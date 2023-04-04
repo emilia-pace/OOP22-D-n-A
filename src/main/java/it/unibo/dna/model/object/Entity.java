@@ -1,5 +1,5 @@
-package it.unibo.D-n-A.Model;
+package it.unibo.dna.model.object;
 
 public interface Entity {
-    
+
 }

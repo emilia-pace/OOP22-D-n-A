@@ -1,4 +1,7 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.object;
+
+import it.unibo.dna.common.Position2d;
+import it.unibo.dna.common.Vector2d;
 
 public class Character {
 

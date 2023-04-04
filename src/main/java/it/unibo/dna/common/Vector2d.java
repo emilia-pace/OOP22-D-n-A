@@ -1,4 +1,4 @@
-package it.unibo.dna.model;
+package it.unibo.dna.common;
 
 public class Vector2d implements java.io.Serializable {
 
@@ -9,11 +9,11 @@ public class Vector2d implements java.io.Serializable {
         this.y = y;
     }
 
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
@@ -25,7 +25,7 @@ public class Vector2d implements java.io.Serializable {
         return new Vector2d(this.x, this.y + d);
     }
 
-    public Vector2d sum(V2d v) {
+    public Vector2d sum(Vector2d v) {
         return new Vector2d(x + v.x, y + v.y);
     }
 

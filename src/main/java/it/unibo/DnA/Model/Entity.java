@@ -1,4 +1,4 @@
-package it.unibo.D-n-A.Model;
+package it.unibo.DnA.Model;
 
 public interface Entity {
     

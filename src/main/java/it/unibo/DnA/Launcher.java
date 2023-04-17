@@ -1,9 +1,8 @@
-package it.unibo.DnA;
+package it.unibo.dna;
 
 
 public class Launcher {
-    
-    public static void main (String[] args){
-        Display display = new Display(800, 600);
+    public static void main(String[] args) {
+        new Thread(new GameEngine(new Game(800, 600))).start();
     }
 }

@@ -1,4 +1,4 @@
-package it.unibo.DnA.Model;
+package it.unibo.dna.model;
 
 public interface Entity {
     

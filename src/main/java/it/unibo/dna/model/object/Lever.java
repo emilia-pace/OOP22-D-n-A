@@ -6,7 +6,7 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
 
-public class Lever implements Object{
+public class Lever implements GameObject{
 
     private boolean state = false;
     private Position2d pos; 
@@ -33,6 +33,7 @@ public class Lever implements Object{
         state=false;
         platform.move(-amount);
     }
+
     @Override
     public boolean isActivated() {
         return state;

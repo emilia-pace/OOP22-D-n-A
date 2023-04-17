@@ -1,16 +1,19 @@
 package it.unibo.dna.model.object;
 
+
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.BoundingBox;
 
-public class Diamond implements GameObject{
+public class Diamond implements Entity{
     
     private double value = 0;
     private BoundingBox box;
+    private Position2d position;
 
-    public Diamond(final BoundingBox b, final double v){
+    public Diamond(final BoundingBox b, final double v, final Position2d p){
         this.value = v;
         this.box = b;
+        this.position = p;
     }
 
 
@@ -25,29 +28,7 @@ public class Diamond implements GameObject{
 
     @Override
     public Position2d getPosition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
-    }
-
-
-    @Override
-    public void enable() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enable'");
-    }
-
-
-    @Override
-    public void disable() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'disable'");
-    }
-
-
-    @Override
-    public boolean isActivated() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isActivated'");
+        return this.position;
     }
 
     

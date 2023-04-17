@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.GameObject;
 
@@ -16,7 +15,7 @@ public class Map {
     private RectBoundingBox borderBox;
     
 
-    public Map(RectBoundingBox borderB){
+    public Map(final RectBoundingBox borderB){
         this.borderBox = borderB;
         objs = new ArrayList<GameObject>();
     }
@@ -26,7 +25,7 @@ public class Map {
         return this.objs;
     }
 
-    public void setObjs(List<GameObject> objs) {
+    public void setObjs(final List<GameObject> objs) {
         this.objs = objs;
     }
 
@@ -34,7 +33,7 @@ public class Map {
         return this.character;
     }
 
-    public void setCharacter(Character character) {
+    public void setCharacter(final Character character) {
         this.character = character;
     }
 
@@ -42,7 +41,7 @@ public class Map {
         return this.diamond;
     }
 
-    public void setDiamond(Diamond d){
+    public void setDiamond(final Diamond d){
         this.diamond = d;
     }
 
@@ -51,23 +50,23 @@ public class Map {
         return this.borderBox;
     }
 
-    public void setBorderBox(RectBoundingBox borderBox) {
+    public void setBorderBox(final RectBoundingBox borderBox) {
         this.borderBox = borderBox;
     }
 
 
-    public void addObj(GameObject obj){
+    public void addObj(final GameObject obj){
         objs.add(obj);
     }
     
-    public void removeObj(GameObject obj){
+    public void removeObj(final GameObject obj){
         objs.remove(obj);
     }
 
     /**
 	 * @TODO to be implemented
 	 */
-    public Optional<GameObject> checkCollision(Position2d p, RectBoundingBox b){
+    public Optional<GameObject> checkCollision(){
         return Optional.empty();
     }
 

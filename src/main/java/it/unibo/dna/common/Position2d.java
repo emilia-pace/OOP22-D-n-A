@@ -10,7 +10,7 @@ public class Position2d implements java.io.Serializable {
     }
 
     public Position2d sum(Vector2d v) {
-        return new Position2d(x + v.getX(), y + v.getY());
+        return new Position2d(x + v.x, y + v.y);
     }
 
     public Vector2d sub(Position2d v) {

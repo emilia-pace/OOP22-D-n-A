@@ -1,7 +1,7 @@
 package it.unibo.dna.input;
 
-import it.unibo.dna.model.object.Character;
-import it.unibo.dna.model.object.Character.State;
+import it.unibo.dna.model.object.PlayerImpl;
+import it.unibo.dna.model.object.PlayerImpl.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,9 +9,9 @@ import java.awt.event.KeyListener;
 public class KeyboardHandler implements KeyListener {
 
     private int commandRight, commandLeft, commandJump;
-    private Character character;
+    private PlayerImpl character;
 
-    public KeyboardHandler(int commandRight, int commandLeft, int commandJump, Character character) {
+    public KeyboardHandler(int commandRight, int commandLeft, int commandJump, PlayerImpl character) {
         this.commandRight = commandRight;
         this.commandLeft = commandLeft;
         this.commandJump = commandJump;

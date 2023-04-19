@@ -1,8 +1,9 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.object.api.Entity;
 
-public class MovablePlatform implements Entity{
+public class MovablePlatform implements Entity {
 
     private Position2d pos;
     private Position2d originalPos;
@@ -14,7 +15,7 @@ public class MovablePlatform implements Entity{
     }
 
     public void setPosition(Position2d p) {
-        pos=p;
+        pos = p;
     }
 
     public Position2d getFinalPosition() {
@@ -22,21 +23,21 @@ public class MovablePlatform implements Entity{
     }
 
     public void setFinalPosition(Position2d fp) {
-        finalPos=fp;
+        finalPos = fp;
     }
 
     public Position2d getOriginalPos() {
         return originalPos;
     }
 
-    public void setOriginalPos(Position2d op){
-        originalPos=op;
+    public void setOriginalPos(Position2d op) {
+        originalPos = op;
     }
 
-    public void move(double amount){
-        for(int i=0;i<amount;i++){
-            pos=new Position2d(pos.x+amount, pos.y);
+    public void move(double amount) {
+        for (int i = 0; i < amount; i++) {
+            pos = new Position2d(pos.x + amount, pos.y);
         }
     }
-    
+
 }

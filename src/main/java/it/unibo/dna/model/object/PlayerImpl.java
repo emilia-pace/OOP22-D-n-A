@@ -2,8 +2,9 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.object.api.Player;
 
-public class Character extends AbstractEntity {
+public class PlayerImpl extends AbstractEntity implements Player {
 
     public final double JumpVelocity = 20;
     public final double StandardVelocity = 2;
@@ -12,7 +13,7 @@ public class Character extends AbstractEntity {
     private Vector2d vector;
     private State state = State.STATE_STANDING;
 
-    public Character(Position2d pos, Vector2d vet, double height, double width) {
+    public PlayerImpl(Position2d pos, Vector2d vet, double height, double width) {
         super(pos, height, width);
         this.vector = vet;
     }

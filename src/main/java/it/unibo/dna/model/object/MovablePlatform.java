@@ -4,7 +4,7 @@ import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.Entity;
 
-public class MovablePlatform implements Entity {
+public class MovablePlatform extends AbstractEntity {
 
     private Position2d pos;
     private Position2d originalPos;
@@ -13,6 +13,12 @@ public class MovablePlatform implements Entity {
     @Override
     public Position2d getPosition() {
         return pos;
+    }
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     public void setPosition(Position2d p) {
@@ -35,7 +41,6 @@ public class MovablePlatform implements Entity {
         originalPos = op;
     }
 
-<<<<<<< HEAD
     private Pair<Double,Double> findDirection(Position2d p1, Position2d p2){
         double differenceX = p1.x-p2.x;
         double differenceY = p1.y-p2.y;
@@ -69,12 +74,9 @@ public class MovablePlatform implements Entity {
         Pair<Double,Double> p = findDirection(pos, originalPos);
         while(!pos.equals(originalPos)){
             pos=new Position2d(pos.x+p.getX(), pos.y+p.getY());
-=======
-    public void move(double amount) {
-        for (int i = 0; i < amount; i++) {
-            pos = new Position2d(pos.x + amount, pos.y);
->>>>>>> bf6c33123c2e9408324c6dcb828f07f673820f17
         }
     }
+
+    
 
 }

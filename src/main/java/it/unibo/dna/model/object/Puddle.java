@@ -1,6 +1,7 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 
 public class Puddle implements Entity {
@@ -40,6 +41,24 @@ public class Puddle implements Entity {
                        * }
                        */
         }
+    }
+
+    @Override
+    public void setPosition(Position2d pos) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPosition'");
+    }
+
+    @Override
+    public RectBoundingBox getBoundingBox() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+    }
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
 }

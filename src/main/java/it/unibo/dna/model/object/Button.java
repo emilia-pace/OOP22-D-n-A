@@ -1,6 +1,7 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.RectBoundingBox;
 
 public class Button implements GameObject{
 
@@ -51,6 +52,18 @@ public class Button implements GameObject{
     @Override
     public boolean isActivated() { // dice se il bottone è abilitato o meno
         return isActive;
+    }
+
+    @Override
+    public RectBoundingBox getBoundingBox() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+    }
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
     
 }

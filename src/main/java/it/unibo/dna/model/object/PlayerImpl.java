@@ -6,10 +6,6 @@ import it.unibo.dna.model.object.api.Player;
 
 public class PlayerImpl extends AbstractEntity implements Player {
 
-    public final double JumpVelocity = 20;
-    public final double StandardVelocity = 2;
-    public final double Gravity = 4;
-
     private Vector2d vector;
     private State state = State.STATE_STANDING;
     private Type type;

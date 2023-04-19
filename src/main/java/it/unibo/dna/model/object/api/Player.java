@@ -4,7 +4,11 @@ import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.PlayerImpl.State;
 import it.unibo.dna.model.object.PlayerImpl.Type;
 
-public interface Player extends Entity{
+public interface Player extends Entity {
+
+    public static final double JumpVelocity = 20;
+    public static final double StandardVelocity = 2;
+    public static final double Gravity = 4;
 
     public Vector2d getVector();
 

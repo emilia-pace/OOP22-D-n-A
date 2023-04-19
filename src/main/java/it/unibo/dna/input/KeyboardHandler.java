@@ -10,12 +10,14 @@ public class KeyboardHandler implements KeyListener {
 
     private int commandRight, commandLeft, commandJump;
     private PlayerImpl character;
+    private CommandFactory command;
 
     public KeyboardHandler(int commandRight, int commandLeft, int commandJump, PlayerImpl character) {
         this.commandRight = commandRight;
         this.commandLeft = commandLeft;
         this.commandJump = commandJump;
         this.character = character;
+        this.command = new CommandFactory(character);
     }
 
     @Override
@@ -24,23 +26,23 @@ public class KeyboardHandler implements KeyListener {
         switch (character.getState()) {
             case STATE_JUMPING:
                 if (key == this.commandRight) {
-                    this.character.setVectorX(character.StandardVelocity);
+                    command.right();
                 }
                 if (key == this.commandLeft) {
-                    this.character.setVectorX(-character.StandardVelocity);
+                    command.left();
                 }
                 break;
             default:
                 if (key == this.commandRight) {
-                    this.character.setVectorX(character.StandardVelocity);
+                    command.right();
                     this.character.setState(State.STATE_RIGHT);
                 }
                 if (key == this.commandLeft) {
-                    this.character.setVectorX(-character.StandardVelocity);
+                    command.left();
                     this.character.setState(State.STATE_LEFT);
                 }
                 if (key == this.commandJump) {
-                    this.character.setVectorY(-character.JumpVelocity);
+                    command.jump();
                     this.character.setState(State.STATE_JUMPING);
                 }
                 break;
@@ -54,13 +56,13 @@ public class KeyboardHandler implements KeyListener {
             case STATE_RIGHT:
                 if (key == this.commandRight) {
                     this.character.setState(State.STATE_STANDING);
-                    this.character.setVectorX(0);
+                    command.stop();
                 }
                 break;
             case STATE_LEFT:
                 if (key == this.commandLeft) {
                     this.character.setState(State.STATE_STANDING);
-                    this.character.setVectorX(0);
+                    command.stop();
                 }
                 break;
             default:

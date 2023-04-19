@@ -2,8 +2,9 @@ package it.unibo.dna.model.object.api;
 
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.PlayerImpl.State;
+import it.unibo.dna.model.object.PlayerImpl.Type;
 
-public interface Player {
+public interface Player extends Entity{
 
     public Vector2d getVector();
 
@@ -16,5 +17,7 @@ public interface Player {
     public State getState();
 
     public void setState(State state);
+
+    public Type getType();
 
 }

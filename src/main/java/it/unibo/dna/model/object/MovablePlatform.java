@@ -4,11 +4,18 @@ import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.Entity;
 
-public class MovablePlatform extends AbstractEntity {
+public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0) in alto a sinistra
 
     private Position2d pos;
     private Position2d originalPos;
     private Position2d finalPos;
+
+    public MovablePlatform(Position2d pos, double height, double width) {//costruttore
+        super(pos, height, width);
+        this.pos=pos;
+        //this.height=height;
+        //this.width=width;
+    }
 
     @Override
     public Position2d getPosition() {
@@ -17,8 +24,7 @@ public class MovablePlatform extends AbstractEntity {
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        
     }
 
     public void setPosition(Position2d p) {
@@ -54,7 +60,7 @@ public class MovablePlatform extends AbstractEntity {
             }
         }
         if(differenceY != 0){
-            if(differenceY > 0 ){
+            if(differenceY < 0 ){ //o > ?
                 verticalMovemet=-1.0;
             }else{
                 verticalMovemet=1.0;
@@ -77,6 +83,15 @@ public class MovablePlatform extends AbstractEntity {
         }
     }
 
+    /*
+    FUNZIONE GENERICA PER MUOVERSI DA UN PUNTO DI PARTENZA AD UN PUNTO DI ARRIVO. MENO RIPETITVA DI AVERNE 2, TUTTAVIA NECESSITA DI ARGOMENTI
+    public void movement(Position2d startingPosition, Position2d finalPosition){
+        Pair<Double,Double> p = findDirection(startingPosition, finalPosition);
+        while(!pos.equals(finalPosition)){
+            pos=new Position2d(pos.x+p.getX(),pos.y+p.getY());
+        }
+    }
+    */
     
 
 }

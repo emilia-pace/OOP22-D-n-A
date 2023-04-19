@@ -1,7 +1,7 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.BoundingBox;
+import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 
 public class Diamond implements Entity {
@@ -20,13 +20,26 @@ public class Diamond implements Entity {
         return this.value;
     }
 
-    public BoundingBox getBox() {
-        return this.box;
-    }
 
     @Override
     public Position2d getPosition() {
         return this.position;
+    }
+
+    @Override
+    public void setPosition(Position2d pos) {
+        this.position= pos;
+    }
+
+    @Override
+    public BoundingBox getBoundingBox() {
+        return this.box;
+    }
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
 }

@@ -1,6 +1,7 @@
 package it.unibo.dna.model;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.object.api.BoundingBox;
 
 public class RectBoundingBox implements BoundingBox{
 

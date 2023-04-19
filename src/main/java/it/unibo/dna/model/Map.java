@@ -4,49 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import it.unibo.dna.model.object.Diamond;
-import it.unibo.dna.model.object.GameObject;
+import it.unibo.dna.model.object.api.BoundingBox;
+import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.common.Position2d;
+
 
 public class Map {
     
-    private List<GameObject> objs;
-    private Character character;
-    private Diamond diamond;
-    private RectBoundingBox borderBox;
+    
+    private List<Entity> entities;
+
+    private BoundingBox borderBox;
     
 
     public Map(final RectBoundingBox borderB){
         this.borderBox = borderB;
-        objs = new ArrayList<GameObject>();
+        entities = new ArrayList<Entity>();
     }
 
 
-    public List<GameObject> getObjs() {
-        return this.objs;
-    }
 
-    public void setObjs(final List<GameObject> objs) {
-        this.objs = objs;
-    }
-
-    public Character getCharacter() {
-        return this.character;
-    }
-
-    public void setCharacter(final Character character) {
-        this.character = character;
-    }
-
-    public Diamond getDiamond() {
-        return this.diamond;
-    }
-
-    public void setDiamond(final Diamond d){
-        this.diamond = d;
-    }
-
-
-    public RectBoundingBox getBorderBox() {
+    public BoundingBox getBorderBox() {
         return this.borderBox;
     }
 
@@ -55,19 +34,46 @@ public class Map {
     }
 
 
-    public void addObj(final GameObject obj){
-        objs.add(obj);
+
+    public void addEntity(final Entity e){
+        this.entities.add(e);
     }
     
-    public void removeObj(final GameObject obj){
-        objs.remove(obj);
+    public void removeEntity(final Entity e){
+        this.entities.remove(e);
     }
 
-    /**
-	 * @TODO to be implemented
-	 */
-    public Optional<GameObject> checkCollision(){
+    public List<Entity> getEntities(){
+        return this.entities;
+    }
+
+
+
+    public Optional<Entity> checkCollisions(final Player character){
+        Position2d ChPos = character.getPosition();
+        double ChHeight = character.getBoundingBox().getHeight();
+        double ChLenght = character.getBoundingBox().getLenght();
+
+        for (Entity e : this.getEntities()) {
+            if(e.getBoundingBox().isCollidingWith(ChPos, ChHeight,ChLenght)){
+                return Optional.of(e);
+            }
+        }
         return Optional.empty();
+    }
+    
+    
+
+    public boolean checkBorders(final Player character){
+        Position2d ChPos = character.getPosition();
+        double ChHeight = character.getBoundingBox().getHeight();
+        double ChLenght = character.getBoundingBox().getLenght();
+
+        if(this.getBorderBox().isCollidingWith(ChPos, ChHeight, ChLenght)){
+            return true;
+        }
+
+        return false;
     }
 
 }

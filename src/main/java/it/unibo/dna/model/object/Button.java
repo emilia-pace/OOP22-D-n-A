@@ -52,19 +52,5 @@ public class Button implements GameObject{
     public boolean isActivated() { // dice se il bottone è abilitato o meno
         return isActive;
     }
-
-    public void push(){ //bottone spinto. La piattaforma si muove fintanto che il bottone sta venendo spinto. 
-                        //Quando si scende dal bottone, la piattaforma torna alla sua pos originale:
-        while(isPushed && !mp.getPosition().equals(mp.getFinalPosition())){
-            mp.setPosition(new Position2d(mp.getPosition().x+1, mp.getPosition().x));
-        }
-
-    }
-
-    public void returnToOriginalPosition(){ 
-        while(!isPushed && !mp.getPosition().equals(mp.getOriginalPos())){
-            mp.setPosition(new Position2d(mp.getPosition().x-1, mp.getPosition().y));
-        }
-    }
     
 }

@@ -1,5 +1,6 @@
 package it.unibo.dna.model.object;
 
+import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 
 public class MovablePlatform implements Entity{
@@ -33,9 +34,39 @@ public class MovablePlatform implements Entity{
         originalPos=op;
     }
 
-    public void move(double amount){
-        for(int i=0;i<amount;i++){
-            pos=new Position2d(pos.x+amount, pos.y);
+    private Pair<Double,Double> findDirection(Position2d p1, Position2d p2){
+        double differenceX = p1.x-p2.x;
+        double differenceY = p1.y-p2.y;
+        double horizontalMovement=0;
+        double verticalMovemet=0;
+        if(differenceX != 0){
+            if(differenceX > 0){
+                horizontalMovement=-1.0;
+            }else{
+                horizontalMovement=+1.0;
+            }
+        }
+        if(differenceY != 0){
+            if(differenceY > 0 ){
+                verticalMovemet=-1.0;
+            }else{
+                verticalMovemet=1.0;
+            }
+        }
+        return new Pair<>(horizontalMovement,verticalMovemet); 
+    }
+
+    public void move() { //tra move() e returnToOriginalPosition() c'è un'evidente ripetizione. 
+        Pair<Double,Double> p = findDirection(originalPos,finalPos);
+        while(!pos.equals(finalPos)){
+            pos=new Position2d(pos.x+p.getX(), pos.y+p.getY());
+        }
+    }
+
+    public void returnToOriginalPosition() {
+        Pair<Double,Double> p = findDirection(pos, originalPos);
+        while(!pos.equals(originalPos)){
+            pos=new Position2d(pos.x+p.getX(), pos.y+p.getY());
         }
     }
     

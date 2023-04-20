@@ -9,12 +9,13 @@ import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 import it.unibo.dna.common.Position2d;
 
-
+/**
+ * 
+ */
 public class Map {
     
     
     private List<Entity> entities;
-
     private BoundingBox borderBox;
     
 
@@ -22,8 +23,6 @@ public class Map {
         this.borderBox = borderB;
         entities = new ArrayList<Entity>();
     }
-
-
 
     public BoundingBox getBorderBox() {
         return this.borderBox;
@@ -33,12 +32,10 @@ public class Map {
         this.borderBox = borderBox;
     }
 
-
-
     public void addEntity(final Entity e){
         this.entities.add(e);
     }
-    
+
     public void removeEntity(final Entity e){
         this.entities.remove(e);
     }
@@ -46,8 +43,6 @@ public class Map {
     public List<Entity> getEntities(){
         return this.entities;
     }
-
-
 
     public Optional<Entity> checkCollisions(final Player character){
         Position2d ChPos = character.getPosition();
@@ -63,17 +58,16 @@ public class Map {
     }
     
     
-
     public boolean checkBorders(final Player character){
         Position2d ChPos = character.getPosition();
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getLenght();
 
-        if(this.getBorderBox().isCollidingWith(ChPos, ChHeight, ChLenght)){
-            return true;
-        }
+        return ChPos.x == this.borderBox.getPosition().x //bordo sx
+            || ChPos.x + ChLenght == this.borderBox.getPosition().x + this.borderBox.getLenght() //bordo dx
+            || ChPos.y == this.borderBox.getPosition().y //bordo nord
+            || ChPos.y + ChHeight == this.borderBox.getPosition().y + this.borderBox.getHeight(); //bordo sud
 
-        return false;
     }
 
 }

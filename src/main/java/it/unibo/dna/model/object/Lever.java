@@ -9,13 +9,14 @@ import it.unibo.dna.model.RectBoundingBox;
 
 public class Lever implements GameObject{
 
-    private boolean state = false;
+    private boolean isActive = false;
     private Position2d pos; 
     private MovablePlatform platform;
     private static int amount = 10;
 
-    public Lever(Position2d pos){
+    public Lever(Position2d pos, MovablePlatform platform){
         this.pos=pos;
+        this.platform=platform;
     }
 
     @Override
@@ -25,25 +26,22 @@ public class Lever implements GameObject{
 
     @Override
     public void enable() {
-        state=true;
-        platform.move(amount);
+        isActive=true;
     }
 
     @Override
     public void disable() {
-        state=false;
-        platform.move(-amount);
+        isActive=false;
     }
 
     @Override
     public boolean isActivated() {
-        return state;
+        return isActive;
     }
 
     @Override
     public void setPosition(Position2d pos) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPosition'");
+        this.pos=pos;
     }
 
     @Override

@@ -10,11 +10,10 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
     private Position2d originalPos;
     private Position2d finalPos;
 
-    public MovablePlatform(Position2d pos, double height, double width) {//costruttore
+    public MovablePlatform(Position2d pos, double height, double width,Position2d originaPos, Position2d finalPos) {//costruttore
         super(pos, height, width);
-        this.pos=pos;
-        //this.height=height;
-        //this.width=width;
+        this.originalPos=originaPos;
+        this.finalPos=finalPos;   
     }
 
     @Override

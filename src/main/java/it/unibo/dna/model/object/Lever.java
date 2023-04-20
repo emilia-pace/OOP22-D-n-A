@@ -9,10 +9,15 @@ import it.unibo.dna.model.RectBoundingBox;
 
 public class Lever implements GameObject{
 
-    private boolean isActive = false;
+    public static enum leverState {
+        SWITCHED_ON,SWITCHED_OFF;
+    }
+
+    private boolean isActive = true;
+    private boolean isSwitchedOn = false;
+    private leverState state = leverState.SWITCHED_OFF;
     private Position2d pos; 
     private MovablePlatform platform;
-    private static int amount = 10;
 
     public Lever(Position2d pos, MovablePlatform platform){
         this.pos=pos;
@@ -22,6 +27,10 @@ public class Lever implements GameObject{
     @Override
     public Position2d getPosition() {
         return pos;
+    }
+    
+    public boolean isSwitchedOn() {
+        return isSwitchedOn;
     }
 
     @Override
@@ -54,6 +63,20 @@ public class Lever implements GameObject{
     public void update() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    public void switchOn() {
+        if(isActive){
+            platform.move();
+            state=leverState.SWITCHED_ON;
+        }
+    }
+
+    public void switchOff() {
+        if(isActive){
+            platform.returnToOriginalPosition();
+            state=leverState.SWITCHED_OFF;
+        }
     }
 }
 

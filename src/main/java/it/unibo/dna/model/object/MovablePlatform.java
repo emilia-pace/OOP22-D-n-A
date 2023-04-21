@@ -46,7 +46,7 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
         originalPos = op;
     }
 
-    private Pair<Double,Double> findDirection(Position2d p1, Position2d p2){
+    public Pair<Double,Double> findDirection(Position2d p1, Position2d p2){
         double differenceX = p1.x-p2.x;
         double differenceY = p1.y-p2.y;
         double horizontalMovement=0;
@@ -68,7 +68,7 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
         return new Pair<>(horizontalMovement,verticalMovemet); 
     }
 
-    public void move() { //tra move() e returnToOriginalPosition() c'è un'evidente ripetizione. 
+    /*public void move() { //tra move() e returnToOriginalPosition() c'è un'evidente ripetizione. 
         Pair<Double,Double> p = findDirection(originalPos,finalPos);
         while(!pos.equals(finalPos)){
             pos=new Position2d(pos.x+p.getX(), pos.y+p.getY());
@@ -80,17 +80,13 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
         while(!pos.equals(originalPos)){
             pos=new Position2d(pos.x+p.getX(), pos.y+p.getY());
         }
-    }
+    }*/
 
-    /*
-    FUNZIONE GENERICA PER MUOVERSI DA UN PUNTO DI PARTENZA AD UN PUNTO DI ARRIVO. MENO RIPETITVA DI AVERNE 2, TUTTAVIA NECESSITA DI ARGOMENTI
-    public void movement(Position2d startingPosition, Position2d finalPosition){
+    public void move(Position2d startingPosition, Position2d finalPosition){
         Pair<Double,Double> p = findDirection(startingPosition, finalPosition);
         while(!pos.equals(finalPosition)){
             pos=new Position2d(pos.x+p.getX(),pos.y+p.getY());
         }
     }
-    */
-    
 
 }

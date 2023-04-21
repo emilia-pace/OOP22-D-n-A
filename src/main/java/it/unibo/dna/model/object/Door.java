@@ -3,12 +3,15 @@ package it.unibo.dna.model.object;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.PlayerImpl;
+import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 
 public class Door implements Entity {
+
     public static enum doorType {
         ANGEL_DOOR, DEVIL_DOOR;
     }
+
     public static enum doorState {
         OPEN_DOOR, CLOSED_DOOR;
     }
@@ -17,6 +20,9 @@ public class Door implements Entity {
     private Position2d pos;
     private boolean isOpen = false;
     private doorState state = doorState.CLOSED_DOOR;
+    private double height;
+    private double width;
+    private BoundingBox bbox;
 
     public Door(Position2d pos, doorType type) {
         this.pos = pos;
@@ -47,8 +53,7 @@ public class Door implements Entity {
 
     @Override
     public RectBoundingBox getBoundingBox() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+        return new RectBoundingBox(pos, width, height);
     }
 
     @Override

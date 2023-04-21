@@ -3,6 +3,7 @@ package it.unibo.dna.model.object;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.PlayerImpl.Type;
+import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 
 public class Puddle extends AbstractEntity {
@@ -13,6 +14,10 @@ public class Puddle extends AbstractEntity {
 
     private Position2d pos;
     private puddleType type;
+    private double height;
+    private double width;
+    //private BoundingBox bbox;
+
     public Puddle(Position2d pos, double height, double width,puddleType type) {
         super(pos, height, width);
         this.type=type;
@@ -46,8 +51,7 @@ public class Puddle extends AbstractEntity {
 
     @Override
     public RectBoundingBox getBoundingBox() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+        return new RectBoundingBox(pos, width, height);
     }
 
     @Override

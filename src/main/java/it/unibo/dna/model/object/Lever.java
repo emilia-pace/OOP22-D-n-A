@@ -1,11 +1,14 @@
 package it.unibo.dna.model.object;
 
+import ch.qos.logback.classic.spi.PlatformInfo;
+
 //import java.util.ArrayList;
 //import java.util.List;
 
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.RectBoundingBox;
+import it.unibo.dna.model.object.api.BoundingBox;
 
 public class Lever implements GameObject{
 
@@ -18,6 +21,9 @@ public class Lever implements GameObject{
     private leverState state = leverState.SWITCHED_OFF;
     private Position2d pos; 
     private MovablePlatform platform;
+    private double height;
+    private double width;
+    //private BoundingBox bbox;
 
     public Lever(Position2d pos, MovablePlatform platform){
         this.pos=pos;
@@ -55,8 +61,7 @@ public class Lever implements GameObject{
 
     @Override
     public RectBoundingBox getBoundingBox() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+        return new RectBoundingBox(pos, width, height);
     }
 
     @Override
@@ -67,14 +72,14 @@ public class Lever implements GameObject{
 
     public void switchOn() {
         if(isActive){
-            platform.move();
+            platform.move(platform.getOriginalPos(),platform.getFinalPosition());
             state=leverState.SWITCHED_ON;
         }
     }
 
     public void switchOff() {
         if(isActive){
-            platform.returnToOriginalPosition();
+            platform.move(platform.getFinalPosition(),platform.getOriginalPos());
             state=leverState.SWITCHED_OFF;
         }
     }

@@ -6,6 +6,7 @@ public interface BoundingBox {
 
     boolean isCollidingWith(Position2d p, double height, double lenght);
 
+    public Position2d getPosition();
     double getHeight();
     double getLenght();
 }

@@ -9,13 +9,14 @@ public class RectBoundingBox implements BoundingBox{
     private double height;
     private double lenght;
 
+    
     public RectBoundingBox(final Position2d p, final double h, final double l){
         this.position=p;
         this.height=h;
         this.lenght=l;
     }
 
-
+    
     public Position2d getPosition() {
         return this.position;
     }
@@ -41,9 +42,11 @@ public class RectBoundingBox implements BoundingBox{
     }
     
     
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean isCollidingWith(final Position2d p, final double h, final double l) {
+    public boolean isCollidingWith(final Position2d p, final double h, final double l   ) {
         //posizione = angolo in alto a sinistra
         return this.position.x + this.lenght >= p.x 
             && this.position.x <= p.x + l

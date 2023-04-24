@@ -1,6 +1,8 @@
 package it.unibo.dna.model.object;
 
+import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.api.BoundingBox;
 
 public class Button implements GameObject{
@@ -9,7 +11,10 @@ public class Button implements GameObject{
     private boolean isActive = false;
     private boolean isPressed = false;
     private boolean isPushed = false;
-    private static Integer amount = 5;
+    //private static Integer amount = 5;
+    private double height;
+    private double width;
+    private BoundingBox bbox;
 
     private MovablePlatform mp;
 
@@ -56,14 +61,23 @@ public class Button implements GameObject{
 
     @Override
     public BoundingBox getBoundingBox() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoundingBox'");
+        return new RectBoundingBox(pos, width, height);
     }
 
     @Override
     public void update() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    
+
+    public void press(PlayerImpl p){
+        while(/*collisione con il bottone*/){
+            Pair<Double,Double> dir = mp.findDirection(mp.getPosition(), mp.getFinalPosition());
+            mp.setPosition(new Position2d(mp.getPosition().x+dir.getX(), mp.getPosition().y+dir.getY()));
+        }
+        mp.move(mp.getPosition(), mp.getOriginalPos());
     }
     
 }

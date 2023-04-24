@@ -24,4 +24,8 @@ public interface Player extends Entity {
 
     public Type getType();
 
+    public boolean isJumping();
+
+    public boolean isTurned();
+
 }

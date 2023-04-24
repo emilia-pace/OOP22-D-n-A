@@ -1,6 +1,7 @@
 package it.unibo.dna.input;
 
 import it.unibo.dna.input.api.Command;
+import it.unibo.dna.model.object.PlayerImpl.State;
 import it.unibo.dna.model.object.api.Player;
 
 public class CommandFactory {
@@ -12,47 +13,38 @@ public class CommandFactory {
     }
 
     public Command right() {
-        return new Command() {
-
-            @Override
-            public void execute() {
-                player.setVectorX(Player.StandardVelocity);
-            }
-
+        return () -> {
+            player.setVectorX(Player.StandardVelocity);
+            player.setState(State.STATE_RIGHT);
         };
     }
 
     public Command left() {
-        return new Command() {
-
-            @Override
-            public void execute() {
-                player.setVectorX(-Player.StandardVelocity);
-            }
-
+        return () -> {
+            player.setVectorX(-Player.StandardVelocity);
+            player.setState(State.STATE_LEFT);
         };
     }
 
     public Command jump() {
-        return new Command() {
-
-            @Override
-            public void execute() {
+        return () -> {
+            if (!player.isJumping()) {
                 player.setVectorY(-Player.JumpVelocity);
+                if (!player.isTurned()) {
+                    player.setState(State.STATE_JUMPING);
+                }
             }
-
         };
     }
 
     public Command stop() {
-        return new Command() {
-
-            @Override
-            public void execute() {
-                player.setVectorX(0);
+        return () -> {
+            player.setVectorX(0);
+            if (player.isJumping()) {
+                player.setState(State.STATE_STANDING);
+            } else {
+                player.setState(State.STATE_STANDING);
             }
-
         };
     }
-
 }

@@ -34,11 +34,16 @@ public class PlayerImpl extends AbstractEntity implements Player {
 
     @Override
     public void update() {
-        if (this.vector.y < this.Gravity) {
+        if (this.vector.y < Player.Gravity) {
             this.vector.sumY(StandardVelocity);
         }
+        if (!isJumping()) { // controllo da implementare meglio
+            this.vector.y = 0;
+            if (!this.isTurned()) {
+                this.state = State.STATE_STANDING;
+            }
+        }
         this.setPosition(this.getPosition().sum(vector));
-
     }
 
     public State getState() {
@@ -47,6 +52,15 @@ public class PlayerImpl extends AbstractEntity implements Player {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    // Controllo da implementare con le collisioni
+    public boolean isJumping() {
+        return false;
+    }
+
+    public boolean isTurned() {
+        return (this.state == State.STATE_LEFT || this.state == State.STATE_RIGHT);
     }
 
     @Override

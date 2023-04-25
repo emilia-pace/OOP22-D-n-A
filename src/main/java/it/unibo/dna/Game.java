@@ -2,10 +2,15 @@ package it.unibo.dna;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.RectBoundingBox;
+import it.unibo.dna.model.Score;
+import it.unibo.dna.model.object.Button;
+import it.unibo.dna.model.object.Door;
+import it.unibo.dna.model.object.Lever;
+import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
@@ -15,6 +20,8 @@ public class Game {
     private Display display;
     private List<Entity> entities;
     private BoundingBox borderBox;
+    private EventFactory event;
+    private Score score;
 
     public Game(int width, int height) {
         display = new Display(width, height);
@@ -31,7 +38,8 @@ public class Game {
 
     public Game(final RectBoundingBox borderB){
         this.borderBox = borderB;
-        entities = new ArrayList<Entity>();
+        this.entities = new ArrayList<Entity>();
+        this.score = new Score();
     }
 
 
@@ -55,17 +63,23 @@ public class Game {
         return this.entities;
     }
 
-    public Optional<Entity> checkCollisions(final Player character){
+    public void checkCollisions(final Player character){
         Position2d ChPos = character.getPosition();
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getLenght();
 
         for (Entity e : this.getEntities()) {
             if(e.getBoundingBox().isCollidingWith(ChPos, ChHeight,ChLenght)){
-                return Optional.of(e);
+                switch(e.getClass().getName()){
+                    case "it.unibo.dna.model.object.Button" -> event.hitButtonEvent((Button)e);
+                    case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door)e);
+                    case "it.unibo.dna.model.object.Lever" -> event.hitLeverEvent((Lever)e);
+                    case "it.unibo.dna.model.object.Diamod" -> event.hitDiamondEvent((Diamond)e, score);
+                }
+                
             }
         }
-        return Optional.empty();
+        
     }
     
     

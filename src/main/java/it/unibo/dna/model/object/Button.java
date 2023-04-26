@@ -41,20 +41,6 @@ public class Button implements GameObject{
     }
 
     @Override
-    public void enable() { //abilita il bottone, e tutte le sue funzionalità
-        if(!isActive){
-            isActive=true;
-        }
-    }
-
-    @Override
-    public void disable() { // disabilita il bottone, e tutte le sue funzionalità
-        if(isActive){
-            isActive=false;
-        }
-    }
-
-    @Override
     public boolean isActivated() { // dice se il bottone è abilitato o meno
         return isActive;
     }
@@ -70,9 +56,7 @@ public class Button implements GameObject{
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
-    
-
-    public void press(PlayerImpl p){
+    public void activate(PlayerImpl p){
         while(/*collisione con il bottone*/){
             Pair<Double,Double> dir = mp.findDirection(mp.getPosition(), mp.getFinalPosition());
             mp.setPosition(new Position2d(mp.getPosition().x+dir.getX(), mp.getPosition().y+dir.getY()));

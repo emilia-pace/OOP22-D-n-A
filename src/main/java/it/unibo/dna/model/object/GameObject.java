@@ -8,9 +8,7 @@ import it.unibo.dna.model.object.api.Entity;
 //import it.unibo.dna.model.BoundingBox;
 
 public interface GameObject extends Entity {
-    public void enable();
-
-    public void disable();
+    public void activate();
 
     public boolean isActivated();
     // public boolean isTouched();

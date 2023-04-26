@@ -40,16 +40,6 @@ public class Lever implements GameObject{
     }
 
     @Override
-    public void enable() {
-        isActive=true;
-    }
-
-    @Override
-    public void disable() {
-        isActive=false;
-    }
-
-    @Override
     public boolean isActivated() {
         return isActive;
     }
@@ -70,14 +60,14 @@ public class Lever implements GameObject{
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
-    public void switchOn() {
+    public void activate() { //switch on
         if(isActive){
             platform.move(platform.getOriginalPos(),platform.getFinalPosition());
             state=leverState.SWITCHED_ON;
         }
     }
 
-    public void switchOff() {
+    public void deactivate() { //switch off
         if(isActive){
             platform.move(platform.getFinalPosition(),platform.getOriginalPos());
             state=leverState.SWITCHED_OFF;

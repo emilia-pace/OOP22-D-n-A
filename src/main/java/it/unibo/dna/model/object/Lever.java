@@ -23,25 +23,26 @@ public class Lever implements GameObject{
     private MovablePlatform platform;
     private double height;
     private double width;
-    //private BoundingBox bbox;
+    private BoundingBox box;
 
-    public Lever(Position2d pos, MovablePlatform platform){
-        this.pos=pos;
-        this.platform=platform;
+    public Lever(final Position2d pos, final MovablePlatform platform, final BoundingBox box){
+        this.pos = pos;
+        this.platform = platform;
+        this.box = box;
     }
 
     @Override
     public Position2d getPosition() {
-        return pos;
+        return this.pos;
     }
     
     public boolean isSwitchedOn() {
-        return isSwitchedOn;
+        return this.isSwitchedOn;
     }
 
     @Override
     public boolean isActivated() {
-        return isActive;
+        return this.isActive;
     }
 
     @Override
@@ -50,8 +51,8 @@ public class Lever implements GameObject{
     }
 
     @Override
-    public RectBoundingBox getBoundingBox() {
-        return new RectBoundingBox(pos, width, height);
+    public BoundingBox getBoundingBox() {
+        return this.box;
     }
 
     @Override

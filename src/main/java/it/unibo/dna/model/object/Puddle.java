@@ -16,31 +16,38 @@ public class Puddle extends AbstractEntity {
     private puddleType type;
     private double height;
     private double width;
-    //private BoundingBox bbox;
+    private BoundingBox box;
 
-    public Puddle(Position2d pos, double height, double width,puddleType type) {
+    public Puddle(final Position2d pos, final double height, final double width, final puddleType type, final BoundingBox box) {
         super(pos, height, width);
         this.type=type;
+        this.box=box;
     }
 
     public puddleType getPuddleType() {
-        return type;
+        return this.type;
     }
 
     @Override
     public Position2d getPosition() {
-        return pos;
+        return this.pos;
     }
 
-    public void checkForMatch(puddleType type, PlayerImpl character) {
+    public void checkForMatch(final puddleType type, final PlayerImpl character) {
         switch (type) {
-            case PURPLE: // the character that fell in the puddle dies.
-            case BLUE: if(character.getType().equals(Type.DEVIL)){
+            case PURPLE -> {
+                        /*the character that fell in the puddle dies.*/ 
+                        }
+            case BLUE -> {
+                        if(character.getType().equals(Type.DEVIL)){
                         //character dies
-                        }//altrimenti tutto ok
-            case RED: if(character.getType().equals(Type.ANGEL)){
+                        }/*altrimenti tutto ok*/ 
+                    }
+            case RED -> {
+                        if(character.getType().equals(Type.ANGEL)){
                         //angel dies
                         }
+                    }
         }
     }
 
@@ -50,8 +57,8 @@ public class Puddle extends AbstractEntity {
     }
 
     @Override
-    public RectBoundingBox getBoundingBox() {
-        return new RectBoundingBox(pos, width, height);
+    public BoundingBox getBoundingBox() {
+        return this.box;
     }
 
     @Override

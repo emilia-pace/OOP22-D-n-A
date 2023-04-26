@@ -14,40 +14,41 @@ public class Button implements GameObject{
     //private static Integer amount = 5;
     private double height;
     private double width;
-    private BoundingBox bbox;
+    private BoundingBox box;
 
     private MovablePlatform mp;
 
-    public Button(Position2d pos, MovablePlatform mp) {
-        this.pos=pos;
-        this.mp=mp;
+    public Button(final Position2d pos, final MovablePlatform mp, final BoundingBox box) {
+        this.pos = pos;
+        this.mp = mp;
+        this.box = box;
     }
 
     @Override
     public Position2d getPosition() {
-        return pos;
+        return this.pos;
     }
 
     public void setPosition(Position2d position) {
-        pos=position;
+        this.pos=position;
     }
 
     public MovablePlatform getMovablePlatform() {
-        return mp;
+        return this.mp;
     }
 
     public void setMovablePlatform(MovablePlatform m) {
-        mp=m;
+        this.mp=m;
     }
 
     @Override
     public boolean isActivated() { // dice se il bottone è abilitato o meno
-        return isActive;
+        return this.isActive;
     }
 
     @Override
     public BoundingBox getBoundingBox() {
-        return new RectBoundingBox(pos, width, height);
+        return this.box;
     }
 
     @Override

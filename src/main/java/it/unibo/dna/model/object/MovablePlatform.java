@@ -2,15 +2,16 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.BoundingBox;
 
 public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0) in alto a sinistra
 
     private Position2d pos;
     private Position2d originalPos;
     private Position2d finalPos;
+    private BoundingBox box;
 
-    public MovablePlatform(Position2d pos, double height, double width,Position2d originaPos, Position2d finalPos) {//costruttore
+    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d originaPos, final Position2d finalPos, final BoundingBox box) {//costruttore
         super(pos, height, width);
         this.originalPos=originaPos;
         this.finalPos=finalPos;   
@@ -18,32 +19,37 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
 
     @Override
     public Position2d getPosition() {
-        return pos;
+        return this.pos;
     }
 
     @Override
     public void update() {
-        
+        //TODO
+    }
+
+    @Override
+    public BoundingBox getBoundingBox() {
+        return this.box;
     }
 
     public void setPosition(Position2d p) {
-        pos = p;
+        this.pos = p;
     }
 
     public Position2d getFinalPosition() {
-        return finalPos;
+        return this.finalPos;
     }
 
     public void setFinalPosition(Position2d fp) {
-        finalPos = fp;
+        this.finalPos = fp;
     }
 
     public Position2d getOriginalPos() {
-        return originalPos;
+        return this.originalPos;
     }
 
     public void setOriginalPos(Position2d op) {
-        originalPos = op;
+        this.originalPos = op;
     }
 
     public Pair<Double,Double> findDirection(Position2d p1, Position2d p2){
@@ -67,20 +73,6 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
         }
         return new Pair<>(horizontalMovement,verticalMovemet); 
     }
-
-    /*public void move() { //tra move() e returnToOriginalPosition() c'è un'evidente ripetizione. 
-        Pair<Double,Double> p = findDirection(originalPos,finalPos);
-        while(!pos.equals(finalPos)){
-            pos=new Position2d(pos.x+p.getX(), pos.y+p.getY());
-        }
-    }
-
-    public void returnToOriginalPosition() {
-        Pair<Double,Double> p = findDirection(pos, originalPos);
-        while(!pos.equals(originalPos)){
-            pos=new Position2d(pos.x+p.getX(), pos.y+p.getY());
-        }
-    }*/
 
     public void move(Position2d startingPosition, Position2d finalPosition){
         Pair<Double,Double> p = findDirection(startingPosition, finalPosition);

@@ -18,15 +18,16 @@ public class Door implements Entity {
 
     private doorType type;
     private Position2d pos;
-    private boolean isOpen = false;
+    //private boolean isOpen = false;
     private doorState state = doorState.CLOSED_DOOR;
     private double height;
     private double width;
     private BoundingBox bbox;
 
-    public Door(Position2d pos, doorType type) {
+    public Door(Position2d pos, doorType type,BoundingBox bbox) {
         this.pos = pos;
         this.type = type;
+        this.bbox = bbox;
     }
 
     @Override

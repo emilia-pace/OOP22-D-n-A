@@ -56,7 +56,7 @@ public class Button implements GameObject{
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
-    public void activate(PlayerImpl p){
+    public void activate(){
         while(/*collisione con il bottone*/){
             Pair<Double,Double> dir = mp.findDirection(mp.getPosition(), mp.getFinalPosition());
             mp.setPosition(new Position2d(mp.getPosition().x+dir.getX(), mp.getPosition().y+dir.getY()));

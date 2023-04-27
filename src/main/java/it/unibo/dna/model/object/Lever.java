@@ -23,35 +23,26 @@ public class Lever implements GameObject{
     private MovablePlatform platform;
     private double height;
     private double width;
-    //private BoundingBox bbox;
+    private BoundingBox box;
 
-    public Lever(Position2d pos, MovablePlatform platform){
-        this.pos=pos;
-        this.platform=platform;
+    public Lever(final Position2d pos, final MovablePlatform platform, final BoundingBox box){
+        this.pos = pos;
+        this.platform = platform;
+        this.box = box;
     }
 
     @Override
     public Position2d getPosition() {
-        return pos;
+        return this.pos;
     }
     
     public boolean isSwitchedOn() {
-        return isSwitchedOn;
-    }
-
-    @Override
-    public void enable() {
-        isActive=true;
-    }
-
-    @Override
-    public void disable() {
-        isActive=false;
+        return this.isSwitchedOn;
     }
 
     @Override
     public boolean isActivated() {
-        return isActive;
+        return this.isActive;
     }
 
     @Override
@@ -60,8 +51,8 @@ public class Lever implements GameObject{
     }
 
     @Override
-    public RectBoundingBox getBoundingBox() {
-        return new RectBoundingBox(pos, width, height);
+    public BoundingBox getBoundingBox() {
+        return this.box;
     }
 
     @Override
@@ -70,14 +61,14 @@ public class Lever implements GameObject{
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
-    public void switchOn() {
+    public void activate() { //switch on
         if(isActive){
             platform.move(platform.getOriginalPos(),platform.getFinalPosition());
             state=leverState.SWITCHED_ON;
         }
     }
 
-    public void switchOff() {
+    public void deactivate() { //switch off
         if(isActive){
             platform.move(platform.getFinalPosition(),platform.getOriginalPos());
             state=leverState.SWITCHED_OFF;

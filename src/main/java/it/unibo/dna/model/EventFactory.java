@@ -4,6 +4,7 @@ import it.unibo.dna.model.object.Button;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.Lever;
+import it.unibo.dna.model.object.api.Player;
 
 /**
  * Interface of a factory that creates {@link Event}.
@@ -17,12 +18,13 @@ public interface EventFactory {
      */
     Event hitButtonEvent(Button b);
 
+
     /**
-     * Models the collision event with a door.
-     * @param d the hit door
+     * Models the collision event with a lever.
+     * @param l the hit lever
      * @return the new event
      */
-    Event hitDoorEvent(Door d);
+    Event hitDoorEvent(Door d, Player p);
 
     /**
      * Models the collision event with a lever.

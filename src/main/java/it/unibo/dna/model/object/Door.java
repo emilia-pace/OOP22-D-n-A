@@ -5,6 +5,7 @@ import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.PlayerImpl;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Player;
 
 public class Door implements Entity {
 
@@ -18,15 +19,16 @@ public class Door implements Entity {
 
     private doorType type;
     private Position2d pos;
-    private boolean isOpen = false;
+    //private boolean isOpen = false;
     private doorState state = doorState.CLOSED_DOOR;
     private double height;
     private double width;
     private BoundingBox bbox;
 
-    public Door(Position2d pos, doorType type) {
+    public Door(Position2d pos, doorType type,BoundingBox bbox) {
         this.pos = pos;
         this.type = type;
+        this.bbox = bbox;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class Door implements Entity {
         return pos;
     }
 
-    public void openDoor(PlayerImpl c) {
+    public void openDoor(Player c) {
         switch(c.getType()){
             case ANGEL: if(this.type.equals(doorType.ANGEL_DOOR)){
             isOpen=true;

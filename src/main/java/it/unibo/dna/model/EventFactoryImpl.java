@@ -4,6 +4,7 @@ import it.unibo.dna.model.object.Button;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.Lever;
+import it.unibo.dna.model.object.api.Player;
 
 /**
  * Class that implements the {@link EventFactory} interface.
@@ -15,17 +16,19 @@ public class EventFactoryImpl implements EventFactory {
      */
     @Override
     public Event hitButtonEvent(Button b) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hitButtonEvent'");
+        return game -> {
+            b.activate();
+        };
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(Door d) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hitDoorEvent'");
+    public Event hitDoorEvent(Door d, Player p) {
+        return game -> {
+            d.openDoor(p);
+        };
     }
 
     /**
@@ -33,8 +36,13 @@ public class EventFactoryImpl implements EventFactory {
      */
     @Override
     public Event hitLeverEvent(Lever l) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hitLeverEvent'");
+        return game -> {
+            if(l.isActivated()){
+                l.deactivate();
+            }else{
+                l.activate();
+            }
+        };
     }
 
     /**

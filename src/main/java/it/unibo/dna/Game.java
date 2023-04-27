@@ -98,7 +98,7 @@ public class Game {
             if(e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)){
                 switch(e.getClass().getName()){
                     case "it.unibo.dna.model.object.Button" -> event.hitButtonEvent((Button)e);
-                    case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door)e);
+                    case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door)e,character);
                     case "it.unibo.dna.model.object.Lever" -> event.hitLeverEvent((Lever)e);
                     case "it.unibo.dna.model.object.Diamod" -> event.hitDiamondEvent((Diamond)e, score);
                 }

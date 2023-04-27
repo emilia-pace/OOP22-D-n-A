@@ -19,7 +19,7 @@ public class Game {
     
     private Display display;
     private List<Entity> entities;
-    private BoundingBox borderBox;
+    private BoundingBox boundingBox;
     private EventFactory event;
     private Score score;
 
@@ -35,41 +35,67 @@ public class Game {
         display.render(this);
     }
     
-
-    public Game(final RectBoundingBox borderB){
-        this.borderBox = borderB;
+    /**
+     * 
+     * @param boundingB the {@link BoundingBox}
+     */
+    public Game(final RectBoundingBox boundingB){
+        this.boundingBox = boundingB;
         this.entities = new ArrayList<Entity>();
         this.score = new Score();
     }
 
-
-    public BoundingBox getBorderBox() {
-        return this.borderBox;
+    /**
+     * 
+     * @return the {@link BoundingBox}
+     */
+    public BoundingBox getBoundingrBox() {
+        return this.boundingBox;
     }
 
-    public void setBorderBox(final RectBoundingBox borderBox) {
-        this.borderBox = borderBox;
+    /**
+     * 
+     * @param boundingBox the {@link BoundingBox}
+     */
+    public void setBorderBox(final RectBoundingBox boundingBox) {
+        this.boundingBox = boundingBox;
     }
 
+    /**
+     * Adds a new {@link Entity} in the game.
+     * @param e the {@link Entity} to add
+     */
     public void addEntity(final Entity e){
         this.entities.add(e);
     }
 
+    /**
+     * Removes an {@link Entity} from the game.
+     * @param e the {@link Entity} to remove
+     */
     public void removeEntity(final Entity e){
         this.entities.remove(e);
     }
 
+    /**
+     * 
+     * @return the list of {@link Entity} of the game
+     */
     public List<Entity> getEntities(){
         return this.entities;
     }
 
+    /**
+     * Checks the collision of a character with the entities in the game.
+     * @param character the moving {@link Player}
+     */
     public void checkCollisions(final Player character){
         Position2d ChPos = character.getPosition();
         double ChHeight = character.getBoundingBox().getHeight();
-        double ChLenght = character.getBoundingBox().getLenght();
+        double ChWidth = character.getBoundingBox().getWidth();
 
         for (Entity e : this.getEntities()) {
-            if(e.getBoundingBox().isCollidingWith(ChPos, ChHeight,ChLenght)){
+            if(e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)){
                 switch(e.getClass().getName()){
                     case "it.unibo.dna.model.object.Button" -> event.hitButtonEvent((Button)e);
                     case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door)e);
@@ -82,16 +108,25 @@ public class Game {
         
     }
     
-    
+    /**
+     * Checks the collision of a character with the borders.
+     * @param character the moving {@link Player}
+     * @return true if the character is colliding with the borders
+     */
     public boolean checkBorders(final Player character){
         Position2d ChPos = character.getPosition();
         double ChHeight = character.getBoundingBox().getHeight();
-        double ChLenght = character.getBoundingBox().getLenght();
+        double ChLenght = character.getBoundingBox().getWidth();
 
-        return ChPos.x == this.borderBox.getPosition().x //bordo sx
-            || ChPos.x + ChLenght == this.borderBox.getPosition().x + this.borderBox.getLenght() //bordo dx
-            || ChPos.y == this.borderBox.getPosition().y //bordo nord
-            || ChPos.y + ChHeight == this.borderBox.getPosition().y + this.borderBox.getHeight(); //bordo sud
+        double sxBorder = this.boundingBox.getPosition().x;
+        double dxBorder = this.boundingBox.getPosition().x + this.boundingBox.getWidth();
+        double northBorder = this.boundingBox.getPosition().y;
+        double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight(); 
+
+        return ChPos.x ==  sxBorder
+            || ChPos.x + ChLenght ==  dxBorder
+            || ChPos.y ==  northBorder
+            || ChPos.y + ChHeight == southBorder;
     }
 
 

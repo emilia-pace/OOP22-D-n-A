@@ -9,5 +9,4 @@ public interface Entity {
 
     public BoundingBox getBoundingBox();
 
-    public void update();
 }

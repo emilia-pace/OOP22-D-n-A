@@ -28,4 +28,6 @@ public interface Player extends Entity {
 
     public boolean isTurned();
 
+    public void update();
+
 }

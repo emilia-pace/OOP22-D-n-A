@@ -1,45 +1,33 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.api.BoundingBox;
-import it.unibo.dna.model.object.api.Entity;
 
-public class Diamond implements Entity {
+/**
+ * {@link Entity} that allows to increase the game score.
+ */
+public class Diamond extends AbstractEntity {
 
     private double value = 0;
-    private BoundingBox box;
-    private Position2d position;
 
-    public Diamond(final BoundingBox b, final double v, final Position2d p) {
+    /**
+     * 
+     * @param h the height of the diamond
+     * @param w the width of the diamond
+     * @param v the value of the diamond
+     * @param p the position of the diamond
+     */
+    public Diamond(final double h, final double w, final double v, final Position2d p) {
+        super(p, h, w);
         this.value = v;
-        this.box = b;
-        this.position = p;
     }
 
+    /**
+     * 
+     * @return the value of the diamond
+     */
     public double getValue() {
         return this.value;
     }
 
-
-    @Override
-    public Position2d getPosition() {
-        return this.position;
-    }
-
-    @Override
-    public void setPosition(Position2d pos) {
-        this.position= pos;
-    }
-
-    @Override
-    public BoundingBox getBoundingBox() {
-        return this.box;
-    }
-
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
 
 }

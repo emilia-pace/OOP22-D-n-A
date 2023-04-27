@@ -3,42 +3,73 @@ package it.unibo.dna.model;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.BoundingBox;
 
+/**
+ * Class that implements the {@link BoundingBox} interface with a rectangular shape.
+ */
 public class RectBoundingBox implements BoundingBox{
 
     private Position2d position;
     private double height;
-    private double lenght;
+    private double width;
 
-    
-    public RectBoundingBox(final Position2d p, final double h, final double l){
+    /**
+     * 
+     * @param p the position of the box
+     * @param h the height of the box
+     * @param w the width of the box
+     */
+    public RectBoundingBox(final Position2d p, final double h, final double w){
         this.position=p;
         this.height=h;
-        this.lenght=l;
+        this.width=w;
     }
 
-    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Position2d getPosition() {
         return this.position;
     }
 
-    public void setPosition(final Position2d position) {
-        this.position = position;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public double getHeight() {
         return this.height;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getWidth() {
+        return this.width;
+    }
+
+    /**
+     * 
+     * @param position
+     */
+    public void setPosition(final Position2d position) {
+        this.position = position;
+    }
+
+    /**
+     * 
+     * @param height the height of the box
+     */
     public void setHeight(final double height) {
         this.height = height;
     }
 
-    public double getLenght() {
-        return this.lenght;
-    }
-
-    public void setLenght(final double lenght) {
-        this.lenght = lenght;
+    /**
+     * 
+     * @param width the width of the box
+     */
+    public void setWidth(final double width) {
+        this.width = width;
     }
     
     
@@ -46,10 +77,9 @@ public class RectBoundingBox implements BoundingBox{
      * {@inheritDoc}
      */
     @Override
-    public boolean isCollidingWith(final Position2d p, final double h, final double l   ) {
-        //posizione = angolo in alto a sinistra
-        return this.position.x + this.lenght >= p.x 
-            && this.position.x <= p.x + l
+    public boolean isCollidingWith(final Position2d p, final double h, final double w) {
+        return this.position.x + this.width >= p.x 
+            && this.position.x <= p.x + w
             && this.position.y >= p.y - h
             && this.position.y - this.height <= p.y;
     }

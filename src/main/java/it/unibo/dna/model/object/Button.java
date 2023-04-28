@@ -18,7 +18,6 @@ public class Button implements GameObject{
 
     private MovablePlatform mp;
 
-
     /**
      * 
      * @param pos the position of the button
@@ -30,7 +29,6 @@ public class Button implements GameObject{
         this.mp = mp;
         this.box = box;
     }
-
 
     /**
      * {@inheritDoc Position2d}

@@ -41,14 +41,6 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
      * {@inheritDoc}
      */
     @Override
-    public void update() {
-        //TODO
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public BoundingBox getBoundingBox() {
         return this.box;
     }

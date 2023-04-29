@@ -49,7 +49,7 @@ public class Game {
      * 
      * @return the {@link BoundingBox}
      */
-    public BoundingBox getBoundingrBox() {
+    public BoundingBox getBoundingBox() {
         return this.boundingBox;
     }
 
@@ -57,7 +57,7 @@ public class Game {
      * 
      * @param boundingBox the {@link BoundingBox}
      */
-    public void setBorderBox(final RectBoundingBox boundingBox) {
+    public void setBoundingBox(final RectBoundingBox boundingBox) {
         this.boundingBox = boundingBox;
     }
 

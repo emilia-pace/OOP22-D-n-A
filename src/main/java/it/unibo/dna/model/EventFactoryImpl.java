@@ -1,5 +1,6 @@
 package it.unibo.dna.model;
 
+import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.Button;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -28,14 +29,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDoorEvent(Door d, Player p) {
         return game -> {
             d.openDoor(p);
-            System.out.println("Il player " + p.getType() + " ha toccato la porta");
-            if (p.getPosition().y + p.getBoundingBox().getHeight() <= d.getPosition().y)
-             {
-            p.setVectorY(0);
-            }
-            System.out.println(
-                    "Il player è in posizione: " + p.getPosition() + " e il vettore " + p.getVector()
-                            + " \ne la porta è in posizone " + d.getPosition());
+            p.reset();
         };
     }
 

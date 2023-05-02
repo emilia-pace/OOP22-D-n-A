@@ -29,4 +29,6 @@ public interface Player extends Entity {
 
     public void update();
 
+    public void reset();
+
 }

@@ -29,7 +29,14 @@ public class Game {
 
     public Game(int width, int height) {
         display = new Display(width, height);
-        this.entities.add(display.door);
+        this.addEntity(display.door);
+        this.addEntity(display.door2);
+        System.out.println("Bounding box porta = " + display.door.getBoundingBox().getWidth() + "x"
+                + display.door.getBoundingBox().getHeight());
+        System.out.println("Bounding box angel = " + display.angel.getBoundingBox().getWidth() + "x"
+                + display.angel.getBoundingBox().getHeight());
+        System.out.println("Bounding box devil = " + display.devil.getBoundingBox().getWidth() + "x"
+                + display.devil.getBoundingBox().getHeight());
     }
 
     public void update() {
@@ -39,10 +46,10 @@ public class Game {
         if (display.devil.getVector().y < Gravity) {
             display.devil.getVector().sumY(Player.StandardVelocity);
         }
-        this.checkCollisions(display.angel);
-        this.checkCollisions(display.devil);
         display.angel.update();
         display.devil.update();
+        this.checkCollisions(display.angel);
+        this.checkCollisions(display.devil);
     }
 
     public void render() {

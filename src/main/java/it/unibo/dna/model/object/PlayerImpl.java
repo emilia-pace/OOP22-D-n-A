@@ -12,11 +12,13 @@ public class PlayerImpl extends AbstractEntity implements Player {
     private Vector2d vector;
     private State state = State.STATE_STANDING;
     private Type type;
+    private Position2d oldPos;
 
     public PlayerImpl(Position2d pos, Vector2d vet, double height, double width, Type type) {
         super(pos, height, width);
         this.vector = vet;
         this.type = type;
+        this.oldPos = pos;
     }
 
     public Vector2d getVector() {
@@ -45,7 +47,12 @@ public class PlayerImpl extends AbstractEntity implements Player {
                 this.state = State.STATE_STANDING;
             }
         }
+        oldPos = this.getPosition();
         this.setPosition(this.getPosition().sum(vector));
+    }
+
+    public void reset() {
+        this.setPosition(new Position2d(this.getPosition().x, oldPos.y));
     }
 
     public State getState() {

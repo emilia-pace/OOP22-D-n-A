@@ -28,6 +28,14 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDoorEvent(Door d, Player p) {
         return game -> {
             d.openDoor(p);
+            System.out.println("Il player " + p.getType() + " ha toccato la porta");
+            if (p.getPosition().y + p.getBoundingBox().getHeight() <= d.getPosition().y)
+             {
+            p.setVectorY(0);
+            }
+            System.out.println(
+                    "Il player è in posizione: " + p.getPosition() + " e il vettore " + p.getVector()
+                            + " \ne la porta è in posizone " + d.getPosition());
         };
     }
 
@@ -37,9 +45,9 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitLeverEvent(Lever l) {
         return game -> {
-            if(l.isActivated()){
+            if (l.isActivated()) {
                 l.deactivate();
-            }else{
+            } else {
                 l.activate();
             }
         };
@@ -55,5 +63,5 @@ public class EventFactoryImpl implements EventFactory {
             s.addScore(d.getValue());
         };
     }
-    
+
 }

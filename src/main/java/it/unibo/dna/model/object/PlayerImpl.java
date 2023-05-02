@@ -1,5 +1,8 @@
 package it.unibo.dna.model.object;
 
+import org.apache.commons.lang3.time.FastDateFormat;
+
+import it.unibo.dna.Game;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.Player;
@@ -34,10 +37,9 @@ public class PlayerImpl extends AbstractEntity implements Player {
 
     @Override
     public void update() {
-        if (this.vector.y < Player.Gravity) {
-            this.vector.sumY(StandardVelocity);
-        }
-        if (!isJumping()) { // controllo da implementare meglio
+        if (this.getPosition().y + this.getVector().y + this.getBoundingBox().getHeight() > 500) { // controllo da
+                                                                                                   // implementare
+                                                                                                   // meglio
             this.vector.y = 0;
             if (!this.isTurned()) {
                 this.state = State.STATE_STANDING;

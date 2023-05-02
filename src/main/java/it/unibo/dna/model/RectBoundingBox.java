@@ -4,9 +4,10 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.BoundingBox;
 
 /**
- * Class that implements the {@link BoundingBox} interface with a rectangular shape.
+ * Class that implements the {@link BoundingBox} interface with a rectangular
+ * shape.
  */
-public class RectBoundingBox implements BoundingBox{
+public class RectBoundingBox implements BoundingBox {
 
     private Position2d position;
     private double height;
@@ -18,10 +19,10 @@ public class RectBoundingBox implements BoundingBox{
      * @param h the height of the box
      * @param w the width of the box
      */
-    public RectBoundingBox(final Position2d p, final double h, final double w){
-        this.position=p;
-        this.height=h;
-        this.width=w;
+    public RectBoundingBox(final Position2d p, final double h, final double w) {
+        this.position = p;
+        this.height = h;
+        this.width = w;
     }
 
     /**
@@ -71,17 +72,16 @@ public class RectBoundingBox implements BoundingBox{
     public void setWidth(final double width) {
         this.width = width;
     }
-    
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean isCollidingWith(final Position2d p, final double h, final double w) {
-        return this.position.x + this.width >= p.x 
-            && this.position.x <= p.x + w
-            && this.position.y >= p.y - h
-            && this.position.y - this.height <= p.y;
+        return this.position.x + this.width >= p.x
+                && this.position.x <= p.x + w
+                && this.position.y + this.height >= p.y
+                && this.position.y <= p.y + h;
     }
-    
+
 }

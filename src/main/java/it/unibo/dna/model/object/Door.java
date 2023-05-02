@@ -1,6 +1,7 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
@@ -25,14 +26,14 @@ public class Door implements Entity {
 
     /**
      * 
-     * @param pos the position of the door
+     * @param pos  the position of the door
      * @param type the type of the door (Angel door, Devil door)
-     * @param box the {@link BoundingBox} of the door
+     * @param box  the {@link BoundingBox} of the door
      */
-    public Door(Position2d pos, doorType type,BoundingBox box) {
+    public Door(Position2d pos, doorType type, double height, double width) {
         this.pos = pos;
         this.type = type;
-        this.box = box;
+        this.box = new RectBoundingBox(pos, height, width);
     }
 
     @Override
@@ -41,20 +42,22 @@ public class Door implements Entity {
     }
 
     /**
-     * A method that opens the door if the correct player is standing in front of it. The door can't be 
+     * A method that opens the door if the correct player is standing in front of
+     * it. The door can't be
      * closed after it has been opened.
+     * 
      * @param c the player standing in front of the door
      */
     public void openDoor(Player c) {
-        switch(c.getType()){
+        switch (c.getType()) {
             case ANGEL -> {
-                if(this.type.equals(doorType.ANGEL_DOOR)){
-                    this.state=doorState.OPEN_DOOR;
+                if (this.type.equals(doorType.ANGEL_DOOR)) {
+                    this.state = doorState.OPEN_DOOR;
                 }
             }
             case DEVIL -> {
-                if(this.type.equals(doorType.DEVIL_DOOR)){
-                    this.state=doorState.OPEN_DOOR;
+                if (this.type.equals(doorType.DEVIL_DOOR)) {
+                    this.state = doorState.OPEN_DOOR;
                 }
             }
         }
@@ -65,7 +68,7 @@ public class Door implements Entity {
      */
     @Override
     public void setPosition(Position2d pos) {
-        this.pos=pos;
+        this.pos = pos;
     }
 
     /**

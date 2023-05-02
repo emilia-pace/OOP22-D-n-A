@@ -8,7 +8,6 @@ public interface Player extends Entity {
 
     public static final double JumpVelocity = 20;
     public static final double StandardVelocity = 2;
-    public static final double Gravity = 4;
 
     public Vector2d getVector();
 

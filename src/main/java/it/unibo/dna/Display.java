@@ -5,10 +5,8 @@ import javax.swing.*;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.PlayerImpl;
-import it.unibo.dna.model.object.Puddle;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

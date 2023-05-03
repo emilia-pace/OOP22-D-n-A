@@ -20,8 +20,8 @@ public interface EventFactory {
 
 
     /**
-     * Models the collision event with a lever.
-     * @param l the hit lever
+     * Models the collision event with a door.
+     * @param l the hit door
      * @return the new event
      */
     Event hitDoorEvent(Door d, Player p);

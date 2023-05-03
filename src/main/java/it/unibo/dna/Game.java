@@ -25,7 +25,6 @@ public class Game {
     private BoundingBox boundingBox;
     private EventFactory event = new EventFactoryImpl();
     private Score score;
-    private int count = 0;
 
     public Game(int width, int height) {
         display = new Display(width, height);
@@ -120,7 +119,6 @@ public class Game {
 
         for (Entity e : this.getEntities()) {
             if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
-                // System.out.println("Sto toccando qualcosa!" + count++);
                 switch (e.getClass().getName()) {
                     case "it.unibo.dna.model.object.Button" -> event.hitButtonEvent((Button) e);
                     case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);

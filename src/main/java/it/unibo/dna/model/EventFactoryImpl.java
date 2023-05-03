@@ -1,6 +1,5 @@
 package it.unibo.dna.model;
 
-import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.Button;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -29,7 +28,10 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDoorEvent(Door d, Player p) {
         return game -> {
             d.openDoor(p);
-            p.reset();
+            p.resetY();
+            if(p.getBoundingBox().isCollidingWith(d.getPosition(), d.getBoundingBox().getHeight(), d.getBoundingBox().getWidth())){
+                p.resetX();
+            }
         };
     }
 

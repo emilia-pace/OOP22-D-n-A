@@ -1,8 +1,5 @@
 package it.unibo.dna.model.object;
 
-import org.apache.commons.lang3.time.FastDateFormat;
-
-import it.unibo.dna.Game;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.Player;
@@ -47,11 +44,15 @@ public class PlayerImpl extends AbstractEntity implements Player {
                 this.state = State.STATE_STANDING;
             }
         }
-        oldPos = this.getPosition();
+        this.oldPos = new Position2d(this.getPosition().x, this.getPosition().y);
         this.setPosition(this.getPosition().sum(vector));
     }
 
-    public void reset() {
+    public void resetX() {
+        this.setPosition(new Position2d(oldPos.x, this.getPosition().y));
+    }
+
+    public void resetY() {
         this.setPosition(new Position2d(this.getPosition().x, oldPos.y));
     }
 

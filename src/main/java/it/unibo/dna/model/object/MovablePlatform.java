@@ -19,9 +19,8 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
      * @param width the width of the platform
      * @param originaPos the original position of the platform
      * @param finalPos the final position of the platform
-     * @param box the {@link BoundingBox} of the platform
      */
-    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d originaPos, final Position2d finalPos, final BoundingBox box) {//costruttore
+    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d originaPos, final Position2d finalPos) {//costruttore
         super(pos, height, width);
         this.originalPos=originaPos;
         this.finalPos=finalPos;   

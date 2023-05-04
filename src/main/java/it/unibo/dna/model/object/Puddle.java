@@ -25,9 +25,8 @@ public class Puddle extends AbstractEntity {
      * @param height the height of the puddle
      * @param width the width of the puddle
      * @param type the type of the puddle (PURPLE,BLUE,RED)
-     * @param box the {@link BoundingBox} of the puddle
      */
-    public Puddle(final Position2d pos, final double height, final double width, final puddleType type, final BoundingBox box) {
+    public Puddle(final Position2d pos, final double height, final double width, final puddleType type) {
         super(pos, height, width);
         this.type=type;
     }
@@ -61,4 +60,5 @@ public class Puddle extends AbstractEntity {
                         }
                     }
         }
+    }
     }

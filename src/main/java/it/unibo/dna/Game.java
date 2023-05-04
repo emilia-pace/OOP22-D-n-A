@@ -27,6 +27,8 @@ public class Game {
     private Score score;
 
     public Game(int width, int height) {
+        this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
+        this.score = new Score();
         display = new Display(width, height);
         this.addEntity(display.door);
         this.addEntity(display.door2);
@@ -49,21 +51,14 @@ public class Game {
         display.devil.update();
         this.checkCollisions(display.angel);
         this.checkCollisions(display.devil);
+        this.checkBorders(display.angel);
+        this.checkBorders(display.devil);
     }
 
     public void render() {
         display.render(this);
     }
 
-    /**
-     * 
-     * @param boundingB the {@link BoundingBox}
-     */
-    public Game(final RectBoundingBox boundingB) {
-        this.boundingBox = boundingB;
-        this.entities = new ArrayList<Entity>();
-        this.score = new Score();
-    }
 
     /**
      * 
@@ -112,7 +107,7 @@ public class Game {
      * 
      * @param character the moving {@link Player}
      */
-    public void checkCollisions(final Player character) {
+    private void checkCollisions(final Player character) {
         Position2d ChPos = character.getPosition();
         double ChHeight = character.getBoundingBox().getHeight();
         double ChWidth = character.getBoundingBox().getWidth();
@@ -137,7 +132,7 @@ public class Game {
      * @param character the moving {@link Player}
      * @return true if the character is colliding with the borders
      */
-    public boolean checkBorders(final Player character) {
+    public void checkBorders(final Player character) {
         Position2d ChPos = character.getPosition();
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getWidth();
@@ -147,10 +142,12 @@ public class Game {
         double northBorder = this.boundingBox.getPosition().y;
         double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight();
 
-        return ChPos.x == sxBorder
-                || ChPos.x + ChLenght == dxBorder
-                || ChPos.y == northBorder
-                || ChPos.y + ChHeight == southBorder;
+        if(ChPos.x <= sxBorder || ChPos.x + ChLenght >= dxBorder){
+            event.hitBorderYEvent(character).manage(this);
+        }
+        if(ChPos.y <= northBorder || ChPos.y + ChHeight >= southBorder){
+            event.hitBorderXEvent(character).manage(this);
+        }
     }
 
 }

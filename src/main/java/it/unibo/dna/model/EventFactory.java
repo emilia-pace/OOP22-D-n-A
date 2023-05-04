@@ -10,6 +10,19 @@ import it.unibo.dna.model.object.api.Player;
  * Interface of a factory that creates {@link Event}.
  */
 public interface EventFactory {
+
+    /**
+     * Models the collision event with the horizontal borders.
+     * @return the new event
+     */
+    Event hitBorderXEvent(Player p);
+
+    /**
+     * Models the collision event with the vertical borders.
+     * @return the new event
+     */
+    Event hitBorderYEvent(Player p);
+
     
     /**
      * Models the collision event with a button.

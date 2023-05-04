@@ -60,4 +60,24 @@ public class EventFactoryImpl implements EventFactory {
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event hitBorderXEvent(Player p) {
+        return game -> {
+            p.resetY();
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event hitBorderYEvent(Player p) {
+        return game -> {
+            p.resetX();
+        };
+    }
+
 }

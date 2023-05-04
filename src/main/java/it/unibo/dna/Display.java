@@ -15,9 +15,9 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
         private Canvas canvas;
-        public PlayerImpl angel = new PlayerImpl(new Position2d(0, 0), new Vector2d(0, 0), 20, 20,
+        public PlayerImpl angel = new PlayerImpl(new Position2d(100, 100), new Vector2d(0, 0), 20, 20,
                         PlayerImpl.Type.ANGEL);
-        public PlayerImpl devil = new PlayerImpl(new Position2d(300, 0), new Vector2d(0, 0), 20, 20,
+        public PlayerImpl devil = new PlayerImpl(new Position2d(200, 200), new Vector2d(0, 0), 20, 20,
                         PlayerImpl.Type.DEVIL);
         public Door door = new Door(new Position2d(300, 450), Door.doorType.DEVIL_DOOR,
                         20, 200);

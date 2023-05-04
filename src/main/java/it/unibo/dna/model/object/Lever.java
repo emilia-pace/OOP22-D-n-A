@@ -1,7 +1,9 @@
 package it.unibo.dna.model.object;
 
+import java.util.Optional;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.BoundingBox;
+import it.unibo.dna.model.object.api.Player;
 
 /**
  * A lever that moves a platform when it gets switched on, and moves the platform back to its original 
@@ -15,6 +17,8 @@ public class Lever extends AbstractEntity implements GameObject{
 
     private boolean isActive = true;
     private leverState state = leverState.SWITCHED_OFF;
+
+    private Optional<Player> player = Optional.empty();
     private MovablePlatform platform;
 
     /**
@@ -28,13 +32,26 @@ public class Lever extends AbstractEntity implements GameObject{
         this.platform = platform;
     }
 
-
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean isActivated() {
         return this.isActive;
+    }
+
+    /**
+     * @param p the {@link Player} that has touched the lever
+     */
+    public void setPlayer(final Player p){
+        this.player = Optional.of(p);
+    }
+
+    /**
+     * resets the player for the lever
+     */
+    public void resetPlayer(){
+        this.player = Optional.empty();
     }
 
     /**

@@ -15,24 +15,22 @@ public class CommandFactory {
     public Command right() {
         return () -> {
             player.setVectorX(Player.StandardVelocity);
-            player.setState(State.STATE_RIGHT);
+            player.setStateY(State.STATE_RIGHT);
         };
     }
 
     public Command left() {
         return () -> {
             player.setVectorX(-Player.StandardVelocity);
-            player.setState(State.STATE_LEFT);
+            player.setStateY(State.STATE_LEFT);
         };
     }
 
     public Command jump() {
         return () -> {
-            if (!player.isJumping()) {
+            if (!player.getState().getX().equals(State.STATE_JUMPING)) {
                 player.setVectorY(-Player.JumpVelocity);
-                if (!player.isTurned()) {
-                    player.setState(State.STATE_JUMPING);
-                }
+                player.setStateX(State.STATE_JUMPING);
             }
         };
     }
@@ -40,11 +38,7 @@ public class CommandFactory {
     public Command stop() {
         return () -> {
             player.setVectorX(0);
-            if (player.isJumping()) {
-                player.setState(State.STATE_STANDING);
-            } else {
-                player.setState(State.STATE_STANDING);
-            }
+            player.setStateY(State.STATE_STILL);
         };
     }
 }

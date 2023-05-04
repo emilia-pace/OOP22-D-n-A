@@ -4,11 +4,11 @@ package it.unibo.dna.common;
  * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString well implemented. 
  */
 
- public class Pair<X,Y> {
-	
-	private final X x;
-	private final Y y;
-	
+public class Pair<X, Y> {
+
+	private X x;
+	private Y y;
+
 	public Pair(X x, Y y) {
 		super();
 		this.x = x;
@@ -21,6 +21,14 @@ package it.unibo.dna.common;
 
 	public Y getY() {
 		return y;
+	}
+
+	public void setX(X x) {
+		this.x = x;
+	}
+
+	public void setY(Y y) {
+		this.y = y;
 	}
 
 	@Override
@@ -59,7 +67,5 @@ package it.unibo.dna.common;
 	public String toString() {
 		return "Pair [x=" + x + ", y=" + y + "]";
 	}
-	
-	
 
 }

@@ -1,13 +1,14 @@
 package it.unibo.dna.model.object;
 
+import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.Player;
 
-public class PlayerImpl extends AbstractEntity implements Player {
+public class PlayerImpl extends EntityImpl implements Player {
 
     private Vector2d vector;
-    private State state = State.STATE_STANDING;
+    private Pair<State, State> state = new Pair<>(State.STATE_STANDING, State.STATE_STILL);
     private Type type;
     private Position2d oldPos;
 
@@ -48,21 +49,20 @@ public class PlayerImpl extends AbstractEntity implements Player {
         this.setPosition(new Position2d(this.getPosition().x, oldPos.y));
     }
 
-    public State getState() {
+    public Pair<State, State> getState() {
         return this.state;
     }
 
-    public void setState(State state) {
+    public void setState(Pair<State, State> state) {
         this.state = state;
     }
 
-    // Controllo da implementare con le collisioni
-    public boolean isJumping() {
-        return false;
+    public void setStateX(State newState) {
+        this.state.setX(newState);
     }
 
-    public boolean isTurned() {
-        return (this.state == State.STATE_LEFT || this.state == State.STATE_RIGHT);
+    public void setStateY(State newState) {
+        this.state.setY(newState);
     }
 
     @Override
@@ -74,11 +74,17 @@ public class PlayerImpl extends AbstractEntity implements Player {
         STATE_STANDING,
         STATE_JUMPING,
         STATE_RIGHT,
-        STATE_LEFT;
+        STATE_LEFT,
+        STATE_STILL;
     }
 
     public enum Type {
         DEVIL,
         ANGEL;
+    }
+
+    @Override
+    public boolean equals(Player p) {
+        return this.type.equals(p.getType());
     }
 }

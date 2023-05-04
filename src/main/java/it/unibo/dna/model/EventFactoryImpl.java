@@ -4,6 +4,7 @@ import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.Platform;
+import it.unibo.dna.model.object.PlayerImpl.State;
 import it.unibo.dna.model.object.api.Player;
 
 /**
@@ -18,9 +19,11 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitPlatformEvent(Platform pt, Player p) {
         return game -> {
             p.resetY();
-            if(p.getBoundingBox().isCollidingWith(pt.getPosition(), pt.getBoundingBox().getHeight(), pt.getBoundingBox().getWidth())){
+            if (p.getBoundingBox().isCollidingWith(pt.getPosition(), pt.getBoundingBox().getHeight(),
+                    pt.getBoundingBox().getWidth())) {
                 p.resetX();
             }
+            p.setStateX(State.STATE_STANDING);
         };
     }
 
@@ -30,7 +33,8 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitButtonEvent(ActivableObject o, Player p) {
         return game -> {
-            if(o.getPlayer().isEmpty()){
+            if (o.getPlayer().isEmpty()) {
+                System.out.println(o.getMovablePlatform().getPosition());
                 o.setPlayer(p);
                 o.activate();
             }
@@ -53,10 +57,11 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitLeverEvent(ActivableObject o, Player p) {
         return game -> {
-            if(o.getPlayer().isEmpty()){
-                if(o.isActivated()){
+            System.out.println(o.getMovablePlatform().getPosition());
+            if (o.getPlayer().isEmpty()) {
+                if (o.isActivated()) {
                     o.deactivate();
-                }else{
+                } else {
                     o.activate();
                 }
                 o.setPlayer(p);
@@ -82,6 +87,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitBorderXEvent(Player p) {
         return game -> {
             p.resetY();
+            p.setStateX(State.STATE_STANDING);
         };
     }
 
@@ -94,6 +100,5 @@ public class EventFactoryImpl implements EventFactory {
             p.resetX();
         };
     }
-
 
 }

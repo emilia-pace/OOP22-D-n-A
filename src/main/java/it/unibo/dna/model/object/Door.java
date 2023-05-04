@@ -6,7 +6,7 @@ import it.unibo.dna.model.object.api.Player;
 /**
  * A door that can be opend only by the corresponding player.
  */
-public class Door extends AbstractEntity {
+public class Door extends EntityImpl {
 
     public static enum doorType {
         ANGEL_DOOR, DEVIL_DOOR;

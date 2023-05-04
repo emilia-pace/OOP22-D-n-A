@@ -5,13 +5,13 @@ import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 
-public abstract class AbstractEntity implements Entity {
+public class EntityImpl implements Entity {
 
     private Position2d position;
     private double height;
     private double width;
 
-    public AbstractEntity(Position2d pos, double height, double width) {
+    public EntityImpl(Position2d pos, double height, double width) {
         this.position = pos;
         this.height = height;
         this.width = width;

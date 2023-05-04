@@ -36,7 +36,7 @@ public class KeyboardHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        switch (character.getState()) {
+        switch (character.getState().getY()) {
             case STATE_RIGHT:
                 if (key == this.commandRight) {
                     command.stop().execute();

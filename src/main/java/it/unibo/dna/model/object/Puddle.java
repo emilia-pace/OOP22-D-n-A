@@ -9,7 +9,7 @@ import it.unibo.dna.model.object.api.Player;
  * - BLUE: kills the Devil if it falls in it. Does nothing to the Angel.
  * - RED: kills the Angel if it falls in it. Does nothing to the Devil.
  */
-public class Puddle extends AbstractEntity {
+public class Puddle extends EntityImpl {
 
     public static enum puddleType {
         PURPLE, BLUE, RED

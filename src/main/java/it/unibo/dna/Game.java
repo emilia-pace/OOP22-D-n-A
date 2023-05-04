@@ -30,10 +30,12 @@ public class Game {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
         this.display = new Display(width, height);
-        System.out.println("Bounding box angel = " + display.angel.getBoundingBox().getWidth() + "x"
-                + display.angel.getBoundingBox().getHeight());
-        System.out.println("Bounding box devil = " + display.devil.getBoundingBox().getWidth() + "x"
-                + display.devil.getBoundingBox().getHeight());
+        this.entities.add(display.button);
+        this.entities.add(display.lever);
+        this.entities.add(display.p1);
+        this.entities.add(display.p2);
+        this.entities.add(display.mp1);
+        this.entities.add(display.mp2);
     }
 
     public void update() {
@@ -54,7 +56,6 @@ public class Game {
     public void render() {
         display.render(this);
     }
-
 
     /**
      * 
@@ -98,8 +99,8 @@ public class Game {
         return this.entities;
     }
 
-    private void freeActivableObject(ActivableObject e){
-        if(e.type.equals(ActivableObject.Activator.BUTTON)){
+    private void freeActivableObject(ActivableObject e) {
+        if (e.type.equals(ActivableObject.Activator.BUTTON)) {
             e.deactivate();
         }
         e.resetPlayer();
@@ -118,22 +119,22 @@ public class Game {
         for (Entity e : this.getEntities()) {
             if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
                 switch (e.getClass().getName()) {
-                    case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent((Platform) e, character).manage(this);
+                    case "it.unibo.dna.model.object.Platform" ->
+                        event.hitPlatformEvent((Platform) e, character).manage(this);
                     case "it.unibo.dna.model.object.ActivableObject" -> {
-                                                                            if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                                                                                event.hitButtonEvent((ActivableObject)e, character).manage(this);
-                                                                            } else {
-                                                                                event.hitLeverEvent((ActivableObject)e, character).manage(this);
-                                                                            }
-                                                                }
+                        if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
+                            event.hitButtonEvent((ActivableObject) e, character).manage(this);
+                        } else {
+                            event.hitLeverEvent((ActivableObject) e, character).manage(this);
+                        }
+                    }
                     case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);
                     case "it.unibo.dna.model.object.Diamond" -> event.hitDiamondEvent((Diamond) e, score).manage(this);
                 }
-            }
-            else if(e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")
-                     && ((ActivableObject) e).getPlayer().isPresent()){
+            } else if (e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")
+                    && ((ActivableObject) e).getPlayer().isPresent() ) {
 
-                        freeActivableObject((ActivableObject) e);
+                freeActivableObject((ActivableObject) e);
             }
         }
 
@@ -155,10 +156,10 @@ public class Game {
         double northBorder = this.boundingBox.getPosition().y;
         double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight();
 
-        if(ChPos.x <= sxBorder || ChPos.x + ChLenght >= dxBorder){
+        if (ChPos.x <= sxBorder || ChPos.x + ChLenght >= dxBorder) {
             event.hitBorderYEvent(character).manage(this);
         }
-        if(ChPos.y <= northBorder || ChPos.y + ChHeight >= southBorder){
+        if (ChPos.y <= northBorder || ChPos.y + ChHeight >= southBorder) {
             event.hitBorderXEvent(character).manage(this);
         }
     }

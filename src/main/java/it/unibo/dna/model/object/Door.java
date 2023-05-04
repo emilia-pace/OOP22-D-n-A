@@ -1,15 +1,12 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.RectBoundingBox;
-import it.unibo.dna.model.object.api.BoundingBox;
-import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
 /**
  * A door that can be opend only by the corresponding player.
  */
-public class Door implements Entity {
+public class Door extends AbstractEntity {
 
     public static enum doorType {
         ANGEL_DOOR, DEVIL_DOOR;
@@ -20,25 +17,18 @@ public class Door implements Entity {
     }
 
     private doorType type;
-    private Position2d pos;
     private doorState state = doorState.CLOSED_DOOR;
-    private BoundingBox box;
 
     /**
      * 
      * @param pos  the position of the door
+     * @param height the height of the door
+     * @param width the width of the door
      * @param type the type of the door (Angel door, Devil door)
-     * @param box  the {@link BoundingBox} of the door
      */
-    public Door(Position2d pos, doorType type, double height, double width) {
-        this.pos = pos;
+    public Door(Position2d pos, double height, double width, doorType type) {
+        super(pos,height,width);
         this.type = type;
-        this.box = new RectBoundingBox(pos, height, width);
-    }
-
-    @Override
-    public Position2d getPosition() {
-        return pos;
     }
 
     /**
@@ -61,22 +51,6 @@ public class Door implements Entity {
                 }
             }
         }
-    }
-
-    /**
-     * A setter for the position of the door.
-     */
-    @Override
-    public void setPosition(Position2d pos) {
-        this.pos = pos;
-    }
-
-    /**
-     * @return the position of the door.
-     */
-    @Override
-    public BoundingBox getBoundingBox() {
-        return this.box;
     }
 
 }

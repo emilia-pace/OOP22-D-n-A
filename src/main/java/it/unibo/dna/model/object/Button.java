@@ -8,41 +8,21 @@ import it.unibo.dna.model.object.api.BoundingBox;
 /**
  * {@link Button} that moves its corresponding platform when pushed by the player.
  */
-public class Button implements GameObject{
+public class Button extends AbstractEntity implements GameObject {
 
-    private Position2d pos;
-    private double height;
-    private double width;
-    private BoundingBox box;
     private boolean isActive=false;
 
     private MovablePlatform mp;
 
     /**
-     * 
      * @param pos the position of the button
+     * @param height the height of the button
+     * @param width the width of the button
      * @param mp the {@link MovablePlatform} that the button moves
-     * @param box the {@link BoundingBox} that expresses the height and width of the button
      */
-    public Button(final Position2d pos, final MovablePlatform mp, final BoundingBox box) {
-        this.pos = pos;
-        this.mp = mp;
-        this.box = box;
-    }
-
-    /**
-     * {@inheritDoc Position2d}
-     */
-    @Override
-    public Position2d getPosition() {
-        return this.pos;
-    }
-
-    /** 
-     * @return the position of the button
-     */
-    public void setPosition(Position2d position) {
-        this.pos=position;
+    public Button(final Position2d pos, final Double height, final Double width, final MovablePlatform mp) {
+       super(pos,height,width);
+       this.mp=mp;
     }
 
     /** 
@@ -57,14 +37,6 @@ public class Button implements GameObject{
      */
     public void setMovablePlatform(MovablePlatform m) {
         this.mp=m;
-    }
-
-    /** 
-     * {@inheritDoc BoudingBox}
-     */
-    @Override
-    public BoundingBox getBoundingBox() {
-        return this.box;
     }
 
     /** 

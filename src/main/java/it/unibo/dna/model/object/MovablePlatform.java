@@ -9,10 +9,8 @@ import it.unibo.dna.model.object.api.BoundingBox;
  */
 public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0) in alto a sinistra
 
-    private Position2d pos;
     private Position2d originalPos;
     private Position2d finalPos;
-    private BoundingBox box;
 
     /**
      * 
@@ -21,35 +19,11 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
      * @param width the width of the platform
      * @param originaPos the original position of the platform
      * @param finalPos the final position of the platform
-     * @param box the {@link BoundingBox} of the platform
      */
-    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d originaPos, final Position2d finalPos, final BoundingBox box) {//costruttore
+    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d originaPos, final Position2d finalPos) {//costruttore
         super(pos, height, width);
         this.originalPos=originaPos;
         this.finalPos=finalPos;   
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Position2d getPosition() {
-        return this.pos;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public BoundingBox getBoundingBox() {
-        return this.box;
-    }
-
-    /**
-     * A setter for the current position of the platform.
-     */
-    public void setPosition(Position2d p) {
-        this.pos = p;
     }
 
     /**
@@ -119,8 +93,8 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
      */
     public void move(Position2d startingPosition, Position2d finalPosition){
         Pair<Double,Double> p = findDirection(startingPosition, finalPosition);
-        while(!pos.equals(finalPosition)){
-            pos=new Position2d(pos.x+p.getX(),pos.y+p.getY());
+        while(!this.getPosition().equals(finalPosition)){
+            this.setPosition(new Position2d(this.getPosition().x+p.getX(),this.getPosition().y+p.getY()));
         }
     }
 

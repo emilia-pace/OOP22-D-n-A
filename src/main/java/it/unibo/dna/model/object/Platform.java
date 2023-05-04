@@ -1,7 +1,5 @@
 package it.unibo.dna.model.object;
 
-import javax.swing.BoundedRangeModel;
-
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.object.api.BoundingBox;

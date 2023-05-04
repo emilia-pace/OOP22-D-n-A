@@ -7,18 +7,15 @@ import it.unibo.dna.model.object.api.BoundingBox;
  * A lever that moves a platform when it gets switched on, and moves the platform back to its original 
  * position when it gets switched off.
  */
-public class Lever implements GameObject{
+public class Lever extends AbstractEntity implements GameObject{
 
     public static enum leverState {
         SWITCHED_ON,SWITCHED_OFF;
     }
 
     private boolean isActive = true;
-    private boolean isSwitchedOn = false;
     private leverState state = leverState.SWITCHED_OFF;
-    private Position2d pos; 
     private MovablePlatform platform;
-    private BoundingBox box;
 
     /**
      * 
@@ -26,24 +23,11 @@ public class Lever implements GameObject{
      * @param platform the {@link MovablePlatform} controlled by the lever
      * @param box the {@link BoundingBox} of the door
      */
-    public Lever(final Position2d pos, final MovablePlatform platform, final BoundingBox box){
-        this.pos = pos;
+    public Lever(final Position2d pos, final Double height, final Double width,  final MovablePlatform platform){
+        super(pos,height,width);
         this.platform = platform;
-        this.box = box;
     }
 
-    @Override
-    public Position2d getPosition() {
-        return this.pos;
-    }
-
-    /**
-     * 
-     * @return wether the lever is switched on
-     */
-    public boolean isSwitchedOn() {
-        return this.isSwitchedOn;
-    }
 
     /**
      * {@inheritDoc}
@@ -54,27 +38,11 @@ public class Lever implements GameObject{
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setPosition(Position2d pos) {
-        this.pos=pos;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public BoundingBox getBoundingBox() {
-        return this.box;
-    }
-
-    /**
      * A method to push the lever. The {@link MovablePlatform} linked to the lever will move towards its final
      * position.
      */
     public void activate() { //switch on
-        if(isActive){
+        if(!isActive){
             platform.move(platform.getOriginalPos(),platform.getFinalPosition());
             state=leverState.SWITCHED_ON;
         }

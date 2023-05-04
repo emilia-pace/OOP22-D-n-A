@@ -8,10 +8,9 @@ import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
-import it.unibo.dna.model.object.Button;
 import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.Lever;
 import it.unibo.dna.model.object.Platform;
+import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
@@ -30,11 +29,7 @@ public class Game {
     public Game(int width, int height) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
-        display = new Display(width, height);
-        this.addEntity(display.platform);
-        this.addEntity(display.platform2);
-        System.out.println("Bounding box porta = " + display.platform.getBoundingBox().getWidth() + "x"
-                + display.platform.getBoundingBox().getHeight());
+        this.display = new Display(width, height);
         System.out.println("Bounding box angel = " + display.angel.getBoundingBox().getWidth() + "x"
                 + display.angel.getBoundingBox().getHeight());
         System.out.println("Bounding box devil = " + display.devil.getBoundingBox().getWidth() + "x"
@@ -103,6 +98,13 @@ public class Game {
         return this.entities;
     }
 
+    private void freeActivableObject(ActivableObject e){
+        if(e.type.equals(ActivableObject.Activator.BUTTON)){
+            e.deactivate();
+        }
+        e.resetPlayer();
+    }
+
     /**
      * Checks the collision of a character with the entities in the game.
      * 
@@ -117,12 +119,21 @@ public class Game {
             if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
                 switch (e.getClass().getName()) {
                     case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent((Platform) e, character).manage(this);
-                    case "it.unibo.dna.model.object.Button" -> event.hitButtonEvent((Button) e);
-                    case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character);
-                    case "it.unibo.dna.model.object.Lever" -> event.hitLeverEvent((Lever) e);
-                    case "it.unibo.dna.model.object.Diamod" -> event.hitDiamondEvent((Diamond) e, score);
+                    case "it.unibo.dna.model.object.ActivableObject" -> {
+                                                                            if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
+                                                                                event.hitButtonEvent().manage(this);
+                                                                            } else {
+                                                                                event.hitLeverEvent().manage(this);
+                                                                            }
+                                                                }
+                    case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);
+                    case "it.unibo.dna.model.object.Diamond" -> event.hitDiamondEvent((Diamond) e, score).manage(this);
                 }
+            }
+            else if(e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")
+                     && ((ActivableObject) e).getPlayer().isPresent()){
 
+                        freeActivableObject((ActivableObject) e);
             }
         }
 

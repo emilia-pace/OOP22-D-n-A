@@ -17,7 +17,7 @@ public class ActivableObject extends AbstractEntity implements GameObject {
     }
 
     private boolean isActive=false;
-    private Activator type;
+    public Activator type;
     private Optional<Player> player = Optional.empty();
     private MovablePlatform mp;
 

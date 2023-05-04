@@ -1,5 +1,6 @@
 package it.unibo.dna.model;
 
+import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.Platform;
@@ -27,19 +28,12 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitButtonEvent() {
+    public Event hitButtonEvent(ActivableObject o, Player p) {
         return game -> {
-            
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Event hitLeverEvent() {
-        return game -> {
-            
+            if(o.getPlayer().isEmpty()){
+                o.setPlayer(p);
+                o.activate();
+            }
         };
     }
 
@@ -50,6 +44,23 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDoorEvent(Door d, Player p) {
         return game -> {
             d.openDoor(p);
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event hitLeverEvent(ActivableObject o, Player p) {
+        return game -> {
+            if(o.getPlayer().isEmpty()){
+                if(o.isActivated()){
+                    o.deactivate();
+                }else{
+                    o.activate();
+                }
+                o.setPlayer(p);
+            }
         };
     }
 

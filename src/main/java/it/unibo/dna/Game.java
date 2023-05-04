@@ -121,9 +121,9 @@ public class Game {
                     case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent((Platform) e, character).manage(this);
                     case "it.unibo.dna.model.object.ActivableObject" -> {
                                                                             if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                                                                                event.hitButtonEvent().manage(this);
+                                                                                event.hitButtonEvent((ActivableObject)e, character).manage(this);
                                                                             } else {
-                                                                                event.hitLeverEvent().manage(this);
+                                                                                event.hitLeverEvent((ActivableObject)e, character).manage(this);
                                                                             }
                                                                 }
                     case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);

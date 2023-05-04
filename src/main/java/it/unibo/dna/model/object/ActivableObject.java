@@ -1,14 +1,14 @@
 package it.unibo.dna.model.object;
 
 import java.util.Optional;
-import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.RectBoundingBox;
-import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Player;
 
 /**
- * {@link Button} that moves its corresponding platform when pushed by the player.
+ * An ActivableObject that moves its corresponding platform when pushed by the player.
+ * It can be either a Lever or a Button.
+ * The lever moves the {@link MovablePlatform} when it is touched by the player.
+ * The Button moves the {@link MovablePlatform} while it is being touched by the player.
  */
 public class ActivableObject extends AbstractEntity implements GameObject {
 
@@ -22,10 +22,10 @@ public class ActivableObject extends AbstractEntity implements GameObject {
     private MovablePlatform mp;
 
     /**
-     * @param pos the position of the button
-     * @param height the height of the button
-     * @param width the width of the button
-     * @param mp the {@link MovablePlatform} that the button moves
+     * @param pos the position of the ActivableObject
+     * @param height the height of the ActivableObject
+     * @param width the width of the ActivableObject
+     * @param mp the {@link MovablePlatform} that the ActivableObject moves
      */
     public ActivableObject(final Position2d pos, final Double height, final Double width, final Activator type, final MovablePlatform mp) {
        super(pos,height,width);
@@ -38,6 +38,14 @@ public class ActivableObject extends AbstractEntity implements GameObject {
      */
     public void setPlayer(final Player p){
         this.player = Optional.of(p);
+    }
+
+
+    /**
+     * @return wether the ActivableObject is a Button or a Lever
+     */
+    public Activator getType(){
+        return this.type;
     }
 
     /**

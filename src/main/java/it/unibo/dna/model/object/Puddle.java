@@ -2,9 +2,7 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.PlayerImpl.Type;
-import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Player;
-
 /**
  * A puddle with the following characteristics:
  * - PURPLE: kills both the Angel and the Devil if they fall in it.
@@ -32,7 +30,6 @@ public class Puddle extends AbstractEntity {
     }
 
     /**
-     * 
      * @return the type of the puddle
      */
     public puddleType getPuddleType() {

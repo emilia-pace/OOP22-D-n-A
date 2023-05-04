@@ -19,10 +19,10 @@ public class Display extends JFrame {
                         PlayerImpl.Type.ANGEL);
         public PlayerImpl devil = new PlayerImpl(new Position2d(300, 0), new Vector2d(0, 0), 20, 20,
                         PlayerImpl.Type.DEVIL);
-        public Door door = new Door(new Position2d(300, 450), Door.doorType.DEVIL_DOOR,
-                        20, 200);
-        public Door door2 = new Door(new Position2d(100, 250), Door.doorType.ANGEL_DOOR,
-                        20, 200);
+        public Door door = new Door(new Position2d(300, 450),
+                        20, 200,Door.doorType.DEVIL_DOOR);
+        public Door door2 = new Door(new Position2d(100, 250),
+                        20, 200,Door.doorType.ANGEL_DOOR);
 
         public Display(final int width, final int height) {
                 setTitle("D-n-A");

@@ -2,7 +2,6 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.api.BoundingBox;
 
 /**
  * A platform that can be moved by a button or a lever.
@@ -20,9 +19,9 @@ public class MovablePlatform extends AbstractEntity { //cambia le posizioi, (0,0
      * @param originaPos the original position of the platform
      * @param finalPos the final position of the platform
      */
-    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d originaPos, final Position2d finalPos) {//costruttore
+    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d finalPos) {//costruttore
         super(pos, height, width);
-        this.originalPos=originaPos;
+        this.originalPos=pos;
         this.finalPos=finalPos;   
     }
 

@@ -5,7 +5,7 @@ import javax.swing.*;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.object.Door;
+import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.PlayerImpl;
 
 import java.awt.*;
@@ -15,14 +15,14 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
         private Canvas canvas;
-        public PlayerImpl angel = new PlayerImpl(new Position2d(0, 0), new Vector2d(0, 0), 20, 20,
+        public PlayerImpl angel = new PlayerImpl(new Position2d(100, 100), new Vector2d(0, 0), 20, 20,
                         PlayerImpl.Type.ANGEL);
-        public PlayerImpl devil = new PlayerImpl(new Position2d(300, 0), new Vector2d(0, 0), 20, 20,
+        public PlayerImpl devil = new PlayerImpl(new Position2d(200, 200), new Vector2d(0, 0), 20, 20,
                         PlayerImpl.Type.DEVIL);
-        public Door door = new Door(new Position2d(300, 450),
-                        20, 200,Door.doorType.DEVIL_DOOR);
-        public Door door2 = new Door(new Position2d(100, 250),
-                        20, 200,Door.doorType.ANGEL_DOOR);
+        public Door door = new Door(new Position2d(300, 450), Door.doorType.DEVIL_DOOR,
+                        20, 200);
+        public Door door2 = new Door(new Position2d(100, 250), Door.doorType.ANGEL_DOOR,
+                        20, 200);
 
         public Display(final int width, final int height) {
                 setTitle("D-n-A");
@@ -56,18 +56,18 @@ public class Display extends JFrame {
                 graphics.fillRect((int) angel.getPosition().x, (int) angel.getPosition().y,
                                 (int) angel.getBoundingBox().getHeight(),
                                 (int) angel.getBoundingBox().getWidth());
-                graphics.fillRect((int) door2.getPosition().x, (int) door2.getPosition().y,
-                                (int) door2.getBoundingBox().getWidth(),
-                                (int) door2.getBoundingBox().getHeight());
+                graphics.fillRect((int) platform2.getPosition().x, (int) platform2.getPosition().y,
+                                (int) platform2.getBoundingBox().getWidth(),
+                                (int) platform2.getBoundingBox().getHeight());
 
                 graphics.setColor(Color.RED);
                 graphics.fillRect((int) devil.getPosition().x, (int) devil.getPosition().y,
                                 (int) devil.getBoundingBox().getHeight(),
                                 (int) devil.getBoundingBox().getWidth());
 
-                graphics.fillRect((int) door.getPosition().x, (int) door.getPosition().y,
-                                (int) door.getBoundingBox().getWidth(),
-                                (int) door.getBoundingBox().getHeight());
+                graphics.fillRect((int) platform.getPosition().x, (int) platform.getPosition().y,
+                                (int) platform.getBoundingBox().getWidth(),
+                                (int) platform.getBoundingBox().getHeight());
 
                 graphics.dispose();
                 bufferStrategy.show();

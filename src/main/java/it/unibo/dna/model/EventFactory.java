@@ -4,20 +4,39 @@ import it.unibo.dna.model.object.Button;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.Lever;
+import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.api.Player;
 
 /**
  * Interface of a factory that creates {@link Event}.
  */
 public interface EventFactory {
-    
+
+    /**
+     * Models the collision event with a platform.
+     * @param l the hit door
+     * @return the new event
+     */
+    Event hitPlatformEvent(Platform pt, Player p);
+
+    /**
+     * Models the collision event with the horizontal borders.
+     * @return the new event
+     */
+    Event hitBorderXEvent(Player p);
+
+    /**
+     * Models the collision event with the vertical borders.
+     * @return the new event
+     */
+    Event hitBorderYEvent(Player p);
+
     /**
      * Models the collision event with a button.
      * @param b the hit button
      * @return the new event
      */
     Event hitButtonEvent(Button b);
-
 
     /**
      * Models the collision event with a door.

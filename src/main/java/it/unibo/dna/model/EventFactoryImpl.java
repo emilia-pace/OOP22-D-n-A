@@ -4,12 +4,26 @@ import it.unibo.dna.model.object.Button;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.Lever;
+import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.api.Player;
 
 /**
  * Class that implements the {@link EventFactory} interface.
  */
 public class EventFactoryImpl implements EventFactory {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event hitPlatformEvent(Platform pt, Player p) {
+        return game -> {
+            p.resetY();
+            if(p.getBoundingBox().isCollidingWith(pt.getPosition(), pt.getBoundingBox().getHeight(), pt.getBoundingBox().getWidth())){
+                p.resetX();
+            }
+        };
+    }
 
     /**
      * {@inheritDoc}
@@ -28,10 +42,6 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDoorEvent(Door d, Player p) {
         return game -> {
             d.openDoor(p);
-            p.resetY();
-            if(p.getBoundingBox().isCollidingWith(d.getPosition(), d.getBoundingBox().getHeight(), d.getBoundingBox().getWidth())){
-                p.resetX();
-            }
         };
     }
 
@@ -59,5 +69,26 @@ public class EventFactoryImpl implements EventFactory {
             s.addScore(d.getValue());
         };
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event hitBorderXEvent(Player p) {
+        return game -> {
+            p.resetY();
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event hitBorderYEvent(Player p) {
+        return game -> {
+            p.resetX();
+        };
+    }
+
 
 }

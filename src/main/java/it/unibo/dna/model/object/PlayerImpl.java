@@ -36,14 +36,6 @@ public class PlayerImpl extends AbstractEntity implements Player {
 
     @Override
     public void update() {
-        if (this.getPosition().y + this.getVector().y + this.getBoundingBox().getHeight() > 500) { // controllo da
-                                                                                                   // implementare
-                                                                                                   // meglio
-            this.vector.y = 0;
-            if (!this.isTurned()) {
-                this.state = State.STATE_STANDING;
-            }
-        }
         this.oldPos = new Position2d(this.getPosition().x, this.getPosition().y);
         this.setPosition(this.getPosition().sum(vector));
     }

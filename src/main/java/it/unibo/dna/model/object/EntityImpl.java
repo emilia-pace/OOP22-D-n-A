@@ -11,20 +11,28 @@ public class EntityImpl implements Entity {
     private double height;
     private double width;
 
+    /**
+     * @param pos    the position of the entity
+     * @param height the height of the entity
+     * @param width  the width of the entity
+     */
     public EntityImpl(Position2d pos, double height, double width) {
         this.position = pos;
         this.height = height;
         this.width = width;
     }
 
+    @Override
     public Position2d getPosition() {
         return this.position;
     }
 
+    @Override
     public void setPosition(Position2d pos) {
         this.position = pos;
     }
 
+    @Override
     public BoundingBox getBoundingBox() {
         return new RectBoundingBox(this.position, this.height, this.width);
     }

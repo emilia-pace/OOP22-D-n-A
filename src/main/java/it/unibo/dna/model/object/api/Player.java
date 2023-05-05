@@ -7,33 +7,69 @@ import it.unibo.dna.model.object.PlayerImpl.Type;
 
 public interface Player extends Entity {
 
+    /**
+     *
+     */
     public static final double JumpVelocity = 25;
+
+
+    /**
+     *
+     */
     public static final double StandardVelocity = 2;
 
-    public Vector2d getVector();
+    /**
+     * @return the player's vector
+     */
+    Vector2d getVector();
 
-    public void setVector(Vector2d vet);
+    /**
+     * @param vet the new player's vector
+     */
+    void setVector(Vector2d vet);
 
-    public void setVectorX(double x);
+    /**
+     * @param x the first value of the player's vector
+     */
+    void setVectorX(double x);
 
-    public void setVectorY(double y);
+    /**
+     * @param y the second value of the player's vector
+     */
+    void setVectorY(double y);
 
-    public Pair<State, State> getState();
+    /**
+     * Make the first value of the player's vector zero
+     */
+    void resetX();
 
-    public void setState(Pair<State, State> state);
+    /**
+     * Make the second value of the player's vector zero
+     */
+    void resetY();
 
-    public void setStateX(State newState);
+    /**
+     * @return the player's state
+     */
+    Pair<State, State> getState();
 
-    public void setStateY(State newState);
+    /**
+     * @return the player's type
+     */
+    Type getType();
 
-    public Type getType();
+    /**
+     * 
+     */
+    void update();
 
-    public void update();
-
-    public void resetX();
-
-    public void resetY();
-
-    public boolean equals(Player p);
+    /**
+     * Compares two player, and returns true if the players
+     * have the same type, and false if not.
+     * 
+     * @param p player for the comparison
+     * @return true if p has the same type of player
+     */
+    boolean equals(Player p);
 
 }

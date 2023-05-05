@@ -1,5 +1,6 @@
 package it.unibo.dna.input;
 
+import it.unibo.dna.input.api.CommandFactory;
 import it.unibo.dna.model.object.api.Player;
 
 import java.awt.event.KeyEvent;
@@ -11,12 +12,18 @@ public class KeyboardHandler implements KeyListener {
     private Player character;
     private CommandFactory command;
 
+    /**
+     * @param commandRight the keycode for the command right
+     * @param commandLeft  the keycode for the command left
+     * @param commandJump  the keycode for jump
+     * @param character    the player linked to this keylistener
+     */
     public KeyboardHandler(int commandRight, int commandLeft, int commandJump, Player character) {
         this.commandRight = commandRight;
         this.commandLeft = commandLeft;
         this.commandJump = commandJump;
         this.character = character;
-        this.command = new CommandFactory(character);
+        this.command = new CommandFactoryImpl(character);
     }
 
     @Override

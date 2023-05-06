@@ -23,7 +23,7 @@ public class EventFactoryImpl implements EventFactory {
                     pt.getBoundingBox().getWidth())) {
                 p.resetX();
             }
-            p.setStateX(State.STATE_STANDING);
+            p.getState().setX(State.STATE_STANDING);
         };
     }
 
@@ -87,7 +87,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitBorderXEvent(Player p) {
         return game -> {
             p.resetY();
-            p.setStateX(State.STATE_STANDING);
+            p.getState().setX(State.STATE_STANDING);
         };
     }
 

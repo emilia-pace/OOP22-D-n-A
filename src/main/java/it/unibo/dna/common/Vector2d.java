@@ -17,10 +17,6 @@ public class Vector2d implements java.io.Serializable {
         y += d;
     }
 
-    public Vector2d sum(Vector2d v) {
-        return new Vector2d(x + v.x, y + v.y);
-    }
-
     public double module() {
         return (double) Math.sqrt(x * x + y * y);
     }

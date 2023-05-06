@@ -2,6 +2,7 @@ package it.unibo.dna;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.EventFactory;
@@ -117,10 +118,10 @@ public class Game {
         double ChWidth = character.getBoundingBox().getWidth();
 
         for (Entity e : this.getEntities()) {
+            String cl = e.getClass().getName();
             if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
-                switch (e.getClass().getName()) {
-                    case "it.unibo.dna.model.object.Platform" ->
-                        event.hitPlatformEvent((Platform) e, character).manage(this);
+                switch (cl) {
+                    case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent((Platform) e, character).manage(this);
                     case "it.unibo.dna.model.object.ActivableObject" -> {
                         if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
                             event.hitButtonEvent((ActivableObject) e, character).manage(this);
@@ -131,10 +132,13 @@ public class Game {
                     case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);
                     case "it.unibo.dna.model.object.Diamond" -> event.hitDiamondEvent((Diamond) e, score).manage(this);
                 }
-            } else if (e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")
-                    && ((ActivableObject) e).getPlayer().isPresent() ) {
-
-                freeActivableObject((ActivableObject) e);
+            } else if (cl.equals("it.unibo.dna.model.object.ActivableObject")) {
+                Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
+                if(objPlayer.isPresent() && objPlayer.get().equals(character)){
+                    freeActivableObject((ActivableObject) e);
+                }
+                    
+                
             }
         }
 

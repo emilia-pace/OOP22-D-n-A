@@ -96,10 +96,7 @@ public class MovablePlatform extends EntityImpl { // cambia le posizioi, (0,0) i
      * @param finalPosition    the final position that the platform wants to reach
      */
     public void move(Position2d startingPosition, Position2d finalPosition) {
-        Pair<Double, Double> p = findDirection(startingPosition, finalPosition);
-        while (!this.getPosition().equals(finalPosition)) {
-            this.setPosition(new Position2d(this.getPosition().x + p.getX(), this.getPosition().y + p.getY()));
-        }
+        this.setPosition(finalPosition);
     }
 
 }

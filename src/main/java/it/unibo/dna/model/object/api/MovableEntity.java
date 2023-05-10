@@ -33,12 +33,12 @@ public interface MovableEntity extends Entity{
     /**
      * Resets the x-axis of the vector.
      */
-    void resetX();
+    //void resetX(); DA GUARDARE
 
     /**
      * Resets the y-axis of the vector.
      */
-    void resetY();
+    //void resetY(); DA GUARDARE
 
     /**
      * 

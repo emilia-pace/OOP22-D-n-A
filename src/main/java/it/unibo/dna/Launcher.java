@@ -1,8 +1,22 @@
 package it.unibo.dna;
 
+import it.unibo.dna.graphics.MenuFactory;
+import it.unibo.dna.graphics.MenuFactoryImpl;
+import it.unibo.dna.graphics.GameMenu;
 
 public class Launcher {
     public static void main(String[] args) {
-        new Thread(new GameEngine(new Game(800, 600))).start();
+
+        GameMenu GameMenu;
+        MenuFactory boh;
+
+        boh = new MenuFactoryImpl();
+
+        GameMenu = boh.startMenu();
+
+        GameMenu.createMenuFrame();
+
+
+      
     }
 }

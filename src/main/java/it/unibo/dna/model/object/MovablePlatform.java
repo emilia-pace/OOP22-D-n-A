@@ -1,7 +1,10 @@
 package it.unibo.dna.model.object;
 
+import java.util.Optional;
+
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.object.api.Player;
 
 /**
  * A platform that can be moved by a button or a lever.
@@ -10,6 +13,7 @@ public class MovablePlatform extends EntityImpl { // cambia le posizioi, (0,0) i
 
     private Position2d originalPos;
     private Position2d finalPos;
+    public Optional<Player> playerOnPlatform;
 
     /**
      * 
@@ -23,6 +27,7 @@ public class MovablePlatform extends EntityImpl { // cambia le posizioi, (0,0) i
         super(pos, height, width);
         this.originalPos = pos;
         this.finalPos = finalPos;
+        playerOnPlatform = Optional.empty();
     }
 
     /**

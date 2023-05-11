@@ -10,7 +10,7 @@ import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.Platform;
+import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
@@ -47,8 +47,7 @@ public class Game {
         if (display.devil.getVector().y < Gravity) {
             display.devil.getVector().sumY(Player.StandardVelocity);
         }
-        display.angel.update();
-        display.devil.update();
+        
         for (Entity ent : entities) {
             if(ent instanceof MovableEntity){
                 ((MovableEntity)ent).update();
@@ -56,8 +55,13 @@ public class Game {
         }
         this.checkCollisions(display.angel);
         this.checkCollisions(display.devil);
+
         this.checkBorders(display.angel);
         this.checkBorders(display.devil);
+
+        display.angel.update();
+        display.devil.update();
+
     }
 
     public void render() {
@@ -127,7 +131,8 @@ public class Game {
             String cl = e.getClass().getName();
             if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
                 switch (cl) {
-                    case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent((Platform) e, character).manage(this);
+                    case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent(e, character).manage(this);
+                    case "it.unibo.dna.model.object.MovablePlatform" -> event.hitMovablePlatformEvent((MovablePlatform)e, character).manage(this);
                     case "it.unibo.dna.model.object.ActivableObject" -> {
                         if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
                             event.hitButtonEvent((ActivableObject) e, character).manage(this);
@@ -142,9 +147,7 @@ public class Game {
                 Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
                 if(objPlayer.isPresent() && objPlayer.get().equals(character)){
                     freeActivableObject((ActivableObject) e);
-                }
-                    
-                
+                }  
             }
         }
 

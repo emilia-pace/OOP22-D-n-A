@@ -76,9 +76,9 @@ public class MovablePlatform extends MovableEntityImpl {
             this.setVectorX(+1.0);
         }
         if (differenceY < 0) {
-            this.setVectorY(-1.0);
+            this.setVectorY(+1.0);
         }else if(differenceY > 0){
-            this.setVectorY(1.0);
+            this.setVectorY(-1.0);
         }
     }
 

@@ -3,9 +3,10 @@ package it.unibo.dna.model;
 import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.Platform;
+import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.PlayerImpl.State;
 import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.api.Entity;
 
 /**
  * Class that implements the {@link EventFactory} interface.
@@ -16,7 +17,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitPlatformEvent(Platform pt, Player p) {
+    public Event hitPlatformEvent(Entity pt, Player p) {
         return game -> {
             p.resetY();
             if (p.getBoundingBox().isCollidingWith(pt.getPosition(), pt.getBoundingBox().getHeight(),
@@ -24,6 +25,17 @@ public class EventFactoryImpl implements EventFactory {
                 p.resetX();
             }
             p.getState().setX(State.STATE_STANDING);
+
+        };
+    }
+
+    public Event hitMovablePlatformEvent(MovablePlatform pt, Player p){
+        return game -> {
+
+            this.hitPlatformEvent(pt, p).manage(game);
+            p.getVector().sumX(pt.getVector().x);
+            p.getVector().sumY(pt.getVector().y);
+            
         };
     }
 

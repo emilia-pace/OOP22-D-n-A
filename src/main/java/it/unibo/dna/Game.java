@@ -15,6 +15,7 @@ import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.MovableEntity;
 import it.unibo.dna.model.object.api.Player;
 
 public class Game {
@@ -48,6 +49,11 @@ public class Game {
         }
         display.angel.update();
         display.devil.update();
+        for (Entity ent : entities) {
+            if(ent instanceof MovableEntity){
+                ((MovableEntity)ent).update();
+            }
+        }
         this.checkCollisions(display.angel);
         this.checkCollisions(display.devil);
         this.checkBorders(display.angel);

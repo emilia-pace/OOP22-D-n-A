@@ -2,14 +2,14 @@ package it.unibo.dna.model.object;
 
 import java.util.Optional;
 
-import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.Player;
 
 /**
  * A platform that can be moved by a button or a lever.
  */
-public class MovablePlatform extends EntityImpl { // cambia le posizioi, (0,0) in alto a sinistra
+public class MovablePlatform extends MovableEntityImpl {
 
     private Position2d originalPos;
     private Position2d finalPos;
@@ -23,8 +23,8 @@ public class MovablePlatform extends EntityImpl { // cambia le posizioi, (0,0) i
      * @param originaPos the original position of the platform
      * @param finalPos   the final position of the platform
      */
-    public MovablePlatform(final Position2d pos, final double height, final double width, final Position2d finalPos) {// costruttore
-        super(pos, height, width);
+    public MovablePlatform(final Position2d pos, final Vector2d vet, final double height, final double width, final Position2d finalPos) {// costruttore
+        super(pos, vet, height, width);
         this.originalPos = pos;
         this.finalPos = finalPos;
         this.playerOnPlatform = Optional.empty();
@@ -71,26 +71,19 @@ public class MovablePlatform extends EntityImpl { // cambia le posizioi, (0,0) i
      * @param p2 the position the platform wants to reach
      * @return a pair of coordinates that explain the movement the platform must do.
      */
-    public Pair<Double, Double> findDirection(Position2d p1, Position2d p2) {
+    public void findVector(Position2d p1, Position2d p2) {
         double differenceX = p1.x - p2.x;
         double differenceY = p1.y - p2.y;
-        double horizontalMovement = 0;
-        double verticalMovemet = 0;
-        if (differenceX != 0) {
-            if (differenceX > 0) {
-                horizontalMovement = -1.0;
-            } else {
-                horizontalMovement = +1.0;
-            }
+        if(differenceX > 0){
+            this.setVectorX(-1.0);
+        }else if(differenceX < 0){
+            this.setVectorX(+1.0);
         }
-        if (differenceY != 0) {
-            if (differenceY < 0) { // o > ?
-                verticalMovemet = -1.0;
-            } else {
-                verticalMovemet = 1.0;
-            }
+        if (differenceY < 0) {
+            this.setVectorY(-1.0);
+        }else if(differenceY > 0){
+            this.setVectorY(1.0);
         }
-        return new Pair<>(horizontalMovement, verticalMovemet);
     }
 
     /**
@@ -100,8 +93,8 @@ public class MovablePlatform extends EntityImpl { // cambia le posizioi, (0,0) i
      * @param startingPosition the starting position of the platform
      * @param finalPosition    the final position that the platform wants to reach
      */
-    public void move(Position2d startingPosition, Position2d finalPosition) {
-        this.setPosition(finalPosition);
+    public void move(final ActivableObject ao, Position2d startingPosition, Position2d finalPosition) {
+        findVector(startingPosition, finalPosition);
     }
 
 }

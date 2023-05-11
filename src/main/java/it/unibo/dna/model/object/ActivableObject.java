@@ -25,6 +25,7 @@ public class ActivableObject extends EntityImpl implements GameObject {
      * @param pos the position of the ActivableObject
      * @param height the height of the ActivableObject
      * @param width the width of the ActivableObject
+     * @param type the type of the ActivableObject
      * @param mp the {@link MovablePlatform} that the ActivableObject moves
      */
     public ActivableObject(final Position2d pos, final Double height, final Double width, final Activator type, final MovablePlatform mp) {
@@ -72,25 +73,28 @@ public class ActivableObject extends EntityImpl implements GameObject {
     /** 
      * A setter for the MovablePlatform controlled by the button.
      */
-    public void setMovablePlatform(MovablePlatform m) {
+    public void setMovablePlatform(final MovablePlatform m) {
         this.mp=m;
     }
 
     /** 
-     * A method that moves the platform of the button as long as it is being pressed. 
+     * A methods that moves the platform from its starting position towards its final position.
      */
     public void activate(){
         this.isActive = true;
-        mp.move(mp.getOriginalPos(),mp.getFinalPosition());
+        mp.move(this.mp.getOriginalPos(),mp.getFinalPosition());
     }
 
+    /**
+     * A method that moves the platform from its final position towards its starting position. 
+     */
     public void deactivate(){
         this.isActive = false;
         mp.move(mp.getFinalPosition(),mp.getOriginalPos());
     }
 
     /**
-     * @return wether the button is being pushed
+     * @return wether the platform is supposed to be moving.
      */
     @Override
     public boolean isActivated() {

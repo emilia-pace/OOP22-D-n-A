@@ -3,7 +3,8 @@ package it.unibo.dna.model;
 import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.Platform;
+import it.unibo.dna.model.object.MovablePlatform;
+import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
 /**
@@ -16,7 +17,15 @@ public interface EventFactory {
      * @param l the hit door
      * @return the new event
      */
-    Event hitPlatformEvent(Platform pt, Player p);
+    Event hitPlatformEvent(Entity pt, Player p);
+
+     /**
+     * Models the collision event with a platform.
+     * @param l the hit door
+     * @return the new event
+     */
+    Event hitMovablePlatformEvent(MovablePlatform pt, Player p);
+
 
     /**
      * Models the collision event with the horizontal borders.

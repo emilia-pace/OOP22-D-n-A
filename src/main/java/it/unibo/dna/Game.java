@@ -11,11 +11,12 @@ import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.Platform;
+import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.MovableEntity;
 import it.unibo.dna.model.object.api.Player;
 
 public class Game {
@@ -41,18 +42,29 @@ public class Game {
     }
 
     public void update() {
-        if (display.angel.getVector().y < Gravity) {
-            display.angel.getVector().sumY(Player.StandardVelocity);
+        this.gravity(display.angel);
+        this.gravity(display.devil);
+
+        for (Entity ent : entities) {
+            if (ent instanceof MovableEntity) {
+                ((MovableEntity) ent).update();
+            }
         }
-        if (display.devil.getVector().y < Gravity) {
-            display.devil.getVector().sumY(Player.StandardVelocity);
-        }
-        display.angel.update();
-        display.devil.update();
         this.checkCollisions(display.angel);
         this.checkCollisions(display.devil);
+
         this.checkBorders(display.angel);
         this.checkBorders(display.devil);
+
+        display.angel.update();
+        display.devil.update();
+
+    }
+
+    private void gravity(Player player) {
+        if (player.getVector().y < Gravity) {
+            player.getVector().sumY(Player.StandardVelocity);
+        }
     }
 
     public void render() {
@@ -114,7 +126,7 @@ public class Game {
      * @param character the moving {@link Player}
      */
     private void checkCollisions(final Player character) {
-        Position2d ChPos = character.getPosition();
+        Position2d ChPos = character.getPosition().sum(character.getVector());
         double ChHeight = character.getBoundingBox().getHeight();
         double ChWidth = character.getBoundingBox().getWidth();
 
@@ -122,7 +134,9 @@ public class Game {
             String cl = e.getClass().getName();
             if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
                 switch (cl) {
-                    case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent((Platform) e, character).manage(this);
+                    case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent(e, character).manage(this);
+                    case "it.unibo.dna.model.object.MovablePlatform" ->
+                        event.hitMovablePlatformEvent((MovablePlatform) e, character).manage(this);
                     case "it.unibo.dna.model.object.ActivableObject" -> {
                         if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
                             event.hitButtonEvent((ActivableObject) e, character).manage(this);
@@ -135,11 +149,9 @@ public class Game {
                 }
             } else if (cl.equals("it.unibo.dna.model.object.ActivableObject")) {
                 Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
-                if(objPlayer.isPresent() && objPlayer.get().equals(character)){
+                if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
                     freeActivableObject((ActivableObject) e);
                 }
-                    
-                
             }
         }
 
@@ -152,7 +164,7 @@ public class Game {
      * @return true if the character is colliding with the borders
      */
     public void checkBorders(final Player character) {
-        Position2d ChPos = character.getPosition();
+        Position2d ChPos = character.getPosition().sum(character.getVector());
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getWidth();
 

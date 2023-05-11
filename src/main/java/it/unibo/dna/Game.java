@@ -163,7 +163,7 @@ public class Game {
      * @return true if the character is colliding with the borders
      */
     public void checkBorders(final Player character) {
-        Position2d ChPos = character.getPosition();
+        Position2d ChPos = character.getPosition().sum(character.getVector());
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getWidth();
 

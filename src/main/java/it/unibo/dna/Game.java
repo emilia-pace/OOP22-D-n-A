@@ -41,16 +41,12 @@ public class Game {
     }
 
     public void update() {
-        if (display.angel.getVector().y < Gravity) {
-            display.angel.getVector().sumY(Player.StandardVelocity);
-        }
-        if (display.devil.getVector().y < Gravity) {
-            display.devil.getVector().sumY(Player.StandardVelocity);
-        }
-        
+        this.gravity(display.angel);
+        this.gravity(display.devil);
+
         for (Entity ent : entities) {
-            if(ent instanceof MovableEntity){
-                ((MovableEntity)ent).update();
+            if (ent instanceof MovableEntity) {
+                ((MovableEntity) ent).update();
             }
         }
         this.checkCollisions(display.angel);
@@ -62,6 +58,12 @@ public class Game {
         display.angel.update();
         display.devil.update();
 
+    }
+
+    private void gravity(Player player) {
+        if (player.getVector().y < Gravity) {
+            player.getVector().sumY(Player.StandardVelocity);
+        }
     }
 
     public void render() {
@@ -123,7 +125,7 @@ public class Game {
      * @param character the moving {@link Player}
      */
     private void checkCollisions(final Player character) {
-        Position2d ChPos = character.getPosition();
+        Position2d ChPos = character.getPosition().sum(character.getVector());
         double ChHeight = character.getBoundingBox().getHeight();
         double ChWidth = character.getBoundingBox().getWidth();
 
@@ -132,7 +134,8 @@ public class Game {
             if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
                 switch (cl) {
                     case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent(e, character).manage(this);
-                    case "it.unibo.dna.model.object.MovablePlatform" -> event.hitMovablePlatformEvent((MovablePlatform)e, character).manage(this);
+                    case "it.unibo.dna.model.object.MovablePlatform" ->
+                        event.hitMovablePlatformEvent((MovablePlatform) e, character).manage(this);
                     case "it.unibo.dna.model.object.ActivableObject" -> {
                         if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
                             event.hitButtonEvent((ActivableObject) e, character).manage(this);
@@ -145,9 +148,9 @@ public class Game {
                 }
             } else if (cl.equals("it.unibo.dna.model.object.ActivableObject")) {
                 Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
-                if(objPlayer.isPresent() && objPlayer.get().equals(character)){
+                if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
                     freeActivableObject((ActivableObject) e);
-                }  
+                }
             }
         }
 

@@ -74,11 +74,15 @@ public class MovablePlatform extends MovableEntityImpl {
             this.setVectorX(-1.0);
         }else if(differenceX < 0){
             this.setVectorX(+1.0);
+        }else{
+            this.setVectorX(0);
         }
         if (differenceY < 0) {
             this.setVectorY(+1.0);
         }else if(differenceY > 0){
             this.setVectorY(-1.0);
+        }else{
+            this.setVectorY(0);
         }
     }
 
@@ -91,6 +95,13 @@ public class MovablePlatform extends MovableEntityImpl {
      */
     public void move(Position2d startingPosition, Position2d finalPosition) {
         findVector(startingPosition, finalPosition);
+    }
+
+    public void update(){
+        if(this.getPosition().equals(this.getOriginalPos()) || this.getPosition().equals(this.getFinalPosition())){
+            this.setVector(new Vector2d(0, 0));
+        }
+        super.update();
     }
 
 }

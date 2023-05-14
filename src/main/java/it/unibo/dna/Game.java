@@ -46,7 +46,7 @@ public class Game {
 
         for (Entity ent : entities) {
             if (ent instanceof MovableEntity) {
-                ((MovableEntity) ent).update();
+                ((MovablePlatform) ent).update();
             }
         }
         this.checkCollisions(display.angel);

@@ -82,7 +82,7 @@ public class ActivableObject extends EntityImpl implements GameObject {
      */
     public void activate(){
         this.isActive = true;
-        mp.move(this.mp.getOriginalPos(),mp.getFinalPosition());
+        mp.move(this.mp.getPosition() ,mp.getFinalPosition());
     }
 
     /**
@@ -90,7 +90,7 @@ public class ActivableObject extends EntityImpl implements GameObject {
      */
     public void deactivate(){
         this.isActive = false;
-        mp.move(mp.getFinalPosition(),mp.getOriginalPos());
+        mp.move(mp.getPosition(),mp.getOriginalPos());
     }
 
     /**

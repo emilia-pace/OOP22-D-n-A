@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.RectBoundingBox;
@@ -28,7 +29,7 @@ public class Game {
     private EventFactory event = new EventFactoryImpl();
     private Score score;
 
-    public Game(int width, int height) {
+    public Game(int width, int height, int level) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
         this.display = new Display(width, height);
@@ -163,7 +164,7 @@ public class Game {
      * @return true if the character is colliding with the borders
      */
     public void checkBorders(final Player character) {
-        Position2d ChPos = character.getPosition();
+        Position2d ChPos = character.getPosition().sum(character.getVector());
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getWidth();
 

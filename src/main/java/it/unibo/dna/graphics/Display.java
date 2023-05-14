@@ -1,7 +1,8 @@
-package it.unibo.dna;
+package it.unibo.dna.graphics;
 
 import javax.swing.*;
 
+import it.unibo.dna.Game;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
@@ -29,6 +30,9 @@ public class Display extends JFrame {
                         ActivableObject.Activator.LEVER, mp1);
         public ActivableObject button = new ActivableObject(new Position2d(500, 550), 30.0, 30.0,
                         ActivableObject.Activator.BUTTON, mp2);
+        JLabel boh = new JLabel("\u2194");
+
+        
 
         public Display(final int width, final int height) {
                 setTitle("D-n-A");

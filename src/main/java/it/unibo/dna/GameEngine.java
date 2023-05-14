@@ -1,10 +1,13 @@
 package it.unibo.dna;
 
+import it.unibo.dna.graphics.MenuFactory;
+import it.unibo.dna.graphics.MenuFactoryImpl;
+
 public class GameEngine implements Runnable {
 
     private Game game;
 
-    private boolean running;
+    boolean running;
     private final double rateUpdate = 1.0d / 60.0d;
 
     public GameEngine(Game game) {
@@ -16,6 +19,7 @@ public class GameEngine implements Runnable {
         running = true;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();
+        
 
         while (running) {
             currentTime = System.currentTimeMillis();

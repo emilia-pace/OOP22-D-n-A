@@ -19,10 +19,10 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitPlatformEvent(Entity pt, Player p) {
         return game -> {
-            p.setVectorY(0);
+            p.resetY();
             if (pt.getBoundingBox().isCollidingWith(p.getPosition().sum(p.getVector()),
-                p.getBoundingBox().getHeight(), p.getBoundingBox().getWidth())) {
-                p.setVectorX(0);
+                    p.getBoundingBox().getHeight(), p.getBoundingBox().getWidth())) {
+                p.resetX();
             }
             p.getState().setX(State.STATE_STANDING);
 

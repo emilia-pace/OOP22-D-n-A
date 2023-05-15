@@ -9,7 +9,6 @@ public class PlayerImpl extends MovableEntityImpl implements Player {
 
     private Pair<State, State> state = new Pair<>(State.STATE_STANDING, State.STATE_STILL);
     private Type type;
-    private Position2d oldPos;
 
     /**
      * @param pos    the position of the player
@@ -21,13 +20,6 @@ public class PlayerImpl extends MovableEntityImpl implements Player {
     public PlayerImpl(Position2d pos, Vector2d vet, double height, double width, Type type) {
         super(pos, vet, height, width);
         this.type = type;
-        this.oldPos = pos;
-    }
-
-    @Override
-    public void update() {
-        this.oldPos = new Position2d(this.getPosition().x, this.getPosition().y);
-        super.update();
     }
 
     @Override
@@ -47,12 +39,12 @@ public class PlayerImpl extends MovableEntityImpl implements Player {
 
     @Override
     public void resetX() {
-        this.setPosition(new Position2d(oldPos.x, this.getPosition().y));
+        this.setVectorX(0);
     }
 
     @Override
     public void resetY() {
-        this.setPosition(new Position2d(this.getPosition().x, oldPos.y));
+        this.setVectorY(0);
     }
 
     public enum State {

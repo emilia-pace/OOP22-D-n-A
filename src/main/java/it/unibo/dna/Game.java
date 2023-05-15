@@ -1,10 +1,12 @@
 package it.unibo.dna;
 
+import java.awt.Button;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
@@ -55,11 +57,12 @@ public class Game {
         display.devil.update();
 
         for (Entity ent : entities) {
-            if (ent instanceof MovablePlatform) {
-                ((MovablePlatform) ent).update();;
+            if(ent instanceof MovablePlatform){
+                ((MovablePlatform)ent).findLimit();
+                System.out.println("Ho provato a fare findLimit");
+                ((MovablePlatform)ent).update();
             }
         }
-
     }
 
     private void gravity(Player player) {

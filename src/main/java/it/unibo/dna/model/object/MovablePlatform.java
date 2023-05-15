@@ -11,7 +11,7 @@ public class MovablePlatform extends MovableEntityImpl {
 
     private Position2d originalPos;
     private Position2d finalPos;
-    private boolean isComingBack;
+    private boolean hasMoved;
 
     /**
      * 
@@ -25,15 +25,11 @@ public class MovablePlatform extends MovableEntityImpl {
         super(pos, vet, height, width);
         this.originalPos = pos;
         this.finalPos = finalPos;
-        this.isComingBack = false;
+        this.hasMoved = false;
     }
 
-    public boolean platformIsComingBack(){
-        return this.isComingBack;
-    }
-
-    public void setIsComingBack(final boolean b){
-        this.isComingBack = b;
+    public boolean hasMoved() {
+        return this.hasMoved;
     }
 
     /**
@@ -90,7 +86,7 @@ public class MovablePlatform extends MovableEntityImpl {
         if (differenceY < 0) {
             this.setVectorY(+1.0);
         }else if(differenceY > 0){
-            this.setVectorY(-1.0);
+                this.setVectorY(-1.0);
         }else{
             this.setVectorY(0);
         }
@@ -105,6 +101,9 @@ public class MovablePlatform extends MovableEntityImpl {
      */
     public void move(final Position2d pos1, final Position2d pos2) {
             findVector(pos1, pos2);
+            if(!hasMoved){
+                this.hasMoved = true;
+            }
     }
 
     public void update(){
@@ -112,6 +111,47 @@ public class MovablePlatform extends MovableEntityImpl {
             this.setVector(new Vector2d(0, 0));
         }
         super.update();
+    }
+
+    public void findLimit(){
+        if(this.getOriginalPos().x > this.getFinalPosition().x){
+            if (this.getPosition().x >= this.getOriginalPos().x){
+                this.setPosition(new Position2d(this.getOriginalPos().x, this.getPosition().y));
+                this.setVector(new Vector2d(0, 0));
+            }else if (this.getPosition().x <= this.getFinalPosition().x){
+                this.setPosition(new Position2d(this.getFinalPosition().x, this.getPosition().y));
+                this.setVector(new Vector2d(0, 0));
+            }
+        }else{
+            System.out.println("la pos iniziale è più a destra della pos finale!");
+            if (this.getPosition().x < this.getOriginalPos().x){
+                this.setPosition(new Position2d(this.getOriginalPos().x, this.getPosition().y));
+                this.setVector(new Vector2d(0, 0));
+            }else if (this.getPosition().x > this.getFinalPosition().x){
+                this.setPosition(new Position2d(this.getFinalPosition().x, this.getPosition().y));
+                this.setVector(new Vector2d(0, 0));
+            }
+        }
+        if(this.getOriginalPos().y > this.getFinalPosition().y){
+            System.out.println("la pos iniziale è più in basso della pos finale!");
+            if (this.getPosition().y > this.getOriginalPos().y){
+                this.setPosition(new Position2d(this.getPosition().x, this.getOriginalPos().y));
+                this.setVector(new Vector2d(0, 0));
+            }else if (this.getPosition().y < this.getFinalPosition().y){
+                this.setPosition(new Position2d(this.getPosition().x, this.getFinalPosition().y));
+                this.setVector(new Vector2d(0, 0));
+            }
+        }else{
+            System.out.println("la pos iniziale è più in alto della pos finale!");
+            if (this.getPosition().y < this.getOriginalPos().y){
+                this.setPosition(new Position2d(this.getPosition().x, this.getOriginalPos().y));
+                this.setVector(new Vector2d(0, 0));
+            }else if (this.getPosition().y > this.getFinalPosition().y){
+                this.setPosition(new Position2d(this.getPosition().x, this.getFinalPosition().y));
+                this.setVector(new Vector2d(0, 0));
+            }
+        }
+
     }
 
 }

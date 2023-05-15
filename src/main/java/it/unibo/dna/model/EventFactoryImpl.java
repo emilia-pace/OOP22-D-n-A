@@ -44,10 +44,14 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitButtonEvent(ActivableObject o, Player p) {
         return game -> {
-            if (o.getPlayer().isEmpty()) {
-                System.out.println(o.getMovablePlatform().getPosition());
+            if(o.getPlayer().isEmpty()){
                 o.setPlayer(p);
-                o.activate();
+                if(!o.isActivated()){
+                    o.activate();
+                }else{
+                    o.deactivate();
+                    o.resetPlayer();
+                }
             }
         };
     }
@@ -68,14 +72,13 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitLeverEvent(ActivableObject o, Player p) {
         return game -> {
-            System.out.println(o.getMovablePlatform().getPosition());
-            if (o.getPlayer().isEmpty()) {
-                if (o.isActivated()) {
+            if(o.getPlayer().isEmpty()){
+                o.setPlayer(p);
+                if(o.isActivated()){
                     o.deactivate();
-                } else {
+                }else{
                     o.activate();
                 }
-                o.setPlayer(p);
             }
         };
     }

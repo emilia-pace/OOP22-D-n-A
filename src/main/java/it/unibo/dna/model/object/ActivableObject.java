@@ -82,7 +82,7 @@ public class ActivableObject extends EntityImpl implements GameObject {
      */
     public void activate(){
         this.isActive = true;
-        mp.move(this.mp.getPosition() ,mp.getFinalPosition());
+        mp.move(mp.getPosition(),mp.getFinalPosition());
     }
 
     /**
@@ -94,7 +94,7 @@ public class ActivableObject extends EntityImpl implements GameObject {
     }
 
     /**
-     * @return wether the platform is supposed to be moving.
+     * @return wether the platform is supposed to be moving from its current position towards its final position.
      */
     @Override
     public boolean isActivated() {

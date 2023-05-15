@@ -11,6 +11,7 @@ public class MovablePlatform extends MovableEntityImpl {
 
     private Position2d originalPos;
     private Position2d finalPos;
+    private boolean isComingBack;
 
     /**
      * 
@@ -24,6 +25,15 @@ public class MovablePlatform extends MovableEntityImpl {
         super(pos, vet, height, width);
         this.originalPos = pos;
         this.finalPos = finalPos;
+        this.isComingBack = false;
+    }
+
+    public boolean platformIsComingBack(){
+        return this.isComingBack;
+    }
+
+    public void setIsComingBack(final boolean b){
+        this.isComingBack = b;
     }
 
     /**
@@ -93,8 +103,8 @@ public class MovablePlatform extends MovableEntityImpl {
      * @param startingPosition the starting position of the platform
      * @param finalPosition    the final position that the platform wants to reach
      */
-    public void move(Position2d startingPosition, Position2d finalPosition) {
-        findVector(startingPosition, finalPosition);
+    public void move(final Position2d pos1, final Position2d pos2) {
+            findVector(pos1, pos2);
     }
 
     public void update(){

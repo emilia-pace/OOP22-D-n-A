@@ -11,7 +11,6 @@ public class MovablePlatform extends MovableEntityImpl {
 
     private Position2d originalPos;
     private Position2d finalPos;
-    private boolean hasMoved;
 
     /**
      * 
@@ -25,11 +24,6 @@ public class MovablePlatform extends MovableEntityImpl {
         super(pos, vet, height, width);
         this.originalPos = pos;
         this.finalPos = finalPos;
-        this.hasMoved = false;
-    }
-
-    public boolean hasMoved() {
-        return this.hasMoved;
     }
 
     /**
@@ -100,10 +94,7 @@ public class MovablePlatform extends MovableEntityImpl {
      * @param finalPosition    the final position that the platform wants to reach
      */
     public void move(final Position2d pos1, final Position2d pos2) {
-            findVector(pos1, pos2);
-            if(!hasMoved){
-                this.hasMoved = true;
-            }
+        findVector(pos1, pos2);
     }
 
     public void update(){
@@ -123,7 +114,6 @@ public class MovablePlatform extends MovableEntityImpl {
                 this.setVector(new Vector2d(0, 0));
             }
         }else{
-            System.out.println("la pos iniziale è più a destra della pos finale!");
             if (this.getPosition().x < this.getOriginalPos().x){
                 this.setPosition(new Position2d(this.getOriginalPos().x, this.getPosition().y));
                 this.setVector(new Vector2d(0, 0));
@@ -133,7 +123,6 @@ public class MovablePlatform extends MovableEntityImpl {
             }
         }
         if(this.getOriginalPos().y > this.getFinalPosition().y){
-            System.out.println("la pos iniziale è più in basso della pos finale!");
             if (this.getPosition().y > this.getOriginalPos().y){
                 this.setPosition(new Position2d(this.getPosition().x, this.getOriginalPos().y));
                 this.setVector(new Vector2d(0, 0));
@@ -142,7 +131,6 @@ public class MovablePlatform extends MovableEntityImpl {
                 this.setVector(new Vector2d(0, 0));
             }
         }else{
-            System.out.println("la pos iniziale è più in alto della pos finale!");
             if (this.getPosition().y < this.getOriginalPos().y){
                 this.setPosition(new Position2d(this.getPosition().x, this.getOriginalPos().y));
                 this.setVector(new Vector2d(0, 0));

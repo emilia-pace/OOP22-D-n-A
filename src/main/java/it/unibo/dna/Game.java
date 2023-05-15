@@ -43,10 +43,10 @@ public class Game {
     }
 
     public void update() {
+
         this.gravity(display.angel);
         this.gravity(display.devil);
 
-        
         this.checkCollisions(display.angel);
         this.checkCollisions(display.devil);
 
@@ -59,10 +59,10 @@ public class Game {
         for (Entity ent : entities) {
             if(ent instanceof MovablePlatform){
                 ((MovablePlatform)ent).findLimit();
-                System.out.println("Ho provato a fare findLimit");
                 ((MovablePlatform)ent).update();
             }
         }
+        
     }
 
     private void gravity(Player player) {

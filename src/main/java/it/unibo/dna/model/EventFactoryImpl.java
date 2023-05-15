@@ -31,10 +31,12 @@ public class EventFactoryImpl implements EventFactory {
 
     public Event hitMovablePlatformEvent(MovablePlatform pt, Player p) {
         return game -> {
-            this.hitPlatformEvent(pt, p).manage(game);
-            p.getVector().sumX(pt.getVector().x);
-            p.getVector().sumY(pt.getVector().y);
-
+            p.resetY();
+            p.getState().setX(State.STATE_STANDING);
+            if(p.getVector().x == 0){
+                p.setVectorX(pt.getVector().x);
+            }
+            p.setVectorY(p.getVector().y+pt.getVector().y);
         };
     }
 

@@ -5,20 +5,23 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.Player;
 
 /**
- * An ActivableObject that moves its corresponding platform when pushed by the player.
+ * An ActivableObject that moves its platform when activated by the player.
  * It can be either a Lever or a Button.
- * The lever moves the {@link MovablePlatform} when it is touched by the player.
+ * The Lever moves the {@link MovablePlatform} when it is touched by the player.
  * The Button moves the {@link MovablePlatform} while it is being touched by the player.
  */
 public class ActivableObject extends EntityImpl implements GameObject {
 
-    public static enum Activator {
+    /**
+     * An enum explaining the two possible kinds of ActivableObject: Button and Lever.
+     */
+    public enum Activator {
         BUTTON, LEVER
     }
 
-    private boolean isActive=false;
+    private boolean isActive=false; /*Tells whether the platform is moving towards its final position. */
     public Activator type;
-    private Optional<Player> player = Optional.empty();
+    private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject */
     private MovablePlatform mp;
 
     /**
@@ -41,9 +44,8 @@ public class ActivableObject extends EntityImpl implements GameObject {
         this.player = Optional.of(p);
     }
 
-
     /**
-     * @return wether the ActivableObject is a Button or a Lever
+     * @return whether the ActivableObject is a Button or a Lever
      */
     public Activator getType(){
         return this.type;

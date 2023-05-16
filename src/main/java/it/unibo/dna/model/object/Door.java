@@ -17,7 +17,7 @@ public class Door extends EntityImpl {
     }
 
     private doorType type;
-    private doorState state = doorState.CLOSED_DOOR;
+    private doorState state;
 
     /**
      * 
@@ -29,6 +29,7 @@ public class Door extends EntityImpl {
     public Door(Position2d pos, double height, double width, doorType type) {
         super(pos,height,width);
         this.type = type;
+        this.state = doorState.CLOSED_DOOR;
     }
 
     /**

@@ -63,6 +63,14 @@ public class MovablePlatform extends MovableEntityImpl {
         this.originalPos = op;
     }
 
+    public Vector2d getLastVector(){
+        return this.lastVector;
+    }
+
+    public void setLastVector(final Vector2d v){
+        this.lastVector = v;
+    }
+
     /**
      * A method that finds the direction in which the platform needs to move.
      * 
@@ -96,6 +104,7 @@ public class MovablePlatform extends MovableEntityImpl {
      * @param pos2 the final position that the platform wants to reach
      */
     public void move(final Position2d pos1, final Position2d pos2) {
+        this.lastVector = this.getVector();
         findVector(pos1, pos2);
     }
 

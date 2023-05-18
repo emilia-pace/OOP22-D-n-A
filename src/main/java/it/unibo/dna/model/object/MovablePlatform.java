@@ -11,6 +11,7 @@ public class MovablePlatform extends MovableEntityImpl {
 
     private Position2d originalPos;
     private Position2d finalPos;
+    private Vector2d lastVector;
 
     /**
      * 
@@ -25,6 +26,7 @@ public class MovablePlatform extends MovableEntityImpl {
         super(pos, vet, height, width);
         this.originalPos = pos;
         this.finalPos = finalPos;
+        this.lastVector = new Vector2d(0, 0);
     }
 
     /**

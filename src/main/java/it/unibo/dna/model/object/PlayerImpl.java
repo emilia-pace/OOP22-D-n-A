@@ -33,7 +33,11 @@ public class PlayerImpl extends MovableEntityImpl implements Player {
     }
 
     @Override
-    public boolean equals(Player p) {
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof Player)) {
+            return false;
+        }
+        final Player p = (Player) obj;
         return this.type.equals(p.getType());
     }
 
@@ -45,19 +49,6 @@ public class PlayerImpl extends MovableEntityImpl implements Player {
     @Override
     public void resetY() {
         this.setVectorY(0);
-    }
-
-    public enum State {
-        STATE_STANDING,
-        STATE_JUMPING,
-        STATE_RIGHT,
-        STATE_LEFT,
-        STATE_STILL;
-    }
-
-    public enum Type {
-        DEVIL,
-        ANGEL;
     }
 
 }

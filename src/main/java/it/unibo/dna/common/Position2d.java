@@ -21,4 +21,15 @@ public class Position2d implements java.io.Serializable {
         return "Position2d(" + x + "," + y + ")";
     }
 
+    
+    @Override
+    public boolean equals(final Object obj) {
+
+        if (!(obj instanceof Position2d)) {
+            return false;
+        }
+        final Position2d pos = (Position2d) obj;
+        return (Double.compare(pos.x, this.x) == 0 && Double.compare(pos.y, this.y) == 0);
+    }
+
 }

@@ -37,4 +37,14 @@ public class EntityImpl implements Entity {
         return new RectBoundingBox(this.position, this.height, this.width);
     }
 
+    @Override
+    public void setPositionX(Double x) {
+        this.setPosition(new Position2d(x, this.getPosition().y));
+    }
+
+    @Override
+    public void setPositionY(Double y) {
+        this.setPosition(new Position2d(this.getPosition().x, y));
+    }
+
 }

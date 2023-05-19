@@ -1,8 +1,6 @@
 package it.unibo.dna.model.object.api;
 
 import it.unibo.dna.common.Pair;
-import it.unibo.dna.model.object.PlayerImpl.State;
-import it.unibo.dna.model.object.PlayerImpl.Type;
 
 public interface Player extends MovableEntity {
 
@@ -37,17 +35,25 @@ public interface Player extends MovableEntity {
     Type getType();
 
     /**
-     * 
-     */
-    void update();
-
-    /**
      * Compares two player, and returns true if the players
      * have the same type, and false if not.
      * 
      * @param p player for the comparison
      * @return true if p has the same type of player
      */
-    boolean equals(Player p);
+    boolean equals(Object p);
+
+    public enum State {
+        STATE_STANDING,
+        STATE_JUMPING,
+        STATE_RIGHT,
+        STATE_LEFT,
+        STATE_STILL;
+    }
+
+    public enum Type {
+        DEVIL,
+        ANGEL;
+    }
 
 }

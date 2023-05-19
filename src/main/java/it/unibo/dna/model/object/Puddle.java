@@ -1,8 +1,8 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.PlayerImpl.Type;
 import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.api.Player.Type;
 /**
  * A puddle with the following characteristics:
  * - PURPLE: kills both the Angel and the Devil if they fall in it.

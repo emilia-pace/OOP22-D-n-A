@@ -24,8 +24,8 @@ public class Display extends JFrame {
                         PlayerImpl.Type.DEVIL);
         public Platform p1 = new Platform(new Position2d(400, 550), 30.0, 300.0);
         public Platform p2 = new Platform(new Position2d(90, 450), 30.0, 300.0);
-        public MovablePlatform mp1 = new MovablePlatform(new Position2d(200, 230), new Vector2d(0, 0),30, 100, new Position2d(200, 100));
-        public MovablePlatform mp2 = new MovablePlatform(new Position2d(340, 350), new Vector2d(0, 0), 30, 100, new Position2d(390, 200));
+        public MovablePlatform mp1 = new MovablePlatform(new Position2d(200, 230), new Vector2d(0, 0),30, 100,new Position2d(200, 100));
+        public MovablePlatform mp2 = new MovablePlatform(new Position2d(340, 350), new Vector2d(0, 0), 30, 100,new Position2d(390, 200));
         public ActivableObject lever = new ActivableObject(new Position2d(120, 450), 30.0, 30.0,
                         ActivableObject.Activator.LEVER, mp1);
         public ActivableObject button = new ActivableObject(new Position2d(500, 550), 30.0, 30.0,

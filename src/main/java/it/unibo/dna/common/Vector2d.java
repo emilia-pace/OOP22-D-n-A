@@ -28,4 +28,13 @@ public class Vector2d implements java.io.Serializable {
     public String toString() {
         return "Vector2d(" + x + "," + y + ")";
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof Vector2d)) {
+            return false;
+        }
+        final Vector2d vec = (Vector2d) obj;
+        return (Double.compare(vec.x, this.x) == 0 && Double.compare(vec.y, this.y) == 0);
+    }
 }

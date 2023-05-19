@@ -78,20 +78,18 @@ public class MovablePlatform extends MovableEntityImpl {
      * @param p2 the position the platform wants to reach
      */
     public void findVector(final Position2d p1, final Position2d p2) {
-        double differenceX = p1.x - p2.x;
-        double differenceY = p1.y - p2.y;
-        if (differenceX > 0) {
-            this.setVectorX(-1.0);
-        } else if (differenceX < 0) {
+        if(p2.isOnTheRight(p1)){
             this.setVectorX(+1.0);
-        } else {
+        }else if(p1.isOnTheRight(p2)){
+            this.setVectorX(-1.0);
+        }else {
             this.setVectorX(0);
         }
-        if (differenceY < 0) {
-            this.setVectorY(+1.0);
-        } else if (differenceY > 0) {
-                this.setVectorY(-1.0);
-        } else {
+        if(p2.isAbove(p1)){
+            this.setVectorY(-1.0);
+        }else if(p1.isAbove(p2)){
+            this.setVectorY(1.0);
+        }else{
             this.setVectorY(0);
         }
     }

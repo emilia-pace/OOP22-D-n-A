@@ -4,8 +4,8 @@ import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.PlayerImpl.State;
 import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.api.Player.State;
 import it.unibo.dna.model.object.api.Entity;
 
 /**

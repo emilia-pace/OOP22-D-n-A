@@ -119,43 +119,45 @@ public class MovablePlatform extends MovableEntityImpl {
     }
 
     /**
+     * Checks whether the platform has gone out of range on the x-axis.
+     */
+    public void checkHorizontal(){
+        if(this.originalPos.isBetweenHorizontally(this.getFinalPosition(), this.getPosition())){
+            this.setPositionX(this.getOriginalPos().x); 
+        } else if (this.finalPos.isBetweenHorizontally(this.getPosition(), this.getOriginalPos())) {
+            this.setPositionX(this.getFinalPosition().x);
+        } else if (this.originalPos.isBetweenHorizontally(this.getPosition(), this.getFinalPosition())) {
+            this.setPositionX(this.getOriginalPos().x);
+        } else if (this.finalPos.isBetweenHorizontally(this.getOriginalPos(), this.getPosition())) {
+            this.setPositionX(this.getFinalPosition().x);
+        }
+    }
+
+    /**
+     * Checks whether the platform has gone out of ranfe on the y-axis.
+     */
+    public void checkVertical() {
+        if (this.originalPos.isBetweenVertically(this.getFinalPosition(), this.getPosition())) {
+            this.setPositionY(this.getOriginalPos().y);
+        } else if (this.finalPos.isBetweenVertically(this.getPosition(), this.getOriginalPos())) {
+            this.setPositionY(this.getFinalPosition().y);
+        } else if (this.originalPos.isBetweenVertically(this.getPosition(), this.getFinalPosition())) {
+            this.setPositionY(this.getOriginalPos().y);
+        } else if (this.finalPos.isBetweenVertically(this.getOriginalPos(), this.getPosition())) {
+            this.setPositionY(this.getFinalPosition().y);
+        }
+    }
+
+    /**
      * A method that tells if the originalPosition of the platfor is on the left, on the right,
      *  above or below the finalPosition of the platform.
      */
     public void findLimit() {
-        if (this.getOriginalPos().x > this.getFinalPosition().x) { //is on the right
-            if (this.getPosition().x >= this.getOriginalPos().x) {
-                this.setPosition(new Position2d(this.getOriginalPos().x, this.getPosition().y));
-                this.setVector(new Vector2d(0, 0));
-            } else if (this.getPosition().x <= this.getFinalPosition().x) {
-                this.setPosition(new Position2d(this.getFinalPosition().x, this.getPosition().y));
-                this.setVector(new Vector2d(0, 0));
-            }
-        } else { //is on the left
-            if (this.getPosition().x < this.getOriginalPos().x) {
-                this.setPosition(new Position2d(this.getOriginalPos().x, this.getPosition().y));
-                this.setVector(new Vector2d(0, 0));
-            } else if (this.getPosition().x > this.getFinalPosition().x) {
-                this.setPosition(new Position2d(this.getFinalPosition().x, this.getPosition().y));
-                this.setVector(new Vector2d(0, 0));
-            }
-        }
-        if (this.getOriginalPos().y > this.getFinalPosition().y) { //is below
-            if (this.getPosition().y > this.getOriginalPos().y) {
-                this.setPosition(new Position2d(this.getPosition().x, this.getOriginalPos().y));
-                this.setVector(new Vector2d(0, 0));
-            } else if (this.getPosition().y < this.getFinalPosition().y) {
-                this.setPosition(new Position2d(this.getPosition().x, this.getFinalPosition().y));
-                this.setVector(new Vector2d(0, 0));
-            }
-        } else { //is above
-            if (this.getPosition().y < this.getOriginalPos().y) {
-                this.setPosition(new Position2d(this.getPosition().x, this.getOriginalPos().y));
-                this.setVector(new Vector2d(0, 0));
-            } else if (this.getPosition().y > this.getFinalPosition().y) {
-                this.setPosition(new Position2d(this.getPosition().x, this.getFinalPosition().y));
-                this.setVector(new Vector2d(0, 0));
-            }
+        Position2d firstPos = this.getPosition();
+        checkVertical();
+        checkHorizontal();
+        if(!this.getPosition().equals(firstPos)){
+            this.setVector(new Vector2d(0, 0));
         }
     }
 

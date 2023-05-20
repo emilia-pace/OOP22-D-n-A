@@ -84,5 +84,19 @@ public class RectBoundingBox implements BoundingBox {
                 && this.position.y <= p.y + h;
     }
 
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean sideCollision(final Position2d p, final double h, final double w) {
+        double eps = this.position.x + this.width - p.x;
+        double eps1 = this.position.x - (p.x + w);
+
+        return this.isCollidingWith(p, h, w) 
+                && (Math.abs(eps) <= Double.MIN_NORMAL || Math.abs(eps1) <= Double.MIN_NORMAL);
+
+    }
+
 
 }

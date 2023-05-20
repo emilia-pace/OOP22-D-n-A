@@ -1,12 +1,10 @@
 package it.unibo.dna;
 
-import java.awt.Button;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
@@ -135,32 +133,36 @@ public class Game {
         double ChHeight = character.getBoundingBox().getHeight();
         double ChWidth = character.getBoundingBox().getWidth();
 
-        for (Entity e : this.getEntities()) {
+        this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)).forEach((e) -> {
             String cl = e.getClass().getName();
-            if (e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)) {
-                switch (cl) {
-                    case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent(e, character).manage(this);
-                    case "it.unibo.dna.model.object.MovablePlatform" ->
-                        event.hitMovablePlatformEvent((MovablePlatform) e, character).manage(this);
-                    case "it.unibo.dna.model.object.ActivableObject" -> {
-                        if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                            event.hitButtonEvent((ActivableObject) e, character).manage(this);
-                        } else {
-                            event.hitLeverEvent((ActivableObject) e, character).manage(this);
-                        }
+            switch (cl) {
+                case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent(e, character).manage(this);
+                case "it.unibo.dna.model.object.MovablePlatform" -> {
+                    event.hitPlatformEvent(e, character).manage(this);
+                    event.hitMovablePlatformEvent((MovablePlatform) e, character).manage(this);
+                }
+                case "it.unibo.dna.model.object.ActivableObject" -> {
+                    if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
+                        event.hitButtonEvent((ActivableObject) e, character).manage(this);
+                    } else {
+                        event.hitLeverEvent((ActivableObject) e, character).manage(this);
                     }
-                    case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);
-                    case "it.unibo.dna.model.object.Diamond" -> event.hitDiamondEvent((Diamond) e, score).manage(this);
                 }
-            } else if (cl.equals("it.unibo.dna.model.object.ActivableObject")) {
-                Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
-                if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                    freeActivableObject((ActivableObject) e);
-                }
+                case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);
+                case "it.unibo.dna.model.object.Diamond" -> event.hitDiamondEvent((Diamond) e, score).manage(this);
             }
-        }
+        });
 
+        this.getEntities().stream().filter((e)->!e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth)).filter((e) ->
+        e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")).forEach((e) -> {
+            Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
+            if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
+                freeActivableObject((ActivableObject) e);
+            }
+        });
     }
+
+
 
     /**
      * Checks the collision of a character with the borders.

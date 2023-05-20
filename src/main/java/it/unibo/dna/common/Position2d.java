@@ -29,12 +29,21 @@ public class Position2d implements java.io.Serializable {
         return this.y < p2.y;
     }
 
-    public boolean isBetweenHorizontally(final Position2d p1, final Position2d p2){
+    public boolean isBetweenHorizontally(final Position2d p1, final Position2d p2) {
         return this.isOnTheRight(p1) && p2.isOnTheRight(this);
     }
 
-    public boolean isBetweenVertically(final Position2d p1, final Position2d p2){
+    public boolean isBetweenVertically(final Position2d p1, final Position2d p2) {
         return this.isAbove(p1) && p2.isAbove(this);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof Position2d)) {
+            return false;
+        }
+        final Position2d pos = (Position2d) obj;
+        return (Double.compare(pos.x, this.x) == 0 && Double.compare(pos.y, this.y) == 0);
     }
 
 }

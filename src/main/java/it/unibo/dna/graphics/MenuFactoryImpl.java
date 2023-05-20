@@ -3,14 +3,15 @@ package it.unibo.dna.graphics;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.dna.Game;
@@ -96,8 +97,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             
         @Override
             public JFrame createMenuFrame() {
-                JFrame gameOverFrame = new JFrame("You Won");
-                JButton nextLevel = getNextLevelButton(gameOverFrame);
+                JFrame victoryFrame = new JFrame("You Won");
+                JButton nextLevel = getNextLevelButton(victoryFrame);
                 JButton quit = getQuitButton();
                 JLabel score = getScorLabel();
                 JPanel panel = new JPanel();
@@ -105,18 +106,18 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 panel.add(score);
                 panel.add(nextLevel);
                 panel.add(quit);
-                gameOverFrame.getContentPane().setLayout(new BoxLayout(gameOverFrame.getContentPane(), BoxLayout.Y_AXIS));
-                gameOverFrame.setSize(800, 600);
-                gameOverFrame.getContentPane().setBackground(Color.BLACK);
+                victoryFrame.getContentPane().setLayout(new BoxLayout(victoryFrame.getContentPane(), BoxLayout.Y_AXIS));
+                victoryFrame.setSize(800, 600);
+                victoryFrame.getContentPane().setBackground(Color.BLACK);
 
-                gameOverFrame.getContentPane().add(panel);
-                gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gameOverFrame.setLocationRelativeTo(null);
-                gameOverFrame.setVisible(true);
+                victoryFrame.getContentPane().add(panel);
+                victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                victoryFrame.setLocationRelativeTo(null);
+                victoryFrame.setVisible(true);
 
 
 
-                return gameOverFrame;
+                return victoryFrame;
             }
             
         };
@@ -144,22 +145,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                JFrame guideFrame = new JFrame("Guide");
-                JLabel angelLabel = new JLabel("Angel controls: W:jump, A: left, D: right ");
-                JLabel deviLabel = new JLabel("Devil controls: ↑: jump, \u2190: left, \u2192: right");
-                JLabel goalLabel = new JLabel("The goal of the game is to reach the doors together");
-
-                angelLabel.setBounds(50,50,500,300);
-                deviLabel.setBounds(50,70,500,300);
-                goalLabel.setBounds(50,100,500,300);
-
-                guideFrame.add(angelLabel);
-                guideFrame.add(deviLabel);
-                guideFrame.add(goalLabel);
-                guideFrame.setSize(500, 500);
-                guideFrame.setResizable(false);
-                guideFrame.setVisible(true);
-                
+                JFrame guideFrame = new JFrame( "Guide");
+                JOptionPane.showMessageDialog(guideFrame, "Angel controls: W:jump, A: left, D: right" +
+                "\n Devil controls: ↑: jump, \u2190: left, \u2192: right \n The goal of the game is to reach the doors together ");
             }
             
         };

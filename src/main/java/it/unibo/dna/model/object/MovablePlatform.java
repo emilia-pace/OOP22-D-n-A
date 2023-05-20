@@ -107,16 +107,6 @@ public class MovablePlatform extends MovableEntityImpl {
     }
 
     /**
-     * 
-     */
-    public void update() {
-        if (this.getPosition().equals(this.getOriginalPos()) || this.getPosition().equals(this.getFinalPosition())) {
-            this.setVector(new Vector2d(0, 0));
-        }
-        super.update();
-    }
-
-    /**
      * Checks whether the platform has gone out of range on the x-axis.
      */
     public void checkHorizontal(){

@@ -33,8 +33,8 @@ public class ManageImage {
             playerMap.put(new Pair<>(state, Player.State.STATE_RIGHT), new ArrayList<>());
             playerMap.put(new Pair<>(state, Player.State.STATE_STILL), new ArrayList<>());
         });
-        playerMap.get(new Pair<>(Player.State.STATE_JUMPING, Player.State.STATE_LEFT)).add(null);
-        playerMap.get(new Pair<>(Player.State.STATE_JUMPING, Player.State.STATE_LEFT)).add(null);
+        playerMap.get(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_LEFT)).add(null);
+        playerMap.get(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_RIGHT)).add(null);
     }
 
     public void update() {

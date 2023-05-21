@@ -10,6 +10,11 @@ import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.PlayerImpl;
+import it.unibo.dna.model.object.api.Player;
+
+import java.io.File;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,15 +29,15 @@ public class Display extends JFrame {
                         PlayerImpl.Type.DEVIL);
         public Platform p1 = new Platform(new Position2d(400, 550), 30.0, 300.0);
         public Platform p2 = new Platform(new Position2d(90, 450), 30.0, 300.0);
-        public MovablePlatform mp1 = new MovablePlatform(new Position2d(200, 230), new Vector2d(0, 0),30, 100,new Position2d(200, 100));
-        public MovablePlatform mp2 = new MovablePlatform(new Position2d(340, 350), new Vector2d(0, 0), 30, 100,new Position2d(390, 200));
+        public MovablePlatform mp1 = new MovablePlatform(new Position2d(200, 230), new Vector2d(0, 0), 30, 100,
+                        new Position2d(200, 100));
+        public MovablePlatform mp2 = new MovablePlatform(new Position2d(340, 350), new Vector2d(0, 0), 30, 100,
+                        new Position2d(390, 200));
         public ActivableObject lever = new ActivableObject(new Position2d(120, 450), 30.0, 30.0,
                         ActivableObject.Activator.LEVER, mp1);
         public ActivableObject button = new ActivableObject(new Position2d(500, 550), 30.0, 30.0,
                         ActivableObject.Activator.BUTTON, mp2);
         JLabel boh = new JLabel("\u2194");
-
-        
 
         public Display(final int width, final int height) {
                 setTitle("D-n-A");
@@ -100,5 +105,23 @@ public class Display extends JFrame {
                 graphics.dispose();
                 bufferStrategy.show();
 
+                if (this.angel.getVector().y == -Player.JumpVelocity + Player.StandardVelocity) {
+                        this.makeSound("src\\main\\resurces\\Angel_audio.wav");
+                }
+                if (this.devil.getVector().y == -Player.JumpVelocity + Player.StandardVelocity) {
+                        this.makeSound("src\\main\\resurces\\Devil_audio.wav");
+                }
+
+        }
+
+        private void makeSound(String fileName) {
+                File file = new File(fileName);
+                try {
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(AudioSystem.getAudioInputStream(file));
+                        clip.start();
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
         }
 }

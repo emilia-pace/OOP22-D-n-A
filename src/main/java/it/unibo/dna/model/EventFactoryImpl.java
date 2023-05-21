@@ -20,12 +20,13 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitPlatformEvent(Entity pt, Player p) {
         return game -> {
             p.resetY();
-            if (pt.getBoundingBox().sideCollision(p.getPosition().sum(p.getVector()), 
-                    p.getBoundingBox().getHeight(), p.getBoundingBox().getWidth())){
+            if (pt.getBoundingBox().sideCollision(p.getPosition().sum(p.getVector()),
+                    p.getBoundingBox().getHeight(), p.getBoundingBox().getWidth())) {
                 p.resetX();
             }
-            p.getState().setX(State.STATE_STANDING);
-
+            if (p.getPosition().y < pt.getPosition().y) {
+                p.getState().setX(State.STATE_STANDING);
+            }
         };
     }
 
@@ -48,11 +49,11 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitButtonEvent(ActivableObject o, Player p) {
         return game -> {
-            if(o.getPlayer().isEmpty()){
+            if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);
-                if(!o.isActivated()){
+                if (!o.isActivated()) {
                     o.activate();
-                }else{
+                } else {
                     o.deactivate();
                     o.resetPlayer();
                 }
@@ -76,11 +77,11 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitLeverEvent(ActivableObject o, Player p) {
         return game -> {
-            if(o.getPlayer().isEmpty()){
+            if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);
-                if(o.isActivated()){
+                if (o.isActivated()) {
                     o.deactivate();
-                }else{
+                } else {
                     o.activate();
                 }
             }

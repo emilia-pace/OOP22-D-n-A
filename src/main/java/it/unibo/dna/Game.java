@@ -166,6 +166,32 @@ public class Game {
     }
 
     /**
+     * Checks the collision of a character with the vertical borders.
+     * @param pos the x coordinate of the character's position
+     * @param lenght the lenght of the character
+     * @return true if the character is colliding with a vertical border
+     */
+    public boolean checkVerticalBorders(double pos, double lenght){
+        double sxBorder = this.boundingBox.getPosition().x;
+        double dxBorder = this.boundingBox.getPosition().x + this.boundingBox.getWidth();
+
+        return pos <= sxBorder || pos + lenght >= dxBorder;
+    }
+
+    /**
+     * Checks the collision of a character with the horizontal borders.
+     * @param pos the y coordinate of the character's position
+     * @param height the height of the character
+     * @return true if the character is colliding with an horizontal border
+     */
+    public boolean checkHorizontalBorders(double pos, double height){
+        double northBorder = this.boundingBox.getPosition().y;
+        double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight();
+
+        return  pos <= northBorder || pos + height >= southBorder;
+    }
+
+    /**
      * Checks the collision of a character with the borders.
      * 
      * @param character the moving {@link Player}
@@ -176,15 +202,10 @@ public class Game {
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getWidth();
 
-        double sxBorder = this.boundingBox.getPosition().x;
-        double dxBorder = this.boundingBox.getPosition().x + this.boundingBox.getWidth();
-        double northBorder = this.boundingBox.getPosition().y;
-        double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight();
-
-        if (ChPos.x <= sxBorder || ChPos.x + ChLenght >= dxBorder) {
+        if (this.checkVerticalBorders(ChPos.x, ChLenght)) {
             event.hitBorderYEvent(character).manage(this);
         }
-        if (ChPos.y <= northBorder || ChPos.y + ChHeight >= southBorder) {
+        if (this.checkHorizontalBorders(ChPos.y, ChHeight)) {
             event.hitBorderXEvent(character).manage(this);
         }
     }

@@ -6,6 +6,9 @@ import it.unibo.dna.model.object.api.Player;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Class that implements the {@link KeyListener} interface.
+ */
 public class KeyboardHandler implements KeyListener {
 
     private int commandRight, commandLeft, commandJump;
@@ -26,6 +29,9 @@ public class KeyboardHandler implements KeyListener {
         this.command = new CommandFactoryImpl(character);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
@@ -40,6 +46,9 @@ public class KeyboardHandler implements KeyListener {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
@@ -59,6 +68,9 @@ public class KeyboardHandler implements KeyListener {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void keyTyped(KeyEvent arg0) {
     }

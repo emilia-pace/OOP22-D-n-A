@@ -5,6 +5,9 @@ import it.unibo.dna.input.api.CommandFactory;
 import it.unibo.dna.model.object.api.Player.State;
 import it.unibo.dna.model.object.api.Player;
 
+/**
+ * Class that implements the {@link CommandFactory} interface.
+ */
 public class CommandFactoryImpl implements CommandFactory {
 
     private Player player;
@@ -13,6 +16,9 @@ public class CommandFactoryImpl implements CommandFactory {
         this.player = p;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Command right() {
         return () -> {
@@ -21,6 +27,9 @@ public class CommandFactoryImpl implements CommandFactory {
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Command left() {
         return () -> {
@@ -29,6 +38,9 @@ public class CommandFactoryImpl implements CommandFactory {
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Command jump() {
         return () -> {
@@ -39,6 +51,9 @@ public class CommandFactoryImpl implements CommandFactory {
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Command stop() {
         return () -> {

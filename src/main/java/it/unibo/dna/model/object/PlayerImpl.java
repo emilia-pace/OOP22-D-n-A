@@ -5,7 +5,10 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.Player;
 
-public class PlayerImpl extends MovableEntityImpl implements Player {
+/**
+ * Class that implements the {@link Player} interface.
+ */
+public class PlayerImpl extends AbstractMovableEntity implements Player {
 
     private Pair<State, State> state = new Pair<>(State.STATE_STANDING, State.STATE_STILL);
     private Type type;
@@ -22,16 +25,25 @@ public class PlayerImpl extends MovableEntityImpl implements Player {
         this.type = type;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<State, State> getState() {
         return this.state;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Type getType() {
         return this.type;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (!(obj instanceof Player)) {
@@ -39,16 +51,6 @@ public class PlayerImpl extends MovableEntityImpl implements Player {
         }
         final Player p = (Player) obj;
         return this.type.equals(p.getType());
-    }
-
-    @Override
-    public void resetX() {
-        this.setVectorX(0);
-    }
-
-    @Override
-    public void resetY() {
-        this.setVectorY(0);
     }
 
 }

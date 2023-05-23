@@ -5,7 +5,7 @@ import it.unibo.dna.common.Position2d;
 /**
  * {@link Entity} that allows to increase the game score.
  */
-public class Diamond extends EntityImpl {
+public class Diamond extends  AbstractEntity {
 
     private double value = 0;
 

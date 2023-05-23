@@ -7,7 +7,7 @@ import it.unibo.dna.common.Vector2d;
 /**
  * A platform that can be moved by a button or a lever.
  */
-public class MovablePlatform extends MovableEntityImpl {
+public class MovablePlatform extends AbstractMovableEntity {
 
     private Position2d originalPos;
     private Position2d finalPos;

@@ -1,7 +1,9 @@
 package it.unibo.dna.common;
 
 /*
- * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString well implemented. 
+ * A standard generic Pair<X,Y> saving couple of element 
+ * @param <X> the type of the first element
+ * @param <Y> the type of the second element
  */
 
 public class Pair<X, Y> {
@@ -9,28 +11,47 @@ public class Pair<X, Y> {
 	private X x;
 	private Y y;
 
+	/**
+	 * @param x the first element
+	 * @param y the second element
+	 */
 	public Pair(X x, Y y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * @return the first element
+	 */
 	public X getX() {
 		return x;
 	}
 
+	/**
+	 * @return the second element
+	 */
 	public Y getY() {
 		return y;
 	}
 
+	/**
+	 * @param x the first element
+	 */
 	public void setX(X x) {
 		this.x = x;
 	}
 
+	/**
+	 * @param y the second element
+	 */
 	public void setY(Y y) {
 		this.y = y;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -40,6 +61,9 @@ public class Pair<X, Y> {
 		return result;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
@@ -63,6 +87,9 @@ public class Pair<X, Y> {
 		return true;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public String toString() {
 		return "Pair [x=" + x + ", y=" + y + "]";

@@ -2,27 +2,21 @@ package it.unibo.dna.model.object.api;
 
 import it.unibo.dna.common.Pair;
 
+/*
+ * An interface rappresenting the Game Character
+ */
+
 public interface Player extends MovableEntity {
 
     /**
-     *
+     * The jump speed value
      */
     public static final double JumpVelocity = 25;
 
     /**
-     *
+     * The standard velocity of the Player
      */
     public static final double StandardVelocity = 2;
-
-    /**
-     * Make the first value of the player's vector zero
-     */
-    void resetX();
-
-    /**
-     * Make the second value of the player's vector zero
-     */
-    void resetY();
 
     /**
      * @return the player's state
@@ -35,14 +29,14 @@ public interface Player extends MovableEntity {
     Type getType();
 
     /**
-     * Compares two player, and returns true if the players
-     * have the same type, and false if not.
-     * 
-     * @param p player for the comparison
-     * @return true if p has the same type of player
+     * {@inheritDoc}
      */
+    @Override
     boolean equals(Object p);
 
+    /*
+     * An enum rappresenting the state of the Player
+     */
     public enum State {
         STATE_STANDING,
         STATE_JUMPING,
@@ -51,6 +45,9 @@ public interface Player extends MovableEntity {
         STATE_STILL;
     }
 
+    /*
+     * An enum rappresenting the type of the Player
+     */
     public enum Type {
         DEVIL,
         ANGEL;

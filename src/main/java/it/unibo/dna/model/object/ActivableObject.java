@@ -40,28 +40,28 @@ public class ActivableObject extends EntityImpl implements GameObject {
     /**
      * @param p the {@link Player} that has touched the button
      */
-    public void setPlayer(final Player p){
+    public void setPlayer(final Player p) {
         this.player = Optional.of(p);
     }
 
     /**
      * @return whether the ActivableObject is a Button or a Lever
      */
-    public Activator getType(){
+    public Activator getType() {
         return this.type;
     }
 
     /**
      * @return the player that has touched the button
      */
-    public Optional<Player> getPlayer(){
+    public Optional<Player> getPlayer() {
         return this.player;
     }
 
     /**
      * resets the player.
      */
-    public void resetPlayer(){
+    public void resetPlayer() {
         this.player = Optional.empty();
     }
 
@@ -82,7 +82,7 @@ public class ActivableObject extends EntityImpl implements GameObject {
     /** 
      * A methods that moves the platform from its starting position towards its final position.
      */
-    public void activate(){
+    public void activate() {
         this.isActive = true;
         mp.move(mp.getOriginalPos(),mp.getFinalPosition());
     }
@@ -90,7 +90,7 @@ public class ActivableObject extends EntityImpl implements GameObject {
     /**
      * A method that moves the platform from its final position towards its starting position. 
      */
-    public void deactivate(){
+    public void deactivate() {
         this.isActive = false;
         mp.move(mp.getFinalPosition(),mp.getOriginalPos());
     }

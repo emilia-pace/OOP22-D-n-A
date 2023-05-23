@@ -41,7 +41,7 @@ public class Puddle extends EntityImpl {
      * @param type the type of the puddle
      * @param character the {@link Player} touching the puddle
      */
-    public void checkForMatch(final puddleType type, final Player character) {
+    public void killPlayer(final puddleType type, final Player character) {
         switch (type) {
             case PURPLE -> {
                         /*the character that fell in the puddle dies.*/ 
@@ -58,4 +58,5 @@ public class Puddle extends EntityImpl {
                     }
         }
     }
+    
     }

@@ -22,7 +22,7 @@ public class MovablePlatform extends MovableEntityImpl {
      * @param finalPos   the final position of the platform
      */
     public MovablePlatform(final Position2d pos, final Vector2d vet, final double height, final double width,
-                            final Position2d finalPos) { // costruttore
+                            final Position2d finalPos) {
         super(pos, vet, height, width);
         this.originalPos = pos;
         this.finalPos = finalPos;

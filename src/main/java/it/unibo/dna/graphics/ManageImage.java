@@ -72,13 +72,11 @@ public class ManageImage {
         }
     }
 
+
     public Image playerChooseImage(Player p) {
-        Map<Pair<Player.State, Player.State>, List<Image>> playerMap;
-        if (p.getType().equals(Player.Type.ANGEL)) {
-            playerMap = this.angelMap;
-        } else {
-            playerMap = this.devilMap;
-        }
+        Map<Pair<Player.State, Player.State>, List<Image>> playerMap = p.getType().equals(Player.Type.ANGEL)
+                ? this.angelMap
+                : this.devilMap;
 
         if (p.getState().equals(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_LEFT))
                 || p.getState().equals(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_RIGHT))) {

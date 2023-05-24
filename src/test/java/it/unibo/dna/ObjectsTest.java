@@ -3,10 +3,11 @@ package it.unibo.dna;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
-import ch.qos.logback.classic.joran.action.ReceiverAction;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.RectBoundingBox;
+import it.unibo.dna.model.object.MovablePlatform;
+import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.PlayerImpl;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Player;
@@ -22,6 +23,42 @@ public class ObjectsTest {
     private static final int GAMEWIDTH = 400;
     private static final Game GAME = new Game(GAMEWIDTH, GAMEHEIGHT, 0);
     private static final Player CHARACTER = new PlayerImpl(POS,new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.Type.ANGEL);
+    private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);
 
-    
+    @Test
+    public void testMovablePlatformMethods(){
+        Position2d finalPos = new Position2d(X+100, Y+100); //test vettore 1,1
+        PLATFORM.setFinalPosition(finalPos);
+        PLATFORM.findVector(PLATFORM.getOriginalPos(),PLATFORM.getFinalPosition());
+        assertTrue(PLATFORM.getVector().equals(new Vector2d(+1, +1)));
+
+        finalPos = new Position2d(X+100, Y-100);//test vettore 1,-1
+        PLATFORM.setFinalPosition(finalPos);
+        PLATFORM.findVector(PLATFORM.getOriginalPos(),PLATFORM.getFinalPosition());
+        assertTrue(PLATFORM.getVector().equals(new Vector2d(+1, -1)));
+
+        finalPos = new Position2d(X-100, Y+100);//test vettore -1,1
+        PLATFORM.setFinalPosition(finalPos);
+        PLATFORM.findVector(PLATFORM.getOriginalPos(),PLATFORM.getFinalPosition());
+        assertTrue(PLATFORM.getVector().equals(new Vector2d(-1, +1)));
+
+        finalPos = new Position2d(X-100, Y-100);//test vettore -1,-1
+        PLATFORM.setFinalPosition(finalPos);
+        PLATFORM.findVector(PLATFORM.getOriginalPos(),PLATFORM.getFinalPosition());
+        assertTrue(PLATFORM.getVector().equals(new Vector2d(-1, -1)));
+
+        PLATFORM.setFinalPosition(new Position2d(110, 110));//test checkHorizontal() e checkVertical()
+        PLATFORM.setPosition(new Position2d(115, 115));
+        assertFalse(PLATFORM.getPosition().equals(PLATFORM.getFinalPosition()) || PLATFORM.getPosition().equals(PLATFORM.getFinalPosition()));
+        PLATFORM.checkHorizontal();
+        PLATFORM.checkVertical();
+        assertTrue(PLATFORM.getPosition().equals(PLATFORM.getFinalPosition()));
+        PLATFORM.setPosition(new Position2d(0, 0));
+        PLATFORM.checkHorizontal();
+        PLATFORM.checkVertical();
+        assertTrue(PLATFORM.getPosition().equals(PLATFORM.getOriginalPos()));
+        
+        
+
+    }
 }

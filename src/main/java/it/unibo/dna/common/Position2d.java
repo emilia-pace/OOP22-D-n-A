@@ -34,12 +34,12 @@ public class Position2d implements java.io.Serializable {
         return "Position2d(" + x + "," + y + ")";
     }
 
-    public boolean isOnTheRight(final Position2d p2) {
-        return this.x > p2.x;
+    public boolean isOnTheRight(final Position2d p) {
+        return this.x > p.x;
     }
 
-    public boolean isAbove(final Position2d p2) {
-        return this.y < p2.y;
+    public boolean isAbove(final Position2d p) {
+        return this.y < p.y;
     }
 
     public boolean isBetweenHorizontally(final Position2d p1, final Position2d p2) {

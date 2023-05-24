@@ -51,6 +51,8 @@ public class Game {
         this.checkBorders(display.angel);
         this.checkBorders(display.devil);
 
+        display.mi.update();
+
         display.angel.update();
         display.devil.update();
 
@@ -167,11 +169,12 @@ public class Game {
 
     /**
      * Checks the collision of a character with the vertical borders.
-     * @param pos the x coordinate of the character's position
+     * 
+     * @param pos    the x coordinate of the character's position
      * @param lenght the lenght of the character
      * @return true if the character is colliding with a vertical border
      */
-    public boolean checkVerticalBorders(double pos, double lenght){
+    public boolean checkVerticalBorders(double pos, double lenght) {
         double sxBorder = this.boundingBox.getPosition().x;
         double dxBorder = this.boundingBox.getPosition().x + this.boundingBox.getWidth();
 
@@ -180,15 +183,16 @@ public class Game {
 
     /**
      * Checks the collision of a character with the horizontal borders.
-     * @param pos the y coordinate of the character's position
+     * 
+     * @param pos    the y coordinate of the character's position
      * @param height the height of the character
      * @return true if the character is colliding with an horizontal border
      */
-    public boolean checkHorizontalBorders(double pos, double height){
+    public boolean checkHorizontalBorders(double pos, double height) {
         double northBorder = this.boundingBox.getPosition().y;
         double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight();
 
-        return  pos <= northBorder || pos + height >= southBorder;
+        return pos <= northBorder || pos + height >= southBorder;
     }
 
     /**

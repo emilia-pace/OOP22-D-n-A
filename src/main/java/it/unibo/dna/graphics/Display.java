@@ -23,9 +23,10 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
         private Canvas canvas;
-        public PlayerImpl angel = new PlayerImpl(new Position2d(100, 500), new Vector2d(0, 0), 20, 20,
+        public ManageImage mi = new ManageImage();
+        public PlayerImpl angel = new PlayerImpl(new Position2d(100, 500), new Vector2d(0, 0), 40, 30,
                         PlayerImpl.Type.ANGEL);
-        public PlayerImpl devil = new PlayerImpl(new Position2d(200, 500), new Vector2d(0, 0), 20, 20,
+        public PlayerImpl devil = new PlayerImpl(new Position2d(200, 500), new Vector2d(0, 0), 40, 30,
                         PlayerImpl.Type.DEVIL);
         public Platform p1 = new Platform(new Position2d(400, 550), 30.0, 300.0);
         public Platform p2 = new Platform(new Position2d(90, 450), 30.0, 300.0);
@@ -67,15 +68,16 @@ public class Display extends JFrame {
                 graphics.setColor(Color.BLACK);
                 graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-                graphics.setColor(Color.LIGHT_GRAY);
-                graphics.fillRect((int) angel.getPosition().x, (int) angel.getPosition().y,
-                                (int) angel.getBoundingBox().getHeight(),
-                                (int) angel.getBoundingBox().getWidth());
-
-                graphics.setColor(Color.RED);
-                graphics.fillRect((int) devil.getPosition().x, (int) devil.getPosition().y,
-                                (int) devil.getBoundingBox().getHeight(),
-                                (int) devil.getBoundingBox().getWidth());
+                graphics.drawImage(
+                                mi.playerChooseImage(this.angel).getScaledInstance(
+                                                (int) angel.getBoundingBox().getWidth(),
+                                                (int) angel.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                (int) angel.getPosition().x, (int) angel.getPosition().y, this);
+                graphics.drawImage(
+                                mi.playerChooseImage(this.devil).getScaledInstance(
+                                                (int) devil.getBoundingBox().getWidth(),
+                                                (int) devil.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                (int) devil.getPosition().x, (int) devil.getPosition().y, this);
 
                 graphics.setColor(Color.WHITE);
                 graphics.fillRect((int) p1.getPosition().x, (int) p1.getPosition().y,

@@ -8,10 +8,14 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import it.unibo.dna.common.Pair;
+import it.unibo.dna.model.object.ActivableObject;
+import it.unibo.dna.model.object.Door;
+import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.api.Player;
 
 public class ManageImage {
@@ -99,6 +103,90 @@ public class ManageImage {
             return playerMap.get(p.getState()).get(this.imageIndex);
         }
         return playerMap.get(p.getState()).get(0);
+    }
+
+    public Image ActivableObjectChooseImage(ActivableObject actObj) {
+        String actObjName;
+        String dirName;
+        Image image = null;
+        if(actObj.getType().equals(ActivableObject.Activator.LEVER)){
+            actObjName = "Leva_";
+        } else {
+            actObjName = "Bottone_";
+        }
+        if(actObj.isActivated()){
+            dirName = "sinistra.PNG";
+        }else {
+            dirName = "destra.PNG";
+        }
+        try{
+            image = ImageIO.read(new File("src\\main\\resurces\\" + actObjName + dirName));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    public Image DoorChooseImage(Door door){
+        String doorName = "porta_";
+        String doorType;
+        String doorState;
+        Image image = null;
+        if(door.getDoorState().equals(Door.doorState.OPEN_DOOR)){
+            doorState = "aperta.PNG";
+        }else {
+            doorState = "chiusa.PNG";
+        }
+        if(door.getDoorType().equals(Door.doorType.ANGEL_DOOR)){
+            doorType = "angelo_";
+        } else {
+            doorType = "diavolo_";
+        }
+        try{
+            image = ImageIO.read(new File("src\\main\\resurces\\" + doorName + doorType + doorState)); 
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    public Image PuddleChooseImage(Puddle puddle) {
+        String puddleName = "Pozza_";
+        String puddleColor;
+        Image image = null;
+        if(puddle.getPuddleType().equals(Puddle.puddleType.RED)) {
+            puddleColor = "rossa.jpg";
+        }else if(puddle.getPuddleType().equals(Puddle.puddleType.BLUE)) {
+            puddleColor = "azzurra.jpg";
+        }else {
+            puddleColor = "viola.jpg";
+        }
+        try {
+            image = ImageIO.read(new File("src\\main\\resurces\\" + puddleName + puddleColor));
+        } catch( IOException e){
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    public Image MovablePlatformImage(){
+        Image image = null;
+        try {
+            image = ImageIO.read(new File("src\\main\\resurces\\piattaforma_mobile.jpg"));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    public Image PlatformImage() {
+        Image image = null;
+        try {
+            image = ImageIO.read(new File("src\\main\\resurces\\Piattaforma_terra.jpg"));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return image;
     }
 
 }

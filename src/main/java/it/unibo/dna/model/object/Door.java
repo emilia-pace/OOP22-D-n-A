@@ -32,6 +32,14 @@ public class Door extends  AbstractEntity {
         this.state = doorState.CLOSED_DOOR;
     }
 
+    public doorType getDoorType(){
+        return this.type;
+    }
+
+    public doorState getDoorState() {
+        return this.state;
+    }
+
     /**
      * A method that opens the door if the correct player is standing in front of
      * it. The door can't be

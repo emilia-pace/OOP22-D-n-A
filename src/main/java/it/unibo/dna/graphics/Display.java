@@ -35,7 +35,7 @@ public class Display extends JFrame {
                         new Position2d(200, 100));
         public MovablePlatform mp2 = new MovablePlatform(new Position2d(340, 350), new Vector2d(0, 0), 30, 100,
                         new Position2d(390, 200));
-        public ActivableObject lever = new ActivableObject(new Position2d(120, 450), 30.0, 30.0,
+        public ActivableObject lever = new ActivableObject(new Position2d(120, 420), 30.0, 30.0,
                         ActivableObject.Activator.LEVER, mp1);
         public ActivableObject button = new ActivableObject(new Position2d(500, 550), 30.0, 30.0,
                         ActivableObject.Activator.BUTTON, mp2);
@@ -89,15 +89,16 @@ public class Display extends JFrame {
                                                 (int) devil.getBoundingBox().getWidth(),
                                                 (int) devil.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) devil.getPosition().x, (int) devil.getPosition().y, this);
-
                 graphics.setColor(Color.WHITE);
-                graphics.fillRect((int) p1.getPosition().x, (int) p1.getPosition().y,
-                                (int) p1.getBoundingBox().getWidth(),
-                                (int) p1.getBoundingBox().getHeight());
-                graphics.fillRect((int) p2.getPosition().x, (int) p2.getPosition().y,
-                                (int) p2.getBoundingBox().getWidth(),
-                                (int) p2.getBoundingBox().getHeight());
-
+                graphics.drawImage(mi.PlatformImage().getScaledInstance(
+                                                (int) p1.getBoundingBox().getWidth(),
+                                                (int) p1.getBoundingBox().getHeight(),Image.SCALE_DEFAULT),
+                                (int) p1.getPosition().x,(int) p1.getPosition().y, this);
+                
+                graphics.drawImage(mi.PlatformImage().getScaledInstance(
+                                                (int) p2.getBoundingBox().getWidth(),
+                                                (int) p2.getBoundingBox().getHeight(),Image.SCALE_DEFAULT),
+                                (int) p2.getPosition().x,(int) p2.getPosition().y, this);
                 graphics.setColor(Color.GREEN);
                 graphics.fillRect((int) mp1.getPosition().x, (int) mp1.getPosition().y,
                                 (int) mp1.getBoundingBox().getWidth(),
@@ -105,11 +106,14 @@ public class Display extends JFrame {
                 graphics.fillRect((int) mp2.getPosition().x, (int) mp2.getPosition().y,
                                 (int) mp2.getBoundingBox().getWidth(),
                                 (int) mp2.getBoundingBox().getHeight());
-
-                graphics.setColor(Color.CYAN);
-                graphics.fillRect((int) lever.getPosition().x, (int) lever.getPosition().y,
+                graphics.drawImage(
+                                mi.ActivableObjectChooseImage(this.lever).getScaledInstance(
+                                        (int) lever.getBoundingBox().getWidth(),
+                                        (int) lever.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                (int) lever.getPosition().x, (int) lever.getPosition().y,this);
+                /*graphics.fillRect((int) lever.getPosition().x, (int) lever.getPosition().y,
                                 (int) lever.getBoundingBox().getWidth(),
-                                (int) lever.getBoundingBox().getHeight());
+                                (int) lever.getBoundingBox().getHeight());*/
                 graphics.setColor(Color.MAGENTA);
                 graphics.fillRect((int) button.getPosition().x, (int) button.getPosition().y,
                                 (int) button.getBoundingBox().getWidth(),

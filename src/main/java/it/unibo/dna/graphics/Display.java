@@ -7,6 +7,7 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
 import it.unibo.dna.model.object.ActivableObject;
+import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.PlayerImpl;
@@ -38,6 +39,8 @@ public class Display extends JFrame {
                         ActivableObject.Activator.LEVER, mp1);
         public ActivableObject button = new ActivableObject(new Position2d(500, 550), 30.0, 30.0,
                         ActivableObject.Activator.BUTTON, mp2);
+
+        public Diamond diamond = new Diamond(45, 45, 1, new Position2d(200, 400));
         JLabel boh = new JLabel("\u2194");
 
         public Display(final int width, final int height) {
@@ -68,6 +71,14 @@ public class Display extends JFrame {
                 graphics.setColor(Color.BLACK);
                 graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
+                if(game.getEntities().contains(diamond)){
+                        graphics.drawImage(mi.getDiamondImage().getScaledInstance(
+                                (int) diamond.getBoundingBox().getWidth(),
+                                (int) diamond.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                (int) diamond.getPosition().x, (int) diamond.getPosition().y, this);
+
+                }
+                
                 graphics.drawImage(
                                 mi.playerChooseImage(this.angel).getScaledInstance(
                                                 (int) angel.getBoundingBox().getWidth(),
@@ -103,7 +114,6 @@ public class Display extends JFrame {
                 graphics.fillRect((int) button.getPosition().x, (int) button.getPosition().y,
                                 (int) button.getBoundingBox().getWidth(),
                                 (int) button.getBoundingBox().getHeight());
-
                 graphics.dispose();
                 bufferStrategy.show();
 
@@ -115,6 +125,7 @@ public class Display extends JFrame {
                 }
 
         }
+
 
         private void makeSound(String fileName) {
                 File file = new File(fileName);

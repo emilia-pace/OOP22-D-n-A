@@ -21,12 +21,15 @@ public class ManageImage {
     private int imageIndex = 0;
     private Map<Pair<Player.State, Player.State>, List<Image>> angelMap = new HashMap<>();
     private Map<Pair<Player.State, Player.State>, List<Image>> devilMap = new HashMap<>();
+    private Image diamondImg;
 
     public ManageImage() {
         // caricamento di tutte le immagini
         this.playerImage(angelMap, Player.Type.ANGEL);
         this.playerImage(devilMap, Player.Type.DEVIL);
+        this.diamondImage();
     }
+
 
     private void playerImage(Map<Pair<Player.State, Player.State>, List<Image>> playerMap, Player.Type type) {
         String path;
@@ -58,6 +61,19 @@ public class ManageImage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void diamondImage(){
+        try{
+            diamondImg = ImageIO.read(new File("src\\main\\resurces\\diamond.png"));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Image getDiamondImage(){
+        return this.diamondImg;
     }
 
     public void update() {

@@ -8,6 +8,7 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
+import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.Door;
@@ -27,6 +28,7 @@ public class Game {
     private BoundingBox boundingBox;
     private EventFactory event = new EventFactoryImpl();
     private Score score;
+    private EventQueue eventQueue = new EventQueue();
 
     public Game(int width, int height, int level) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
@@ -38,6 +40,7 @@ public class Game {
         this.entities.add(display.p2);
         this.entities.add(display.mp1);
         this.entities.add(display.mp2);
+        this.entities.add(display.diamond);
     }
 
     public void update() {
@@ -48,6 +51,8 @@ public class Game {
         this.checkCollisions(display.angel);
         this.checkCollisions(display.devil);
 
+        this.eventQueue.manageEvents(this);
+
         this.checkBorders(display.angel);
         this.checkBorders(display.devil);
 
@@ -55,6 +60,7 @@ public class Game {
 
         display.angel.update();
         display.devil.update();
+
 
         for (Entity ent : entities) {
             if (ent instanceof MovablePlatform) {
@@ -117,6 +123,10 @@ public class Game {
         return this.entities;
     }
 
+    public EventQueue getEvents(){
+        return this.eventQueue;
+    }
+
     private void freeActivableObject(ActivableObject e) {
         if (e.type.equals(ActivableObject.Activator.BUTTON)) {
             e.deactivate();
@@ -139,21 +149,20 @@ public class Game {
                 .forEach((e) -> {
                     String cl = e.getClass().getName();
                     switch (cl) {
-                        case "it.unibo.dna.model.object.Platform" -> event.hitPlatformEvent(e, character).manage(this);
+                        case "it.unibo.dna.model.object.Platform" -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                         case "it.unibo.dna.model.object.MovablePlatform" -> {
-                            event.hitPlatformEvent(e, character).manage(this);
-                            event.hitMovablePlatformEvent((MovablePlatform) e, character).manage(this);
+                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                            this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
                         }
                         case "it.unibo.dna.model.object.ActivableObject" -> {
                             if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                                event.hitButtonEvent((ActivableObject) e, character).manage(this);
+                                this.eventQueue.addEvent(event.hitButtonEvent((ActivableObject) e, character));
                             } else {
-                                event.hitLeverEvent((ActivableObject) e, character).manage(this);
+                                this.eventQueue.addEvent(event.hitLeverEvent((ActivableObject) e, character));
                             }
                         }
-                        case "it.unibo.dna.model.object.Door" -> event.hitDoorEvent((Door) e, character).manage(this);
-                        case "it.unibo.dna.model.object.Diamond" ->
-                            event.hitDiamondEvent((Diamond) e, score).manage(this);
+                        case "it.unibo.dna.model.object.Door" -> this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                        case "it.unibo.dna.model.object.Diamond" -> this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
                     }
                 });
 

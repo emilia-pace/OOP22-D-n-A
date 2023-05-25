@@ -94,7 +94,7 @@ public class RectBoundingBox implements BoundingBox {
         double eps1 = this.position.x - (p.x + w);
 
         return this.isCollidingWith(p, h, w) 
-                && (Math.abs(eps) <= Double.MIN_NORMAL || Math.abs(eps1) <= Double.MIN_NORMAL);
+                && (Math.abs(eps) < 1 || Math.abs(eps1) < 1);
 
     }
 

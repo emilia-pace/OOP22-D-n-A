@@ -89,9 +89,14 @@ public class Display extends JFrame {
                                                 (int) p2.getBoundingBox().getHeight(),Image.SCALE_DEFAULT),
                                 (int) p2.getPosition().x,(int) p2.getPosition().y, this);
                 graphics.setColor(Color.GREEN);
-                graphics.fillRect((int) mp1.getPosition().x, (int) mp1.getPosition().y,
-                                (int) mp1.getBoundingBox().getWidth(),
-                                (int) mp1.getBoundingBox().getHeight());
+                graphics.drawImage(mi.MovablePlatformImage().getScaledInstance(
+                                                (int) mp1.getBoundingBox().getWidth(),
+                                                (int) mp1.getBoundingBox().getWidth(),Image.SCALE_DEFAULT),
+                                (int) mp1.getPosition().x, (int) mp1.getPosition().y, this);
+                graphics.drawImage(mi.MovablePlatformImage().getScaledInstance(
+                                        (int) mp2.getBoundingBox().getWidth(),
+                                        (int) mp2.getBoundingBox().getWidth(),Image.SCALE_DEFAULT),
+                        (int) mp2.getPosition().x, (int) mp2.getPosition().y, this);
                 graphics.fillRect((int) mp2.getPosition().x, (int) mp2.getPosition().y,
                                 (int) mp2.getBoundingBox().getWidth(),
                                 (int) mp2.getBoundingBox().getHeight());
@@ -100,9 +105,6 @@ public class Display extends JFrame {
                                         (int) lever.getBoundingBox().getWidth(),
                                         (int) lever.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) lever.getPosition().x, (int) lever.getPosition().y,this);
-                /*graphics.fillRect((int) lever.getPosition().x, (int) lever.getPosition().y,
-                                (int) lever.getBoundingBox().getWidth(),
-                                (int) lever.getBoundingBox().getHeight());*/
                 graphics.setColor(Color.MAGENTA);
                 graphics.fillRect((int) button.getPosition().x, (int) button.getPosition().y,
                                 (int) button.getBoundingBox().getWidth(),

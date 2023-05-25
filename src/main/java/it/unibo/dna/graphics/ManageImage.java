@@ -99,9 +99,9 @@ public class ManageImage {
             actObjName = "Bottone_";
         }
         if(actObj.isActivated()){
-            dirName = "sinistra.PNG";
+            dirName = "on.PNG";
         }else {
-            dirName = "destra.PNG";
+            dirName = "off.PNG";
         }
         try{
             image = ImageIO.read(new File("src\\main\\resurces\\" + actObjName + dirName));
@@ -156,7 +156,7 @@ public class ManageImage {
     public Image MovablePlatformImage(){
         Image image = null;
         try {
-            image = ImageIO.read(new File("src\\main\\resurces\\piattaforma_mobile.jpg"));
+            image = ImageIO.read(new File("src\\main\\resurces\\MovablePlatform.PNG"));
         } catch(IOException e) {
             e.printStackTrace();
         }

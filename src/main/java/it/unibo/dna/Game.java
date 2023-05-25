@@ -33,7 +33,7 @@ public class Game {
     public Game(int width, int height, int level) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
-        this.display = new Display(width, height);
+        this.display = new Display(width, height, this);
         this.entities.add(display.button);
         this.entities.add(display.lever);
         this.entities.add(display.p1);
@@ -60,7 +60,6 @@ public class Game {
 
         display.angel.update();
         display.devil.update();
-
 
         for (Entity ent : entities) {
             if (ent instanceof MovablePlatform) {
@@ -123,7 +122,7 @@ public class Game {
         return this.entities;
     }
 
-    public EventQueue getEvents(){
+    public EventQueue getEvents() {
         return this.eventQueue;
     }
 
@@ -149,7 +148,8 @@ public class Game {
                 .forEach((e) -> {
                     String cl = e.getClass().getName();
                     switch (cl) {
-                        case "it.unibo.dna.model.object.Platform" -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                        case "it.unibo.dna.model.object.Platform" ->
+                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                         case "it.unibo.dna.model.object.MovablePlatform" -> {
                             this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                             this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
@@ -161,8 +161,12 @@ public class Game {
                                 this.eventQueue.addEvent(event.hitLeverEvent((ActivableObject) e, character));
                             }
                         }
-                        case "it.unibo.dna.model.object.Door" -> this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
-                        case "it.unibo.dna.model.object.Diamond" -> this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
+                        case "it.unibo.dna.model.object.Door" ->
+                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                        case "it.unibo.dna.model.object.Diamond" -> {
+                            this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
+                            this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
+                        }
                     }
                 });
 
@@ -221,6 +225,10 @@ public class Game {
         if (this.checkHorizontalBorders(ChPos.y, ChHeight)) {
             event.hitBorderXEvent(character).manage(this);
         }
+    }
+
+    public EventQueue getEventQueue() {
+        return this.eventQueue;
     }
 
 }

@@ -1,9 +1,9 @@
 package it.unibo.dna.input;
 
-import it.unibo.dna.graphics.ManageSounds;
 import it.unibo.dna.input.api.Command;
 import it.unibo.dna.input.api.CommandFactory;
 import it.unibo.dna.model.object.api.Player.State;
+import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.object.api.Player;
 
 /**
@@ -23,8 +23,8 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command right() {
         return () -> {
-            player.setVectorX(Player.StandardVelocity);
-            player.getState().setY(State.STATE_RIGHT);
+            this.player.setVectorX(Player.StandardVelocity);
+            this.player.getState().setY(State.STATE_RIGHT);
         };
     }
 
@@ -34,8 +34,8 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command left() {
         return () -> {
-            player.setVectorX(-Player.StandardVelocity);
-            player.getState().setY(State.STATE_LEFT);
+            this.player.setVectorX(-Player.StandardVelocity);
+            this.player.getState().setY(State.STATE_LEFT);
         };
     }
 
@@ -45,10 +45,18 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command jump() {
         return () -> {
-            if (!player.getState().getX().equals(State.STATE_JUMPING)) {
-                player.setVectorY(-Player.JumpVelocity);
-                player.getState().setX(State.STATE_JUMPING);
-                ManageSounds.makeSoundPlayer(player);
+            if (!this.player.getState().getX().equals(State.STATE_JUMPING)) {
+                this.player.setVectorY(-Player.JumpVelocity);
+                this.player.getState().setX(State.STATE_JUMPING);
+                if (this.player.getType().equals(Player.Type.ANGEL)) {
+                    this.player.getGame().getEventQueue()
+                            .addEvent(
+                                    new EventFactoryImpl().soundEvent("Angel_audio"));
+                } else {
+                    this.player.getGame().getEventQueue()
+                            .addEvent(
+                                    new EventFactoryImpl().soundEvent("Devil_audio"));
+                }
             }
         };
     }
@@ -59,8 +67,8 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command stop() {
         return () -> {
-            player.setVectorX(0);
-            player.getState().setY(State.STATE_STILL);
+            this.player.setVectorX(0);
+            this.player.getState().setY(State.STATE_STILL);
         };
     }
 }

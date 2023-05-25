@@ -36,13 +36,13 @@ public class KeyboardHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == this.commandRight) {
-            command.right().execute();
+            this.command.right().execute();
         }
         if (key == this.commandLeft) {
-            command.left().execute();
+            this.command.left().execute();
         }
         if (key == this.commandJump) {
-            command.jump().execute();
+            this.command.jump().execute();
         }
     }
 
@@ -55,12 +55,12 @@ public class KeyboardHandler implements KeyListener {
         switch (character.getState().getY()) {
             case STATE_RIGHT:
                 if (key == this.commandRight) {
-                    command.stop().execute();
+                    this.command.stop().execute();
                 }
                 break;
             case STATE_LEFT:
                 if (key == this.commandLeft) {
-                    command.stop().execute();
+                    this.command.stop().execute();
                 }
                 break;
             default:

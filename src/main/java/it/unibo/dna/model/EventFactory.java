@@ -67,4 +67,6 @@ public interface EventFactory {
      * @return the new event
      */
     Event hitDiamondEvent(Diamond d, Score s);
+
+    Event soundEvent(String s);
 }

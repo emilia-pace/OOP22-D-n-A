@@ -1,5 +1,10 @@
 package it.unibo.dna.model;
 
+import java.io.File;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -19,7 +24,8 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitPlatformEvent(Entity pt, Player p) {
         return game -> {
-            if (p.getBoundingBox().sideCollision(pt.getPosition(), pt.getBoundingBox().getHeight(), pt.getBoundingBox().getWidth())){
+            if (p.getBoundingBox().sideCollision(pt.getPosition(), pt.getBoundingBox().getHeight(),
+                    pt.getBoundingBox().getWidth())) {
                 p.resetX();
             } else {
                 p.resetY();
@@ -121,6 +127,18 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitBorderYEvent(Player p) {
         return game -> {
             p.resetX();
+        };
+    }
+
+    public Event soundEvent(String s) {
+        return game -> {
+            try {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
+                clip.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         };
     }
 

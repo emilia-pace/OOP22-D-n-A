@@ -1,5 +1,6 @@
 package it.unibo.dna.model.object.api;
 
+import it.unibo.dna.Game;
 import it.unibo.dna.common.Pair;
 
 /*
@@ -33,6 +34,10 @@ public interface Player extends MovableEntity {
      */
     @Override
     boolean equals(Object p);
+
+    Game getGame();
+
+    void setGame(Game game);
 
     /*
      * An enum rappresenting the state of the Player

@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -34,13 +33,12 @@ public class ManageImage {
         this.diamondImage();
     }
 
-
     private void playerImage(Map<Pair<Player.State, Player.State>, List<Image>> playerMap, Player.Type type) {
         String path;
         if (type.equals(Player.Type.ANGEL)) {
-            path = "angelo";
+            path = "angel";
         } else {
-            path = "diavolo";
+            path = "devil";
         }
         List.of(Player.State.STATE_JUMPING, Player.State.STATE_STANDING).forEach(state -> {
             playerMap.put(new Pair<>(state, Player.State.STATE_LEFT), new ArrayList<>());
@@ -48,35 +46,34 @@ public class ManageImage {
             playerMap.put(new Pair<>(state, Player.State.STATE_STILL), new ArrayList<>());
             try {
                 playerMap.get(new Pair<>(state, Player.State.STATE_LEFT))
-                        .add(ImageIO.read(new File("src\\main\\resurces\\" + path + "_sinistra1.PNG")));
+                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left1.PNG")));
                 playerMap.get(new Pair<>(state, Player.State.STATE_RIGHT))
-                        .add(ImageIO.read(new File("src\\main\\resurces\\" + path + "_destra1.PNG")));
+                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right1.PNG")));
                 playerMap.get(new Pair<>(state, Player.State.STATE_STILL))
-                        .add(ImageIO.read(new File("src\\main\\resurces\\" + path + "_fronte.PNG")));
+                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_front.PNG")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         try {
             playerMap.get(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_LEFT))
-                    .add(ImageIO.read(new File("src\\main\\resurces\\" + path + "_sinistra2.PNG")));
+                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left2.PNG")));
             playerMap.get(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_RIGHT))
-                    .add(ImageIO.read(new File("src\\main\\resurces\\" + path + "_destra2.PNG")));
+                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right2.PNG")));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void diamondImage(){
-        try{
-            diamondImg = ImageIO.read(new File("src\\main\\resurces\\diamond.png"));
-        }
-        catch (IOException e) {
+    private void diamondImage() {
+        try {
+            diamondImg = ImageIO.read(new File("src\\main\\resources\\diamond.png"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Image getDiamondImage(){
+    public Image getDiamondImage() {
         return this.diamondImg;
     }
 
@@ -91,7 +88,6 @@ public class ManageImage {
             this.frame = 0;
         }
     }
-
 
     public Image playerChooseImage(Player p) {
         Map<Pair<Player.State, Player.State>, List<Image>> playerMap = p.getType().equals(Player.Type.ANGEL)
@@ -109,42 +105,42 @@ public class ManageImage {
         String actObjName;
         String dirName;
         Image image = null;
-        if(actObj.getType().equals(ActivableObject.Activator.LEVER)){
+        if (actObj.getType().equals(ActivableObject.Activator.LEVER)) {
             actObjName = "Leva_";
         } else {
             actObjName = "Bottone_";
         }
-        if(actObj.isActivated()){
+        if (actObj.isActivated()) {
             dirName = "on.PNG";
-        }else {
+        } else {
             dirName = "off.PNG";
         }
-        try{
-            image = ImageIO.read(new File("src\\main\\resurces\\" + actObjName + dirName));
-        } catch(IOException e) {
+        try {
+            image = ImageIO.read(new File("src\\main\\resources\\" + actObjName + dirName));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return image;
     }
 
-    public Image DoorChooseImage(Door door){
+    public Image DoorChooseImage(Door door) {
         String doorName = "porta_";
         String doorType;
         String doorState;
         Image image = null;
-        if(door.getDoorState().equals(Door.doorState.OPEN_DOOR)){
+        if (door.getDoorState().equals(Door.doorState.OPEN_DOOR)) {
             doorState = "aperta.PNG";
-        }else {
+        } else {
             doorState = "chiusa.PNG";
         }
-        if(door.getDoorType().equals(Door.doorType.ANGEL_DOOR)){
+        if (door.getDoorType().equals(Door.doorType.ANGEL_DOOR)) {
             doorType = "angelo_";
         } else {
             doorType = "diavolo_";
         }
-        try{
-            image = ImageIO.read(new File("src\\main\\resurces\\" + doorName + doorType + doorState)); 
-        } catch(IOException e) {
+        try {
+            image = ImageIO.read(new File("src\\main\\resources\\" + doorName + doorType + doorState));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return image;
@@ -154,26 +150,26 @@ public class ManageImage {
         String puddleName = "Pozza_";
         String puddleColor;
         Image image = null;
-        if(puddle.getPuddleType().equals(Puddle.puddleType.RED)) {
+        if (puddle.getPuddleType().equals(Puddle.puddleType.RED)) {
             puddleColor = "rossa.jpg";
-        }else if(puddle.getPuddleType().equals(Puddle.puddleType.BLUE)) {
+        } else if (puddle.getPuddleType().equals(Puddle.puddleType.BLUE)) {
             puddleColor = "azzurra.jpg";
-        }else {
+        } else {
             puddleColor = "viola.jpg";
         }
         try {
-            image = ImageIO.read(new File("src\\main\\resurces\\" + puddleName + puddleColor));
-        } catch( IOException e){
+            image = ImageIO.read(new File("src\\main\\resources\\" + puddleName + puddleColor));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return image;
     }
 
-    public Image MovablePlatformImage(){
+    public Image MovablePlatformImage() {
         Image image = null;
         try {
-            image = ImageIO.read(new File("src\\main\\resurces\\MovablePlatform.PNG"));
-        } catch(IOException e) {
+            image = ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return image;
@@ -182,8 +178,8 @@ public class ManageImage {
     public Image PlatformImage() {
         Image image = null;
         try {
-            image = ImageIO.read(new File("src\\main\\resurces\\Piattaforma_terra.jpg"));
-        } catch(IOException e) {
+            image = ImageIO.read(new File("src\\main\\resources\\Piattaforma_terra.jpg"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return image;

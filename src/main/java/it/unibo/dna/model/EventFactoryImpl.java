@@ -30,6 +30,10 @@ public class EventFactoryImpl implements EventFactory {
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Event hitMovablePlatformEvent(MovablePlatform pt, Player p) {
         return game -> {
             p.setVectorY(p.getVector().y + pt.getVector().y);

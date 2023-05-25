@@ -1,5 +1,6 @@
 package it.unibo.dna.input;
 
+import it.unibo.dna.graphics.ManageSounds;
 import it.unibo.dna.input.api.Command;
 import it.unibo.dna.input.api.CommandFactory;
 import it.unibo.dna.model.object.api.Player.State;
@@ -47,6 +48,7 @@ public class CommandFactoryImpl implements CommandFactory {
             if (!player.getState().getX().equals(State.STATE_JUMPING)) {
                 player.setVectorY(-Player.JumpVelocity);
                 player.getState().setX(State.STATE_JUMPING);
+                ManageSounds.makeSoundPlayer(player);
             }
         };
     }

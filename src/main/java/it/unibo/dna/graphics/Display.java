@@ -105,15 +105,13 @@ public class Display extends JFrame {
                 graphics.setColor(Color.GREEN);
                 graphics.drawImage(mi.MovablePlatformImage().getScaledInstance(
                                 (int) mp1.getBoundingBox().getWidth(),
-                                (int) mp1.getBoundingBox().getWidth(), Image.SCALE_DEFAULT),
+                                (int) mp1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) mp1.getPosition().x, (int) mp1.getPosition().y, this);
                 graphics.drawImage(mi.MovablePlatformImage().getScaledInstance(
                                 (int) mp2.getBoundingBox().getWidth(),
-                                (int) mp2.getBoundingBox().getWidth(), Image.SCALE_DEFAULT),
+                                (int) mp2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) mp2.getPosition().x, (int) mp2.getPosition().y, this);
-                graphics.fillRect((int) mp2.getPosition().x, (int) mp2.getPosition().y,
-                                (int) mp2.getBoundingBox().getWidth(),
-                                (int) mp2.getBoundingBox().getHeight());
+                graphics.setColor(Color.GREEN);
                 graphics.drawImage(
                                 mi.ActivableObjectChooseImage(this.lever).getScaledInstance(
                                                 (int) lever.getBoundingBox().getWidth(),

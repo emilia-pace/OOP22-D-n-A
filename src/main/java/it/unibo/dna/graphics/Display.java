@@ -93,27 +93,27 @@ public class Display extends JFrame {
                                                 (int) devil.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) devil.getPosition().x, (int) devil.getPosition().y, this);
                 graphics.setColor(Color.WHITE);
-                graphics.drawImage(mi.PlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getPlatformImage().getScaledInstance(
                                 (int) p1.getBoundingBox().getWidth(),
                                 (int) p1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) p1.getPosition().x, (int) p1.getPosition().y, this);
 
-                graphics.drawImage(mi.PlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getPlatformImage().getScaledInstance(
                                 (int) p2.getBoundingBox().getWidth(),
                                 (int) p2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) p2.getPosition().x, (int) p2.getPosition().y, this);
                 graphics.setColor(Color.GREEN);
-                graphics.drawImage(mi.MovablePlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getMovablePlatformImage().getScaledInstance(
                                 (int) mp1.getBoundingBox().getWidth(),
                                 (int) mp1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) mp1.getPosition().x, (int) mp1.getPosition().y, this);
-                graphics.drawImage(mi.MovablePlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getMovablePlatformImage().getScaledInstance(
                                 (int) mp2.getBoundingBox().getWidth(),
                                 (int) mp2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) mp2.getPosition().x, (int) mp2.getPosition().y, this);
                 graphics.setColor(Color.GREEN);
                 graphics.drawImage(
-                                mi.ActivableObjectChooseImage(this.lever).getScaledInstance(
+                                mi.getActObjImage(this.lever).getScaledInstance(
                                                 (int) lever.getBoundingBox().getWidth(),
                                                 (int) lever.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) lever.getPosition().x, (int) lever.getPosition().y, this);

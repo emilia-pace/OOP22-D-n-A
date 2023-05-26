@@ -25,12 +25,23 @@ public class ManageImage {
     private Map<Pair<Player.State, Player.State>, List<Image>> angelMap = new HashMap<>();
     private Map<Pair<Player.State, Player.State>, List<Image>> devilMap = new HashMap<>();
     private Image diamondImg;
+    private Pair<Image,Image> buttonImages = new Pair<>(null,null);
+    private Pair<Image,Image> leverImages = new Pair<>(null,null);
+    private List<Image> portaAngelo = new ArrayList<>();
+    private List<Image> portaDiavolo = new ArrayList<>();
+    private List<Image> puddleImage = new ArrayList<>();
+    private Image platfformImage;
+    private Image MovablePlatformImage; 
 
     public ManageImage() {
         // caricamento di tutte le immagini
         this.playerImage(angelMap, Player.Type.ANGEL);
         this.playerImage(devilMap, Player.Type.DEVIL);
         this.diamondImage();
+        this.actObjImage();
+        this.doorImage();
+        this.PuddleImage();
+        this.platformImages();
     }
 
     private void playerImage(Map<Pair<Player.State, Player.State>, List<Image>> playerMap, Player.Type type) {
@@ -101,88 +112,86 @@ public class ManageImage {
         return playerMap.get(p.getState()).get(0);
     }
 
-    public Image ActivableObjectChooseImage(ActivableObject actObj) {
-        String actObjName;
-        String dirName;
-        Image image = null;
-        if (actObj.getType().equals(ActivableObject.Activator.LEVER)) {
-            actObjName = "Leva_";
-        } else {
-            actObjName = "Bottone_";
-        }
-        if (actObj.isActivated()) {
-            dirName = "on.PNG";
-        } else {
-            dirName = "off.PNG";
-        }
-        try {
-            image = ImageIO.read(new File("src\\main\\resources\\" + actObjName + dirName));
-        } catch (IOException e) {
+    private void actObjImage(){
+        try{
+            buttonImages.setX(ImageIO.read(new File("src\\main\\resources\\Bottone_off.PNG")));
+            buttonImages.setY(ImageIO.read(new File("src\\main\\resources\\Bottone_on.PNG")));
+            leverImages.setX(ImageIO.read(new File("src\\main\\resources\\Leva_off.PNG")));
+            leverImages.setY(ImageIO.read(new File("src\\main\\resources\\Leva_on.PNG")));
+        } catch(IOException e) {
             e.printStackTrace();
         }
-        return image;
     }
 
-    public Image DoorChooseImage(Door door) {
-        String doorName = "porta_";
-        String doorType;
-        String doorState;
-        Image image = null;
-        if (door.getDoorState().equals(Door.doorState.OPEN_DOOR)) {
-            doorState = "aperta.PNG";
-        } else {
-            doorState = "chiusa.PNG";
+    public Image getActObjImage(ActivableObject actObj) {
+        Pair<Image,Image> p = this.buttonImages;
+        if(actObj.getType().equals(ActivableObject.Activator.LEVER)){
+            p = this.leverImages;
         }
-        if (door.getDoorType().equals(Door.doorType.ANGEL_DOOR)) {
-            doorType = "angelo_";
-        } else {
-            doorType = "diavolo_";
+        if(actObj.isActivated()){
+            return p.getY();
         }
-        try {
-            image = ImageIO.read(new File("src\\main\\resources\\" + doorName + doorType + doorState));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
+        return p.getX();
     }
 
-    public Image PuddleChooseImage(Puddle puddle) {
-        String puddleName = "Pozza_";
-        String puddleColor;
-        Image image = null;
-        if (puddle.getPuddleType().equals(Puddle.puddleType.RED)) {
-            puddleColor = "rossa.jpg";
-        } else if (puddle.getPuddleType().equals(Puddle.puddleType.BLUE)) {
-            puddleColor = "azzurra.jpg";
-        } else {
-            puddleColor = "viola.jpg";
-        }
+    private void doorImage() {
         try {
-            image = ImageIO.read(new File("src\\main\\resources\\" + puddleName + puddleColor));
-        } catch (IOException e) {
+            portaAngelo.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo.PNG")));
+            portaAngelo.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo_aperta.PNG")));
+            portaDiavolo.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo.PNG")));
+            portaDiavolo.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo_aperta.PNG")));
+        } catch(IOException e) {
             e.printStackTrace();
         }
-        return image;
     }
 
-    public Image MovablePlatformImage() {
-        Image image = null;
-        try {
-            image = ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public Image getAngelDoor(Door d) {
+        List<Image> door;
+        if(d.getDoorType().equals(Door.doorType.ANGEL_DOOR)){
+            door = portaAngelo;
+        }else {
+            door = portaDiavolo;
         }
-        return image;
+        if(d.getDoorState().equals(Door.doorState.OPEN_DOOR)){
+            return door.get(1);
+        }
+        return door.get(0);
     }
 
-    public Image PlatformImage() {
-        Image image = null;
+    private void PuddleImage() {
         try {
-            image = ImageIO.read(new File("src\\main\\resources\\Piattaforma_terra.jpg"));
-        } catch (IOException e) {
+            puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_azzurra.jpg")));
+            puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_rossa.jpg")));
+            puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_viola.jpg")));
+        }catch(IOException e) {
             e.printStackTrace();
         }
-        return image;
+    }
+
+    public Image getPuddleImage(Puddle p){
+        if(p.getPuddleType().equals(Puddle.puddleType.BLUE)){
+            return this.puddleImage.get(0);
+        }else if(p.getPuddleType().equals(Puddle.puddleType.RED)){
+            return this.puddleImage.get(1);
+        }
+        return this.puddleImage.get(2);
+    }
+
+    private void platformImages(){
+        try {
+            this.MovablePlatformImage = ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg"));
+            this.platfformImage = ImageIO.read(new File("src\\main\\resources\\Piattaforma_terra.jpg"));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Image getPlatformImage() {
+        return this.platfformImage;
+    }
+
+    public Image getMovablePlatformImage() {
+        return this.MovablePlatformImage;
     }
 
 }

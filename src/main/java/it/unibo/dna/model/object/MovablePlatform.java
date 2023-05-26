@@ -78,20 +78,19 @@ public class MovablePlatform extends AbstractMovableEntity {
      * @param p2 the position the platform wants to reach
      */
     public void findVector(final Position2d p1, final Position2d p2) {
+        Double x = 0.0;
+        Double y = 0.0;
         if(p2.isOnTheRight(p1)){
-            this.setVectorX(+1.0);
+            x=1.0;
         }else if(p1.isOnTheRight(p2)){
-            this.setVectorX(-1.0);
-        }else {
-            this.setVectorX(0);
+            x=-1.0;
         }
         if(p2.isAbove(p1)){
-            this.setVectorY(-1.0);
+            y=-1.0;
         }else if(p1.isAbove(p2)){
-            this.setVectorY(1.0);
-        }else{
-            this.setVectorY(0);
+            y=1.0;
         }
+        setVector(new Vector2d(x, y));
     }
 
     /**

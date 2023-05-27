@@ -11,6 +11,7 @@ public class MovablePlatform extends AbstractMovableEntity {
 
     private Position2d originalPos;
     private Position2d finalPos;
+    private Position2d lastPos;
     private Vector2d lastVector;
 
     /**
@@ -25,6 +26,7 @@ public class MovablePlatform extends AbstractMovableEntity {
                             final Position2d finalPos) {
         super(pos, vet, height, width);
         this.originalPos = pos;
+        this.lastPos = pos;
         this.finalPos = finalPos;
         this.lastVector = new Vector2d(0, 0);
     }
@@ -105,34 +107,16 @@ public class MovablePlatform extends AbstractMovableEntity {
         findVector(pos1, pos2);
     }
 
-    /**
-     * Checks whether the platform has gone out of range on the x-axis.
-     */
-    public void checkHorizontal(){
-        if(this.originalPos.isBetweenHorizontally(this.getFinalPosition(), this.getPosition())){
-            this.setPositionX(this.getOriginalPos().x); 
-        } else if (this.finalPos.isBetweenHorizontally(this.getPosition(), this.getOriginalPos())) {
-            this.setPositionX(this.getFinalPosition().x);
-        } else if (this.originalPos.isBetweenHorizontally(this.getPosition(), this.getFinalPosition())) {
-            this.setPositionX(this.getOriginalPos().x);
-        } else if (this.finalPos.isBetweenHorizontally(this.getOriginalPos(), this.getPosition())) {
-            this.setPositionX(this.getFinalPosition().x);
-        }
+    public void setLastPosition() {
+        this.lastPos = this.getPosition();
     }
 
-    /**
-     * Checks whether the platform has gone out of ranfe on the y-axis.
-     */
-    public void checkVertical() {
-        if (this.originalPos.isBetweenVertically(this.getFinalPosition(), this.getPosition())) {
-            this.setPositionY(this.getOriginalPos().y);
-        } else if (this.finalPos.isBetweenVertically(this.getPosition(), this.getOriginalPos())) {
-            this.setPositionY(this.getFinalPosition().y);
-        } else if (this.originalPos.isBetweenVertically(this.getPosition(), this.getFinalPosition())) {
-            this.setPositionY(this.getOriginalPos().y);
-        } else if (this.finalPos.isBetweenVertically(this.getOriginalPos(), this.getPosition())) {
-            this.setPositionY(this.getFinalPosition().y);
-        }
+    private boolean isBetweenRange() {
+        double maxX = Math.max(this.originalPos.x,this.finalPos.x);
+        double minX =  Math.min(this.originalPos.x,this.originalPos.y);
+        double maxY = Math.max(this.originalPos.y,this.finalPos.y);
+        double minY = Math.min(this.originalPos.y,this.finalPos.y);
+        return this.getPosition().x >= minX && this.getPosition().x <= maxX && this.getPosition().y <= maxY && this.getPosition().y >= minY;
     }
 
     /**
@@ -140,10 +124,8 @@ public class MovablePlatform extends AbstractMovableEntity {
      *  above or below the finalPosition of the platform.
      */
     public void findLimit() {
-        Position2d firstPos = this.getPosition();
-        checkVertical();
-        checkHorizontal();
-        if(!this.getPosition().equals(firstPos)){
+        if(!isBetweenRange()){
+            this.setPosition(this.lastPos);
             this.setVector(new Vector2d(0, 0));
         }
     }

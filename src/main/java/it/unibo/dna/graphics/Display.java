@@ -35,7 +35,7 @@ public class Display extends JFrame {
                         new Position2d(390, 200));
         public ActivableObject lever = new ActivableObject(new Position2d(120, 420), 30.0, 30.0,
                         ActivableObject.Activator.LEVER, mp1);
-        public ActivableObject button = new ActivableObject(new Position2d(500, 550), 30.0, 30.0,
+        public ActivableObject button = new ActivableObject(new Position2d(500, 530), 20.0, 30.0,
                         ActivableObject.Activator.BUTTON, mp2);
 
         public Diamond diamond = new Diamond(45, 45, 1, new Position2d(200, 400));
@@ -118,9 +118,10 @@ public class Display extends JFrame {
                                                 (int) lever.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) lever.getPosition().x, (int) lever.getPosition().y, this);
                 graphics.setColor(Color.MAGENTA);
-                graphics.fillRect((int) button.getPosition().x, (int) button.getPosition().y,
-                                (int) button.getBoundingBox().getWidth(),
-                                (int) button.getBoundingBox().getHeight());
+                graphics.drawImage(mi.getActObjImage(this.button).getScaledInstance(
+                                                (int) button.getBoundingBox().getWidth(),
+                                                (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                (int) button.getPosition().x, (int) button.getPosition().y, this);
                 graphics.dispose();
                 bufferStrategy.show();
 

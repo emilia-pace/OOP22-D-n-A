@@ -63,8 +63,9 @@ public class Game {
 
         for (Entity ent : entities) {
             if (ent instanceof MovablePlatform) {
-                ((MovablePlatform) ent).findLimit();
+                ((MovablePlatform) ent).setLastPosition();
                 ((MovablePlatform) ent).update();
+                ((MovablePlatform) ent).findLimit();
             }
         }
 

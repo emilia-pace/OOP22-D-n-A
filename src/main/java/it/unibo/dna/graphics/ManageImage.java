@@ -25,11 +25,12 @@ public class ManageImage {
     private Map<Pair<Player.State, Player.State>, List<Image>> angelMap = new HashMap<>();
     private Map<Pair<Player.State, Player.State>, List<Image>> devilMap = new HashMap<>();
     private Image diamondImg;
-    private Pair<Image,Image> buttonImages = new Pair<>(null,null);
-    private Pair<Image,Image> leverImages = new Pair<>(null,null);
-    private List<Image> portaAngelo = new ArrayList<>();
-    private List<Image> portaDiavolo = new ArrayList<>();
-    private List<Image> puddleImage = new ArrayList<>();
+    private Pair<Image,Image> buttonImages = new Pair<Image,Image>(null,null);
+    private Pair<Image,Image> leverImages = new Pair<Image,Image>(null,null);
+    private Pair<Image,Image> portaAngelo = new Pair<Image,Image>(null,null);
+    private Pair<Image,Image> portaDiavolo = new Pair<Image,Image>(null,null);
+
+    private List<Image> puddleImage = new ArrayList<>(); //0 azzurra, 1 rossa, 2 viola
     private Image platfformImage;
     private Image MovablePlatformImage; 
 
@@ -136,26 +137,26 @@ public class ManageImage {
 
     private void doorImage() {
         try {
-            portaAngelo.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo.PNG")));
-            portaAngelo.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo_aperta.PNG")));
-            portaDiavolo.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo.PNG")));
-            portaDiavolo.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo_aperta.PNG")));
+            portaAngelo.setX(ImageIO.read(new File("src\\main\\resources\\porta_angelo.PNG")));
+            portaAngelo.setY(ImageIO.read(new File("src\\main\\resources\\porta_angelo_aperta.PNG")));
+            portaDiavolo.setX(ImageIO.read(new File("src\\main\\resources\\porta_diavolo.PNG")));
+            portaDiavolo.setY(ImageIO.read(new File("src\\main\\resources\\porta_diavolo_aperta.PNG")));
         } catch(IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Image getAngelDoor(Door d) {
-        List<Image> door;
+    public Image getDoor(Door d) {
+        Pair<Image,Image> door;
         if(d.getDoorType().equals(Door.doorType.ANGEL_DOOR)){
             door = portaAngelo;
         }else {
             door = portaDiavolo;
         }
         if(d.getDoorState().equals(Door.doorState.OPEN_DOOR)){
-            return door.get(1);
+            return door.getY();
         }
-        return door.get(0);
+        return door.getX();
     }
 
     private void PuddleImage() {

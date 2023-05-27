@@ -21,7 +21,8 @@ public class KeyboardHandler implements KeyListener {
      * @param commandJump  the keycode for jump
      * @param character    the player linked to this keylistener
      */
-    public KeyboardHandler(int commandRight, int commandLeft, int commandJump, Player character) {
+    public KeyboardHandler(final int commandRight, final int commandLeft, final int commandJump,
+            final Player character) {
         this.commandRight = commandRight;
         this.commandLeft = commandLeft;
         this.commandJump = commandJump;
@@ -33,7 +34,7 @@ public class KeyboardHandler implements KeyListener {
      * {@inheritDoc}
      */
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(final KeyEvent e) {
         int key = e.getKeyCode();
         if (key == this.commandRight) {
             this.command.right().execute();
@@ -50,7 +51,7 @@ public class KeyboardHandler implements KeyListener {
      * {@inheritDoc}
      */
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         int key = e.getKeyCode();
         switch (character.getState().getY()) {
             case STATE_RIGHT:
@@ -72,6 +73,6 @@ public class KeyboardHandler implements KeyListener {
      * {@inheritDoc}
      */
     @Override
-    public void keyTyped(KeyEvent arg0) {
+    public void keyTyped(final KeyEvent e) {
     }
 }

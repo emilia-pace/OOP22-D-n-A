@@ -2,20 +2,34 @@ package it.unibo.dna.common;
 
 /**
  * A class rappresenting a vector in 2-dimensional space that describe
- * the direction and velocity of a movement
+ * the direction and velocity of a movement.
  */
 
 public class Vector2d implements java.io.Serializable {
 
-    public double x, y;
+    private double x, y;
 
     /**
      * @param x the first coordinate of the vector
      * @param y the second coordinate of the vector
      */
-    public Vector2d(double x, double y) {
+    public Vector2d(final double x, final double y) {
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * @return the first coordinate
+     */
+    public double getX() {
+        return this.x;
+    }
+
+    /**
+     * @return the second coordinate
+     */
+    public double getY() {
+        return this.y;
     }
 
     /**
@@ -24,7 +38,7 @@ public class Vector2d implements java.io.Serializable {
      * 
      * @param d the double number to be summed
      */
-    public void sumX(double d) {
+    public void sumX(final double d) {
         x += d;
     }
 
@@ -34,7 +48,7 @@ public class Vector2d implements java.io.Serializable {
      * 
      * @param d the double number to be summed
      */
-    public void sumY(double d) {
+    public void sumY(final double d) {
         y += d;
     }
 
@@ -46,7 +60,6 @@ public class Vector2d implements java.io.Serializable {
         return "Vector2d(" + x + "," + y + ")";
     }
 
-    
     /**
      * {@inheritDoc}
      */
@@ -57,5 +70,17 @@ public class Vector2d implements java.io.Serializable {
         }
         final Vector2d vec = (Vector2d) obj;
         return (Double.compare(vec.x, this.x) == 0 && Double.compare(vec.y, this.y) == 0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result;
+        result = prime * result;
+        return result;
     }
 }

@@ -72,7 +72,7 @@ public class Game {
     }
 
     private void gravity(Player player) {
-        if (player.getVector().y < Gravity) {
+        if (player.getVector().getY() < Gravity) {
             player.getVector().sumY(Player.StandardVelocity);
         }
     }
@@ -189,8 +189,8 @@ public class Game {
      * @return true if the character is colliding with a vertical border
      */
     public boolean checkVerticalBorders(double pos, double lenght) {
-        double sxBorder = this.boundingBox.getPosition().x;
-        double dxBorder = this.boundingBox.getPosition().x + this.boundingBox.getWidth();
+        double sxBorder = this.boundingBox.getPosition().getX();
+        double dxBorder = this.boundingBox.getPosition().getX() + this.boundingBox.getWidth();
 
         return pos <= sxBorder || pos + lenght >= dxBorder;
     }
@@ -203,8 +203,8 @@ public class Game {
      * @return true if the character is colliding with an horizontal border
      */
     public boolean checkHorizontalBorders(double pos, double height) {
-        double northBorder = this.boundingBox.getPosition().y;
-        double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight();
+        double northBorder = this.boundingBox.getPosition().getY();
+        double southBorder = this.boundingBox.getPosition().getY() + this.boundingBox.getHeight();
 
         return pos <= northBorder || pos + height >= southBorder;
     }
@@ -220,10 +220,10 @@ public class Game {
         double ChHeight = character.getBoundingBox().getHeight();
         double ChLenght = character.getBoundingBox().getWidth();
 
-        if (this.checkVerticalBorders(ChPos.x, ChLenght)) {
+        if (this.checkVerticalBorders(ChPos.getX(), ChLenght)) {
             event.hitBorderYEvent(character).manage(this);
         }
-        if (this.checkHorizontalBorders(ChPos.y, ChHeight)) {
+        if (this.checkHorizontalBorders(ChPos.getY(), ChHeight)) {
             event.hitBorderXEvent(character).manage(this);
         }
     }

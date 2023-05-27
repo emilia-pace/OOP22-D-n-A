@@ -1,29 +1,44 @@
 package it.unibo.dna.common;
 
 /**
- * A class rapresenting a point in a two dimensional space
+ * A class rapresenting a point in a two dimensional space.
  */
 
 public class Position2d implements java.io.Serializable {
 
-    public double x, y;
+    private double x, y;
 
     /**
      * @param x the first coordinate of the position
      * @param y the second coordinate of the position
      */
-    public Position2d(double x, double y) {
+    public Position2d(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
 
     /**
+     * @return the first coordinate
+     */
+    public double getX() {
+        return this.x;
+    }
+
+    /**
+     * @return the second coordinate
+     */
+    public double getY() {
+        return this.y;
+    }
+
+    /**
      * Move the position by adding a 2-dimensional vector
-     * @param v 2-dimensional vector
+     * 
+     * @param vector 2-dimensional vector
      * @return the new position
      */
-    public Position2d sum(Vector2d vector) {
-        return new Position2d(x + vector.x, y + vector.y);
+    public Position2d sum(final Vector2d vector) {
+        return new Position2d(x + vector.getX(), y + vector.getY());
     }
 
     /**
@@ -35,11 +50,11 @@ public class Position2d implements java.io.Serializable {
     }
 
     public boolean isOnTheRight(final Position2d p) {
-        return this.x > p.x;
+        return this.x > p.getX();
     }
 
     public boolean isAbove(final Position2d p) {
-        return this.y < p.y;
+        return this.y < p.getY();
     }
 
     /**
@@ -51,7 +66,19 @@ public class Position2d implements java.io.Serializable {
             return false;
         }
         final Position2d pos = (Position2d) obj;
-        return (Double.compare(pos.x, this.x) == 0 && Double.compare(pos.y, this.y) == 0);
+        return (Double.compare(pos.getX(), this.x) == 0 && Double.compare(pos.getY(), this.y) == 0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result;
+        result = prime * result;
+        return result;
     }
 
 }

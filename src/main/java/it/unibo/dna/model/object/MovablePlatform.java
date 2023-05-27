@@ -82,10 +82,10 @@ public class MovablePlatform extends AbstractMovableEntity {
     public void findVector(final Position2d p1, final Position2d p2) {
         double x = 0.0;
         double y = 0.0;
-        if(p1.x != p2.x){
+        if(p1.getX() != p2.getX()){
             x = p2.isOnTheRight(p1) ? +1.0 : -1.0;
         }
-        if(p1.y != p2.y){
+        if(p1.getY() != p2.getY()){
             y = p2.isAbove(p1) ? -1.0 : +1.0;
         } 
         System.out.println(x + " " + y);
@@ -115,11 +115,11 @@ public class MovablePlatform extends AbstractMovableEntity {
      * Checks whether the platform position is between its original position and its final position.
      */
     private boolean isBetweenRange() {
-        double maxX = Math.max(this.originalPos.x,this.finalPos.x);
-        double minX =  Math.min(this.originalPos.x,this.originalPos.y);
-        double maxY = Math.max(this.originalPos.y,this.finalPos.y);
-        double minY = Math.min(this.originalPos.y,this.finalPos.y);
-        return this.getPosition().x >= minX && this.getPosition().x <= maxX && this.getPosition().y <= maxY && this.getPosition().y >= minY;
+        double maxX = Math.max(this.originalPos.getX(),this.finalPos.getX());
+        double minX =  Math.min(this.originalPos.getX(),this.originalPos.getY());
+        double maxY = Math.max(this.originalPos.getY(),this.finalPos.getY());
+        double minY = Math.min(this.originalPos.getY(),this.finalPos.getY());
+        return this.getPosition().getX() >= minX && this.getPosition().getX() <= maxX && this.getPosition().getY() <= maxY && this.getPosition().getY() >= minY;
     }
 
     /**

@@ -78,10 +78,10 @@ public class RectBoundingBox implements BoundingBox {
      */
     @Override
     public boolean isCollidingWith(final Position2d p, final double h, final double w) {
-        return this.position.x + this.width >= p.x
-                && this.position.x <= p.x + w
-                && this.position.y + this.height >= p.y
-                && this.position.y <= p.y + h;
+        return this.position.getX() + this.width >= p.getX()
+                && this.position.getX() <= p.getX() + w
+                && this.position.getY() + this.height >= p.getY()
+                && this.position.getY() <= p.getY() + h;
     }
 
     
@@ -90,8 +90,8 @@ public class RectBoundingBox implements BoundingBox {
      */
     @Override
     public boolean sideCollision(final Position2d p, final double h, final double w) {
-        double eps = this.position.x + this.width - p.x;
-        double eps1 = this.position.x - (p.x + w);
+        double eps = this.position.getX() + this.width - p.getX();
+        double eps1 = this.position.getX() - (p.getX() + w);
 
         return this.isCollidingWith(p, h, w) 
                 && (Math.abs(eps) < 1 || Math.abs(eps1) < 1);

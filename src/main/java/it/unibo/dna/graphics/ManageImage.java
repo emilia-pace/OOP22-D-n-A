@@ -113,6 +113,9 @@ public class ManageImage {
         return playerMap.get(p.getState()).get(0);
     }
 
+    /**
+     * Sets the image for the possible {@link ActivableObject} (button, lever) and their respective states
+     */
     private void actObjImage(){
         try{
             buttonImages.setX(ImageIO.read(new File("src\\main\\resources\\Bottone_off.PNG")));
@@ -124,6 +127,11 @@ public class ManageImage {
         }
     }
 
+    /**
+     * 
+     * @param actObj the {@link ActivableObject} we need an image for 
+     * @return the image of the {@link ActivableObkect}
+     */
     public Image getActObjImage(ActivableObject actObj) {
         Pair<Image,Image> p = this.buttonImages;
         if(actObj.getType().equals(ActivableObject.Activator.LEVER)){
@@ -135,6 +143,9 @@ public class ManageImage {
         return p.getX();
     }
 
+    /**
+     * Sets the image for the 2 types of {@link Door} and their 2 respective states.
+     */
     private void doorImage() {
         try {
             portaAngelo.setX(ImageIO.read(new File("src\\main\\resources\\porta_angelo.PNG")));
@@ -146,6 +157,11 @@ public class ManageImage {
         }
     }
 
+    /**
+     * 
+     * @param d the door we need an image for
+     * @return the image of the {@link Door}
+     */
     public Image getDoor(Door d) {
         Pair<Image,Image> door;
         if(d.getDoorType().equals(Door.doorType.ANGEL_DOOR)){
@@ -159,6 +175,9 @@ public class ManageImage {
         return door.getX();
     }
 
+    /**
+     * Sets the image for the 3 types of {@link Puddle}
+     */
     private void PuddleImage() {
         try {
             puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_azzurra.jpg")));
@@ -169,6 +188,11 @@ public class ManageImage {
         }
     }
 
+    /**
+     * 
+     * @param p the puddle we need the image for.
+     * @return the image for the {@link Puddle}
+     */
     public Image getPuddleImage(Puddle p){
         if(p.getPuddleType().equals(Puddle.puddleType.BLUE)){
             return this.puddleImage.get(0);
@@ -178,6 +202,9 @@ public class ManageImage {
         return this.puddleImage.get(2);
     }
 
+    /**
+     * Sets the images for the {@link MovablePlatform} and the {@link Platform}
+     */
     private void platformImages(){
         try {
             this.MovablePlatformImage = ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg"));
@@ -187,10 +214,18 @@ public class ManageImage {
         }
     }
 
+    /**
+     * 
+     * @return the image of the standard {@link Platform}
+     */
     public Image getPlatformImage() {
         return this.platfformImage;
     }
 
+    /**
+     * 
+     * @return the image of the {@link MovablePlatform} 
+     */
     public Image getMovablePlatformImage() {
         return this.MovablePlatformImage;
     }

@@ -42,14 +42,6 @@ public class Position2d implements java.io.Serializable {
         return this.y < p.y;
     }
 
-    public boolean isBetweenHorizontally(final Position2d p1, final Position2d p2) {
-        return this.isOnTheRight(p1) && p2.isOnTheRight(this);
-    }
-
-    public boolean isBetweenVertically(final Position2d p1, final Position2d p2) {
-        return this.isAbove(p1) && p2.isAbove(this);
-    }
-
     /**
      * {@inheritDoc}
      */

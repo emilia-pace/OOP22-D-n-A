@@ -32,10 +32,18 @@ public class Door extends  AbstractEntity {
         this.state = doorState.CLOSED_DOOR;
     }
 
+    /**
+     * 
+     * @return the type of the door (angel door, devil door)
+     */
     public doorType getDoorType(){
         return this.type;
     }
 
+    /**
+     * 
+     * @return the state of the door (open, closed)
+     */
     public doorState getDoorState() {
         return this.state;
     }

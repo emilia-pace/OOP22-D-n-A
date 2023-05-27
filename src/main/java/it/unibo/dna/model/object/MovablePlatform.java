@@ -80,19 +80,16 @@ public class MovablePlatform extends AbstractMovableEntity {
      * @param p2 the position the platform wants to reach
      */
     public void findVector(final Position2d p1, final Position2d p2) {
-        Double x = 0.0;
-        Double y = 0.0;
-        if(p2.isOnTheRight(p1)){
-            x=1.0;
-        }else if(p1.isOnTheRight(p2)){
-            x=-1.0;
+        double x = 0.0;
+        double y = 0.0;
+        if(p1.x != p2.x){
+            x = p2.isOnTheRight(p1) ? +1.0 : -1.0;
         }
-        if(p2.isAbove(p1)){
-            y=-1.0;
-        }else if(p1.isAbove(p2)){
-            y=1.0;
-        }
-        setVector(new Vector2d(x, y));
+        if(p1.y != p2.y){
+            y = p2.isAbove(p1) ? -1.0 : +1.0;
+        } 
+        System.out.println(x + " " + y);
+        this.setVector(new Vector2d(x, y));
     }
 
     /**
@@ -107,10 +104,16 @@ public class MovablePlatform extends AbstractMovableEntity {
         findVector(pos1, pos2);
     }
 
+    /**
+     * Saves the last position had by the platform, in order not to lose it once the position of the platform has been updated.
+     */
     public void setLastPosition() {
         this.lastPos = this.getPosition();
     }
 
+    /*
+     * Checks whether the platform position is between its original position and its final position.
+     */
     private boolean isBetweenRange() {
         double maxX = Math.max(this.originalPos.x,this.finalPos.x);
         double minX =  Math.min(this.originalPos.x,this.originalPos.y);

@@ -242,7 +242,7 @@ public class Game {
         if (this.checkVerticalBorders(chPos.getX(), chLenght)) {
             event.hitBorderYEvent(character).manage(this);
         }
-        if (this.checkHorizontalBorders(chPos.y, chHeight)) {
+        if (this.checkHorizontalBorders(chPos.getY(), chHeight)) {
             event.hitBorderXEvent(character).manage(this);
         }
     }

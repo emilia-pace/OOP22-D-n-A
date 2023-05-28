@@ -79,23 +79,23 @@ public class CollisionTest {
         final double southBorderY = GAME.getBoundingBox().getHeight();
 
         CHARACTER.setPosition(new Position2d(eastBorderX - WIDTH - 1, 1));
-        assertFalse(GAME.checkVerticalBorders(CHARACTER.getPosition().x, CHARACTER.getBoundingBox().getWidth()));
+        assertFalse(GAME.checkVerticalBorders(CHARACTER.getPosition().getX(), CHARACTER.getBoundingBox().getWidth()));
         CHARACTER.setPosition(new Position2d(eastBorderX - WIDTH, 1));
-        assertTrue(GAME.checkVerticalBorders(CHARACTER.getPosition().x, CHARACTER.getBoundingBox().getWidth()));
+        assertTrue(GAME.checkVerticalBorders(CHARACTER.getPosition().getX(), CHARACTER.getBoundingBox().getWidth()));
 
         CHARACTER.setPosition(new Position2d(westBorderX + 1, 1));
-        assertFalse(GAME.checkVerticalBorders(CHARACTER.getPosition().x, CHARACTER.getBoundingBox().getWidth()));
+        assertFalse(GAME.checkVerticalBorders(CHARACTER.getPosition().getX(), CHARACTER.getBoundingBox().getWidth()));
         CHARACTER.setPosition(new Position2d(westBorderX, 1));
-        assertTrue(GAME.checkVerticalBorders(CHARACTER.getPosition().x, CHARACTER.getBoundingBox().getWidth()));
+        assertTrue(GAME.checkVerticalBorders(CHARACTER.getPosition().getX(), CHARACTER.getBoundingBox().getWidth()));
 
         CHARACTER.setPosition(new Position2d(1, northBorderY + 1));
-        assertFalse(GAME.checkHorizontalBorders(CHARACTER.getPosition().y, CHARACTER.getBoundingBox().getHeight()));
+        assertFalse(GAME.checkHorizontalBorders(CHARACTER.getPosition().getY(), CHARACTER.getBoundingBox().getHeight()));
         CHARACTER.setPosition(new Position2d(1, northBorderY));
-        assertTrue(GAME.checkHorizontalBorders(CHARACTER.getPosition().y, CHARACTER.getBoundingBox().getHeight()));
+        assertTrue(GAME.checkHorizontalBorders(CHARACTER.getPosition().getY(), CHARACTER.getBoundingBox().getHeight()));
 
         CHARACTER.setPosition(new Position2d(1, southBorderY - HEIGHT - 1));
-        assertFalse(GAME.checkHorizontalBorders(CHARACTER.getPosition().y, CHARACTER.getBoundingBox().getHeight()));
+        assertFalse(GAME.checkHorizontalBorders(CHARACTER.getPosition().getY(), CHARACTER.getBoundingBox().getHeight()));
         CHARACTER.setPosition(new Position2d(1, southBorderY - HEIGHT));
-        assertTrue(GAME.checkHorizontalBorders(CHARACTER.getPosition().y, CHARACTER.getBoundingBox().getHeight()));
+        assertTrue(GAME.checkHorizontalBorders(CHARACTER.getPosition().getY(), CHARACTER.getBoundingBox().getHeight()));
     }
 }

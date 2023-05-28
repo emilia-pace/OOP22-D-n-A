@@ -78,7 +78,7 @@ public class Display extends JFrame {
                         graphics.drawImage(mi.getDiamondImage().getScaledInstance(
                                         (int) diamond.getBoundingBox().getWidth(),
                                         (int) diamond.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                        (int) diamond.getPosition().x, (int) diamond.getPosition().y, this);
+                                        (int) diamond.getPosition().getX(), (int) diamond.getPosition().getY(), this);
 
                 }
 
@@ -86,62 +86,44 @@ public class Display extends JFrame {
                                 mi.playerChooseImage(this.angel).getScaledInstance(
                                                 (int) angel.getBoundingBox().getWidth(),
                                                 (int) angel.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) angel.getPosition().x, (int) angel.getPosition().y, this);
+                                (int) angel.getPosition().getX(), (int) angel.getPosition().getY(), this);
                 graphics.drawImage(
                                 mi.playerChooseImage(this.devil).getScaledInstance(
                                                 (int) devil.getBoundingBox().getWidth(),
                                                 (int) devil.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) devil.getPosition().x, (int) devil.getPosition().y, this);
+                                (int) devil.getPosition().getX(), (int) devil.getPosition().getY(), this);
                 graphics.setColor(Color.WHITE);
                 graphics.drawImage(mi.getPlatformImage().getScaledInstance(
                                 (int) p1.getBoundingBox().getWidth(),
                                 (int) p1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) p1.getPosition().x, (int) p1.getPosition().y, this);
+                                (int) p1.getPosition().getX(), (int) p1.getPosition().getY(), this);
 
                 graphics.drawImage(mi.getPlatformImage().getScaledInstance(
                                 (int) p2.getBoundingBox().getWidth(),
                                 (int) p2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) p2.getPosition().x, (int) p2.getPosition().y, this);
+                                (int) p2.getPosition().getX(), (int) p2.getPosition().getY(), this);
                 graphics.setColor(Color.GREEN);
                 graphics.drawImage(mi.getMovablePlatformImage().getScaledInstance(
                                 (int) mp1.getBoundingBox().getWidth(),
                                 (int) mp1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) mp1.getPosition().x, (int) mp1.getPosition().y, this);
+                                (int) mp1.getPosition().getX(), (int) mp1.getPosition().getY(), this);
                 graphics.drawImage(mi.getMovablePlatformImage().getScaledInstance(
                                 (int) mp2.getBoundingBox().getWidth(),
                                 (int) mp2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) mp2.getPosition().x, (int) mp2.getPosition().y, this);
+                                (int) mp2.getPosition().getX(), (int) mp2.getPosition().getY(), this);
                 graphics.setColor(Color.GREEN);
                 graphics.drawImage(
                                 mi.getActObjImage(this.lever).getScaledInstance(
                                                 (int) lever.getBoundingBox().getWidth(),
                                                 (int) lever.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) lever.getPosition().x, (int) lever.getPosition().y, this);
+                                (int) lever.getPosition().getX(), (int) lever.getPosition().getY(), this);
                 graphics.setColor(Color.MAGENTA);
                 graphics.drawImage(mi.getActObjImage(this.button).getScaledInstance(
                                                 (int) button.getBoundingBox().getWidth(),
                                                 (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) button.getPosition().x, (int) button.getPosition().y, this);
+                                (int) button.getPosition().getX(), (int) button.getPosition().getY(), this);
                 graphics.dispose();
                 bufferStrategy.show();
 
-                if (this.angel.getVector().y == -Player.JumpVelocity + Player.StandardVelocity) {
-                        this.makeSound("src\\main\\resurces\\Angel_audio.wav");
-                }
-                if (this.devil.getVector().y == -Player.JumpVelocity + Player.StandardVelocity) {
-                        this.makeSound("src\\main\\resurces\\Devil_audio.wav");
-                }
-
-        }
-
-        private void makeSound(String fileName) {
-                File file = new File(fileName);
-                try {
-                        Clip clip = AudioSystem.getClip();
-                        clip.open(AudioSystem.getAudioInputStream(file));
-                        clip.start();
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
         }
 }

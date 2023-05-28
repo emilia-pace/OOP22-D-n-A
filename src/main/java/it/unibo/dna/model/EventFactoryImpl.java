@@ -30,7 +30,7 @@ public class EventFactoryImpl implements EventFactory {
             } else {
                 p.resetY();
             }
-            if (p.getPosition().y < pt.getPosition().y) {
+            if (p.getPosition().getY() < pt.getPosition().getY()) {
                 p.getState().setX(State.STATE_STANDING);
             }
         };
@@ -42,12 +42,12 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitMovablePlatformEvent(final MovablePlatform pt, final Player p) {
         return game -> {
-            p.setVectorY(p.getVector().y + pt.getVector().y);
-            if (p.getVector().x == 0 && pt.getLastVector().x != 0) {
-                p.setVectorX(pt.getLastVector().x);
+            p.setVectorY(p.getVector().getY() + pt.getVector().getY());
+            if (p.getVector().getX() == 0 && pt.getLastVector().getX() != 0) {
+                p.setVectorX(pt.getLastVector().getX());
             }
-            p.setVectorX(p.getVector().x + pt.getVector().x - pt.getLastVector().x);
-            if (pt.getVector().x != 0 || pt.getLastVector().x != 0) {
+            p.setVectorX(p.getVector().getX() + pt.getVector().getX() - pt.getLastVector().getX());
+            if (pt.getVector().getX() != 0 || pt.getLastVector().getX() != 0) {
                 pt.setLastVector(pt.getVector());
             }
         };

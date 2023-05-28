@@ -19,7 +19,7 @@ public abstract class AbstractEntity implements Entity {
      * @param height the height of the entity
      * @param width  the width of the entity
      */
-    public AbstractEntity(Position2d pos, double height, double width) {
+    public AbstractEntity(final Position2d pos, final double height, final double width) {
         this.position = pos;
         this.height = height;
         this.width = width;
@@ -37,7 +37,7 @@ public abstract class AbstractEntity implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public void setPosition(Position2d pos) {
+    public void setPosition(final Position2d pos) {
         this.position = pos;
     }
 
@@ -53,16 +53,16 @@ public abstract class AbstractEntity implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public void setPositionX(Double x) {
-        this.setPosition(new Position2d(x, this.getPosition().y));
+    public void setPositionX(final Double x) {
+        this.setPosition(new Position2d(x, this.getPosition().getY()));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setPositionY(Double y) {
-        this.setPosition(new Position2d(this.getPosition().x, y));
+    public void setPositionY(final Double y) {
+        this.setPosition(new Position2d(this.getPosition().getX(), y));
     }
 
 }

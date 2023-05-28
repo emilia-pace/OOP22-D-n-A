@@ -5,7 +5,6 @@ package it.unibo.dna.common;
  * @param <X> the type of the first element
  * @param <Y> the type of the second element
  */
-
 public class Pair<X, Y> {
 
 	private X x;
@@ -15,7 +14,7 @@ public class Pair<X, Y> {
 	 * @param x the first element
 	 * @param y the second element
 	 */
-	public Pair(X x, Y y) {
+	public Pair(final X x, final Y y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -38,20 +37,20 @@ public class Pair<X, Y> {
 	/**
 	 * @param x the first element
 	 */
-	public void setX(X x) {
+	public void setX(final X x) {
 		this.x = x;
 	}
 
 	/**
 	 * @param y the second element
 	 */
-	public void setY(Y y) {
+	public void setY(final Y y) {
 		this.y = y;
 	}
 
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,17 +61,20 @@ public class Pair<X, Y> {
 	}
 
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(final Object obj) {
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Pair other = (Pair) obj;
 		if (x == null) {
 			if (other.x != null)
@@ -82,14 +84,15 @@ public class Pair<X, Y> {
 		if (y == null) {
 			if (other.y != null)
 				return false;
-		} else if (!y.equals(other.y))
+		} else if (!y.equals(other.y)) {
 			return false;
+		}
 		return true;
 	}
 
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return "Pair [x=" + x + ", y=" + y + "]";

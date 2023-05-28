@@ -14,7 +14,7 @@ public class RectBoundingBox implements BoundingBox {
     private double width;
 
     /**
-     * 
+     * {@link RectBoundingBox} constructor.
      * @param p the position of the box
      * @param h the height of the box
      * @param w the width of the box
@@ -84,7 +84,6 @@ public class RectBoundingBox implements BoundingBox {
                 && this.position.y <= p.y + h;
     }
 
-    
     /**
      * {@inheritDoc}
      */

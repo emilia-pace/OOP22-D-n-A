@@ -22,7 +22,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitPlatformEvent(Entity pt, Player p) {
+    public Event hitPlatformEvent(final Entity pt, final Player p) {
         return game -> {
             if (p.getBoundingBox().sideCollision(pt.getPosition(), pt.getBoundingBox().getHeight(),
                     pt.getBoundingBox().getWidth())) {
@@ -40,7 +40,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitMovablePlatformEvent(MovablePlatform pt, Player p) {
+    public Event hitMovablePlatformEvent(final MovablePlatform pt, final Player p) {
         return game -> {
             p.setVectorY(p.getVector().y + pt.getVector().y);
             if (p.getVector().x == 0 && pt.getLastVector().x != 0) {
@@ -57,7 +57,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitButtonEvent(ActivableObject o, Player p) {
+    public Event hitButtonEvent(final ActivableObject o, final Player p) {
         return game -> {
             if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);
@@ -75,7 +75,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(Door d, Player p) {
+    public Event hitDoorEvent(final Door d, final Player p) {
         return game -> {
             d.openDoor(p);
         };
@@ -85,7 +85,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitLeverEvent(ActivableObject o, Player p) {
+    public Event hitLeverEvent(final ActivableObject o, final Player p) {
         return game -> {
             if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);
@@ -102,7 +102,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDiamondEvent(Diamond d, Score s) {
+    public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
             game.removeEntity(d);
             s.addScore(d.getValue());
@@ -113,7 +113,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitBorderXEvent(Player p) {
+    public Event hitBorderXEvent(final Player p) {
         return game -> {
             p.resetY();
             p.getState().setX(State.STATE_STANDING);
@@ -124,7 +124,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitBorderYEvent(Player p) {
+    public Event hitBorderYEvent(final Player p) {
         return game -> {
             p.resetX();
         };

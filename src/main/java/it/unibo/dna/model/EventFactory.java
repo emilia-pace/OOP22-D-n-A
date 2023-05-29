@@ -14,14 +14,16 @@ public interface EventFactory {
 
     /**
      * Models the collision event with a platform.
-     * @param l the hit door
+     * @param pt the hit platform 
+     * @param p the player
      * @return the new event
      */
     Event hitPlatformEvent(Entity pt, Player p);
 
      /**
-     * Models the collision event with a platform.
-     * @param l the hit door
+     * Models the collision event with a movable platform.
+     * @param pt the hit movable platform 
+     * @param p the player
      * @return the new event
      */
     Event hitMovablePlatformEvent(MovablePlatform pt, Player p);
@@ -29,33 +31,38 @@ public interface EventFactory {
 
     /**
      * Models the collision event with the horizontal borders.
+     * @param p the player
      * @return the new event
      */
     Event hitBorderXEvent(Player p);
 
     /**
      * Models the collision event with the vertical borders.
+     * @param p the player
      * @return the new event
      */
     Event hitBorderYEvent(Player p);
 
     /**
      * Models the collision event with a button.
-     * @param b the hit button
+     * @param o the hit button
+     * @param p the player
      * @return the new event
      */
     Event hitButtonEvent(ActivableObject o, Player p);
 
     /**
      * Models the collision event with a door.
-     * @param l the hit door
+     * @param d the hit door
+     * @param p the player
      * @return the new event
      */
     Event hitDoorEvent(Door d, Player p);
 
     /**
      * Models the collision event with a lever.
-     * @param l the hit lever
+     * @param o the hit lever
+     * @param p the player
      * @return the new event
      */
     Event hitLeverEvent(ActivableObject o, Player p);

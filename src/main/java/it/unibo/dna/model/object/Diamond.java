@@ -10,7 +10,7 @@ public class Diamond extends  AbstractEntity {
     private double value = 0;
 
     /**
-     * 
+     * {@link Diamond} constructor.
      * @param h the height of the diamond
      * @param w the width of the diamond
      * @param v the value of the diamond
@@ -28,6 +28,4 @@ public class Diamond extends  AbstractEntity {
     public double getValue() {
         return this.value;
     }
-
-
 }

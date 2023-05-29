@@ -3,6 +3,7 @@ package it.unibo.dna;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.lang.IllegalArgumentException;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.graphics.Display;
@@ -19,6 +20,9 @@ import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
+/**
+ * Class that models the state of the game.
+ */
 public class Game {
 
     public static final double Gravity = 4;
@@ -30,7 +34,13 @@ public class Game {
     private Score score;
     private EventQueue eventQueue = new EventQueue();
 
-    public Game(int width, int height, int level) {
+    /**
+     * {@link Game} constructor.
+     * @param width the width of the game
+     * @param height the height of the game
+     * @param level the level of the game
+     */
+    public Game(final int width, final int height, final int level) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
         this.display = new Display(width, height, this);
@@ -43,6 +53,9 @@ public class Game {
         this.entities.add(display.diamond);
     }
 
+    /**
+     * Updates the state of the game.
+     */
     public void update() {
 
         this.gravity(display.angel);
@@ -68,11 +81,10 @@ public class Game {
                 ((MovablePlatform) ent).findLimit();
             }
         }
-
     }
 
     private void gravity(Player player) {
-        if (player.getVector().y < Gravity) {
+        if (player.getVector().getY() < Gravity) {
             player.getVector().sumY(Player.StandardVelocity);
         }
     }
@@ -123,16 +135,31 @@ public class Game {
         return this.entities;
     }
 
-    public EventQueue getEvents() {
+    /**
+     * 
+     * @return the list of {@link Event}
+     */
+    public EventQueue getEventQueue() {
         return this.eventQueue;
     }
 
-    private void freeActivableObject(ActivableObject e) {
-        if (e.type.equals(ActivableObject.Activator.BUTTON)) {
-            e.deactivate();
-
-        }
-        e.resetPlayer();
+    /**
+     * Manages when a character leaves an {@link ActivableObject}.
+     * @param character the {@link Player} to check
+     */
+    private void freeActivableObject(final Player character) {
+        var box = character.getBoundingBox();
+        this.getEntities().stream().filter((e) -> 
+        !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth())).filter((e) -> 
+        e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")).forEach((e) -> {
+            Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
+            if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
+                if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
+                    ((ActivableObject) e).deactivate();
+                }
+                ((ActivableObject) e).resetPlayer();
+            }
+        });
     }
 
     /**
@@ -141,56 +168,49 @@ public class Game {
      * @param character the moving {@link Player}
      */
     private void checkCollisions(final Player character) {
-        Position2d ChPos = character.getPosition().sum(character.getVector());
-        double ChHeight = character.getBoundingBox().getHeight();
-        double ChWidth = character.getBoundingBox().getWidth();
+        Position2d chPos = character.getPosition().sum(character.getVector());
+        double chHeight = character.getBoundingBox().getHeight();
+        double chWidth = character.getBoundingBox().getWidth();
 
-        this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth))
-                .forEach((e) -> {
-                    String cl = e.getClass().getName();
-                    switch (cl) {
-                        case "it.unibo.dna.model.object.Platform" ->
-                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                        case "it.unibo.dna.model.object.MovablePlatform" -> {
-                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                            this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
-                        }
-                        case "it.unibo.dna.model.object.ActivableObject" -> {
-                            if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                                this.eventQueue.addEvent(event.hitButtonEvent((ActivableObject) e, character));
-                            } else {
-                                this.eventQueue.addEvent(event.hitLeverEvent((ActivableObject) e, character));
-                            }
-                        }
-                        case "it.unibo.dna.model.object.Door" ->
-                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
-                        case "it.unibo.dna.model.object.Diamond" -> {
-                            this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
-                            this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
-                        }
+        this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth)).forEach((e) -> {
+            String cl = e.getClass().getName();
+            switch (cl) {
+                case "it.unibo.dna.model.object.Platform" ->
+                    this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                case "it.unibo.dna.model.object.MovablePlatform" -> {
+                    this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                    this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
+                }
+                case "it.unibo.dna.model.object.ActivableObject" -> {
+                    if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
+                        this.eventQueue.addEvent(event.hitButtonEvent((ActivableObject) e, character));
+                    } else {
+                        this.eventQueue.addEvent(event.hitLeverEvent((ActivableObject) e, character));
                     }
-                });
+                }
+                case "it.unibo.dna.model.object.Door" ->
+                    this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                case "it.unibo.dna.model.object.Diamond" -> {
+                    this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
+                    this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
+                }
+                default -> throw new IllegalArgumentException();
+            }
+        });
 
-        this.getEntities().stream().filter((e) -> !e.getBoundingBox().isCollidingWith(ChPos, ChHeight, ChWidth))
-                .filter((e) -> e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject"))
-                .forEach((e) -> {
-                    Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
-                    if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                        freeActivableObject((ActivableObject) e);
-                    }
-                });
+        freeActivableObject(character);
     }
 
     /**
      * Checks the collision of a character with the vertical borders.
      * 
-     * @param pos    the x coordinate of the character's position
+     * @param pos the x coordinate of the character's position
      * @param lenght the lenght of the character
      * @return true if the character is colliding with a vertical border
      */
-    public boolean checkVerticalBorders(double pos, double lenght) {
-        double sxBorder = this.boundingBox.getPosition().x;
-        double dxBorder = this.boundingBox.getPosition().x + this.boundingBox.getWidth();
+    public boolean checkVerticalBorders(final double pos, final double lenght) {
+        double sxBorder = this.boundingBox.getPosition().getX();
+        double dxBorder = this.boundingBox.getPosition().getX() + this.boundingBox.getWidth();
 
         return pos <= sxBorder || pos + lenght >= dxBorder;
     }
@@ -198,13 +218,13 @@ public class Game {
     /**
      * Checks the collision of a character with the horizontal borders.
      * 
-     * @param pos    the y coordinate of the character's position
+     * @param pos the y coordinate of the character's position
      * @param height the height of the character
      * @return true if the character is colliding with an horizontal border
      */
-    public boolean checkHorizontalBorders(double pos, double height) {
-        double northBorder = this.boundingBox.getPosition().y;
-        double southBorder = this.boundingBox.getPosition().y + this.boundingBox.getHeight();
+    public boolean checkHorizontalBorders(final double pos, final double height) {
+        double northBorder = this.boundingBox.getPosition().getY();
+        double southBorder = this.boundingBox.getPosition().getY() + this.boundingBox.getHeight();
 
         return pos <= northBorder || pos + height >= southBorder;
     }
@@ -213,23 +233,17 @@ public class Game {
      * Checks the collision of a character with the borders.
      * 
      * @param character the moving {@link Player}
-     * @return true if the character is colliding with the borders
      */
     public void checkBorders(final Player character) {
-        Position2d ChPos = character.getPosition().sum(character.getVector());
-        double ChHeight = character.getBoundingBox().getHeight();
-        double ChLenght = character.getBoundingBox().getWidth();
+        Position2d chPos = character.getPosition().sum(character.getVector());
+        double chHeight = character.getBoundingBox().getHeight();
+        double chLenght = character.getBoundingBox().getWidth();
 
-        if (this.checkVerticalBorders(ChPos.x, ChLenght)) {
+        if (this.checkVerticalBorders(chPos.getX(), chLenght)) {
             event.hitBorderYEvent(character).manage(this);
         }
-        if (this.checkHorizontalBorders(ChPos.y, ChHeight)) {
+        if (this.checkHorizontalBorders(chPos.getY(), chHeight)) {
             event.hitBorderXEvent(character).manage(this);
         }
     }
-
-    public EventQueue getEventQueue() {
-        return this.eventQueue;
-    }
-
 }

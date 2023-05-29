@@ -16,13 +16,15 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
     private Game game;
 
     /**
+     * @param game   the game of the player
      * @param pos    the position of the player
      * @param vet    the vector of the player
      * @param height the height of the player
      * @param width  the width of the player
      * @param type   the type (angel/devil) of the player
      */
-    public PlayerImpl(Game game, Position2d pos, Vector2d vet, double height, double width, Type type) {
+    public PlayerImpl(final Game game, final Position2d pos, final Vector2d vet, final double height,
+            final double width, final Type type) {
         super(pos, vet, height, width);
         this.type = type;
         this.game = game;
@@ -44,22 +46,21 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
         return this.type;
     }
 
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(final Object obj) {
-        if (!(obj instanceof Player)) {
-            return false;
-        }
-        final Player p = (Player) obj;
-        return this.type.equals(p.getType());
-    }
-
     public Game getGame() {
         return this.game;
     }
-    public void setGame(Game game){
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setGame(final Game game) {
         this.game = game;
-    } 
+    }
+
 }

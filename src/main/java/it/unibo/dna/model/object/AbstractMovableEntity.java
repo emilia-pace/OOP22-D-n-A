@@ -9,7 +9,7 @@ import it.unibo.dna.model.object.api.MovableEntity;
  */
 public abstract class AbstractMovableEntity extends AbstractEntity implements MovableEntity {
 
-    Vector2d vector;
+    private Vector2d vector;
 
     /**
      * @param pos    the position of the Entity
@@ -17,7 +17,7 @@ public abstract class AbstractMovableEntity extends AbstractEntity implements Mo
      * @param height the height of the Entity
      * @param width  the width of the Entity
      */
-    public AbstractMovableEntity(Position2d pos, Vector2d vet, double height, double width) {
+    public AbstractMovableEntity(final Position2d pos, final Vector2d vet, final double height, final double width) {
         super(pos, height, width);
         this.vector = vet;
     }
@@ -34,7 +34,7 @@ public abstract class AbstractMovableEntity extends AbstractEntity implements Mo
      * {@inheritDoc}
      */
     @Override
-    public void setVector(Vector2d vet) {
+    public void setVector(final Vector2d vet) {
         this.vector = vet;
     }
 
@@ -42,16 +42,16 @@ public abstract class AbstractMovableEntity extends AbstractEntity implements Mo
      * {@inheritDoc}
      */
     @Override
-    public void setVectorX(double x) {
-        this.vector = new Vector2d(x, this.vector.y);
+    public void setVectorX(final double x) {
+        this.vector = new Vector2d(x, this.vector.getY());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setVectorY(double y) {
-        this.vector = new Vector2d(this.vector.x, y);
+    public void setVectorY(final double y) {
+        this.vector = new Vector2d(this.vector.getX(), y);
     }
 
     /**

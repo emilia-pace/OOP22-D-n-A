@@ -2,7 +2,7 @@ package it.unibo.dna.input.api;
 
 /**
  * Interface of a Factory that creates {@link Command} that can
- * be given to the Player
+ * be given to the Player.
  */
 
 public interface CommandFactory {

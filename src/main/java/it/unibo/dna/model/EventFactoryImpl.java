@@ -5,7 +5,7 @@ import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import it.unibo.dna.model.object.ActivableObject;
+import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
@@ -57,7 +57,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitButtonEvent(final ActivableObject o, final Player p) {
+    public Event hitButtonEvent(final ActivableObjectImpl o, final Player p) {
         return game -> {
             if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);
@@ -85,7 +85,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitLeverEvent(final ActivableObject o, final Player p) {
+    public Event hitLeverEvent(final ActivableObjectImpl o, final Player p) {
         return game -> {
             if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);

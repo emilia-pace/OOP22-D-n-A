@@ -6,7 +6,7 @@ import it.unibo.dna.Game;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.object.ActivableObject;
+import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Platform;
@@ -33,10 +33,10 @@ public class Display extends JFrame {
                         new Position2d(200, 100));
         public MovablePlatform mp2 = new MovablePlatform(new Position2d(340, 350), new Vector2d(0, 0), 30, 100,
                         new Position2d(390, 200));
-        public ActivableObject lever = new ActivableObject(new Position2d(120, 420), 30.0, 30.0,
-                        ActivableObject.Activator.LEVER, mp1);
-        public ActivableObject button = new ActivableObject(new Position2d(500, 530), 20.0, 30.0,
-                        ActivableObject.Activator.BUTTON, mp2);
+        public ActivableObjectImpl lever = new ActivableObjectImpl(new Position2d(120, 420), 30.0, 30.0,
+                        ActivableObjectImpl.Activator.LEVER, mp1);
+        public ActivableObjectImpl button = new ActivableObjectImpl(new Position2d(500, 530), 20.0, 30.0,
+                        ActivableObjectImpl.Activator.BUTTON, mp2);
 
         public Diamond diamond = new Diamond(45, 45, 1, new Position2d(200, 400));
         JLabel boh = new JLabel("\u2194");
@@ -93,32 +93,32 @@ public class Display extends JFrame {
                                                 (int) devil.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) devil.getPosition().getX(), (int) devil.getPosition().getY(), this);
                 graphics.setColor(Color.WHITE);
-                graphics.drawImage(mi.getPlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getImage(p1).getScaledInstance(
                                 (int) p1.getBoundingBox().getWidth(),
                                 (int) p1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) p1.getPosition().getX(), (int) p1.getPosition().getY(), this);
 
-                graphics.drawImage(mi.getPlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getImage(p2).getScaledInstance(
                                 (int) p2.getBoundingBox().getWidth(),
                                 (int) p2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) p2.getPosition().getX(), (int) p2.getPosition().getY(), this);
                 graphics.setColor(Color.GREEN);
-                graphics.drawImage(mi.getMovablePlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getImage(mp1).getScaledInstance(
                                 (int) mp1.getBoundingBox().getWidth(),
                                 (int) mp1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) mp1.getPosition().getX(), (int) mp1.getPosition().getY(), this);
-                graphics.drawImage(mi.getMovablePlatformImage().getScaledInstance(
+                graphics.drawImage(mi.getImage(mp1).getScaledInstance(
                                 (int) mp2.getBoundingBox().getWidth(),
                                 (int) mp2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) mp2.getPosition().getX(), (int) mp2.getPosition().getY(), this);
                 graphics.setColor(Color.GREEN);
                 graphics.drawImage(
-                                mi.getActObjImage(this.lever).getScaledInstance(
+                                mi.getImage(this.lever).getScaledInstance(
                                                 (int) lever.getBoundingBox().getWidth(),
                                                 (int) lever.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) lever.getPosition().getX(), (int) lever.getPosition().getY(), this);
                 graphics.setColor(Color.MAGENTA);
-                graphics.drawImage(mi.getActObjImage(this.button).getScaledInstance(
+                graphics.drawImage(mi.getImage(this.button).getScaledInstance(
                                                 (int) button.getBoundingBox().getWidth(),
                                                 (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) button.getPosition().getX(), (int) button.getPosition().getY(), this);

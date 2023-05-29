@@ -14,7 +14,7 @@ import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.ActivableObject;
+import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
@@ -144,20 +144,20 @@ public class Game {
     }
 
     /**
-     * Manages when a character leaves an {@link ActivableObject}.
+     * Manages when a character leaves an {@link ActivableObjectImpl}.
      * @param character the {@link Player} to check
      */
     private void freeActivableObject(final Player character) {
         var box = character.getBoundingBox();
         this.getEntities().stream().filter((e) -> 
         !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth())).filter((e) -> 
-        e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")).forEach((e) -> {
-            Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
+        e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObjectImpl")).forEach((e) -> {
+            Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
             if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                    ((ActivableObject) e).deactivate();
+                if (((ActivableObjectImpl) e).type.equals(ActivableObjectImpl.Activator.BUTTON)) {
+                    ((ActivableObjectImpl) e).deactivate();
                 }
-                ((ActivableObject) e).resetPlayer();
+                ((ActivableObjectImpl) e).resetPlayer();
             }
         });
     }
@@ -181,11 +181,11 @@ public class Game {
                     this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                     this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
                 }
-                case "it.unibo.dna.model.object.ActivableObject" -> {
-                    if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                        this.eventQueue.addEvent(event.hitButtonEvent((ActivableObject) e, character));
+                case "it.unibo.dna.model.object.ActivableObjectImpl" -> {
+                    if (((ActivableObjectImpl) e).type.equals(ActivableObjectImpl.Activator.BUTTON)) {
+                        this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
                     } else {
-                        this.eventQueue.addEvent(event.hitLeverEvent((ActivableObject) e, character));
+                        this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
                     }
                 }
                 case "it.unibo.dna.model.object.Door" ->

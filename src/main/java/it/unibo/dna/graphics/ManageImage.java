@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.model.object.AbstractEntity;
-import it.unibo.dna.model.object.ActivableObject;
+import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Platform;
@@ -21,7 +21,7 @@ import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.Door.doorType;
 import it.unibo.dna.model.object.Puddle.puddleType;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Entity; 
 import it.unibo.dna.model.object.api.Player;
 
 public class ManageImage {
@@ -39,94 +39,59 @@ public class ManageImage {
 
     private Map<Class<? extends AbstractEntity>,List<Image>> map = new HashMap<>();
 
+    Image getImage(Entity entity) {
+        Image image = getDiamondImage();
+        if(entity.getClass().equals(Door.class)){
+            image = getDoorImage(((Door)entity));
+        }else if (entity.getClass().equals(ActivableObjectImpl.class)) {
+            image = getActObjImage(((ActivableObjectImpl)entity));
+        }else if (entity.getClass().equals(Puddle.class)) {
+            image = getPuddleImage(((Puddle)entity));
+        }else if (entity.getClass().equals(Platform.class)) {
+            image = getPlatformImage();
+        }else if (entity.getClass().equals(MovablePlatform.class)) {
+            image = getMovablePlatformImage();
+        }
+        return image;
+    }
+
+    private void loadImages() {
+        String path = "src\\main\\resources\\";
+        List<Image> doorImageList = new ArrayList<>();
+        List<Image> activableObjectImageList = new ArrayList<>();
+        List<Image> puddleImageList = new ArrayList<>();
+        List<Image> platformImageList = new ArrayList<>();
+        List<Image> movablePlatformImageList = new ArrayList<>();
+        try {
+            doorImageList.add(ImageIO.read(new File(path + "porta_angelo.PNG")));
+            doorImageList.add(ImageIO.read(new File( path + "porta_angelo_aperta.PNG")));
+            doorImageList.add(ImageIO.read(new File( path + "porta_diavolo.PNG")));
+            doorImageList.add(ImageIO.read(new File( path + "porta_diavolo_aperta.PNG")));
+            activableObjectImageList.add(ImageIO.read(new File( path + "Bottone_off.PNG")));
+            activableObjectImageList.add(ImageIO.read(new File( path + "Bottone_on.PNG")));
+            activableObjectImageList.add(ImageIO.read(new File( path + "Leva_off.PNG")));
+            activableObjectImageList.add(ImageIO.read(new File( path + "Leva_on.PNG")));
+            puddleImageList.add(ImageIO.read(new File( path + "Pozza_azzurra.jpg")));
+            puddleImageList.add(ImageIO.read(new File( path + "Pozza_rossa.jpg")));
+            puddleImageList.add(ImageIO.read(new File( path + "Pozza_viola.jpg")));
+            platformImageList.add(ImageIO.read(new File( path + "Piattaforma_terra.jpg")));
+            movablePlatformImageList.add(ImageIO.read(new File( path + "MovablePlatform.jpg")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.map.put(Door.class,doorImageList);
+        this.map.put(ActivableObjectImpl.class, activableObjectImageList);
+        this.map.put(Puddle.class, puddleImageList);
+        this.map.put(Platform.class,platformImageList);
+        this.map.put(MovablePlatform.class,movablePlatformImageList);
+    }
+
     public ManageImage() {
         // caricamento di tutte le immagini
         this.playerImage(angelMap, Player.Type.ANGEL);
         this.playerImage(devilMap, Player.Type.DEVIL);
-        map.put(ActivableObject.class,loadActivableObjectImages());
-        map.put(Door.class,loadDoorImages());
-        map.put(Puddle.class,loadPuddleImages());
-        map.put(Platform.class,loadPlatformImages());
-        map.put(MovablePlatform.class,loadMovablePlatformImages());
+        loadImages();
         this.diamondImage();
-    }
-
-    /**
-     * 
-     * @return a list of the Images for the levers and the buttons
-     */
-    private List<Image> loadActivableObjectImages() {
-        List<Image> activableObjectImageList = new ArrayList<>();
-        try {
-            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Bottone_off.PNG")));
-            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Bottone_on.PNG")));
-            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Leva_off.PNG")));
-            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Leva_on.PNG")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return activableObjectImageList;
-    }
-
-    /**
-     * 
-     * @return a list of the Images for the devil door and the angel door
-     */
-    private List<Image> loadDoorImages() {
-        List<Image> doorImageList = new ArrayList<>();
-        try {
-            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo.PNG")));
-            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo_aperta.PNG")));
-            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo.PNG")));
-            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo_aperta.PNG")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return doorImageList;
-    }
-
-    /**
-     * 
-     * @return a list of the Images for the puddles
-     */
-    private List<Image> loadPuddleImages() {
-        List<Image> puddleImageList = new ArrayList<>();
-        try {
-            puddleImageList.add(ImageIO.read(new File("src\\main\\resources\\Pozza_azzurra.jpg")));
-            puddleImageList.add(ImageIO.read(new File("src\\main\\resources\\Pozza_rossa.jpg")));
-            puddleImageList.add(ImageIO.read(new File("src\\main\\resources\\Pozza_viola.jpg")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return puddleImageList;
-    }
-
-    /**
-     * 
-     * @return a list of the Images for the puddles
-     */
-    private List<Image> loadPlatformImages() {
-        List<Image> platformImageList = new ArrayList<>();
-        try {
-            platformImageList.add(ImageIO.read(new File("src\\main\\resources\\Piattaforma_terra.jpg")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return platformImageList;
-    }
-
-    /**
-     * 
-     * @return a list of the Images for the puddles
-     */
-    private List<Image> loadMovablePlatformImages() {
-        List<Image> movablePlatformImageList = new ArrayList<>();
-        try {
-            movablePlatformImageList.add(ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return movablePlatformImageList;
     }
 
     private void playerImage(Map<Pair<Player.State, Player.State>, List<Image>> playerMap, Player.Type type) {
@@ -199,14 +164,14 @@ public class ManageImage {
 
     /**
      * 
-     * @param actObj the {@link ActivableObject} we need an image for 
+     * @param actObj the {@link ActivableObjectImpl} we need an image for 
      * @return the image of the {@link ActivableObkect}
      */
-    public Image getActObjImage(ActivableObject activableObject) {
-        if(activableObject.getType().equals(ActivableObject.Activator.BUTTON)){
-            return (activableObject.isActivated()) ? this.map.get(ActivableObject.class).get(1) : this.map.get(ActivableObject.class).get(0); 
+    public Image getActObjImage(ActivableObjectImpl activableObject) {
+        if(activableObject.getType().equals(ActivableObjectImpl.Activator.BUTTON)){
+            return (activableObject.isActivated()) ? this.map.get(ActivableObjectImpl.class).get(1) : this.map.get(ActivableObjectImpl.class).get(0); 
         }
-        return (activableObject.isActivated()) ? this.map.get(ActivableObject.class).get(3) : this.map.get(ActivableObject.class).get(2);
+        return (activableObject.isActivated()) ? this.map.get(ActivableObjectImpl.class).get(3) : this.map.get(ActivableObjectImpl.class).get(2);
     }
 
     /**

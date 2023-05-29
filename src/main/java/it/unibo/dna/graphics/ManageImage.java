@@ -12,13 +12,23 @@ import java.io.File;
 import java.io.IOException;
 
 import it.unibo.dna.common.Pair;
+import it.unibo.dna.model.object.AbstractEntity;
 import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Door;
+import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
+import it.unibo.dna.model.object.Door.doorState;
+import it.unibo.dna.model.object.Door.doorType;
+import it.unibo.dna.model.object.Puddle.puddleType;
+import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
 public class ManageImage {
+
+    public static double LEVERHEIGHT = 30.0;
+    public static double ACTIVABLEOBJECTWIDTH = 30.0;
+    public static double BUTTONHEIGHT = 20.0;
 
     private int MAX_FRAME = 10;
     private int frame = 0;
@@ -26,24 +36,97 @@ public class ManageImage {
     private Map<Pair<Player.State, Player.State>, List<Image>> angelMap = new HashMap<>();
     private Map<Pair<Player.State, Player.State>, List<Image>> devilMap = new HashMap<>();
     private Image diamondImg;
-    private Pair<Image,Image> buttonImages = new Pair<Image,Image>(null,null);
-    private Pair<Image,Image> leverImages = new Pair<Image,Image>(null,null);
-    private Pair<Image,Image> portaAngelo = new Pair<Image,Image>(null,null);
-    private Pair<Image,Image> portaDiavolo = new Pair<Image,Image>(null,null);
 
-    private List<Image> puddleImage = new ArrayList<>(); //0 azzurra, 1 rossa, 2 viola
-    private Image platfformImage;
-    private Image MovablePlatformImage; 
+    private Map<Class<? extends AbstractEntity>,List<Image>> map = new HashMap<>();
 
     public ManageImage() {
         // caricamento di tutte le immagini
         this.playerImage(angelMap, Player.Type.ANGEL);
         this.playerImage(devilMap, Player.Type.DEVIL);
+        map.put(ActivableObject.class,loadActivableObjectImages());
+        map.put(Door.class,loadDoorImages());
+        map.put(Puddle.class,loadPuddleImages());
+        map.put(Platform.class,loadPlatformImages());
+        map.put(MovablePlatform.class,loadMovablePlatformImages());
         this.diamondImage();
-        this.actObjImage();
-        this.doorImage();
-        this.PuddleImage();
-        this.platformImages();
+    }
+
+    /**
+     * 
+     * @return a list of the Images for the levers and the buttons
+     */
+    private List<Image> loadActivableObjectImages() {
+        List<Image> activableObjectImageList = new ArrayList<>();
+        try {
+            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Bottone_off.PNG")));
+            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Bottone_on.PNG")));
+            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Leva_off.PNG")));
+            activableObjectImageList.add(ImageIO.read(new File("src\\main\\resources\\Leva_on.PNG")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return activableObjectImageList;
+    }
+
+    /**
+     * 
+     * @return a list of the Images for the devil door and the angel door
+     */
+    private List<Image> loadDoorImages() {
+        List<Image> doorImageList = new ArrayList<>();
+        try {
+            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo.PNG")));
+            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_angelo_aperta.PNG")));
+            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo.PNG")));
+            doorImageList.add(ImageIO.read(new File("src\\main\\resources\\porta_diavolo_aperta.PNG")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return doorImageList;
+    }
+
+    /**
+     * 
+     * @return a list of the Images for the puddles
+     */
+    private List<Image> loadPuddleImages() {
+        List<Image> puddleImageList = new ArrayList<>();
+        try {
+            puddleImageList.add(ImageIO.read(new File("src\\main\\resources\\Pozza_azzurra.jpg")));
+            puddleImageList.add(ImageIO.read(new File("src\\main\\resources\\Pozza_rossa.jpg")));
+            puddleImageList.add(ImageIO.read(new File("src\\main\\resources\\Pozza_viola.jpg")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return puddleImageList;
+    }
+
+    /**
+     * 
+     * @return a list of the Images for the puddles
+     */
+    private List<Image> loadPlatformImages() {
+        List<Image> platformImageList = new ArrayList<>();
+        try {
+            platformImageList.add(ImageIO.read(new File("src\\main\\resources\\Piattaforma_terra.jpg")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return platformImageList;
+    }
+
+    /**
+     * 
+     * @return a list of the Images for the puddles
+     */
+    private List<Image> loadMovablePlatformImages() {
+        List<Image> movablePlatformImageList = new ArrayList<>();
+        try {
+            movablePlatformImageList.add(ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return movablePlatformImageList;
     }
 
     private void playerImage(Map<Pair<Player.State, Player.State>, List<Image>> playerMap, Player.Type type) {
@@ -115,120 +198,62 @@ public class ManageImage {
     }
 
     /**
-     * Sets the image for the possible {@link ActivableObject} (button, lever) and their respective states
-     */
-    private void actObjImage(){
-        try{
-            buttonImages.setX(ImageIO.read(new File("src\\main\\resources\\Bottone_off.PNG")));
-            buttonImages.setY(ImageIO.read(new File("src\\main\\resources\\Bottone_on.PNG")));
-            leverImages.setX(ImageIO.read(new File("src\\main\\resources\\Leva_off.PNG")));
-            leverImages.setY(ImageIO.read(new File("src\\main\\resources\\Leva_on.PNG")));
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * 
      * @param actObj the {@link ActivableObject} we need an image for 
      * @return the image of the {@link ActivableObkect}
      */
-    public Image getActObjImage(ActivableObject actObj) {
-        Pair<Image,Image> p = this.buttonImages;
-        if(actObj.getType().equals(ActivableObject.Activator.LEVER)){
-            p = this.leverImages;
+    public Image getActObjImage(ActivableObject activableObject) {
+        if(activableObject.getType().equals(ActivableObject.Activator.BUTTON)){
+            return (activableObject.isActivated()) ? this.map.get(ActivableObject.class).get(1) : this.map.get(ActivableObject.class).get(0); 
         }
-        if(actObj.isActivated()){
-            return p.getY();
-        }
-        return p.getX();
-    }
-
-    /**
-     * Sets the image for the 2 types of {@link Door} and their 2 respective states.
-     */
-    private void doorImage() {
-        try {
-            portaAngelo.setX(ImageIO.read(new File("src\\main\\resources\\porta_angelo.PNG")));
-            portaAngelo.setY(ImageIO.read(new File("src\\main\\resources\\porta_angelo_aperta.PNG")));
-            portaDiavolo.setX(ImageIO.read(new File("src\\main\\resources\\porta_diavolo.PNG")));
-            portaDiavolo.setY(ImageIO.read(new File("src\\main\\resources\\porta_diavolo_aperta.PNG")));
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+        return (activableObject.isActivated()) ? this.map.get(ActivableObject.class).get(3) : this.map.get(ActivableObject.class).get(2);
     }
 
     /**
      * 
-     * @param d the door we need an image for
-     * @return the image of the {@link Door}
+     * @param puddle the puddle we want the Image for
+     * @return the Image
      */
-    public Image getDoor(Door d) {
-        Pair<Image,Image> door;
-        if(d.getDoorType().equals(Door.doorType.ANGEL_DOOR)){
-            door = portaAngelo;
-        }else {
-            door = portaDiavolo;
+    public Image getPuddleImage(Puddle puddle) {
+        puddleType type = puddle.getPuddleType();
+        List<Image> puddleImages = this.map.get(Puddle.class);
+        if(type.equals(puddleType.BLUE)){
+            return puddleImages.get(0);
+        }else if (type.equals(puddleType.RED)) {
+            return puddleImages.get(1);
         }
-        if(d.getDoorState().equals(Door.doorState.OPEN_DOOR)){
-            return door.getY();
-        }
-        return door.getX();
-    }
-
-    /**
-     * Sets the image for the 3 types of {@link Puddle}
-     */
-    private void PuddleImage() {
-        try {
-            puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_azzurra.jpg")));
-            puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_rossa.jpg")));
-            puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_viola.jpg")));
-        }catch(IOException e) {
-            e.printStackTrace();
-        }
+        return puddleImages.get(2);
     }
 
     /**
      * 
-     * @param p the puddle we need the image for.
-     * @return the image for the {@link Puddle}
+     * @param door the door we want an Image for
+     * @return the Image of the door
      */
-    public Image getPuddleImage(Puddle p){
-        if(p.getPuddleType().equals(Puddle.puddleType.BLUE)){
-            return this.puddleImage.get(0);
-        }else if(p.getPuddleType().equals(Puddle.puddleType.RED)){
-            return this.puddleImage.get(1);
+    public Image getDoorImage(Door door) {
+        doorType type = door.getDoorType();
+        doorState state = door.getDoorState();
+        List<Image> doorImages = this.map.get(Door.class);
+        if(type.equals(Door.doorType.ANGEL_DOOR)){
+            return state.equals(Door.doorState.CLOSED_DOOR) ? doorImages.get(0) : doorImages.get(1);
         }
-        return this.puddleImage.get(2);
-    }
-
-    /**
-     * Sets the images for the {@link MovablePlatform} and the {@link Platform}
-     */
-    private void platformImages(){
-        try {
-            this.MovablePlatformImage = ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg"));
-            this.platfformImage = ImageIO.read(new File("src\\main\\resources\\Piattaforma_terra.jpg"));
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+        return state.equals(Door.doorState.CLOSED_DOOR) ? doorImages.get(2) : doorImages.get(3);
     }
 
     /**
      * 
-     * @return the image of the standard {@link Platform}
+     * @return the Image of the platform
      */
     public Image getPlatformImage() {
-        return this.platfformImage;
+        return this.map.get(Platform.class).get(0);
     }
 
     /**
      * 
-     * @return the image of the {@link MovablePlatform} 
+     * @return the image of the MovablePlatform
      */
     public Image getMovablePlatformImage() {
-        return this.MovablePlatformImage;
+        return this.map.get(MovablePlatform.class).get(0);
     }
 
 }

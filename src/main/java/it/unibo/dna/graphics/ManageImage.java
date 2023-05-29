@@ -14,6 +14,7 @@ import java.io.IOException;
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.model.object.ActivableObject;
 import it.unibo.dna.model.object.Door;
+import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.api.Player;
 

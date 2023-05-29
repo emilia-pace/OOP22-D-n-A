@@ -7,7 +7,7 @@ package it.unibo.dna.input.api;
 public interface Command {
 
     /**
-     * execute the Command
+     * execute the Command.
      */
     void execute();
 

@@ -12,12 +12,12 @@ public interface Player extends MovableEntity {
     /**
      * The jump speed value
      */
-    double JumpVelocity = 25;
+    double JUMPVELOCITY = 25;
 
     /**
      * The standard velocity of the Player
      */
-    double StandardVelocity = 2;
+    double STANDARDVELOCITY = 2;
 
     /**
      * @return the player's state
@@ -39,14 +39,29 @@ public interface Player extends MovableEntity {
      */
     void setGame(Game game);
 
-    /*
+    /**
      * An enum rappresenting the state of the Player
      */
     enum State {
+        /**
+         * when player is on a platform
+         */
         STATE_STANDING,
+        /**
+         * when player is jumping
+         */
         STATE_JUMPING,
+        /**
+         * when player goes right
+         */
         STATE_RIGHT,
+        /**
+         * when player goes left
+         */
         STATE_LEFT,
+        /**
+         * when player is still
+         */
         STATE_STILL;
     }
 
@@ -54,7 +69,13 @@ public interface Player extends MovableEntity {
      * An enum rappresenting the type of the Player
      */
     enum Type {
+        /**
+         * when player is a devil
+         */
         DEVIL,
+        /**
+         * when player is an angel
+         */
         ANGEL;
     }
 

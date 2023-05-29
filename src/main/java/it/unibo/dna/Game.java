@@ -36,9 +36,10 @@ public class Game {
 
     /**
      * {@link Game} constructor.
-     * @param width the width of the game
+     * 
+     * @param width  the width of the game
      * @param height the height of the game
-     * @param level the level of the game
+     * @param level  the level of the game
      */
     public Game(final int width, final int height, final int level) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
@@ -85,7 +86,7 @@ public class Game {
 
     private void gravity(Player player) {
         if (player.getVector().getY() < Gravity) {
-            player.getVector().sumY(Player.StandardVelocity);
+            player.getVector().sumY(Player.STANDARDVELOCITY);
         }
     }
 
@@ -145,21 +146,23 @@ public class Game {
 
     /**
      * Manages when a character leaves an {@link ActivableObject}.
+     * 
      * @param character the {@link Player} to check
      */
     private void freeActivableObject(final Player character) {
         var box = character.getBoundingBox();
-        this.getEntities().stream().filter((e) -> 
-        !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth())).filter((e) -> 
-        e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject")).forEach((e) -> {
-            Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
-            if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                    ((ActivableObject) e).deactivate();
-                }
-                ((ActivableObject) e).resetPlayer();
-            }
-        });
+        this.getEntities().stream()
+                .filter((e) -> !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth()))
+                .filter((e) -> e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObject"))
+                .forEach((e) -> {
+                    Optional<Player> objPlayer = ((ActivableObject) e).getPlayer();
+                    if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
+                        if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
+                            ((ActivableObject) e).deactivate();
+                        }
+                        ((ActivableObject) e).resetPlayer();
+                    }
+                });
     }
 
     /**
@@ -172,31 +175,32 @@ public class Game {
         double chHeight = character.getBoundingBox().getHeight();
         double chWidth = character.getBoundingBox().getWidth();
 
-        this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth)).forEach((e) -> {
-            String cl = e.getClass().getName();
-            switch (cl) {
-                case "it.unibo.dna.model.object.Platform" ->
-                    this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                case "it.unibo.dna.model.object.MovablePlatform" -> {
-                    this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                    this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
-                }
-                case "it.unibo.dna.model.object.ActivableObject" -> {
-                    if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
-                        this.eventQueue.addEvent(event.hitButtonEvent((ActivableObject) e, character));
-                    } else {
-                        this.eventQueue.addEvent(event.hitLeverEvent((ActivableObject) e, character));
+        this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth))
+                .forEach((e) -> {
+                    String cl = e.getClass().getName();
+                    switch (cl) {
+                        case "it.unibo.dna.model.object.Platform" ->
+                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                        case "it.unibo.dna.model.object.MovablePlatform" -> {
+                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                            this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
+                        }
+                        case "it.unibo.dna.model.object.ActivableObject" -> {
+                            if (((ActivableObject) e).type.equals(ActivableObject.Activator.BUTTON)) {
+                                this.eventQueue.addEvent(event.hitButtonEvent((ActivableObject) e, character));
+                            } else {
+                                this.eventQueue.addEvent(event.hitLeverEvent((ActivableObject) e, character));
+                            }
+                        }
+                        case "it.unibo.dna.model.object.Door" ->
+                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                        case "it.unibo.dna.model.object.Diamond" -> {
+                            this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
+                            this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
+                        }
+                        default -> throw new IllegalArgumentException();
                     }
-                }
-                case "it.unibo.dna.model.object.Door" ->
-                    this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
-                case "it.unibo.dna.model.object.Diamond" -> {
-                    this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
-                    this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
-                }
-                default -> throw new IllegalArgumentException();
-            }
-        });
+                });
 
         freeActivableObject(character);
     }
@@ -204,7 +208,7 @@ public class Game {
     /**
      * Checks the collision of a character with the vertical borders.
      * 
-     * @param pos the x coordinate of the character's position
+     * @param pos    the x coordinate of the character's position
      * @param lenght the lenght of the character
      * @return true if the character is colliding with a vertical border
      */
@@ -218,7 +222,7 @@ public class Game {
     /**
      * Checks the collision of a character with the horizontal borders.
      * 
-     * @param pos the y coordinate of the character's position
+     * @param pos    the y coordinate of the character's position
      * @param height the height of the character
      * @return true if the character is colliding with an horizontal border
      */

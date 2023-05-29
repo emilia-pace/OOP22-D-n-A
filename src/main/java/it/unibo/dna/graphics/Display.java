@@ -83,14 +83,10 @@ public class Display extends JFrame {
                 }
 
                 graphics.drawImage(
-                                mi.playerChooseImage(this.angel).getScaledInstance(
-                                                (int) angel.getBoundingBox().getWidth(),
-                                                (int) angel.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                mi.playerChooseImage(this.angel),
                                 (int) angel.getPosition().getX(), (int) angel.getPosition().getY(), this);
                 graphics.drawImage(
-                                mi.playerChooseImage(this.devil).getScaledInstance(
-                                                (int) devil.getBoundingBox().getWidth(),
-                                                (int) devil.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                mi.playerChooseImage(this.devil),
                                 (int) devil.getPosition().getX(), (int) devil.getPosition().getY(), this);
                 graphics.setColor(Color.WHITE);
                 graphics.drawImage(mi.getPlatformImage().getScaledInstance(
@@ -119,8 +115,8 @@ public class Display extends JFrame {
                                 (int) lever.getPosition().getX(), (int) lever.getPosition().getY(), this);
                 graphics.setColor(Color.MAGENTA);
                 graphics.drawImage(mi.getActObjImage(this.button).getScaledInstance(
-                                                (int) button.getBoundingBox().getWidth(),
-                                                (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                (int) button.getBoundingBox().getWidth(),
+                                (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) button.getPosition().getX(), (int) button.getPosition().getY(), this);
                 graphics.dispose();
                 bufferStrategy.show();

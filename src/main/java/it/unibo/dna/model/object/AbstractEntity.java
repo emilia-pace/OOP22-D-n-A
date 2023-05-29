@@ -10,9 +10,7 @@ import it.unibo.dna.model.object.api.Entity;
  */
 public abstract class AbstractEntity implements Entity {
 
-    private Position2d position;
-    private double height;
-    private double width;
+    private BoundingBox box;
 
     /**
      * @param pos    the position of the entity
@@ -20,9 +18,7 @@ public abstract class AbstractEntity implements Entity {
      * @param width  the width of the entity
      */
     public AbstractEntity(final Position2d pos, final double height, final double width) {
-        this.position = pos;
-        this.height = height;
-        this.width = width;
+        box = new RectBoundingBox(pos, height, width);
     }
 
     /**
@@ -30,7 +26,7 @@ public abstract class AbstractEntity implements Entity {
      */
     @Override
     public Position2d getPosition() {
-        return this.position;
+        return box.getPosition();
     }
 
     /**
@@ -38,7 +34,7 @@ public abstract class AbstractEntity implements Entity {
      */
     @Override
     public void setPosition(final Position2d pos) {
-        this.position = pos;
+        this.box.setPosition(pos);
     }
 
     /**
@@ -46,7 +42,7 @@ public abstract class AbstractEntity implements Entity {
      */
     @Override
     public BoundingBox getBoundingBox() {
-        return new RectBoundingBox(this.position, this.height, this.width);
+        return this.box;
     }
 
     /**

@@ -130,6 +130,10 @@ public class EventFactoryImpl implements EventFactory {
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Event soundEvent(String s) {
         return game -> {
             try {

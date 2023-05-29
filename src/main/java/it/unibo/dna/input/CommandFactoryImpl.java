@@ -26,7 +26,7 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command right() {
         return () -> {
-            this.player.setVectorX(Player.StandardVelocity);
+            this.player.setVectorX(Player.STANDARDVELOCITY);
             this.player.getState().setY(State.STATE_RIGHT);
         };
     }
@@ -37,7 +37,7 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command left() {
         return () -> {
-            this.player.setVectorX(-Player.StandardVelocity);
+            this.player.setVectorX(-Player.STANDARDVELOCITY);
             this.player.getState().setY(State.STATE_LEFT);
         };
     }
@@ -49,7 +49,7 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command jump() {
         return () -> {
             if (!this.player.getState().getX().equals(State.STATE_JUMPING)) {
-                this.player.setVectorY(-Player.JumpVelocity);
+                this.player.setVectorY(-Player.JUMPVELOCITY);
                 this.player.getState().setX(State.STATE_JUMPING);
                 String s = (this.player.getType().equals(Player.Type.ANGEL)) ? "Angel_audio" : "Devil_audio";
                 this.player.getGame().getEventQueue()

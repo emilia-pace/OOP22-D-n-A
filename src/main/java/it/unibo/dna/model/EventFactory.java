@@ -75,5 +75,9 @@ public interface EventFactory {
      */
     Event hitDiamondEvent(Diamond d, Score s);
 
+    /**
+     * @param s
+     * @return
+     */
     Event soundEvent(String s);
 }

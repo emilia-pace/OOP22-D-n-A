@@ -25,19 +25,19 @@ public class ManageImage {
     private Map<Pair<Player.State, Player.State>, List<Image>> angelMap = new HashMap<>();
     private Map<Pair<Player.State, Player.State>, List<Image>> devilMap = new HashMap<>();
     private Image diamondImg;
-    private Pair<Image,Image> buttonImages = new Pair<Image,Image>(null,null);
-    private Pair<Image,Image> leverImages = new Pair<Image,Image>(null,null);
-    private Pair<Image,Image> portaAngelo = new Pair<Image,Image>(null,null);
-    private Pair<Image,Image> portaDiavolo = new Pair<Image,Image>(null,null);
+    private Pair<Image, Image> buttonImages = new Pair<Image, Image>(null, null);
+    private Pair<Image, Image> leverImages = new Pair<Image, Image>(null, null);
+    private Pair<Image, Image> portaAngelo = new Pair<Image, Image>(null, null);
+    private Pair<Image, Image> portaDiavolo = new Pair<Image, Image>(null, null);
 
-    private List<Image> puddleImage = new ArrayList<>(); //0 azzurra, 1 rossa, 2 viola
+    private List<Image> puddleImage = new ArrayList<>(); // 0 azzurra, 1 rossa, 2 viola
     private Image platfformImage;
-    private Image MovablePlatformImage; 
+    private Image MovablePlatformImage;
 
     public ManageImage() {
         // caricamento di tutte le immagini
-        this.playerImage(angelMap, Player.Type.ANGEL);
-        this.playerImage(devilMap, Player.Type.DEVIL);
+        this.playerImage(angelMap, Player.Type.ANGEL, 40, 30);
+        this.playerImage(devilMap, Player.Type.DEVIL, 40, 30);
         this.diamondImage();
         this.actObjImage();
         this.doorImage();
@@ -45,33 +45,38 @@ public class ManageImage {
         this.platformImages();
     }
 
-    private void playerImage(Map<Pair<Player.State, Player.State>, List<Image>> playerMap, Player.Type type) {
-        String path;
-        if (type.equals(Player.Type.ANGEL)) {
-            path = "angel";
-        } else {
-            path = "devil";
-        }
+    /**
+     * @param playerMap
+     * @param type
+     */
+    private void playerImage(final Map<Pair<Player.State, Player.State>, List<Image>> playerMap,
+            final Player.Type type, final int width, final int height) {
+        String path = (type.equals(Player.Type.ANGEL)) ? "angel" : "devil";
         List.of(Player.State.STATE_JUMPING, Player.State.STATE_STANDING).forEach(state -> {
             playerMap.put(new Pair<>(state, Player.State.STATE_LEFT), new ArrayList<>());
             playerMap.put(new Pair<>(state, Player.State.STATE_RIGHT), new ArrayList<>());
             playerMap.put(new Pair<>(state, Player.State.STATE_STILL), new ArrayList<>());
             try {
                 playerMap.get(new Pair<>(state, Player.State.STATE_LEFT))
-                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left1.PNG")));
+                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left1.PNG"))
+                                .getScaledInstance(height, width, Image.SCALE_DEFAULT));
                 playerMap.get(new Pair<>(state, Player.State.STATE_RIGHT))
-                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right1.PNG")));
+                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right1.PNG"))
+                                .getScaledInstance(height, width, Image.SCALE_DEFAULT));
                 playerMap.get(new Pair<>(state, Player.State.STATE_STILL))
-                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_front.PNG")));
+                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_front.PNG"))
+                                .getScaledInstance(height, width, Image.SCALE_DEFAULT));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         try {
             playerMap.get(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_LEFT))
-                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left2.PNG")));
+                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left2.PNG"))
+                            .getScaledInstance(height, width, Image.SCALE_DEFAULT));
             playerMap.get(new Pair<>(Player.State.STATE_STANDING, Player.State.STATE_RIGHT))
-                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right2.PNG")));
+                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right2.PNG"))
+                            .getScaledInstance(height, width, Image.SCALE_DEFAULT));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,19 +94,22 @@ public class ManageImage {
         return this.diamondImg;
     }
 
+    /**
+     * 
+     */
     public void update() {
         this.frame++;
         if (frame >= this.MAX_FRAME) {
-            if (this.imageIndex == 0) {
-                this.imageIndex = 1;
-            } else {
-                this.imageIndex = 0;
-            }
+            this.imageIndex = (this.imageIndex == 0) ? 1 : 0;
             this.frame = 0;
         }
     }
 
-    public Image playerChooseImage(Player p) {
+    /**
+     * @param p
+     * @return
+     */
+    public Image playerChooseImage(final Player p) {
         Map<Pair<Player.State, Player.State>, List<Image>> playerMap = p.getType().equals(Player.Type.ANGEL)
                 ? this.angelMap
                 : this.devilMap;
@@ -114,30 +122,31 @@ public class ManageImage {
     }
 
     /**
-     * Sets the image for the possible {@link ActivableObject} (button, lever) and their respective states
+     * Sets the image for the possible {@link ActivableObject} (button, lever) and
+     * their respective states
      */
-    private void actObjImage(){
-        try{
+    private void actObjImage() {
+        try {
             buttonImages.setX(ImageIO.read(new File("src\\main\\resources\\Bottone_off.PNG")));
             buttonImages.setY(ImageIO.read(new File("src\\main\\resources\\Bottone_on.PNG")));
             leverImages.setX(ImageIO.read(new File("src\\main\\resources\\Leva_off.PNG")));
             leverImages.setY(ImageIO.read(new File("src\\main\\resources\\Leva_on.PNG")));
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
      * 
-     * @param actObj the {@link ActivableObject} we need an image for 
+     * @param actObj the {@link ActivableObject} we need an image for
      * @return the image of the {@link ActivableObkect}
      */
     public Image getActObjImage(ActivableObject actObj) {
-        Pair<Image,Image> p = this.buttonImages;
-        if(actObj.getType().equals(ActivableObject.Activator.LEVER)){
+        Pair<Image, Image> p = this.buttonImages;
+        if (actObj.getType().equals(ActivableObject.Activator.LEVER)) {
             p = this.leverImages;
         }
-        if(actObj.isActivated()){
+        if (actObj.isActivated()) {
             return p.getY();
         }
         return p.getX();
@@ -152,7 +161,7 @@ public class ManageImage {
             portaAngelo.setY(ImageIO.read(new File("src\\main\\resources\\porta_angelo_aperta.PNG")));
             portaDiavolo.setX(ImageIO.read(new File("src\\main\\resources\\porta_diavolo.PNG")));
             portaDiavolo.setY(ImageIO.read(new File("src\\main\\resources\\porta_diavolo_aperta.PNG")));
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -163,13 +172,13 @@ public class ManageImage {
      * @return the image of the {@link Door}
      */
     public Image getDoor(Door d) {
-        Pair<Image,Image> door;
-        if(d.getDoorType().equals(Door.doorType.ANGEL_DOOR)){
+        Pair<Image, Image> door;
+        if (d.getDoorType().equals(Door.doorType.ANGEL_DOOR)) {
             door = portaAngelo;
-        }else {
+        } else {
             door = portaDiavolo;
         }
-        if(d.getDoorState().equals(Door.doorState.OPEN_DOOR)){
+        if (d.getDoorState().equals(Door.doorState.OPEN_DOOR)) {
             return door.getY();
         }
         return door.getX();
@@ -183,7 +192,7 @@ public class ManageImage {
             puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_azzurra.jpg")));
             puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_rossa.jpg")));
             puddleImage.add(ImageIO.read(new File("src\\main\\resources\\Pozza_viola.jpg")));
-        }catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -193,10 +202,10 @@ public class ManageImage {
      * @param p the puddle we need the image for.
      * @return the image for the {@link Puddle}
      */
-    public Image getPuddleImage(Puddle p){
-        if(p.getPuddleType().equals(Puddle.puddleType.BLUE)){
+    public Image getPuddleImage(Puddle p) {
+        if (p.getPuddleType().equals(Puddle.puddleType.BLUE)) {
             return this.puddleImage.get(0);
-        }else if(p.getPuddleType().equals(Puddle.puddleType.RED)){
+        } else if (p.getPuddleType().equals(Puddle.puddleType.RED)) {
             return this.puddleImage.get(1);
         }
         return this.puddleImage.get(2);
@@ -205,11 +214,11 @@ public class ManageImage {
     /**
      * Sets the images for the {@link MovablePlatform} and the {@link Platform}
      */
-    private void platformImages(){
+    private void platformImages() {
         try {
             this.MovablePlatformImage = ImageIO.read(new File("src\\main\\resources\\MovablePlatform.jpg"));
             this.platfformImage = ImageIO.read(new File("src\\main\\resources\\Piattaforma_terra.jpg"));
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -224,7 +233,7 @@ public class ManageImage {
 
     /**
      * 
-     * @return the image of the {@link MovablePlatform} 
+     * @return the image of the {@link MovablePlatform}
      */
     public Image getMovablePlatformImage() {
         return this.MovablePlatformImage;

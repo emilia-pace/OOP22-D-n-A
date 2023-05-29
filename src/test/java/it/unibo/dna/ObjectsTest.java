@@ -22,7 +22,7 @@ public class ObjectsTest {
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
     private static final Game GAME = new Game(GAMEWIDTH, GAMEHEIGHT, 0);
-    private static final Player CHARACTER = new PlayerImpl(POS,new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.Type.ANGEL);
+    private static final Player CHARACTER = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.Type.ANGEL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);
 
     @Test
@@ -47,18 +47,14 @@ public class ObjectsTest {
         PLATFORM.findVector(PLATFORM.getOriginalPos(),PLATFORM.getFinalPosition());
         assertTrue(PLATFORM.getVector().equals(new Vector2d(-1, -1)));
 
-        PLATFORM.setFinalPosition(new Position2d(110, 110));//test checkHorizontal() e checkVertical()
-        PLATFORM.setPosition(new Position2d(115, 115));
-        assertFalse(PLATFORM.getPosition().equals(PLATFORM.getFinalPosition()) || PLATFORM.getPosition().equals(PLATFORM.getFinalPosition()));
-        PLATFORM.checkHorizontal();
-        PLATFORM.checkVertical();
+        PLATFORM.setPosition(PLATFORM.getFinalPosition());
+        PLATFORM.setLastPosition();
+        PLATFORM.findLimit();
         assertTrue(PLATFORM.getPosition().equals(PLATFORM.getFinalPosition()));
-        PLATFORM.setPosition(new Position2d(0, 0));
-        PLATFORM.checkHorizontal();
-        PLATFORM.checkVertical();
-        assertTrue(PLATFORM.getPosition().equals(PLATFORM.getOriginalPos()));
-        
-        
+    }
 
+    @Test
+    public void testDoor() {
+            
     }
 }

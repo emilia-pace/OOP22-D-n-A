@@ -74,7 +74,8 @@ public class MovablePlatform extends AbstractMovableEntity {
     }
 
     /**
-     * A method that finds the direction in which the platform needs to move.
+     * A method that finds the direction in which the platform needs to move, 
+     * and sets the vector accordingly.
      * 
      * @param p1 the starting position of the platform
      * @param p2 the position the platform wants to reach
@@ -88,7 +89,6 @@ public class MovablePlatform extends AbstractMovableEntity {
         if(p1.getY() != p2.getY()){
             y = p2.isAbove(p1) ? -1.0 : +1.0;
         } 
-        System.out.println(x + " " + y);
         this.setVector(new Vector2d(x, y));
     }
 
@@ -105,7 +105,8 @@ public class MovablePlatform extends AbstractMovableEntity {
     }
 
     /**
-     * Saves the last position had by the platform, in order not to lose it once the position of the platform has been updated.
+     * Saves the last position had by the platform, in order not to lose it once the position of 
+     * the platform has been updated.
      */
     public void setLastPosition() {
         this.lastPos = this.getPosition();

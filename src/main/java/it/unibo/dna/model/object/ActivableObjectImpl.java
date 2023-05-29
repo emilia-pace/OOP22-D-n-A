@@ -10,7 +10,7 @@ import it.unibo.dna.model.object.api.Player;
  * The Lever moves the {@link MovablePlatform} when it is touched by the player.
  * The Button moves the {@link MovablePlatform} while it is being touched by the player.
  */
-public class ActivableObject extends  AbstractEntity implements GameObject {
+public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
 
     /**
      * An enum explaining the two possible kinds of ActivableObject: Button and Lever.
@@ -31,7 +31,7 @@ public class ActivableObject extends  AbstractEntity implements GameObject {
      * @param type the type of the ActivableObject
      * @param mp the {@link MovablePlatform} that the ActivableObject moves
      */
-    public ActivableObject(final Position2d pos, final Double height, final Double width, final Activator type, final MovablePlatform mp) {
+    public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, final Activator type, final MovablePlatform mp) {
        super(pos,height,width);
        this.type=type;
        this.mp=mp;

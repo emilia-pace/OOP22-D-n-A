@@ -1,6 +1,6 @@
 package it.unibo.dna.model;
 
-import it.unibo.dna.model.object.ActivableObject;
+import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
@@ -49,7 +49,7 @@ public interface EventFactory {
      * @param p the player
      * @return the new event
      */
-    Event hitButtonEvent(ActivableObject o, Player p);
+    Event hitButtonEvent(ActivableObjectImpl o, Player p);
 
     /**
      * Models the collision event with a door.
@@ -65,7 +65,7 @@ public interface EventFactory {
      * @param p the player
      * @return the new event
      */
-    Event hitLeverEvent(ActivableObject o, Player p);
+    Event hitLeverEvent(ActivableObjectImpl o, Player p);
 
     /**
      * Models the collision event with a diamond.

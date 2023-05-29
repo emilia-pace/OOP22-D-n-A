@@ -12,6 +12,8 @@ public class RectBoundingBox implements BoundingBox {
     private Position2d position;
     private double height;
     private double width;
+    
+    private static final double EPSILON = 0.0001; 
 
     /**
      * {@link RectBoundingBox} constructor.
@@ -93,7 +95,7 @@ public class RectBoundingBox implements BoundingBox {
         double eps1 = this.position.getX() - (p.getX() + w);
 
         return this.isCollidingWith(p, h, w) 
-                && (Math.abs(eps) < 1 || Math.abs(eps1) < 1);
+                && (Math.abs(eps) < EPSILON || Math.abs(eps1) < EPSILON);
 
     }
 

@@ -21,7 +21,7 @@ public class ObjectsTest {
     private static final BoundingBox BOX = new RectBoundingBox(POS, HEIGHT, WIDTH);
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
-    private static final Game GAME = new Game(GAMEWIDTH, GAMEHEIGHT, 0);
+    private static final GameState GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, 0);
     private static final Player CHARACTER = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.Type.ANGEL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);
 

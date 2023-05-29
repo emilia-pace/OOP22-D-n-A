@@ -33,6 +33,12 @@ public interface BoundingBox {
 
     /**
      * 
+     * @param pos the position to set
+     */
+    void setPosition(Position2d pos);
+
+    /**
+     * 
      * @return the height of the box
      */
     double getHeight();

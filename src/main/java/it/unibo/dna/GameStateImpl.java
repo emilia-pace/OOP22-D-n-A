@@ -21,9 +21,9 @@ import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
 /**
- * Class that models the state of the game.
+ * Class that implements {@link GameState}.
  */
-public class Game {
+public class GameStateImpl implements GameState{
 
     public static final double Gravity = 4;
 
@@ -41,7 +41,7 @@ public class Game {
      * @param height the height of the game
      * @param level  the level of the game
      */
-    public Game(final int width, final int height, final int level) {
+    public GameStateImpl(final int width, final int height, final int level) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
         this.display = new Display(width, height, this);
@@ -55,8 +55,9 @@ public class Game {
     }
 
     /**
-     * Updates the state of the game.
+     * {@inheritDoc}
      */
+    @Override
     public void update() {
 
         this.gravity(display.angel);
@@ -84,62 +85,67 @@ public class Game {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     private void gravity(Player player) {
         if (player.getVector().getY() < Gravity) {
             player.getVector().sumY(Player.STANDARDVELOCITY);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void render() {
         display.render(this);
     }
 
     /**
-     * 
-     * @return the {@link BoundingBox}
+     * {@inheritDoc}
      */
+    @Override
     public BoundingBox getBoundingBox() {
         return this.boundingBox;
     }
 
     /**
-     * 
-     * @param boundingBox the {@link BoundingBox}
+     * {@inheritDoc}
      */
-    public void setBoundingBox(final RectBoundingBox boundingBox) {
+    @Override
+    public void setBoundingBox(final BoundingBox boundingBox) {
         this.boundingBox = boundingBox;
     }
 
     /**
-     * Adds a new {@link Entity} in the game.
-     * 
-     * @param e the {@link Entity} to add
+     * {@inheritDoc}
      */
+    @Override
     public void addEntity(final Entity e) {
         this.entities.add(e);
     }
 
     /**
-     * Removes an {@link Entity} from the game.
-     * 
-     * @param e the {@link Entity} to remove
+     * {@inheritDoc}
      */
+    @Override
     public void removeEntity(final Entity e) {
         this.entities.remove(e);
     }
 
     /**
-     * 
-     * @return the list of {@link Entity} of the game
+     * {@inheritDoc}
      */
+    @Override
     public List<Entity> getEntities() {
         return this.entities;
     }
 
     /**
-     * 
-     * @return the list of {@link Event}
+     * {@inheritDoc}
      */
+    @Override
     public EventQueue getEventQueue() {
         return this.eventQueue;
     }
@@ -176,23 +182,26 @@ public class Game {
 
         this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth)).forEach((e) -> {
             String cl = e.getClass().getName();
+            final String platform = "it.unibo.dna.model.object.Platform";
+            final String movablePlatform = "it.unibo.dna.model.object.MovablePlatform";
+            final String activableObject = "it.unibo.dna.model.object.ActivableObjectImpl";
+            final String door = "it.unibo.dna.model.object.Door";
+            final String diamond = "it.unibo.dna.model.object.Diamond";
             switch (cl) {
-                case "it.unibo.dna.model.object.Platform" ->
-                    this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                case "it.unibo.dna.model.object.MovablePlatform" -> {
+                case platform -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                case movablePlatform -> {
                     this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                     this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
                 }
-                case "it.unibo.dna.model.object.ActivableObjectImpl" -> {
+                case activableObject -> {
                     if (((ActivableObjectImpl) e).type.equals(ActivableObjectImpl.Activator.BUTTON)) {
                         this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
                     } else {
                         this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
                     }
                 }
-                case "it.unibo.dna.model.object.Door" ->
-                    this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
-                case "it.unibo.dna.model.object.Diamond" -> {
+                case door -> this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                case diamond -> {
                     this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
                     this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
                 }
@@ -236,7 +245,7 @@ public class Game {
      * 
      * @param character the moving {@link Player}
      */
-    public void checkBorders(final Player character) {
+    private void checkBorders(final Player character) {
         Position2d chPos = character.getPosition().sum(character.getVector());
         double chHeight = character.getBoundingBox().getHeight();
         double chLenght = character.getBoundingBox().getWidth();

@@ -14,6 +14,7 @@ import java.io.IOException;
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.model.object.AbstractEntity;
 import it.unibo.dna.model.object.ActivableObjectImpl;
+import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Platform;
@@ -36,14 +37,12 @@ public class ManageImage {
     private Map<Pair<Player.State, Player.State>, List<Image>> angelMap = new HashMap<>();
     private Map<Pair<Player.State, Player.State>, List<Image>> devilMap = new HashMap<>();
     private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
-    private Image diamondImg;
 
     public ManageImage() {
         // caricamento di tutte le immagini
-        this.playerImage(angelMap, Player.Type.ANGEL, 30, 40);
-        this.playerImage(devilMap, Player.Type.DEVIL, 30, 40);
+        this.playerImage(angelMap, Player.Type.ANGEL, 40, 30);
+        this.playerImage(devilMap, Player.Type.DEVIL, 40, 30);
         loadImages();
-        this.diamondImage();
     }
 
     Image getImage(Entity entity) {
@@ -58,6 +57,8 @@ public class ManageImage {
             image = getPlatformImage();
         } else if (entity.getClass().equals(MovablePlatform.class)) {
             image = getMovablePlatformImage();
+        } else if(entity.getClass().equals(MovablePlatform.class)){
+            image = getDiamondImage();
         }
         return image;
     }
@@ -69,6 +70,7 @@ public class ManageImage {
         List<Image> puddleImageList = new ArrayList<>();
         List<Image> platformImageList = new ArrayList<>();
         List<Image> movablePlatformImageList = new ArrayList<>();
+        List<Image> diamondImage = new ArrayList<>();
         try {
             doorImageList.add(ImageIO.read(new File(path + "porta_angelo.PNG")));
             doorImageList.add(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")));
@@ -83,6 +85,7 @@ public class ManageImage {
             puddleImageList.add(ImageIO.read(new File(path + "Pozza_viola.jpg")));
             platformImageList.add(ImageIO.read(new File(path + "Piattaforma_terra.jpg")));
             movablePlatformImageList.add(ImageIO.read(new File(path + "MovablePlatform.jpg")));
+            diamondImage.add(ImageIO.read(new File(path + "diamond.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,6 +94,7 @@ public class ManageImage {
         this.map.put(Puddle.class, puddleImageList);
         this.map.put(Platform.class, platformImageList);
         this.map.put(MovablePlatform.class, movablePlatformImageList);
+        this.map.put(Diamond.class, diamondImage);
     }
 
     /**
@@ -128,18 +132,6 @@ public class ManageImage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void diamondImage() {
-        try {
-            diamondImg = ImageIO.read(new File("src\\main\\resources\\diamond.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Image getDiamondImage() {
-        return this.diamondImg;
     }
 
     /**
@@ -228,6 +220,14 @@ public class ManageImage {
      */
     public Image getMovablePlatformImage() {
         return this.map.get(MovablePlatform.class).get(0);
+    }
+
+    /**
+     * 
+     * @return the image of the {@link Diamond}
+     */
+    public Image getDiamondImage() {
+        return this.map.get(Diamond.class).get(0);
     }
 
 }

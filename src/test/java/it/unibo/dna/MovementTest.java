@@ -17,7 +17,7 @@ class MovementTest {
     private static final Vector2d START_VECTOR = new Vector2d(1, 0);
     private static final double HEIGHT = 10.0;
     private static final double WIDTH = 10.0;
-    private final Game game = new Game((int) WIDTH, (int) HEIGHT, 1);
+    private final GameState game = new GameStateImpl((int) WIDTH, (int) HEIGHT, 1);
     private static final PlayerImpl.Type TYPE = PlayerImpl.Type.ANGEL;
     private final Player player = new PlayerImpl(this.game, START_POSITION, START_VECTOR, HEIGHT, WIDTH, TYPE);
     private final CommandFactory command = new CommandFactoryImpl(this.player);

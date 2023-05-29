@@ -5,12 +5,12 @@ import it.unibo.dna.graphics.MenuFactoryImpl;
 
 public class GameEngine implements Runnable {
 
-    private Game game;
+    private GameState game;
 
     boolean running;
     private final double rateUpdate = 1.0d / 60.0d;
 
-    public GameEngine(Game game) {
+    public GameEngine(GameState game) {
         this.game = game;
     }
 

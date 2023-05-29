@@ -1,6 +1,6 @@
 package it.unibo.dna.model.object.api;
 
-import it.unibo.dna.Game;
+import it.unibo.dna.GameState;
 import it.unibo.dna.common.Pair;
 
 /*
@@ -32,12 +32,12 @@ public interface Player extends MovableEntity {
     /**
      * @return the game of the Player
      */
-    Game getGame();
+    GameState getGame();
 
     /**
      * @param game the new game of the player
      */
-    void setGame(Game game);
+    void setGame(GameState game);
 
     /**
      * An enum rappresenting the state of the Player

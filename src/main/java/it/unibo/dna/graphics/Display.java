@@ -2,7 +2,7 @@ package it.unibo.dna.graphics;
 
 import javax.swing.*;
 
-import it.unibo.dna.Game;
+import it.unibo.dna.GameState;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
@@ -41,7 +41,7 @@ public class Display extends JFrame {
         public Diamond diamond = new Diamond(45, 45, 1, new Position2d(200, 400));
         JLabel boh = new JLabel("\u2194");
 
-        public Display(final int width, final int height, Game game) {
+        public Display(final int width, final int height, GameState game) {
                 setTitle("D-n-A");
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setResizable(false);
@@ -67,7 +67,7 @@ public class Display extends JFrame {
 
         }
 
-        public void render(Game game) {
+        public void render(GameState game) {
                 BufferStrategy bufferStrategy = canvas.getBufferStrategy();
                 Graphics graphics = bufferStrategy.getDrawGraphics();
 

@@ -3,7 +3,7 @@ package it.unibo.dna.model;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import it.unibo.dna.Game;
+import it.unibo.dna.GameState;
 
 /**
  * Class for a queue of {@link Event}.
@@ -30,7 +30,7 @@ public class EventQueue {
      * Manages all the Events in the queue.
      * @param game the game state to manage 
      */
-    public void manageEvents(final Game game) {
+    public void manageEvents(final GameState game) {
         while (!eventQueue.isEmpty()) {
             eventQueue.poll().manage(game);
         }

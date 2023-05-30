@@ -45,8 +45,9 @@ public class EventFactoryImpl implements EventFactory {
             p.setVectorY(p.getVector().getY() + pt.getVector().getY());
             if (p.getVector().getX() == 0 && pt.getLastVector().getX() != 0) {
                 p.setVectorX(pt.getLastVector().getX());
+            } else{
+                p.setVectorX(p.getVector().getX() + pt.getVector().getX() - pt.getLastVector().getX());
             }
-            p.setVectorX(p.getVector().getX() + pt.getVector().getX() - pt.getLastVector().getX());
             if (pt.getVector().getX() != 0 || pt.getLastVector().getX() != 0) {
                 pt.setLastVector(pt.getVector());
             }

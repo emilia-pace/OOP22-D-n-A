@@ -4,6 +4,8 @@ import it.unibo.dna.common.Position2d;
 
 public interface Entity {
 
+    enum entityType { PLAYER, ANGEL_DOOR, DEVIL_DOOR, LEVER, BUTTON, BLUE_PUDDLE, RED_PUDDLE, PURPLE_PUDDLE, PLATFORM, MOVABLEPLATFORM, DIAMOND};
+
     /**
      * @return the position of the entity
      */
@@ -34,5 +36,7 @@ public interface Entity {
      * @param y the y-axis value
      */
     public void setPositionY(Double y);
+
+    public Entity.entityType getType();
 
 }

@@ -26,8 +26,8 @@ public interface Player extends MovableEntity {
 
     /**
      * @return the player's type
-     */
-    Type getType();
+    */
+    PlayerType getPlayerType();
 
     /**
      * @return the game of the Player
@@ -68,7 +68,7 @@ public interface Player extends MovableEntity {
     /*
      * An enum rappresenting the type of the Player
      */
-    enum Type {
+    enum PlayerType {
         /**
          * when player is a devil
          */

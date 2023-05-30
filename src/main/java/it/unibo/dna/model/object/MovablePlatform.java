@@ -1,8 +1,11 @@
 package it.unibo.dna.model.object;
 
 
+import java.util.Vector;
+
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.object.api.Entity;
 
 /**
  * A platform that can be moved by a button or a lever.
@@ -17,20 +20,20 @@ public class MovablePlatform extends AbstractMovableEntity {
     /**
      * 
      * @param pos        the position of the platform
-     * @param vet        the vector of the platform
+     * @param vector        the vector of the platform
      * @param height     the height of the platform
      * @param width      the width of the platform
      * @param finalPos   the final position of the platform
      */
-    public MovablePlatform(final Position2d pos, final Vector2d vet, final double height, final double width,
+    public MovablePlatform(final Position2d pos, final Vector2d vector, final double height, final double width,
                             final Position2d finalPos) {
-        super(pos, vet, height, width);
+        super(pos, vector, height, width,Entity.entityType.MOVABLEPLATFORM);
         this.originalPos = pos;
         this.lastPos = pos;
         this.finalPos = finalPos;
         this.lastVector = new Vector2d(0, 0);
     }
-
+    
     /**
      * 
      * @return the final position of the platform

@@ -14,13 +14,13 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
 
     /**
      * An enum explaining the two possible kinds of ActivableObject: Button and Lever.
-     */
+    
     public enum Activator {
         BUTTON, LEVER
-    }
+    } */
 
     private boolean isActive=false; /*Tells whether the platform is moving towards its final position. */
-    public Activator type;
+    //public Activator type;
     private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject */
     private MovablePlatform mp;
 
@@ -31,9 +31,9 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
      * @param type the type of the ActivableObject
      * @param mp the {@link MovablePlatform} that the ActivableObject moves
      */
-    public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, final Activator type, final MovablePlatform mp) {
-       super(pos,height,width);
-       this.type=type;
+    public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, final MovablePlatform mp, final entityType type) {
+       super(pos,height,width,type);
+       //this.type=type;
        this.mp=mp;
     }
 
@@ -46,10 +46,15 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
 
     /**
      * @return whether the ActivableObject is a Button or a Lever
-     */
+     
     public Activator getType() {
         return this.type;
-    }
+    }*/
+
+    /* 
+    public void setType(Activator type) {
+        this.type = type;
+    }*/
 
     /**
      * @return the player that has touched the button

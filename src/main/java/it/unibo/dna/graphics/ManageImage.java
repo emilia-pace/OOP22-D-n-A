@@ -21,7 +21,7 @@ import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.Door.doorType;
-import it.unibo.dna.model.object.Puddle.puddleType;
+//import it.unibo.dna.model.object.Puddle.puddleType;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
@@ -40,8 +40,8 @@ public class ManageImage {
 
     public ManageImage() {
         // caricamento di tutte le immagini
-        this.playerImage(angelMap, Player.Type.ANGEL, 40, 30);
-        this.playerImage(devilMap, Player.Type.DEVIL, 40, 30);
+        this.playerImage(angelMap, Player.PlayerType.ANGEL, 40, 30);
+        this.playerImage(devilMap, Player.PlayerType.DEVIL, 40, 30);
         loadImages();
     }
 
@@ -102,8 +102,8 @@ public class ManageImage {
      * @param type
      */
     private void playerImage(final Map<Pair<Player.State, Player.State>, List<Image>> playerMap,
-            final Player.Type type, final int width, final int height) {
-        String path = (type.equals(Player.Type.ANGEL)) ? "angel" : "devil";
+            final Player.PlayerType type, final int width, final int height) {
+        String path = (type.equals(Player.PlayerType.ANGEL)) ? "angel" : "devil";
         List.of(Player.State.STATE_JUMPING, Player.State.STATE_STANDING).forEach(state -> {
             playerMap.put(new Pair<>(state, Player.State.STATE_LEFT), new ArrayList<>());
             playerMap.put(new Pair<>(state, Player.State.STATE_RIGHT), new ArrayList<>());
@@ -150,7 +150,7 @@ public class ManageImage {
      * @return
      */
     public Image playerChooseImage(final Player p) {
-        Map<Pair<Player.State, Player.State>, List<Image>> playerMap = p.getType().equals(Player.Type.ANGEL)
+        Map<Pair<Player.State, Player.State>, List<Image>> playerMap = p.getPlayerType().equals(/*Player.Type.ANGEL*/Player.PlayerType.ANGEL)
                 ? this.angelMap
                 : this.devilMap;
 
@@ -167,7 +167,7 @@ public class ManageImage {
      * @return the image of the {@link ActivableObkect}
      */
     public Image getActObjImage(ActivableObjectImpl activableObject) {
-        if (activableObject.getType().equals(ActivableObjectImpl.Activator.BUTTON)) {
+        if (activableObject.getType().equals(/*ActivableObjectImpl.Activator.BUTTON*/Entity.entityType.BUTTON)) {
             return (activableObject.isActivated()) ? this.map.get(ActivableObjectImpl.class).get(1)
                     : this.map.get(ActivableObjectImpl.class).get(0);
         }
@@ -181,11 +181,12 @@ public class ManageImage {
      * @return the Image
      */
     public Image getPuddleImage(Puddle puddle) {
-        puddleType type = puddle.getPuddleType();
+        //puddleType type = puddle.getPuddleType();
+        Entity.entityType type = puddle.getType();
         List<Image> puddleImages = this.map.get(Puddle.class);
-        if (type.equals(puddleType.BLUE)) {
+        if (type.equals(/*puddleType.BLUE)*/Entity.entityType.BLUE_PUDDLE)) {
             return puddleImages.get(0);
-        } else if (type.equals(puddleType.RED)) {
+        } else if (type.equals(/*puddleType.RED*/Entity.entityType.BLUE_PUDDLE)) {
             return puddleImages.get(1);
         }
         return puddleImages.get(2);

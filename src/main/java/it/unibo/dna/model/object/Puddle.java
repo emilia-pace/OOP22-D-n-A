@@ -2,7 +2,7 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.Player;
-import it.unibo.dna.model.object.api.Player.Type;
+//import it.unibo.dna.model.object.api.Player.Type;
 
 /**
  * A puddle with the following characteristics:
@@ -12,12 +12,6 @@ import it.unibo.dna.model.object.api.Player.Type;
  */
 public class Puddle extends AbstractEntity {
 
-    public static enum puddleType {
-        PURPLE, BLUE, RED
-    }
-
-    private puddleType type;
-
     /**
      * 
      * @param pos    the position of the puddle
@@ -25,16 +19,8 @@ public class Puddle extends AbstractEntity {
      * @param width  the width of the puddle
      * @param type   the type of the puddle (PURPLE,BLUE,RED)
      */
-    public Puddle(final Position2d pos, final double height, final double width, final puddleType type) {
-        super(pos, height, width);
-        this.type = type;
-    }
-
-    /**
-     * @return the type of the puddle
-     */
-    public puddleType getPuddleType() {
-        return this.type;
+    public Puddle(final Position2d pos, final double height, final double width, final entityType type) {
+        super(pos, height, width, type);
     }
 
     /**
@@ -43,21 +29,22 @@ public class Puddle extends AbstractEntity {
      * @param type      the type of the puddle
      * @param character the {@link Player} touching the puddle
      */
-    public void killPlayer(final puddleType type, final Player character) {
-        switch (type) {
-            case PURPLE -> {
+    public void killPlayer( final Player character) {
+        switch (this.getType()) {
+            case PURPLE_PUDDLE -> {
                 /* the character that fell in the puddle dies. */
             }
-            case BLUE -> {
-                if (character.getType().equals(Type.DEVIL)) {
+            case BLUE_PUDDLE -> {
+                if (character.getPlayerType().equals(Player.PlayerType.DEVIL)) {
                     // character dies
                 } /* altrimenti tutto ok */
             }
-            case RED -> {
-                if (character.getType().equals(Type.ANGEL)) {
+            case RED_PUDDLE -> {
+                if (character.getPlayerType().equals(Player.PlayerType.ANGEL)) {
                     // angel dies
                 }
             }
+            default -> throw new IllegalArgumentException();
         }
     }
 }

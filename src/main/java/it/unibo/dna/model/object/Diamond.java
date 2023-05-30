@@ -1,6 +1,7 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.object.api.Entity;
 
 /**
  * {@link Entity} that allows to increase the game score.
@@ -17,7 +18,7 @@ public class Diamond extends  AbstractEntity {
      * @param p the position of the diamond
      */
     public Diamond(final double h, final double w, final double v, final Position2d p) {
-        super(p, h, w);
+        super(p, h, w, Entity.entityType.DIAMOND);
         this.value = v;
     }
 

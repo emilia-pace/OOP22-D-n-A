@@ -4,6 +4,7 @@ import it.unibo.dna.GameState;
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
 /**
@@ -12,7 +13,7 @@ import it.unibo.dna.model.object.api.Player;
 public class PlayerImpl extends AbstractMovableEntity implements Player {
 
     private Pair<State, State> state = new Pair<>(State.STATE_STANDING, State.STATE_STILL);
-    private Type type;
+    private PlayerType playerType;
     private GameState game;
 
     /**
@@ -24,9 +25,9 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * @param type   the type (angel/devil) of the player
      */
     public PlayerImpl(final GameState game, final Position2d pos, final Vector2d vet, final double height,
-            final double width, final Type type) {
-        super(pos, vet, height, width);
-        this.type = type;
+            final double width, final PlayerType type) {
+        super(pos, vet, height, width, Entity.entityType.PLAYER);
+        this.playerType = type;
         this.game = game;
     }
 
@@ -40,10 +41,10 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
 
     /**
      * {@inheritDoc}
-     */
+    */
     @Override
-    public Type getType() {
-        return this.type;
+    public PlayerType getPlayerType() {
+        return this.playerType;
     }
 
 

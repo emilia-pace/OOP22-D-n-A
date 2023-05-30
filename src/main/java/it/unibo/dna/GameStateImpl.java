@@ -47,10 +47,10 @@ public class GameStateImpl implements GameState{
         this.display = new Display(width, height, this);
         this.entities.add(display.button);
         this.entities.add(display.lever);
-        this.entities.add(display.p1);
-        this.entities.add(display.p2);
-        this.entities.add(display.mp1);
-        this.entities.add(display.mp2);
+        this.entities.add(display.platform1);
+        this.entities.add(display.platform2);
+        this.entities.add(display.movablePlatform1);
+        this.entities.add(display.movablePlatform2);
         this.entities.add(display.diamond);
     }
 

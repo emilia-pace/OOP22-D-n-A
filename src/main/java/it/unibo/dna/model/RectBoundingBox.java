@@ -12,8 +12,7 @@ public class RectBoundingBox implements BoundingBox {
     private Position2d position;
     private double height;
     private double width;
-    
-    private static final double EPSILON = 0.001; 
+
 
     /**
      * {@link RectBoundingBox} constructor.
@@ -91,12 +90,9 @@ public class RectBoundingBox implements BoundingBox {
      */
     @Override
     public boolean sideCollision(final Position2d p, final double h, final double w) {
-        double eps = this.position.getX() + this.width - p.getX();
-        double eps1 = this.position.getX() - (p.getX() + w);
-
-        return this.isCollidingWith(p, h, w) 
-                && (Math.abs(eps) < EPSILON || Math.abs(eps1) < EPSILON);
-
+        return this.position.getY() + this.height >= p.getY()
+                && this.position.getY() <= p.getY() + h
+                && (this.position.getX() + this.width <= p.getX() || this.position.getX() >= p.getX() + w);
     }
 
 

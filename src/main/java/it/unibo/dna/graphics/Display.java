@@ -37,7 +37,7 @@ public class Display extends JFrame {
         public Optional<MovablePlatform> emptyParameter = Optional.empty();
 
         public Entity platform1 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,new Position2d(400, 550));
-        public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.PLATFORM,new Position2d(90, 450));
+        public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.PLATFORM,new Position2d(90, 440));
         public Entity movablePlatform1 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(200, 230),new Position2d(200,100));
         public Entity movablePlatform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(340, 350),new Position2d(390, 200));
         public Entity lever = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform1),entityType.LEVER,new Position2d(120, 420));

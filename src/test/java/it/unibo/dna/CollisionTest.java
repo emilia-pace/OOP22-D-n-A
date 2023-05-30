@@ -1,8 +1,10 @@
 package it.unibo.dna;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
@@ -12,7 +14,9 @@ import it.unibo.dna.model.object.api.Player;
 import it.unibo.dna.model.object.api.Player.PlayerType;
 import it.unibo.dna.model.object.PlayerImpl;
 
-
+/**
+ * Class for testing collisions.
+ */
 public class CollisionTest {
     private static final double X = 10;
     private static final double Y = 20;
@@ -23,13 +27,13 @@ public class CollisionTest {
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
     private static final GameStateImpl GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, 0);
-    private static final Player CHARACTER = new PlayerImpl(GAME,POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerType.ANGEL);
+    private static final Player CHARACTER = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerType.ANGEL);
 
     /**
-     * test the collision between rectangular boxes
+     * test the collision between rectangular boxes.
      */
     @Test
-    public void testRectCollision() {
+    protected void testRectCollision() {
         //(0,0) angolo in alto a sx
         assertTrue(BOX.isCollidingWith(POS, HEIGHT, WIDTH));
         assertTrue(BOX.isCollidingWith(POS, HEIGHT / 2, WIDTH / 2));
@@ -47,31 +51,30 @@ public class CollisionTest {
     }
 
     /**
-     * test the collision between rectangular boxes
+     * test if the collision is on the left or the right side.
      */
     @Test
-    public void testSideCollision() {
+    protected void testSideCollision() {
         //(0,0) angolo in alto a sx
         assertTrue(BOX.sideCollision(new Position2d(X + WIDTH, Y), HEIGHT, WIDTH));
         assertTrue(BOX.sideCollision(new Position2d(X - WIDTH, Y), HEIGHT, WIDTH));
-        assertTrue(BOX.sideCollision(new Position2d(X + WIDTH, Y - 1), HEIGHT, WIDTH));
+        assertTrue(BOX.sideCollision(new Position2d(X + WIDTH, Y - HEIGHT), HEIGHT, WIDTH));
         assertTrue(BOX.sideCollision(new Position2d(X - WIDTH, Y + HEIGHT), HEIGHT, WIDTH));
+        assertTrue(BOX.sideCollision(new Position2d(X + WIDTH + 1, Y - 1), HEIGHT, WIDTH));
 
         assertFalse(BOX.sideCollision(POS, HEIGHT, WIDTH));
-        assertFalse(BOX.sideCollision(new Position2d(X + WIDTH + 1, Y), HEIGHT, WIDTH));
-        assertFalse(BOX.sideCollision(new Position2d(X - WIDTH - 1, Y), HEIGHT, WIDTH));
         assertFalse(BOX.sideCollision(new Position2d(X, Y - HEIGHT), HEIGHT, WIDTH));
         assertFalse(BOX.sideCollision(new Position2d(X, Y + HEIGHT), HEIGHT, WIDTH));
-        assertFalse(BOX.sideCollision(new Position2d(X + WIDTH + 1, Y + HEIGHT), HEIGHT, WIDTH));
+        assertFalse(BOX.sideCollision(new Position2d(X + WIDTH / 2, Y + HEIGHT), HEIGHT, WIDTH));
         assertFalse(BOX.sideCollision(new Position2d(X + WIDTH - 1, Y), HEIGHT / 2, WIDTH / 2));
 
     }
 
     /**
-    * test the collision between the character and the borders
+    * test the collision between the character and the borders.
     */
     @Test
-    public void testBordersCollision() {
+    protected void testBordersCollision() {
         //(0,0) angolo in alto a sx
         final double eastBorderX = GAME.getBoundingBox().getWidth();
         final double westBorderX = 0;

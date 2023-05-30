@@ -51,9 +51,9 @@ public class RectBoundingBox implements BoundingBox {
     }
 
     /**
-     * 
-     * @param position
+     * {@inheritDoc}
      */
+    @Override
     public void setPosition(final Position2d position) {
         this.position = position;
     }

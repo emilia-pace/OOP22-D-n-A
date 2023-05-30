@@ -10,49 +10,49 @@ import it.unibo.dna.model.object.api.Entity;
  * Interface that models the state of the game.
  */
 public interface GameState {
-    
+
     /**
      * Updates the state of the game.
      */
-    public void update();
+    void update();
 
-    public void render();
+    void render();
 
     /**
      * 
      * @return the {@link BoundingBox}
      */
-    public BoundingBox getBoundingBox();
+    BoundingBox getBoundingBox();
 
     /**
      * 
      * @param boundingBox the {@link BoundingBox}
      */
-    public void setBoundingBox(final BoundingBox boundingBox);
+    void setBoundingBox(BoundingBox boundingBox);
 
     /**
      * Adds a new {@link Entity} in the game.
      * 
      * @param e the {@link Entity} to add
      */
-    public void addEntity(final Entity e);
+    void addEntity(Entity e);
 
     /**
      * Removes an {@link Entity} from the game.
      * 
      * @param e the {@link Entity} to remove
      */
-    public void removeEntity(final Entity e);
+    void removeEntity(Entity e);
 
     /**
      * 
      * @return the list of {@link Entity} of the game
      */
-    public List<Entity> getEntities();
+    List<Entity> getEntities();
 
     /**
      * 
      * @return the list of {@link Event}
      */
-    public EventQueue getEventQueue();
+    EventQueue getEventQueue();
 }

@@ -13,7 +13,7 @@ public class RectBoundingBox implements BoundingBox {
     private double height;
     private double width;
     
-    private static final double EPSILON = 0.0001; 
+    private static final double EPSILON = 0.001; 
 
     /**
      * {@link RectBoundingBox} constructor.

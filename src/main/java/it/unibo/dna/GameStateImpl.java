@@ -159,10 +159,10 @@ public class GameStateImpl implements GameState{
         var box = character.getBoundingBox();
         this.getEntities().stream().filter((e) -> 
         !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth())).filter((e) -> 
-        e.getClass().getName().equals("it.unibo.dna.model.object.ActivableObjectImpl")).forEach((e) -> {
+        (e.getType().equals(Entity.entityType.BUTTON)) || e.getType().equals(Entity.entityType.LEVER)).forEach((e) -> {
             Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
             if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                if (((ActivableObjectImpl) e).type.equals(ActivableObjectImpl.Activator.BUTTON)) {
+                if (e.getType().equals(Entity.entityType.BUTTON)) {
                     ((ActivableObjectImpl) e).deactivate();
                 }
                 ((ActivableObjectImpl) e).resetPlayer();
@@ -181,27 +181,16 @@ public class GameStateImpl implements GameState{
         double chWidth = character.getBoundingBox().getWidth();
 
         this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth)).forEach((e) -> {
-            String cl = e.getClass().getName();
-            final String platform = "it.unibo.dna.model.object.Platform";
-            final String movablePlatform = "it.unibo.dna.model.object.MovablePlatform";
-            final String activableObject = "it.unibo.dna.model.object.ActivableObjectImpl";
-            final String door = "it.unibo.dna.model.object.Door";
-            final String diamond = "it.unibo.dna.model.object.Diamond";
-            switch (cl) {
-                case platform -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                case movablePlatform -> {
+            switch (e.getType()) {
+                case PLATFORM -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                case MOVABLEPLATFORM-> {
                     this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                     this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
                 }
-                case activableObject -> {
-                    if (((ActivableObjectImpl) e).type.equals(ActivableObjectImpl.Activator.BUTTON)) {
-                        this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
-                    } else {
-                        this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
-                    }
-                }
-                case door -> this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
-                case diamond -> {
+                case BUTTON -> this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
+                case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
+                case ANGEL_DOOR, DEVIL_DOOR -> this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                case DIAMOND -> {
                     this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
                     this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
                 }

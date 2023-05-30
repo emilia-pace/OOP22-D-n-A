@@ -40,7 +40,7 @@ public class Display extends JFrame {
         public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.PLATFORM,new Position2d(90, 440));
         public Entity movablePlatform1 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(200, 230),new Position2d(200,100));
         public Entity movablePlatform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(340, 350),new Position2d(390, 200));
-        public Entity lever = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform1),entityType.LEVER,new Position2d(120, 420));
+        public Entity lever = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform1),entityType.LEVER,new Position2d(120, 410));
         public Entity button = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform2),entityType.BUTTON,new Position2d(500, 530));
         public Entity diamond = entityFactoryImpl.createEntity(emptyParameter,entityType.DIAMOND,new Position2d(200, 400));
         JLabel boh = new JLabel("\u2194");

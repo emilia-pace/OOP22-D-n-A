@@ -17,11 +17,11 @@ public interface BoundingBox {
     boolean isCollidingWith(Position2d p, double height, double width);
 
     /**
-     * Checks if the {@link Entity} modelled by this box is colliding on the left or the right side of another {@link Entity}.
+     * Checks if the collision beetween the two entities is on the left or the right side.
      * @param p the position of the other {@link Entity}
      * @param height the height of the other {@link Entity}
      * @param width the width of the other {@link Entity}
-     * @return true if the entities are colliding on the left or the right side
+     * @return true if the collision is on the left or the right side
      */
     boolean sideCollision(Position2d p, double height, double width);
 

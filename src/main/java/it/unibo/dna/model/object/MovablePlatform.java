@@ -1,7 +1,6 @@
 package it.unibo.dna.model.object;
 
 
-import java.util.Vector;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
@@ -118,7 +117,7 @@ public class MovablePlatform extends AbstractMovableEntity {
     /*
      * Checks whether the platform position is between its original position and its final position.
      */
-    private boolean isBetweenRange() {
+    public boolean isBetweenRange() {
         double maxX = Math.max(this.originalPos.getX(),this.finalPos.getX());
         double minX =  Math.min(this.originalPos.getX(),this.originalPos.getY());
         double maxY = Math.max(this.originalPos.getY(),this.finalPos.getY());

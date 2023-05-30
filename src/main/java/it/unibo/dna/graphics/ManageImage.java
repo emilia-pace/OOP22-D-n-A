@@ -20,8 +20,6 @@ import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
-import it.unibo.dna.model.object.Door.doorType;
-//import it.unibo.dna.model.object.Puddle.puddleType;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
@@ -198,10 +196,10 @@ public class ManageImage {
      * @return the Image of the door
      */
     public Image getDoorImage(Door door) {
-        doorType type = door.getDoorType();
+        Entity.entityType type = door.getType();
         doorState state = door.getDoorState();
         List<Image> doorImages = this.map.get(Door.class);
-        if (type.equals(Door.doorType.ANGEL_DOOR)) {
+        if (type.equals(Entity.entityType.ANGEL_DOOR)) {
             return state.equals(Door.doorState.CLOSED_DOOR) ? doorImages.get(0) : doorImages.get(1);
         }
         return state.equals(Door.doorState.CLOSED_DOOR) ? doorImages.get(2) : doorImages.get(3);

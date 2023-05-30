@@ -6,7 +6,7 @@ import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 
 /**
- * Abstract Class that implements {@link MovableEntity} interface.
+ * Abstract Class that implements {@link Entity} interface.
  */
 public abstract class AbstractEntity implements Entity {
 

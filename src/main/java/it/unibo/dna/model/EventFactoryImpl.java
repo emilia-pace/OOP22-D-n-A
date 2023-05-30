@@ -58,15 +58,15 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitButtonEvent(final ActivableObjectImpl o, final Player p) {
+    public Event hitButtonEvent(final ActivableObjectImpl object, final Player player) {
         return game -> {
-            if (o.getPlayer().isEmpty()) {
-                o.setPlayer(p);
-                if (!o.isActivated()) {
-                    o.activate();
+            if (object.getPlayer().isEmpty()) {
+                object.setPlayer(player);
+                if (!object.isActivated()) {
+                    object.activate();
                 } else {
-                    o.deactivate();
-                    o.resetPlayer();
+                    object.deactivate();
+                    object.resetPlayer();
                 }
             }
         };
@@ -76,9 +76,9 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(final Door d, final Player p) {
+    public Event hitDoorEvent(final Door door, final Player player) {
         return game -> {
-            d.openDoor(p);
+            door.openDoor(player);
         };
     }
 
@@ -86,14 +86,14 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitLeverEvent(final ActivableObjectImpl o, final Player p) {
+    public Event hitLeverEvent(final ActivableObjectImpl object, final Player player) {
         return game -> {
-            if (o.getPlayer().isEmpty()) {
-                o.setPlayer(p);
-                if (o.isActivated()) {
-                    o.deactivate();
+            if (object.getPlayer().isEmpty()) {
+                object.setPlayer(player);
+                if (object.isActivated()) {
+                    object.deactivate();
                 } else {
-                    o.activate();
+                    object.activate();
                 }
             }
         };

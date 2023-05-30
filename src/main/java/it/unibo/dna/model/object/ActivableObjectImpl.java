@@ -45,18 +45,6 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
     }
 
     /**
-     * @return whether the ActivableObject is a Button or a Lever
-     
-    public Activator getType() {
-        return this.type;
-    }*/
-
-    /* 
-    public void setType(Activator type) {
-        this.type = type;
-    }*/
-
-    /**
      * @return the player that has touched the button
      */
     public Optional<Player> getPlayer() {

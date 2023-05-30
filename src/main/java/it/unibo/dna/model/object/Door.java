@@ -35,14 +35,6 @@ public class Door extends  AbstractEntity {
 
     /**
      * 
-     * @return the type of the door (angel door, devil door)
-    
-    public doorType getDoorType(){
-        return this.type;
-    }
-
-    /**
-     * 
      * @return the state of the door (open, closed)
      */
     public doorState getDoorState() {

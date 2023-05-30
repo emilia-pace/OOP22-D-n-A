@@ -6,22 +6,14 @@ import it.unibo.dna.GameState;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.object.ActivableObjectImpl;
-import it.unibo.dna.model.object.Diamond;
-import it.unibo.dna.model.object.EntityFactory;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.PlayerImpl;
-import it.unibo.dna.model.object.api.Player;
 import it.unibo.dna.model.object.api.Entity.entityType;
 import it.unibo.dna.model.object.api.Entity;
 
-import java.io.File;
 import java.util.Optional;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

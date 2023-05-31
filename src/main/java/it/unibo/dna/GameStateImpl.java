@@ -3,7 +3,6 @@ package it.unibo.dna;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.lang.IllegalArgumentException;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.graphics.Display;
@@ -23,16 +22,16 @@ import it.unibo.dna.model.object.api.Player;
 /**
  * Class that implements {@link GameState}.
  */
-public class GameStateImpl implements GameState{
+public class GameStateImpl implements GameState {
 
     public static final double Gravity = 4;
 
-    private Display display;
-    private List<Entity> entities = new ArrayList<>();
+    private final Display display;
+    private final List<Entity> entities = new ArrayList<>();
     private BoundingBox boundingBox;
-    private EventFactory event = new EventFactoryImpl();
-    private Score score;
-    private EventQueue eventQueue = new EventQueue();
+    private final EventFactory event = new EventFactoryImpl();
+    private final Score score;
+    private final EventQueue eventQueue = new EventQueue();
 
     /**
      * {@link Game} constructor.
@@ -85,9 +84,7 @@ public class GameStateImpl implements GameState{
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     private void gravity(Player player) {
         if (player.getVector().getY() < Gravity) {
             player.getVector().sumY(Player.STANDARDVELOCITY);
@@ -156,15 +153,14 @@ public class GameStateImpl implements GameState{
      * @param character the {@link Player} to check
      */
     private void freeActivableObject(final Player character) {
-        var box = character.getBoundingBox();
+        final var box = character.getBoundingBox();
         this.getEntities().stream().filter((e) -> 
         !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth())).filter((e) -> 
         (e.getType().equals(Entity.entityType.BUTTON)) || e.getType().equals(Entity.entityType.LEVER)).forEach((e) -> {
-            Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
+            final Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
             if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                if (e.getType().equals(Entity.entityType.BUTTON)) {
+                if (e.getType().equals(Entity.entityType.BUTTON))
                     ((ActivableObjectImpl) e).deactivate();
-                }
                 ((ActivableObjectImpl) e).resetPlayer();
             }
         });
@@ -176,14 +172,14 @@ public class GameStateImpl implements GameState{
      * @param character the moving {@link Player}
      */
     private void checkCollisions(final Player character) {
-        Position2d chPos = character.getPosition().sum(character.getVector());
-        double chHeight = character.getBoundingBox().getHeight();
-        double chWidth = character.getBoundingBox().getWidth();
+        final Position2d chPos = character.getPosition().sum(character.getVector());
+        final double chHeight = character.getBoundingBox().getHeight();
+        final double chWidth = character.getBoundingBox().getWidth();
 
         this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth)).forEach((e) -> {
             switch (e.getType()) {
                 case PLATFORM -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                case MOVABLEPLATFORM-> {
+                case MOVABLEPLATFORM -> {
                     this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                     this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
                 }
@@ -209,8 +205,8 @@ public class GameStateImpl implements GameState{
      * @return true if the character is colliding with a vertical border
      */
     public boolean checkVerticalBorders(final double pos, final double lenght) {
-        double sxBorder = this.boundingBox.getPosition().getX();
-        double dxBorder = this.boundingBox.getPosition().getX() + this.boundingBox.getWidth();
+        final double sxBorder = this.boundingBox.getPosition().getX();
+        final double dxBorder = this.boundingBox.getPosition().getX() + this.boundingBox.getWidth();
 
         return pos <= sxBorder || pos + lenght >= dxBorder;
     }
@@ -223,8 +219,8 @@ public class GameStateImpl implements GameState{
      * @return true if the character is colliding with an horizontal border
      */
     public boolean checkHorizontalBorders(final double pos, final double height) {
-        double northBorder = this.boundingBox.getPosition().getY();
-        double southBorder = this.boundingBox.getPosition().getY() + this.boundingBox.getHeight();
+        final double northBorder = this.boundingBox.getPosition().getY();
+        final double southBorder = this.boundingBox.getPosition().getY() + this.boundingBox.getHeight();
 
         return pos <= northBorder || pos + height >= southBorder;
     }
@@ -235,9 +231,9 @@ public class GameStateImpl implements GameState{
      * @param character the moving {@link Player}
      */
     private void checkBorders(final Player character) {
-        Position2d chPos = character.getPosition().sum(character.getVector());
-        double chHeight = character.getBoundingBox().getHeight();
-        double chLenght = character.getBoundingBox().getWidth();
+        final Position2d chPos = character.getPosition().sum(character.getVector());
+        final double chHeight = character.getBoundingBox().getHeight();
+        final double chLenght = character.getBoundingBox().getWidth();
 
         if (this.checkVerticalBorders(chPos.getX(), chLenght)) {
             event.hitBorderYEvent(character).manage(this);

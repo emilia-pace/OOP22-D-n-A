@@ -51,6 +51,10 @@ public class EventFactoryImpl implements EventFactory {
             if (pt.getVector().getX() != 0 || pt.getLastVector().getX() != 0) {
                 pt.setLastVector(pt.getVector());
             }
+            if(p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() && 
+                p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY() + pt.getBoundingBox().getHeight()){
+                    p.setPositionY(pt.getPosition().getY() - p.getBoundingBox().getHeight());
+            }
         };
     }
 

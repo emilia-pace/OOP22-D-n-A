@@ -9,13 +9,13 @@ import it.unibo.dna.GameState;
  * Class for a queue of {@link Event}.
  */
 public class EventQueue {
-    private final Queue<Event> eventQueue;
+    private final Queue<Event> events;
 
     /**
      * {@link EventQueue} constructor.
      */
     public EventQueue() {
-        eventQueue = new LinkedList<>();
+        events = new LinkedList<>();
     }
 
     /**
@@ -23,7 +23,7 @@ public class EventQueue {
      * @param event the {@Event} to add
      */
     public void addEvent(final Event event) {
-        eventQueue.add(event);
+        events.add(event);
     }
 
     /**
@@ -31,8 +31,8 @@ public class EventQueue {
      * @param game the game state to manage 
      */
     public void manageEvents(final GameState game) {
-        while (!eventQueue.isEmpty()) {
-            eventQueue.poll().manage(game);
+        while (!events.isEmpty()) {
+            events.poll().manage(game);
         }
     }
 }

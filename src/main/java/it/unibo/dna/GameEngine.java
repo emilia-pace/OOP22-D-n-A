@@ -1,8 +1,5 @@
 package it.unibo.dna;
 
-import it.unibo.dna.graphics.MenuFactory;
-import it.unibo.dna.graphics.MenuFactoryImpl;
-
 public class GameEngine implements Runnable {
 
     private Game game;

@@ -1,12 +1,10 @@
 package it.unibo.dna;
 
-import java.awt.Button;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;

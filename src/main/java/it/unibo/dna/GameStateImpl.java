@@ -70,7 +70,8 @@ public class GameStateImpl implements GameState {
         this.checkBorders(display.angel);
         this.checkBorders(display.devil);
 
-        display.mi.update();
+        display.obsAngel.update();
+        display.obsDevil.update();
 
         display.angel.update();
         display.devil.update();
@@ -84,7 +85,6 @@ public class GameStateImpl implements GameState {
         }
     }
 
-    
     private void gravity(Player player) {
         if (player.getVector().getY() < Gravity) {
             player.getVector().sumY(Player.STANDARDVELOCITY);
@@ -154,16 +154,18 @@ public class GameStateImpl implements GameState {
      */
     private void freeActivableObject(final Player character) {
         final var box = character.getBoundingBox();
-        this.getEntities().stream().filter((e) -> 
-        !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth())).filter((e) -> 
-        (e.getType().equals(Entity.entityType.BUTTON)) || e.getType().equals(Entity.entityType.LEVER)).forEach((e) -> {
-            final Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
-            if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                if (e.getType().equals(Entity.entityType.BUTTON))
-                    ((ActivableObjectImpl) e).deactivate();
-                ((ActivableObjectImpl) e).resetPlayer();
-            }
-        });
+        this.getEntities().stream()
+                .filter((e) -> !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth()))
+                .filter((e) -> (e.getType().equals(Entity.entityType.BUTTON))
+                        || e.getType().equals(Entity.entityType.LEVER))
+                .forEach((e) -> {
+                    final Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
+                    if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
+                        if (e.getType().equals(Entity.entityType.BUTTON))
+                            ((ActivableObjectImpl) e).deactivate();
+                        ((ActivableObjectImpl) e).resetPlayer();
+                    }
+                });
     }
 
     /**
@@ -176,23 +178,26 @@ public class GameStateImpl implements GameState {
         final double chHeight = character.getBoundingBox().getHeight();
         final double chWidth = character.getBoundingBox().getWidth();
 
-        this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth)).forEach((e) -> {
-            switch (e.getType()) {
-                case PLATFORM -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                case MOVABLEPLATFORM -> {
-                    this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                    this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
-                }
-                case BUTTON -> this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
-                case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
-                case ANGEL_DOOR, DEVIL_DOOR -> this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
-                case DIAMOND -> {
-                    this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
-                    this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
-                }
-                default -> throw new IllegalArgumentException();
-            }
-        });
+        this.getEntities().stream().filter((e) -> e.getBoundingBox().isCollidingWith(chPos, chHeight, chWidth))
+                .forEach((e) -> {
+                    switch (e.getType()) {
+                        case PLATFORM -> this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                        case MOVABLEPLATFORM -> {
+                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
+                            this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
+                        }
+                        case BUTTON ->
+                            this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
+                        case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
+                        case ANGEL_DOOR, DEVIL_DOOR ->
+                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                        case DIAMOND -> {
+                            this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
+                            this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
+                        }
+                        default -> throw new IllegalArgumentException();
+                    }
+                });
 
         freeActivableObject(character);
     }

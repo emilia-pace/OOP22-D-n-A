@@ -2,8 +2,8 @@ package it.unibo.dna.input;
 
 import it.unibo.dna.input.api.Command;
 import it.unibo.dna.input.api.CommandFactory;
-import it.unibo.dna.model.object.api.Player.State;
 import it.unibo.dna.model.EventFactoryImpl;
+import it.unibo.dna.model.object.State.StateEnum;
 import it.unibo.dna.model.object.api.Player;
 
 /**
@@ -14,7 +14,7 @@ public class CommandFactoryImpl implements CommandFactory {
     private Player player;
 
     /**
-     * @param p the player 
+     * @param p the player
      */
     public CommandFactoryImpl(final Player p) {
         this.player = p;
@@ -27,7 +27,7 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command right() {
         return () -> {
             this.player.setVectorX(Player.STANDARDVELOCITY);
-            this.player.getState().setY(State.STATE_RIGHT);
+            this.player.getState().setStateY(StateEnum.STATE_RIGHT);
         };
     }
 
@@ -38,7 +38,7 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command left() {
         return () -> {
             this.player.setVectorX(-Player.STANDARDVELOCITY);
-            this.player.getState().setY(State.STATE_LEFT);
+            this.player.getState().setStateY(StateEnum.STATE_LEFT);
         };
     }
 
@@ -48,10 +48,11 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command jump() {
         return () -> {
-            if (!this.player.getState().getX().equals(State.STATE_JUMPING)) {
+            if (!this.player.getState().getX().equals(StateEnum.STATE_JUMPING)) {
                 this.player.setVectorY(-Player.JUMPVELOCITY);
-                this.player.getState().setX(State.STATE_JUMPING);
-                String s = (this.player.getPlayerType().equals(Player.PlayerType.ANGEL)) ? "Angel_audio" : "Devil_audio";
+                this.player.getState().setStateX(StateEnum.STATE_JUMPING);
+                String s = (this.player.getPlayerType().equals(Player.PlayerType.ANGEL)) ? "Angel_audio"
+                        : "Devil_audio";
                 this.player.getGame().getEventQueue()
                         .addEvent(
                                 new EventFactoryImpl().soundEvent(s));
@@ -66,7 +67,7 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command stop() {
         return () -> {
             this.player.setVectorX(0);
-            this.player.getState().setY(State.STATE_STILL);
+            this.player.getState().setStateY(StateEnum.STATE_STILL);
         };
     }
 }

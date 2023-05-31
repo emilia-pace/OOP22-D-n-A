@@ -8,12 +8,13 @@ import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
+import it.unibo.dna.model.object.Observer;
 import it.unibo.dna.model.object.PlayerImpl;
 import it.unibo.dna.model.object.api.Entity.entityType;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Player;
 
 import java.util.Optional;
-
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -28,14 +29,23 @@ public class Display extends JFrame {
         public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
         public Optional<MovablePlatform> emptyParameter = Optional.empty();
 
-        public Entity platform1 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,new Position2d(400, 550));
-        public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.PLATFORM,new Position2d(90, 440));
-        public Entity movablePlatform1 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(200, 230),new Position2d(200,100));
-        public Entity movablePlatform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(340, 350),new Position2d(390, 200));
-        public Entity lever = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform1),entityType.LEVER,new Position2d(120, 410));
-        public Entity button = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform2),entityType.BUTTON,new Position2d(500, 530));
-        public Entity diamond = entityFactoryImpl.createEntity(emptyParameter,entityType.DIAMOND,new Position2d(200, 400));
+        public Entity platform1 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,
+                        new Position2d(400, 550));
+        public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,
+                        new Position2d(90, 440));
+        public Entity movablePlatform1 = entityFactoryImpl.createEntity(emptyParameter, entityType.MOVABLEPLATFORM,
+                        new Position2d(200, 230), new Position2d(200, 100));
+        public Entity movablePlatform2 = entityFactoryImpl.createEntity(emptyParameter, entityType.MOVABLEPLATFORM,
+                        new Position2d(340, 350), new Position2d(390, 200));
+        public Entity lever = entityFactoryImpl.createEntity(Optional.of((MovablePlatform) movablePlatform1),
+                        entityType.LEVER, new Position2d(120, 410));
+        public Entity button = entityFactoryImpl.createEntity(Optional.of((MovablePlatform) movablePlatform2),
+                        entityType.BUTTON, new Position2d(500, 530));
+        public Entity diamond = entityFactoryImpl.createEntity(emptyParameter, entityType.DIAMOND,
+                        new Position2d(200, 400));
         JLabel boh = new JLabel("\u2194");
+        public Observer obsAngel;
+        public Observer obsDevil;
 
         public Display(final int width, final int height, GameState game) {
                 setTitle("D-n-A");
@@ -57,7 +67,8 @@ public class Display extends JFrame {
                                 PlayerImpl.PlayerType.ANGEL);
                 devil = new PlayerImpl(game, new Position2d(200, 500), new Vector2d(0, 0), 40, 30,
                                 PlayerImpl.PlayerType.DEVIL);
-
+                obsAngel = new Observer(this.angel.getState(), Player.PlayerType.ANGEL);
+                obsDevil = new Observer(this.devil.getState(), Player.PlayerType.DEVIL);
                 this.addKeyListener(new KeyboardHandler(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, angel));
                 this.addKeyListener(new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, devil));
 
@@ -79,10 +90,10 @@ public class Display extends JFrame {
                 }
 
                 graphics.drawImage(
-                                mi.playerChooseImage(this.angel),
+                                obsAngel.getPlayerImage(),
                                 (int) angel.getPosition().getX(), (int) angel.getPosition().getY(), this);
                 graphics.drawImage(
-                                mi.playerChooseImage(this.devil),
+                                obsDevil.getPlayerImage(),
                                 (int) devil.getPosition().getX(), (int) devil.getPosition().getY(), this);
                 graphics.setColor(Color.WHITE);
                 graphics.drawImage(mi.getImage(platform1).getScaledInstance(
@@ -98,11 +109,13 @@ public class Display extends JFrame {
                 graphics.drawImage(mi.getImage(movablePlatform1).getScaledInstance(
                                 (int) movablePlatform1.getBoundingBox().getWidth(),
                                 (int) movablePlatform1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) movablePlatform1.getPosition().getX(), (int) movablePlatform1.getPosition().getY(), this);
+                                (int) movablePlatform1.getPosition().getX(),
+                                (int) movablePlatform1.getPosition().getY(), this);
                 graphics.drawImage(mi.getImage(movablePlatform1).getScaledInstance(
                                 (int) movablePlatform2.getBoundingBox().getWidth(),
                                 (int) movablePlatform2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
-                                (int) movablePlatform2.getPosition().getX(), (int) movablePlatform2.getPosition().getY(), this);
+                                (int) movablePlatform2.getPosition().getX(),
+                                (int) movablePlatform2.getPosition().getY(), this);
                 graphics.setColor(Color.GREEN);
                 graphics.drawImage(
                                 mi.getImage(this.lever).getScaledInstance(
@@ -111,8 +124,8 @@ public class Display extends JFrame {
                                 (int) lever.getPosition().getX(), (int) lever.getPosition().getY(), this);
                 graphics.setColor(Color.MAGENTA);
                 graphics.drawImage(mi.getImage(this.button).getScaledInstance(
-                                                (int) button.getBoundingBox().getWidth(),
-                                                (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
+                                (int) button.getBoundingBox().getWidth(),
+                                (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT),
                                 (int) button.getPosition().getX(), (int) button.getPosition().getY(), this);
                 graphics.dispose();
                 bufferStrategy.show();

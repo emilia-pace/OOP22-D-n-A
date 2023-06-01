@@ -5,31 +5,37 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
+ 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.PlayerImpl;
 import it.unibo.dna.model.object.api.Entity.entityType;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Player;
 
 
 public class Level {
     
     File lvlFile;
-    ArrayList <Entity> entitiesList = new ArrayList<>();
+    List<Entity> entitiesList = new ArrayList<>();
+    List<Player> characters = new ArrayList<>();
     String nameFile;
     String s;
     int lvl;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double tileSize = screenSize.getHeight()/100;
     public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
+    PlayerImpl angel;
+    PlayerImpl devil;
     
 
-    ArrayList <Entity> entitiesList() throws IOException{
+    public List<Entity> entitiesList() throws IOException{
+        getFile(lvl);
         ArrayList <Entity> entities = new ArrayList<>();
         FileReader f = new FileReader(nameFile);
         BufferedReader b;
@@ -40,15 +46,15 @@ public class Level {
         while(s!= null){
             String[] splittedC = s.split("//s");
             switch(splittedC[0]){
-                case "angel" : PlayerImpl angel = new PlayerImpl(null, new 
+                case "angel" : angel = new PlayerImpl(null, new 
                 Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
                 null, Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
-                PlayerImpl.PlayerType.ANGEL); entities.add(angel);
+                PlayerImpl.PlayerType.ANGEL); characters.add(angel);
 
-                case "devil" : PlayerImpl devil = new PlayerImpl(null, new 
+                case "devil" : devil = new PlayerImpl(null, new 
                 Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
                 null, Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
-                PlayerImpl.PlayerType.DEVIL); entities.add(devil);
+                PlayerImpl.PlayerType.DEVIL); characters.add(devil);
                 
                 case "dDevil" : entities.add(entityFactoryImpl.createEntity(null, entityType.DEVIL_DOOR,
                  new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); 
@@ -72,6 +78,17 @@ public class Level {
 
                 case "movablePlatform" : entities.add(entityFactoryImpl.createEntity(null, entityType.MOVABLEPLATFORM, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+                case "rPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.RED_PUDDLE, 
+                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+                case "bPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.BLUE_PUDDLE, 
+                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+                case "pPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.PURPLE_PUDDLE, 
+                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+
     
             }
             b.readLine();
@@ -81,13 +98,17 @@ public class Level {
         return entities;
     }
 
-    void getFile(int lvl) {
+    private void getFile(int lvl) {
         switch(lvl){
             case 1: nameFile = "lvl1.txt";
             case 2: nameFile = "lvl2.txt";
             case 3: nameFile = "lvl3.txt";
         }
 
+    }
+
+    public List<Player> getCharacters(){
+        return this.characters;
     }
 
     

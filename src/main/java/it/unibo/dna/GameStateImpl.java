@@ -1,14 +1,14 @@
 package it.unibo.dna;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.EventQueue;
+import it.unibo.dna.model.Level;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.Door;
@@ -26,8 +26,8 @@ public class GameStateImpl implements GameState {
 
     public static final double Gravity = 4;
 
-    private final Display display;
-    private final List<Entity> entities = new ArrayList<>();
+    private final List<Entity> entities;
+    private final List<Player> characters;
     private BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
     private final Score score;
@@ -39,18 +39,13 @@ public class GameStateImpl implements GameState {
      * @param width  the width of the game
      * @param height the height of the game
      * @param level  the level of the game
+     * @throws IOException
      */
-    public GameStateImpl(final int width, final int height, final int level) {
+    public GameStateImpl(final int width, final int height, final Level level) throws IOException {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
-        this.display = new Display(width, height, this);
-        this.entities.add(display.button);
-        this.entities.add(display.lever);
-        this.entities.add(display.platform1);
-        this.entities.add(display.platform2);
-        this.entities.add(display.movablePlatform1);
-        this.entities.add(display.movablePlatform2);
-        this.entities.add(display.diamond);
+        this.entities = level.entitiesList();
+        this.characters = level.getCharacters();
     }
 
     /**
@@ -59,22 +54,22 @@ public class GameStateImpl implements GameState {
     @Override
     public void update() {
 
-        this.gravity(display.angel);
-        this.gravity(display.devil);
-
-        this.checkCollisions(display.angel);
-        this.checkCollisions(display.devil);
+        characters.stream().forEach((c)->{
+            this.checkCollisions(c);
+            this.checkBorders(c);
+        });
 
         this.eventQueue.manageEvents(this);
 
-        this.checkBorders(display.angel);
-        this.checkBorders(display.devil);
+        /*
+        this.gravity(angel);
+        this.gravity(devil);
 
         display.obsAngel.update();
         display.obsDevil.update();
 
         display.angel.update();
-        display.devil.update();
+        display.devil.update();*/
 
         for (Entity ent : entities) {
             if (ent instanceof MovablePlatform) {
@@ -85,19 +80,12 @@ public class GameStateImpl implements GameState {
         }
     }
 
-    private void gravity(Player player) {
+    /*private void gravity(Player player) {
         if (player.getVector().getY() < Gravity) {
             player.getVector().sumY(Player.STANDARDVELOCITY);
         }
-    }
+    }*/
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void render() {
-        display.render(this);
-    }
 
     /**
      * {@inheritDoc}

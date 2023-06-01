@@ -12,8 +12,8 @@ import it.unibo.dna.model.object.api.Player;
  */
 public class PlayerImpl extends AbstractMovableEntity implements Player {
 
-    private Pair<State, State> state = new Pair<>(State.STATE_STANDING, State.STATE_STILL);
     private PlayerType playerType;
+    private State playerState = new State();
     private GameState game;
 
     /**
@@ -35,18 +35,17 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public Pair<State, State> getState() {
-        return this.state;
+    public State getState() {
+        return this.playerState;
     }
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public PlayerType getPlayerType() {
         return this.playerType;
     }
-
 
     /**
      * {@inheritDoc}

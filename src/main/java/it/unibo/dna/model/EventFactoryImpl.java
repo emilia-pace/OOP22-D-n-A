@@ -9,8 +9,8 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
+import it.unibo.dna.model.object.State.StateEnum;
 import it.unibo.dna.model.object.api.Player;
-import it.unibo.dna.model.object.api.Player.State;
 import it.unibo.dna.model.object.api.Entity;
 
 /**
@@ -30,8 +30,9 @@ public class EventFactoryImpl implements EventFactory {
             } else {
                 p.resetY();
             }
-            if (p.getPosition().getY() < pt.getPosition().getY()) {
-                p.getState().setX(State.STATE_STANDING);
+            if (p.getState().getX().equals(StateEnum.STATE_JUMPING)
+                    && p.getPosition().getY() < pt.getPosition().getY()) {
+                p.getState().setStateX(StateEnum.STATE_STANDING);
             }
         };
     }
@@ -45,15 +46,16 @@ public class EventFactoryImpl implements EventFactory {
             p.setVectorY(p.getVector().getY() + pt.getVector().getY());
             if (p.getVector().getX() == 0 && pt.getLastVector().getX() != 0) {
                 p.setVectorX(pt.getLastVector().getX());
-            } else{
+            } else {
                 p.setVectorX(p.getVector().getX() + pt.getVector().getX() - pt.getLastVector().getX());
             }
             if (pt.getVector().getX() != 0 || pt.getLastVector().getX() != 0) {
                 pt.setLastVector(pt.getVector());
             }
-            if(p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() && 
-                p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY() + pt.getBoundingBox().getHeight()){
-                    p.setPositionY(pt.getPosition().getY() - p.getBoundingBox().getHeight());
+            if (p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() &&
+                    p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY()
+                            + pt.getBoundingBox().getHeight()) {
+                p.setPositionY(pt.getPosition().getY() - p.getBoundingBox().getHeight());
             }
         };
     }
@@ -121,7 +123,9 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitBorderXEvent(final Player p) {
         return game -> {
             p.resetY();
-            p.getState().setX(State.STATE_STANDING);
+            if (p.getState().getX().equals(StateEnum.STATE_JUMPING)) {
+                p.getState().setStateX(StateEnum.STATE_STANDING);
+            }
         };
     }
 

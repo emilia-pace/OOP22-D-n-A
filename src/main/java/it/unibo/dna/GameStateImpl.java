@@ -55,7 +55,8 @@ public class GameStateImpl implements GameState {
     @Override
     public void update() {
 
-        characters.stream().forEach((c) -> {
+        characters.stream().forEach((c)->{
+            this.gravity(c);
             this.checkCollisions(c);
             this.checkBorders(c);
         });
@@ -63,14 +64,6 @@ public class GameStateImpl implements GameState {
         this.eventQueue.manageEvents(this);
 
         characters.stream().forEach((c) -> c.update());
-
-        /*
-         * this.gravity(angel);
-         * this.gravity(devil);
-         * 
-         * display.obsAngel.update();
-         * display.obsDevil.update();
-         */
 
         for (Entity ent : entities) {
             if (ent instanceof MovablePlatform) {
@@ -81,13 +74,15 @@ public class GameStateImpl implements GameState {
         }
     }
 
-    /*
-     * private void gravity(Player player) {
-     * if (player.getVector().getY() < Gravity) {
-     * player.getVector().sumY(Player.STANDARDVELOCITY);
-     * }
-     * }
+    /**
+     * Manages the gravity of the player
+     * @param player the {@link Player} to manage
      */
+    private void gravity(Player player) {
+        if (player.getVector().getY() < Gravity) {
+            player.getVector().sumY(Player.STANDARDVELOCITY);
+        }
+    }
 
     /**
      * {@inheritDoc}

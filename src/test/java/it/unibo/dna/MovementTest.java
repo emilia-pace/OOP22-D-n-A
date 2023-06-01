@@ -38,7 +38,7 @@ class MovementTest {
     @Test
     void testCommand() {
         final Vector2d expectedVectorRight = new Vector2d(Player.STANDARDVELOCITY, 0);
-        final Pair<PlayerImpl.State, PlayerImpl.State> expectedStateRight = new Pair<>(PlayerImpl.State.STATE_STANDING,
+        final Pair<Player.State, PlayerImpl.State> expectedStateRight = new Pair<>(PlayerImpl.State.STATE_STANDING,
                 PlayerImpl.State.STATE_RIGHT);
         this.command.right().execute();
         assertEquals(expectedVectorRight, this.player.getVector());

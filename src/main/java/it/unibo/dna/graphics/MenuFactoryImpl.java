@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -173,7 +174,12 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al= new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gameOverMenu.setVisible(false);
-                new Thread(new GameEngine(level)).start();
+                try {
+                    new Thread(new GameEngine(level)).start();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
             
         };

@@ -18,7 +18,7 @@ import it.unibo.dna.GameEngine;
 import it.unibo.dna.model.Score;
 
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
-    private int level = 0;
+    private int level = 1;
     Score totalScore;
 
     @Override
@@ -35,18 +35,15 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 startMenu.getContentPane().setLayout(new BoxLayout(startMenu.getContentPane(), BoxLayout.Y_AXIS));
                 startMenu.setSize(800, 600);
                 startMenu.getContentPane().setBackground(Color.BLACK);
-            
+
                 panel.add(start);
                 panel.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.setAlignmentY(Component.CENTER_ALIGNMENT);
-                panel.setMinimumSize(new Dimension(600,600));
+                panel.setMinimumSize(new Dimension(600, 600));
                 panel.add(guide);
                 panel.add(quit);
                 panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-                
 
-                
-                
                 startMenu.getContentPane().add(panel);
                 startMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 startMenu.setLocationRelativeTo(null);
@@ -54,8 +51,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
 
                 return startMenu;
             }
-            
-        };    
+
+        };
     }
 
     @Override
@@ -73,7 +70,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 panel.add(score);
                 panel.add(restart);
                 panel.add(quit);
-                gameOverFrame.getContentPane().setLayout(new BoxLayout(gameOverFrame.getContentPane(), BoxLayout.Y_AXIS));
+                gameOverFrame.getContentPane()
+                        .setLayout(new BoxLayout(gameOverFrame.getContentPane(), BoxLayout.Y_AXIS));
                 gameOverFrame.setSize(800, 600);
                 gameOverFrame.getContentPane().setBackground(Color.BLACK);
 
@@ -82,19 +80,17 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 gameOverFrame.setLocationRelativeTo(null);
                 gameOverFrame.setVisible(true);
 
-
-
                 return gameOverFrame;
             }
-            
+
         };
     }
 
     @Override
     public GameMenu victoryMenu(Score totalScore) {
         return new GameMenu() {
-            
-        @Override
+
+            @Override
             public JFrame createMenuFrame() {
                 JFrame victoryFrame = new JFrame("You Won");
                 JButton nextLevel = getNextLevelButton(victoryFrame);
@@ -114,29 +110,25 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 victoryFrame.setLocationRelativeTo(null);
                 victoryFrame.setVisible(true);
 
-
-
                 return victoryFrame;
             }
-            
+
         };
     }
 
-
-
     public JButton getStartButton(JFrame startMenu) {
         JButton startButton = new JButton("Start");
-        ActionListener al= new ActionListener() {
+        ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startMenu.setVisible(false);
                 try {
-                    new Thread(new GameEngine(level)).start();
+                    new Thread(new GameEngine(1)).start();
                 } catch (IOException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
-            
+
         };
         startButton.addActionListener(al);
 
@@ -145,15 +137,15 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
 
     public JButton getGuideButton() {
         JButton guideButton = new JButton("Guide", null);
-        ActionListener al= new ActionListener() {
+        ActionListener al = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                JFrame guideFrame = new JFrame( "Guide");
+                JFrame guideFrame = new JFrame("Guide");
                 JOptionPane.showMessageDialog(guideFrame, "Angel controls: W:jump, A: left, D: right" +
-                "\n Devil controls: ↑: jump, \u2190: left, \u2192: right \n The goal of the game is to reach the doors together ");
+                        "\n Devil controls: ↑: jump, \u2190: left, \u2192: right \n The goal of the game is to reach the doors together ");
             }
-            
+
         };
         guideButton.addActionListener(al);
         return guideButton;
@@ -161,21 +153,21 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
 
     public JButton getQuitButton() {
         JButton quitButton = new JButton("Quit");
-        ActionListener al= new ActionListener() {
+        ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-            
+
         };
         quitButton.addActionListener(al);
 
         return quitButton;
-        
+
     }
 
     public JButton getRestartButton(int level, JFrame gameOverMenu) {
         JButton restartButton = new JButton("Restart Level");
-        ActionListener al= new ActionListener() {
+        ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gameOverMenu.setVisible(false);
                 try {
@@ -185,16 +177,16 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                     e1.printStackTrace();
                 }
             }
-            
+
         };
         restartButton.addActionListener(al);
 
         return restartButton;
     }
 
-    public JButton getNextLevelButton(JFrame victoryMenu){
+    public JButton getNextLevelButton(JFrame victoryMenu) {
         JButton restartButton = new JButton("Restart");
-        ActionListener al= new ActionListener() {
+        ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 victoryMenu.setVisible(false);
                 level++;
@@ -205,16 +197,15 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                     e1.printStackTrace();
                 }
             }
-            
+
         };
         restartButton.addActionListener(al);
 
         return restartButton;
     }
 
-    public JLabel getScorLabel(){
-        return new JLabel("Score: %d"+ totalScore);
+    public JLabel getScorLabel() {
+        return new JLabel("Score: %d" + totalScore);
     }
 
-    
 }

@@ -41,11 +41,12 @@ public class GameStateImpl implements GameState {
      * @param level  the level of the game
      * @throws IOException
      */
-    public GameStateImpl(final int width, final int height, final Level level) throws IOException {
+    public GameStateImpl(final int width, final int height, final List<Entity> level, List<Player> players)
+            throws IOException {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.score = new Score();
-        this.entities = level.entitiesList();
-        this.characters = level.getCharacters();
+        this.entities = level;
+        this.characters = players;
     }
 
     /**
@@ -54,21 +55,22 @@ public class GameStateImpl implements GameState {
     @Override
     public void update() {
 
-        characters.stream().forEach((c)->{
+        characters.stream().forEach((c) -> {
             this.checkCollisions(c);
             this.checkBorders(c);
         });
 
         this.eventQueue.manageEvents(this);
 
-        characters.stream().forEach((c)-> c.update());
+        characters.stream().forEach((c) -> c.update());
 
         /*
-        this.gravity(angel);
-        this.gravity(devil);
-
-        display.obsAngel.update();
-        display.obsDevil.update();*/
+         * this.gravity(angel);
+         * this.gravity(devil);
+         * 
+         * display.obsAngel.update();
+         * display.obsDevil.update();
+         */
 
         for (Entity ent : entities) {
             if (ent instanceof MovablePlatform) {
@@ -79,12 +81,13 @@ public class GameStateImpl implements GameState {
         }
     }
 
-    /*private void gravity(Player player) {
-        if (player.getVector().getY() < Gravity) {
-            player.getVector().sumY(Player.STANDARDVELOCITY);
-        }
-    }*/
-
+    /*
+     * private void gravity(Player player) {
+     * if (player.getVector().getY() < Gravity) {
+     * player.getVector().sumY(Player.STANDARDVELOCITY);
+     * }
+     * }
+     */
 
     /**
      * {@inheritDoc}

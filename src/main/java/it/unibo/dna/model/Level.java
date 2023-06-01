@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.awt.Dimension;
 import java.awt.Toolkit;
- 
+
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
@@ -18,24 +18,22 @@ import it.unibo.dna.model.object.api.Entity.entityType;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
-
 public class Level {
-    
+
     File lvlFile;
     List<Entity> entitiesList = new ArrayList<>();
     List<Player> characters = new ArrayList<>();
     String nameFile;
     String s;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    double tileSize = screenSize.getHeight()/100;
+    double tileSize = screenSize.getHeight() / 100;
     public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
     PlayerImpl angel;
     PlayerImpl devil;
 
-    public Level(int lvl){
+    public Level(int lvl) {
         getFile(lvl);
     }
-    
 
     public List<Entity> entitiesList() throws IOException{
         FileReader f = new FileReader(nameFile);
@@ -46,7 +44,8 @@ public class Level {
         System.out.println(" 1 \n");
         
         while(s!= null){
-            String[] splittedC = s.split("//s");
+            String[] splittedC = s.split("//s+");
+            System.out.println(splittedC);
             switch(splittedC[0]){
                 case "angel" : angel = new PlayerImpl(null, new 
                 Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
@@ -90,7 +89,6 @@ public class Level {
                 case "pPuddle" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.PURPLE_PUDDLE, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
 
-
             }
             s = b.readLine();
         }
@@ -109,11 +107,8 @@ public class Level {
 
     }
 
-    public List<Player> getCharacters(){
+    public List<Player> getCharacters() {
         return this.characters;
     }
-
-    
-    
 
 }

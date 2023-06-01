@@ -16,8 +16,6 @@ public interface GameState {
      */
     void update();
 
-    void render();
-
     /**
      * 
      * @return the {@link BoundingBox}

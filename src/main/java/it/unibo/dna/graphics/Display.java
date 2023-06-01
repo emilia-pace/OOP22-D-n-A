@@ -1,6 +1,7 @@
 package it.unibo.dna.graphics;
 
 import javax.swing.*;
+import java.util.List;
 
 import it.unibo.dna.GameState;
 import it.unibo.dna.common.Position2d;
@@ -23,30 +24,20 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
         private Canvas canvas;
-        public ManageImage mi = new ManageImage();
-        public PlayerImpl angel;
-        public PlayerImpl devil;
-        public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
-        public Optional<MovablePlatform> emptyParameter = Optional.empty();
-
-        public Entity platform1 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,new Position2d(400, 550));
-        public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.PLATFORM,new Position2d(90, 440));
-        public Entity movablePlatform1 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(200, 230),new Position2d(200,100));
-        public Entity movablePlatform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(340, 350),new Position2d(390, 200));
-        public Entity lever = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform1),entityType.LEVER,new Position2d(120, 410));
-        public Entity button = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform2),entityType.BUTTON,new Position2d(500, 530));
-        public Entity diamond = entityFactoryImpl.createEntity(emptyParameter,entityType.DIAMOND,new Position2d(200, 400));
-
+        public ImageManager imgMgr = new ImageManager();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        
         public MyObserver obsAngel;
         public MyObserver obsDevil;
 
-        public Display(final int width, final int height, GameState game) {
+        public Display() {
                 setTitle("D-n-A");
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setResizable(false);
 
                 canvas = new Canvas();
-                canvas.setSize(width, height);
+                canvas.setSize((int) (screenSize.getHeight()) , (int) screenSize.getHeight());
                 canvas.setFocusable(false);
                 add(canvas);
                 pack();
@@ -56,72 +47,30 @@ public class Display extends JFrame {
                 setLocationRelativeTo(null);
                 setVisible(true);
 
-                angel = new PlayerImpl(game, new Position2d(100, 500), new Vector2d(0, 0), 40, 30,
-                                PlayerImpl.PlayerType.ANGEL);
-                devil = new PlayerImpl(game, new Position2d(200, 500), new Vector2d(0, 0), 40, 30,
-                                PlayerImpl.PlayerType.DEVIL);
-                obsAngel = new MyObserver(this.angel.getState(), Player.PlayerType.ANGEL);
-                obsDevil = new MyObserver(this.devil.getState(), Player.PlayerType.DEVIL);
+                
                 this.addKeyListener(new KeyboardHandler(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, angel));
                 this.addKeyListener(new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, devil));
 
         }
 
-        public void render(GameState game) {
+        public void render(List<Entity> entities) {
                 BufferStrategy bufferStrategy = canvas.getBufferStrategy();
                 Graphics graphics = bufferStrategy.getDrawGraphics();
 
                 graphics.setColor(Color.BLACK);
                 graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-                if (game.getEntities().contains(diamond)) {
-                        graphics.drawImage(mi.getDiamondImage()/*.getScaledInstance(
-                                        (int) diamond.getBoundingBox().getWidth(),
-                                        (int) diamond.getBoundingBox().getHeight(), Image.SCALE_DEFAULT)*/,
-                                        (int) diamond.getPosition().getX(), (int) diamond.getPosition().getY(), this);
-
+                for (Entity entity : entities) {
+                        imgMgr.getImage(entity);
+                        graphics.drawImage(imgMgr.getImage(entity), (int) entity.getPosition().getX(), (int) entity.getPosition().getY(), this);
                 }
 
-                graphics.drawImage(
-                                obsAngel.getPlayerImage(),
-                                (int) angel.getPosition().getX(), (int) angel.getPosition().getY(), this);
-                graphics.drawImage(
-                                obsDevil.getPlayerImage(),
-                                (int) devil.getPosition().getX(), (int) devil.getPosition().getY(), this);
-                graphics.setColor(Color.WHITE);
-                graphics.drawImage(mi.getImage(platform1)/* .getScaledInstance(
-                                (int) platform1.getBoundingBox().getWidth(),
-                                (int) platform1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT)*/,
-                                (int) platform1.getPosition().getX(), (int) platform1.getPosition().getY(), this);
-
-                graphics.drawImage(mi.getImage(platform2)/*.getScaledInstance(
-                                (int) platform2.getBoundingBox().getWidth(),
-                                (int) platform2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT)*/,
-                                (int) platform2.getPosition().getX(), (int) platform2.getPosition().getY(), this);
-                graphics.setColor(Color.GREEN);
-                graphics.drawImage(mi.getImage(movablePlatform1)/*.getScaledInstance(
-                                (int) movablePlatform1.getBoundingBox().getWidth(),
-                                (int) movablePlatform1.getBoundingBox().getHeight(), Image.SCALE_DEFAULT)*/,
-                                (int) movablePlatform1.getPosition().getX(),
-                                (int) movablePlatform1.getPosition().getY(), this);
-                graphics.drawImage(mi.getImage(movablePlatform1)/*.getScaledInstance(
-                                (int) movablePlatform2.getBoundingBox().getWidth(),
-                                (int) movablePlatform2.getBoundingBox().getHeight(), Image.SCALE_DEFAULT)*/,
-                                (int) movablePlatform2.getPosition().getX(),
-                                (int) movablePlatform2.getPosition().getY(), this);
-                graphics.setColor(Color.GREEN);
-                graphics.drawImage(
-                                mi.getImage(this.lever)/*.getScaledInstance(
-                                                (int) lever.getBoundingBox().getWidth(),
-                                                (int) lever.getBoundingBox().getHeight(), Image.SCALE_DEFAULT)*/,
-                                (int) lever.getPosition().getX(), (int) lever.getPosition().getY(), this);
-                graphics.setColor(Color.MAGENTA);
-                graphics.drawImage(mi.getImage(this.button)/*.getScaledInstance(
-                                (int) button.getBoundingBox().getWidth(),
-                                (int) button.getBoundingBox().getHeight(), Image.SCALE_DEFAULT)*/,
-                                (int) button.getPosition().getX(), (int) button.getPosition().getY(), this);
                 graphics.dispose();
                 bufferStrategy.show();
 
+        }
+
+        public double getBoh(){
+                return width;
         }
 }

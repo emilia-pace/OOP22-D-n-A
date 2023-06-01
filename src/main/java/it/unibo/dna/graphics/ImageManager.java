@@ -23,7 +23,7 @@ import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
-public class ManageImage {
+public class ImageManager {
 
     public static double LEVERHEIGHT = 30.0;
     public static double ACTIVABLEOBJECTWIDTH = 30.0;
@@ -34,7 +34,7 @@ public class ManageImage {
     private MyObserver obsPlayer1;
     private MyObserver obsPlayer2;
 
-    public ManageImage(List<Player> playerList) {
+    public ImageManager() {
         // caricamento di tutte le immagini
         obsPlayer1 = new MyObserver(playerList.get(0).getState(), playerList.get(0).getPlayerType(),
                 (int) playerList.get(0).getBoundingBox().getHeight(),

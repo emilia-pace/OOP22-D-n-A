@@ -69,7 +69,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
      */
     public void activate() {
         this.isActive = true;
-        movablePlatform.move(movablePlatform.getOriginalPos(),movablePlatform.getFinalPosition());
+        movablePlatform.move(movablePlatform.getOriginalPosition(),movablePlatform.getFinalPosition());
     }
 
     /**
@@ -77,7 +77,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
      */
     public void deactivate() {
         this.isActive = false;
-        movablePlatform.move(movablePlatform.getFinalPosition(),movablePlatform.getOriginalPos());
+        movablePlatform.move(movablePlatform.getFinalPosition(),movablePlatform.getOriginalPosition());
     }
 
     /**

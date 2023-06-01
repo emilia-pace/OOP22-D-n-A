@@ -2,8 +2,6 @@ package it.unibo.dna.model.object;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import it.unibo.dna.common.Pair;
 

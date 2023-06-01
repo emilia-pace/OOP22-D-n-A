@@ -6,8 +6,7 @@ import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.Level;
 
 public class GameEngine implements Runnable {
-    Display display = new Display();
-    
+    Display display;
 
     private GameState game;
     private Level level;
@@ -17,6 +16,7 @@ public class GameEngine implements Runnable {
 
     public GameEngine(int lvl) throws IOException {
         this.level = new Level(lvl);
+        this.display = new Display(this.level.getCharacters());
         this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level);
     }
 
@@ -25,7 +25,6 @@ public class GameEngine implements Runnable {
         running = true;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();
-        
 
         while (running) {
             currentTime = System.currentTimeMillis();
@@ -43,7 +42,7 @@ public class GameEngine implements Runnable {
 
     private void render() {
         display.render(game.getEntities());
-        
+
     }
 
     private void update() {

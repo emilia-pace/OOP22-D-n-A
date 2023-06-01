@@ -34,7 +34,7 @@ public class ImageManager {
     private MyObserver obsPlayer1;
     private MyObserver obsPlayer2;
 
-    public ImageManager() {
+    public ImageManager(List<Player> playerList) {
         // caricamento di tutte le immagini
         obsPlayer1 = new MyObserver(playerList.get(0).getState(), playerList.get(0).getPlayerType(),
                 (int) playerList.get(0).getBoundingBox().getHeight(),

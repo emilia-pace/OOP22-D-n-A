@@ -27,7 +27,7 @@ public class ImageManager {
 
     private int defaultButtonHeight = 20;
     private int defaultWidth = 30;
-    private int defaultHeight = 30;
+    private int defaultHeight = 4;
     private double defaultPuddleWidth = 40;
     private int defaultDoorHeight = 7;
     private int defaultDoorWidth = 5;

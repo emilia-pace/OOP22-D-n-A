@@ -22,7 +22,7 @@ public class MyObserver implements PropertyChangeListener {
     private Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
     private Player.PlayerType type;
     private Image playerImage;
-    private int MAX_FRAME = 10;
+    private int MAX_FRAME = 100;
     private int frame = 0;
     private int imageIndex = 0;
 

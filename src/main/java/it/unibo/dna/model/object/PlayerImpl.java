@@ -55,4 +55,9 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
         return this.game.getEventQueue();
     }
 
+    @Override
+    public void setGame(GameState game) {
+        this.game = game;
+    }
+
 }

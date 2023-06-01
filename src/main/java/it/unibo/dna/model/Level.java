@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.PlayerImpl;
@@ -54,12 +55,12 @@ public class Level {
             switch(splittedC[0]){
                 case "angel" : angel = new PlayerImpl(null, new 
                 Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
-                null, Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
+                new Vector2d(0,0), Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
                 PlayerImpl.PlayerType.ANGEL); characters.add(angel); System.out.println("a \n"); break;
 
                 case "devil" : devil = new PlayerImpl(null, new 
                 Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
-                null, Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
+                new Vector2d(0,0), Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
                 PlayerImpl.PlayerType.DEVIL); characters.add(devil);System.out.println("d \n"); break;
                 
                 case "dDevil" : entities.add(entityFactoryImpl.createEntity(null, entityType.DEVIL_DOOR,

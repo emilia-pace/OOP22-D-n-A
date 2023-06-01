@@ -18,11 +18,10 @@ public class GameEngine implements Runnable {
 
     public GameEngine(int lvl) throws IOException {
         this.level = new Level(lvl);
-        System.out.println(this.level.getCharacters());
-        System.out.println(lvl);
         this.display = new Display(this.level.getCharacters());
         this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level.getEntities(),
                 this.level.getCharacters());
+        System.out.println(this.level.getCharacters());
     }
 
     @Override
@@ -46,7 +45,7 @@ public class GameEngine implements Runnable {
     }
 
     private void render() {
-        display.render(game.getEntities());
+        display.render(game.getEntities(), this.game.getCharacters());
 
     }
 

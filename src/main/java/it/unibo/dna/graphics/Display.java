@@ -17,6 +17,7 @@ public class Display extends JFrame {
         private Canvas canvas;
         public ImageManager imgMgr;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double tileSize = screenSize.getHeight() / 100;
         double width = screenSize.getWidth();
 
         public MyObserver obsAngel;
@@ -38,7 +39,7 @@ public class Display extends JFrame {
                 setLocationRelativeTo(null);
                 setVisible(true);
 
-                imgMgr = new ImageManager(playerList);
+                imgMgr = new ImageManager(playerList, (int) this.tileSize);
 
                 playerList.forEach(p -> {
                         if (p.getPlayerType().equals(Player.PlayerType.ANGEL)) {
@@ -52,7 +53,7 @@ public class Display extends JFrame {
 
         }
 
-        public void render(List<Entity> entities) {
+        public void render(List<Entity> entities, List<Player> players) {
                 BufferStrategy bufferStrategy = canvas.getBufferStrategy();
                 Graphics graphics = bufferStrategy.getDrawGraphics();
 
@@ -60,9 +61,13 @@ public class Display extends JFrame {
                 graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
                 for (Entity entity : entities) {
-                        imgMgr.getImage(entity);
                         graphics.drawImage(imgMgr.getImage(entity), (int) entity.getPosition().getX(),
                                         (int) entity.getPosition().getY(), this);
+                }
+
+                for (Player p : players) {
+                        graphics.drawImage(imgMgr.getPlayerImage(p), (int) p.getPosition().getX(),
+                                        (int) p.getPosition().getY(), this);
                 }
 
                 graphics.dispose();

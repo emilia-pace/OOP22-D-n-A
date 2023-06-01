@@ -5,6 +5,7 @@ import java.util.List;
 import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Player;
 
 /**
  * Interface that models the state of the game.
@@ -34,6 +35,8 @@ public interface GameState {
      * @param e the {@link Entity} to add
      */
     void addEntity(Entity e);
+
+    List<Player> getCharacters();
 
     /**
      * Removes an {@link Entity} from the game.

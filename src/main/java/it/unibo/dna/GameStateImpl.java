@@ -55,7 +55,7 @@ public class GameStateImpl implements GameState {
     @Override
     public void update() {
 
-        characters.stream().forEach((c)->{
+        characters.stream().forEach((c) -> {
             this.gravity(c);
             this.checkCollisions(c);
             this.checkBorders(c);
@@ -76,6 +76,7 @@ public class GameStateImpl implements GameState {
 
     /**
      * Manages the gravity of the player
+     * 
      * @param player the {@link Player} to manage
      */
     private void gravity(Player player) {
@@ -122,6 +123,10 @@ public class GameStateImpl implements GameState {
     @Override
     public List<Entity> getEntities() {
         return this.entities;
+    }
+
+    public List<Player> getCharacters() {
+        return this.characters;
     }
 
     /**

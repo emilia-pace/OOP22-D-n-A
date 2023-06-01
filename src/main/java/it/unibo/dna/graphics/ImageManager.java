@@ -25,17 +25,26 @@ import it.unibo.dna.model.object.api.Player;
 
 public class ImageManager {
 
-    public static double LEVERHEIGHT = 30.0;
-    public static double ACTIVABLEOBJECTWIDTH = 30.0;
-    public static double BUTTONHEIGHT = 20.0;
-    public int tileSize = 10;
+    private int defaultButtonHeight = 2;
+    private int defaultWidth = 30;
+    private int defaultHeight = 3;
+    private double defaultPuddleWidth = 4;
+    private int defaultDoorHeight = 7;
+    private int defaultDoorWidth = 5;
+    private int defaultPlatformWidth = 30;
+    private int defaultMovablePlatformWidth = 1;
+    private double diamondDimension = 4;
+
+    private int diamondValue = 1;
+    private int tileSize;
 
     private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
     private MyObserver obsPlayer1;
     private MyObserver obsPlayer2;
 
-    public ImageManager(List<Player> playerList) {
+    public ImageManager(List<Player> playerList, int tileSize) {
         // caricamento di tutte le immagini
+        this.tileSize = tileSize;
         obsPlayer1 = new MyObserver(playerList.get(0).getState(), playerList.get(0).getPlayerType(),
                 (int) playerList.get(0).getBoundingBox().getHeight(),
                 (int) playerList.get(0).getBoundingBox().getWidth(), this.tileSize);
@@ -69,7 +78,8 @@ public class ImageManager {
     }
 
     private Image resizeImage(Image image) {
-        return image.getScaledInstance(image.getHeight(null) * tileSize, image.getWidth(null) * tileSize,
+        return image.getScaledInstance(image.getHeight(null) * tileSize,
+                image.getWidth(null) * tileSize,
                 Image.SCALE_DEFAULT);
     }
 
@@ -82,10 +92,13 @@ public class ImageManager {
         List<Image> movablePlatformImageList = new ArrayList<>();
         List<Image> diamondImage = new ArrayList<>();
         try {
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG"))));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG"))));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG"))));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG"))));
+            doorImageList.add(
+                    (ImageIO.read(new File(path + "porta_angelo.PNG"))).getScaledInstance(defaultDoorHeight * tileSize,
+                            defaultDoorWidth * tileSize,
+                            Image.SCALE_DEFAULT));
+            doorImageList.add((ImageIO.read(new File(path + "porta_angelo_aperta.PNG"))));
+            doorImageList.add((ImageIO.read(new File(path + "porta_diavolo.PNG"))));
+            doorImageList.add((ImageIO.read(new File(path + "porta_diavolo_aperta.PNG"))));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG"))));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG"))));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG"))));
@@ -93,8 +106,15 @@ public class ImageManager {
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg"))));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg"))));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg"))));
-            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg"))));
-            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg"))));
+            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")))
+                    .getScaledInstance(defaultPlatformWidth * tileSize,
+                    defaultHeight * tileSize,
+                            Image.SCALE_DEFAULT));
+            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")))
+                    .getScaledInstance(defaultPlatformWidth * tileSize,
+                    defaultHeight * tileSize,
+                            Image.SCALE_DEFAULT));
+            ;
             diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png"))));
         } catch (IOException e) {
             e.printStackTrace();

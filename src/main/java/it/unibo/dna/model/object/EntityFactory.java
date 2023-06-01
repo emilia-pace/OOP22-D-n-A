@@ -11,6 +11,15 @@ import it.unibo.dna.model.object.api.Entity;
  */
 public interface EntityFactory {
     
+    public static int DEF_HEIGHT = 4;
+    public static int DEF_WIDTH = 4;
+    public static int BUTTON_HEIGHT = 2;
+    public static int LEVER_HEIGHT = 3;
+    public static int PUDDLE_WIDTH = 5;
+    public static int DOOR_HEIGHT = 10;
+    public static int PLATFORM_WIDTH = 30;
+    public static int PLAYER_HEIGHT = 4;
+    public static int PLAYER_WIDTH = 3;
     /**
      * A method that creates an Entity of a wanted type.
      * @param movablePlatform the optional MovablePlatform that the Entity can control. It shoudl be present if a BUTTON or a LEVER is being created

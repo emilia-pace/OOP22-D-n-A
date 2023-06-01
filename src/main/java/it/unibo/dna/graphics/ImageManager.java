@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,6 +23,7 @@ import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.EntityFactory;
 
 public class ImageManager {
 
@@ -77,9 +79,9 @@ public class ImageManager {
         return image;
     }
 
-    private Image resizeImage(Image image) {
-        return image.getScaledInstance(image.getHeight(null) * tileSize,
-                image.getWidth(null) * tileSize,
+    private Image resizeImage(Image image, int height, int width) {
+        return image.getScaledInstance(width * tileSize,
+                height * tileSize,
                 Image.SCALE_DEFAULT);
     }
 
@@ -92,30 +94,20 @@ public class ImageManager {
         List<Image> movablePlatformImageList = new ArrayList<>();
         List<Image> diamondImage = new ArrayList<>();
         try {
-            doorImageList.add(
-                    (ImageIO.read(new File(path + "porta_angelo.PNG"))).getScaledInstance(defaultDoorHeight * tileSize,
-                            defaultDoorWidth * tileSize,
-                            Image.SCALE_DEFAULT));
-            doorImageList.add((ImageIO.read(new File(path + "porta_angelo_aperta.PNG"))));
-            doorImageList.add((ImageIO.read(new File(path + "porta_diavolo.PNG"))));
-            doorImageList.add((ImageIO.read(new File(path + "porta_diavolo_aperta.PNG"))));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG"))));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG"))));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG"))));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG"))));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg"))));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg"))));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg"))));
-            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")))
-                    .getScaledInstance(defaultPlatformWidth * tileSize,
-                            defaultHeight * tileSize,
-                            Image.SCALE_DEFAULT));
-            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")))
-                    .getScaledInstance(defaultPlatformWidth * tileSize,
-                            defaultHeight * tileSize,
-                            Image.SCALE_DEFAULT));
-            ;
-            diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png"))));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,defaultWidth));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG")),EntityFactory.LEVER_HEIGHT,EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG")),EntityFactory.LEVER_HEIGHT,EntityFactory.DEF_WIDTH));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PUDDLE_WIDTH));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PUDDLE_WIDTH));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PUDDLE_WIDTH));
+            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PLATFORM_WIDTH));
+            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PLATFORM_WIDTH));
+            diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png")),EntityFactory.DEF_HEIGHT,EntityFactory.DEF_HEIGHT));
         } catch (IOException e) {
             e.printStackTrace();
         }

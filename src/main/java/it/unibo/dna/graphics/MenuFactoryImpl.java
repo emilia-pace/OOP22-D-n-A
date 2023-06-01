@@ -18,7 +18,7 @@ import it.unibo.dna.GameEngine;
 import it.unibo.dna.model.Score;
 
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
-    private int level = 0;
+    private int level = 1;
     Score totalScore;
 
     @Override

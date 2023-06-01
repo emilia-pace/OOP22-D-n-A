@@ -2,8 +2,8 @@ angel 5 90 10 10
 devil 17 90 10 10
 dAngel 5 10
 dDevil 15 10
-p1 0 80
-p2 60 80
-p3 30 60
-p4 70 40
-p5 0 30
+platform 0 80
+platform 60 80
+platform 30 60
+platform 70 40
+platform 0 30

@@ -3,19 +3,10 @@ package it.unibo.dna.graphics;
 import javax.swing.*;
 import java.util.List;
 
-import it.unibo.dna.GameState;
-import it.unibo.dna.common.Position2d;
-import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.object.EntityFactoryImpl;
-import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.MyObserver;
-import it.unibo.dna.model.object.PlayerImpl;
-import it.unibo.dna.model.object.api.Entity.entityType;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
-
-import java.util.Optional;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

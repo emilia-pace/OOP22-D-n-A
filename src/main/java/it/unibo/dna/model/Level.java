@@ -26,7 +26,6 @@ public class Level {
     List<Player> characters = new ArrayList<>();
     String nameFile;
     String s;
-    int lvl;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     double tileSize = screenSize.getHeight()/100;
     public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
@@ -39,12 +38,12 @@ public class Level {
     
 
     public List<Entity> entitiesList() throws IOException{
-        ArrayList <Entity> entities = new ArrayList<>();
         FileReader f = new FileReader(nameFile);
         BufferedReader b;
         
         b=new BufferedReader(f);
-        s = b.readLine();
+        s= b.readLine();
+        System.out.println(" 1 \n");
         
         while(s!= null){
             String[] splittedC = s.split("//s");
@@ -52,60 +51,60 @@ public class Level {
                 case "angel" : angel = new PlayerImpl(null, new 
                 Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
                 null, Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
-                PlayerImpl.PlayerType.ANGEL); characters.add(angel);
+                PlayerImpl.PlayerType.ANGEL); 
 
                 case "devil" : devil = new PlayerImpl(null, new 
                 Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
                 null, Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
                 PlayerImpl.PlayerType.DEVIL); characters.add(devil);
                 
-                case "dDevil" : entities.add(entityFactoryImpl.createEntity(null, entityType.DEVIL_DOOR,
+                case "dDevil" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.DEVIL_DOOR,
                  new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); 
 
-                case "dAngel" : entities.add(entityFactoryImpl.createEntity(null, entityType.ANGEL_DOOR,
+                case "dAngel" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.ANGEL_DOOR,
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); 
 
-                case "diamond" : entities.add(entityFactoryImpl.createEntity(null, entityType.DIAMOND,
+                case "diamond" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.DIAMOND,
                  new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); 
 
-                case "button" : entities.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entities.stream()
+                case "button" : entitiesList.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entitiesList.stream()
                 .filter(e -> e.getType().equals(entityType.MOVABLEPLATFORM)).reduce((first, second)->second).get()), 
                 entityType.BUTTON, new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); 
 
-                case "lever" : entities.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entities.stream()
+                case "lever" : entitiesList.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entitiesList.stream()
                 .filter(e -> e.getType().equals(entityType.MOVABLEPLATFORM)).reduce((first, second)->second).get()), 
                 entityType.LEVER, new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
                 
-                case "platform" : entities.add(entityFactoryImpl.createEntity(null, entityType.PLATFORM, 
+                case "platform" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.PLATFORM, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
 
-                case "movablePlatform" : entities.add(entityFactoryImpl.createEntity(null, entityType.MOVABLEPLATFORM, 
+                case "movablePlatform" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.MOVABLEPLATFORM, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
 
-                case "rPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.RED_PUDDLE, 
+                case "rPuddle" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.RED_PUDDLE, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
 
-                case "bPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.BLUE_PUDDLE, 
+                case "bPuddle" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.BLUE_PUDDLE, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
 
-                case "pPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.PURPLE_PUDDLE, 
+                case "pPuddle" : entitiesList.add(entityFactoryImpl.createEntity(null, entityType.PURPLE_PUDDLE, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
 
 
-    
             }
-            b.readLine();
+            s = b.readLine();
         }
 
         b.close();
-        return entities;
+        return entitiesList;
     }
+
 
     private void getFile(int lvl) {
         switch(lvl){
-            case 1: nameFile = "lvl1.txt";
-            case 2: nameFile = "lvl2.txt";
-            case 3: nameFile = "lvl3.txt";
+            case 1: nameFile = "lvl1.txt"; break;
+            case 2: nameFile = "lvl2.txt"; break;
+            case 3: nameFile = "lvl3.txt"; break;
         }
 
     }

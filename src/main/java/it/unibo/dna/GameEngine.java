@@ -20,17 +20,13 @@ public class GameEngine implements Runnable {
         this.level = new Level(lvl);
         System.out.println(this.level.getCharacters());
         System.out.println(lvl);
-        List<Entity> entities = level.entitiesList();
         this.display = new Display(this.level.getCharacters());
-        this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level.entitiesList(),
+        this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level.getEntities(),
                 this.level.getCharacters());
-        System.out.println(this.game.getEntities());
     }
 
     @Override
     public void run() {
-        System.out.println(this.game.getEntities());
-        System.out.println(this.level.getCharacters());
         running = true;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();

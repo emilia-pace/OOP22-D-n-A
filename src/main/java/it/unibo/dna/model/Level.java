@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -20,7 +21,7 @@ import it.unibo.dna.model.object.api.Entity;
 public class Level {
     
     File lvlFile;
-    ArrayList <Entity> entitiesList = new ArrayList<>();
+    List<Entity> entitiesList = new ArrayList<>();
     String nameFile;
     String s;
     int lvl;
@@ -29,7 +30,7 @@ public class Level {
     public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
     
 
-    public ArrayList <Entity> entitiesList() throws IOException{
+    public List<Entity> entitiesList() throws IOException{
         getFile(lvl);
         ArrayList <Entity> entities = new ArrayList<>();
         FileReader f = new FileReader(nameFile);

@@ -29,6 +29,15 @@ public class Display extends JFrame {
         public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
         public Optional<MovablePlatform> emptyParameter = Optional.empty();
 
+<<<<<<< HEAD
+        public Entity platform1 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,new Position2d(400, 550));
+        public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.PLATFORM,new Position2d(90, 440));
+        public Entity movablePlatform1 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(200, 230),new Position2d(200,100));
+        public Entity movablePlatform2 = entityFactoryImpl.createEntity(emptyParameter,entityType.MOVABLEPLATFORM,new Position2d(340, 350),new Position2d(390, 200));
+        public Entity lever = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform1),entityType.LEVER,new Position2d(120, 410));
+        public Entity button = entityFactoryImpl.createEntity(Optional.of((MovablePlatform)movablePlatform2),entityType.BUTTON,new Position2d(500, 530));
+        public Entity diamond = entityFactoryImpl.createEntity(emptyParameter,entityType.DIAMOND,new Position2d(200, 400));
+=======
         public Entity platform1 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,
                         new Position2d(400, 550));
         public Entity platform2 = entityFactoryImpl.createEntity(emptyParameter, entityType.PLATFORM,
@@ -44,8 +53,14 @@ public class Display extends JFrame {
         public Entity diamond = entityFactoryImpl.createEntity(emptyParameter, entityType.DIAMOND,
                         new Position2d(200, 400));
         JLabel boh = new JLabel("\u2194");
+<<<<<<< HEAD
         public MyObserver obsAngel;
         public MyObserver obsDevil;
+=======
+        public Observer obsAngel;
+        public Observer obsDevil;
+>>>>>>> 445ee0c7bf4016f3296fd999224f83327834cee5
+>>>>>>> 338f02d4a631a1af3fbcb5be48314e71e28fad23
 
         public Display(final int width, final int height, GameState game) {
                 setTitle("D-n-A");

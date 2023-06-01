@@ -16,26 +16,41 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
+import it.unibo.dna.model.object.MyObserver;
 import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Player;
 
 public class ImageManager {
 
     public static double LEVERHEIGHT = 30.0;
     public static double ACTIVABLEOBJECTWIDTH = 30.0;
     public static double BUTTONHEIGHT = 20.0;
-    public static int tileSize = 10;
+    public int tileSize = 10;
 
     private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
+    private MyObserver obsPlayer1;
+    private MyObserver obsPlayer2;
 
-    public ImageManager() {
+    public ImageManager(List<Player> playerList) {
         // caricamento di tutte le immagini
+        obsPlayer1 = new MyObserver(playerList.get(0).getState(), playerList.get(0).getPlayerType(),
+                (int) playerList.get(0).getBoundingBox().getHeight(),
+                (int) playerList.get(0).getBoundingBox().getWidth(), this.tileSize);
+        obsPlayer2 = new MyObserver(playerList.get(1).getState(), playerList.get(1).getPlayerType(),
+                (int) playerList.get(1).getBoundingBox().getHeight(),
+                (int) playerList.get(1).getBoundingBox().getWidth(), this.tileSize);
         loadImages();
     }
 
-    Image getImage(Entity entity) {
+    public Image getPlayerImage(Player player) {
+        return (obsPlayer1.getType().equals(player.getPlayerType())) ? obsPlayer1.getPlayerImage()
+                : obsPlayer2.getPlayerImage();
+    }
+
+    public Image getImage(Entity entity) {
         Image image = getDiamondImage();
         if (entity.getClass().equals(Door.class)) {
             image = getDoorImage(((Door) entity));
@@ -47,14 +62,15 @@ public class ImageManager {
             image = getPlatformImage();
         } else if (entity.getClass().equals(MovablePlatform.class)) {
             image = getMovablePlatformImage();
-        } else if(entity.getClass().equals(MovablePlatform.class)){
+        } else if (entity.getClass().equals(MovablePlatform.class)) {
             image = getDiamondImage();
         }
         return image;
     }
 
     private Image resizeImage(Image image) {
-        return image.getScaledInstance(image.getHeight(null)*tileSize, image.getWidth(null)*tileSize,Image.SCALE_DEFAULT);
+        return image.getScaledInstance(image.getHeight(null) * tileSize, image.getWidth(null) * tileSize,
+                Image.SCALE_DEFAULT);
     }
 
     private void loadImages() {
@@ -91,6 +107,9 @@ public class ImageManager {
         this.map.put(Diamond.class, diamondImage);
     }
 
+    public List<MyObserver> getObservers() {
+        return List.of(obsPlayer1, obsPlayer2);
+    }
 
     /**
      * 
@@ -98,7 +117,7 @@ public class ImageManager {
      * @return the image of the {@link ActivableObkect}
      */
     public Image getActObjImage(ActivableObjectImpl activableObject) {
-        if (activableObject.getType().equals(/*ActivableObjectImpl.Activator.BUTTON*/Entity.entityType.BUTTON)) {
+        if (activableObject.getType().equals(/* ActivableObjectImpl.Activator.BUTTON */Entity.entityType.BUTTON)) {
             return (activableObject.isActivated()) ? this.map.get(ActivableObjectImpl.class).get(1)
                     : this.map.get(ActivableObjectImpl.class).get(0);
         }
@@ -112,12 +131,12 @@ public class ImageManager {
      * @return the Image
      */
     public Image getPuddleImage(Puddle puddle) {
-        //puddleType type = puddle.getPuddleType();
+        // puddleType type = puddle.getPuddleType();
         Entity.entityType type = puddle.getType();
         List<Image> puddleImages = this.map.get(Puddle.class);
-        if (type.equals(/*puddleType.BLUE)*/Entity.entityType.BLUE_PUDDLE)) {
+        if (type.equals(/* puddleType.BLUE) */Entity.entityType.BLUE_PUDDLE)) {
             return puddleImages.get(0);
-        } else if (type.equals(/*puddleType.RED*/Entity.entityType.BLUE_PUDDLE)) {
+        } else if (type.equals(/* puddleType.RED */Entity.entityType.BLUE_PUDDLE)) {
             return puddleImages.get(1);
         }
         return puddleImages.get(2);

@@ -20,15 +20,17 @@ public class MyObserver implements PropertyChangeListener {
 
     private State state;
     private Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
+    private Player.PlayerType type;
     private Image playerImage;
     private int MAX_FRAME = 10;
     private int frame = 0;
     private int imageIndex = 0;
 
-    public MyObserver(State state, Player.PlayerType type) {
+    public MyObserver(State state, Player.PlayerType type, int height, int width, double tileSize) {
         state.addChangeListener(this);
         this.state = state;
-        this.playerImage(playerMap, type, 40, 30);
+        this.type = type;
+        this.playerImage(playerMap, height * (int) tileSize, width * (int) tileSize);
         playerImage = this.playerMap.get(state.getState()).get(0);
     }
 
@@ -60,8 +62,8 @@ public class MyObserver implements PropertyChangeListener {
     }
 
     private void playerImage(final Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap,
-            final Player.PlayerType type, final int width, final int height) {
-        String path = (type.equals(Player.PlayerType.ANGEL)) ? "angel" : "devil";
+            final int width, final int height) {
+        String path = (this.type.equals(Player.PlayerType.ANGEL)) ? "angel" : "devil";
         List.of(State.StateEnum.STATE_JUMPING, State.StateEnum.STATE_STANDING).forEach(state -> {
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_LEFT), new ArrayList<>());
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_RIGHT), new ArrayList<>());
@@ -94,6 +96,10 @@ public class MyObserver implements PropertyChangeListener {
 
     public Image getPlayerImage() {
         return this.playerImage;
+    }
+
+    public Player.PlayerType getType() {
+        return this.type;
     }
 
 }

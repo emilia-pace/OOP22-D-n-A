@@ -13,10 +13,10 @@ import it.unibo.dna.model.object.api.Entity.entityType;
  */
 public class EntityFactoryImpl implements EntityFactory {
 
-    private double defaultButtonHeight = 2.0;
+    private double defaultButtonHeight = 20.0;
     private double defaultWidth = 30.0;
     private double defaultHeight = 30.0;
-    private double defaultPuddleWidth = 4.0;
+    private double defaultPuddleWidth = 40.0;
     private double defaultDoorHeight = 7.0;
     private double defaultDoorWidth = 5.0;
     private double defaultPlatformWidth = 30.0;
@@ -39,7 +39,7 @@ public class EntityFactoryImpl implements EntityFactory {
                 new Puddle(position[0], defaultHeight, defaultPuddleWidth, Entity.entityType.PURPLE_PUDDLE);
             case ANGEL_DOOR -> new Door(position[0], defaultDoorHeight, defaultDoorWidth, Entity.entityType.ANGEL_DOOR);
             case DEVIL_DOOR -> new Door(position[0], defaultDoorHeight, defaultDoorWidth, Entity.entityType.DEVIL_DOOR);
-            case PLATFORM -> new Platform(position[0], defaultHeight, defaultPlatformWidth);
+            case PLATFORM -> new Platform(position[0], defaultPlatformWidth, defaultHeight);
             case MOVABLEPLATFORM -> new MovablePlatform(position[0], defaultVector, defaultMovablePlatformWidth,
                     defaultHeight, position[1]);
             case DIAMOND -> new Diamond(diamondDimension, diamondDimension, diamondValue, position[0]);

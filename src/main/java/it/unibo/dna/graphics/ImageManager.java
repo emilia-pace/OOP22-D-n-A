@@ -25,10 +25,10 @@ import it.unibo.dna.model.object.api.Player;
 
 public class ImageManager {
 
-    private int defaultButtonHeight = 2;
+    private int defaultButtonHeight = 20;
     private int defaultWidth = 30;
-    private int defaultHeight = 3;
-    private double defaultPuddleWidth = 4;
+    private int defaultHeight = 30;
+    private double defaultPuddleWidth = 40;
     private int defaultDoorHeight = 7;
     private int defaultDoorWidth = 5;
     private int defaultPlatformWidth = 30;
@@ -108,11 +108,11 @@ public class ImageManager {
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg"))));
             platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")))
                     .getScaledInstance(defaultPlatformWidth * tileSize,
-                    defaultHeight * tileSize,
+                            defaultHeight * tileSize,
                             Image.SCALE_DEFAULT));
             movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")))
                     .getScaledInstance(defaultPlatformWidth * tileSize,
-                    defaultHeight * tileSize,
+                            defaultHeight * tileSize,
                             Image.SCALE_DEFAULT));
             ;
             diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png"))));

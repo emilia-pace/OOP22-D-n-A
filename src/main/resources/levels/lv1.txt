@@ -1,8 +1,4 @@
-angel 5 50 1 1
-devil 17 50 1 1
+angel 5 50 10 10
+devil 17 50 10 10
 platform 0 80
-platform 60 80
-platform 30 60
-platform 70 40
-platform 0 30
-dDevil 7 60
+

@@ -21,7 +21,11 @@ public class GameEngine implements Runnable {
         this.display = new Display(this.level.getCharacters());
         this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level.getEntities(),
                 this.level.getCharacters());
-        System.out.println(this.level.getCharacters());
+        for (Entity e : this.game.getEntities()) {
+            System.out.println(e.getClass());
+            System.out.println(e.getBoundingBox().getHeight());
+            System.out.println(e.getBoundingBox().getWidth());
+        }
     }
 
     @Override

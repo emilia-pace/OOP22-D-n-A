@@ -26,8 +26,6 @@ public class Level {
     List<Player> characters = new ArrayList<>();
     String nameFile;
     String s;
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    double tileSize = screenSize.getHeight() / 100;
     public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
     PlayerImpl angel;
     PlayerImpl devil;
@@ -54,47 +52,47 @@ public class Level {
             String[] splittedC = s.split(" ");
             switch(splittedC[0]){
                 case "angel" : angel = new PlayerImpl(null, new 
-                Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
-                new Vector2d(0,0), Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
+                Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])), 
+                new Vector2d(0,0), Double.parseDouble(splittedC[3]), Double.parseDouble(splittedC[4]), 
                 PlayerImpl.PlayerType.ANGEL); characters.add(angel); System.out.println("a \n"); break;
 
                 case "devil" : devil = new PlayerImpl(null, new 
-                Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)), 
-                new Vector2d(0,0), Double.parseDouble(splittedC[3])*(tileSize), Double.parseDouble(splittedC[4])*(tileSize), 
+                Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])), 
+                new Vector2d(0,0), Double.parseDouble(splittedC[3]), Double.parseDouble(splittedC[4]), 
                 PlayerImpl.PlayerType.DEVIL); characters.add(devil);System.out.println("d \n"); break;
                 
                 case "dDevil" : entities.add(entityFactoryImpl.createEntity(null, entityType.DEVIL_DOOR,
-                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));System.out.println("c \n"); break;
+                 new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));System.out.println("c \n"); break;
 
                 case "dAngel" : entities.add(entityFactoryImpl.createEntity(null, entityType.ANGEL_DOOR,
-                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); System.out.println("c \n"); break;
+                new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); System.out.println("c \n"); break;
 
                 case "diamond" : entities.add(entityFactoryImpl.createEntity(null, entityType.DIAMOND,
-                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); break;
+                 new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); break;
 
                 case "button" : entities.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entities.stream()
                 .filter(e -> e.getType().equals(entityType.MOVABLEPLATFORM)).reduce((first, second)->second).get()), 
-                entityType.BUTTON, new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); break;
+                entityType.BUTTON, new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); break;
 
                 case "lever" : entities.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entities.stream()
                 .filter(e -> e.getType().equals(entityType.MOVABLEPLATFORM)).reduce((first, second)->second).get()), 
-                entityType.LEVER, new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); break;
+                entityType.LEVER, new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); break;
                 
                 case "platform" : entities.add(entityFactoryImpl.createEntity(null, entityType.PLATFORM, 
-                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); System.out.println("1 \n"); break;
+                new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); System.out.println("1 \n"); break;
 
                 case "movablePlatform": entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.MOVABLEPLATFORM,
-                new Position2d(Double.parseDouble(splittedC[1]) * (tileSize), Double.parseDouble(splittedC[2]) * (tileSize)),
-                new Position2d(Double.parseDouble(splittedC[3]) * (tileSize), Double.parseDouble(splittedC[4]) *(tileSize)))); break;
+                new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
+                new Position2d(Double.parseDouble(splittedC[3]), Double.parseDouble(splittedC[4])))); break;
 
                 case "rPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.RED_PUDDLE, 
-                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); break;
+                new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); break;
 
                 case "bPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.BLUE_PUDDLE, 
-                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); break;
+                new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); break;
 
                 case "pPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.PURPLE_PUDDLE, 
-                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize)))); break;
+                new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])))); break;
 
             }
             System.out.println(entities.size());

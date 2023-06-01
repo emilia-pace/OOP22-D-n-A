@@ -61,15 +61,14 @@ public class GameStateImpl implements GameState {
 
         this.eventQueue.manageEvents(this);
 
+        characters.stream().forEach((c)-> c.update());
+
         /*
         this.gravity(angel);
         this.gravity(devil);
 
         display.obsAngel.update();
-        display.obsDevil.update();
-
-        display.angel.update();
-        display.devil.update();*/
+        display.obsDevil.update();*/
 
         for (Entity ent : entities) {
             if (ent instanceof MovablePlatform) {

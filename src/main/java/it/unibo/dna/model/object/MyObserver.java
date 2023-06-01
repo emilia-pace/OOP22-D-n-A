@@ -16,7 +16,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Observer implements PropertyChangeListener {
+public class MyObserver implements PropertyChangeListener {
 
     private State state;
     private Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
@@ -25,7 +25,7 @@ public class Observer implements PropertyChangeListener {
     private int frame = 0;
     private int imageIndex = 0;
 
-    public Observer(State state, Player.PlayerType type) {
+    public MyObserver(State state, Player.PlayerType type) {
         state.addChangeListener(this);
         this.state = state;
         this.playerImage(playerMap, type, 40, 30);

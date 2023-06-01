@@ -53,7 +53,7 @@ public class CommandFactoryImpl implements CommandFactory {
                 this.player.getState().setStateX(StateEnum.STATE_JUMPING);
                 String s = (this.player.getPlayerType().equals(Player.PlayerType.ANGEL)) ? "Angel_audio"
                         : "Devil_audio";
-                this.player.getGame().getEventQueue()
+                this.player.getGameEventQueue()
                         .addEvent(
                                 new EventFactoryImpl().soundEvent(s));
             }

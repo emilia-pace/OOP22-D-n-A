@@ -4,6 +4,7 @@ import it.unibo.dna.GameState;
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
@@ -51,16 +52,8 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public GameState getGame() {
-        return this.game;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setGame(final GameState game) {
-        this.game = game;
+    public EventQueue getGameEventQueue() {
+        return this.game.getEventQueue();
     }
 
 }

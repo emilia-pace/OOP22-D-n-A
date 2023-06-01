@@ -8,7 +8,7 @@ import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.KeyboardHandler;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.Observer;
+import it.unibo.dna.model.object.MyObserver;
 import it.unibo.dna.model.object.PlayerImpl;
 import it.unibo.dna.model.object.api.Entity.entityType;
 import it.unibo.dna.model.object.api.Entity;
@@ -44,8 +44,8 @@ public class Display extends JFrame {
         public Entity diamond = entityFactoryImpl.createEntity(emptyParameter, entityType.DIAMOND,
                         new Position2d(200, 400));
         JLabel boh = new JLabel("\u2194");
-        public Observer obsAngel;
-        public Observer obsDevil;
+        public MyObserver obsAngel;
+        public MyObserver obsDevil;
 
         public Display(final int width, final int height, GameState game) {
                 setTitle("D-n-A");
@@ -67,8 +67,8 @@ public class Display extends JFrame {
                                 PlayerImpl.PlayerType.ANGEL);
                 devil = new PlayerImpl(game, new Position2d(200, 500), new Vector2d(0, 0), 40, 30,
                                 PlayerImpl.PlayerType.DEVIL);
-                obsAngel = new Observer(this.angel.getState(), Player.PlayerType.ANGEL);
-                obsDevil = new Observer(this.devil.getState(), Player.PlayerType.DEVIL);
+                obsAngel = new MyObserver(this.angel.getState(), Player.PlayerType.ANGEL);
+                obsDevil = new MyObserver(this.devil.getState(), Player.PlayerType.DEVIL);
                 this.addKeyListener(new KeyboardHandler(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, angel));
                 this.addKeyListener(new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, devil));
 

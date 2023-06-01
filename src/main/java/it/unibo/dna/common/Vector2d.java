@@ -5,7 +5,7 @@ package it.unibo.dna.common;
  * the direction and velocity of a movement.
  */
 
-public class Vector2d implements java.io.Serializable {
+public class Vector2d  {
 
     private double x, y;
 

@@ -6,6 +6,7 @@ import java.util.List;
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.Level;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.Player;
 
 public class GameEngine implements Runnable {
     Display display;
@@ -21,10 +22,8 @@ public class GameEngine implements Runnable {
         this.display = new Display(this.level.getCharacters());
         this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level.getEntities(),
                 this.level.getCharacters());
-        for (Entity e : this.game.getEntities()) {
-            System.out.println(e.getClass());
-            System.out.println(e.getBoundingBox().getHeight());
-            System.out.println(e.getBoundingBox().getWidth());
+        for (Player p : this.game.getCharacters()) {
+            p.setGame(this.game);
         }
     }
 

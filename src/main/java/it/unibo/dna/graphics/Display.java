@@ -26,7 +26,7 @@ public class Display extends JFrame {
         public Display(List<Player> playerList) {
                 setTitle("D-n-A");
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
-                setResizable(false);
+                setResizable(true);
 
                 canvas = new Canvas();
                 canvas.setSize((int) (screenSize.getHeight()), (int) screenSize.getHeight());

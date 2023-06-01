@@ -24,7 +24,7 @@ import it.unibo.dna.model.object.api.Player;
  */
 public class GameStateImpl implements GameState {
 
-    public static final double Gravity = 4;
+    public static final double Gravity = 0.8;
 
     private final List<Entity> entities;
     private final List<Player> characters;

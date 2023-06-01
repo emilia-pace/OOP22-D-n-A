@@ -17,8 +17,9 @@ class MovementTest {
     private static final Vector2d START_VECTOR = new Vector2d(1, 0);
     private static final double HEIGHT = 10.0;
     private static final double WIDTH = 10.0;
-    private static final PlayerImpl.Type TYPE = PlayerImpl.Type.ANGEL;
-    private final Player player = new PlayerImpl(START_POSITION, START_VECTOR, HEIGHT, WIDTH, TYPE);
+    private final GameState game = new GameStateImpl((int) WIDTH, (int) HEIGHT, 1);
+    private static final PlayerImpl.PlayerType TYPE = PlayerImpl.PlayerType.ANGEL;
+    private final Player player = new PlayerImpl(this.game, START_POSITION, START_VECTOR, HEIGHT, WIDTH, TYPE);
     private final CommandFactory command = new CommandFactoryImpl(this.player);
 
     /**
@@ -36,21 +37,21 @@ class MovementTest {
      */
     @Test
     void testCommand() {
-        final Vector2d expectedVectorRight = new Vector2d(Player.StandardVelocity, 0);
+        final Vector2d expectedVectorRight = new Vector2d(Player.STANDARDVELOCITY, 0);
         final Pair<PlayerImpl.State, PlayerImpl.State> expectedStateRight = new Pair<>(PlayerImpl.State.STATE_STANDING,
                 PlayerImpl.State.STATE_RIGHT);
         this.command.right().execute();
         assertEquals(expectedVectorRight, this.player.getVector());
         assertEquals(expectedStateRight, this.player.getState());
 
-        final Vector2d expectedVectorLeft = new Vector2d(-Player.StandardVelocity, 0);
+        final Vector2d expectedVectorLeft = new Vector2d(-Player.STANDARDVELOCITY, 0);
         final Pair<PlayerImpl.State, PlayerImpl.State> expectedStateLeft = new Pair<>(PlayerImpl.State.STATE_STANDING,
                 PlayerImpl.State.STATE_LEFT);
         this.command.left().execute();
         assertEquals(expectedVectorLeft, this.player.getVector());
         assertEquals(expectedStateLeft, this.player.getState());
 
-        final Vector2d expectedVectorJump = new Vector2d(0, -Player.JumpVelocity);
+        final Vector2d expectedVectorJump = new Vector2d(0, -Player.JUMPVELOCITY);
         final Pair<PlayerImpl.State, PlayerImpl.State> expectedStateJump = new Pair<>(PlayerImpl.State.STATE_JUMPING,
                 PlayerImpl.State.STATE_STILL);
         this.command.stop().execute();

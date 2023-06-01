@@ -1,6 +1,11 @@
 package it.unibo.dna.model;
 
-import it.unibo.dna.model.object.ActivableObject;
+import java.io.File;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
+import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
@@ -17,26 +22,17 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitPlatformEvent(Entity pt, Player p) {
+    public Event hitPlatformEvent(final Entity pt, final Player p) {
         return game -> {
-            p.resetY();
-            if (pt.getBoundingBox().isCollidingWith(p.getPosition().sum(p.getVector()),
-                    p.getBoundingBox().getHeight(), p.getBoundingBox().getWidth())) {
+            if (p.getBoundingBox().sideCollision(pt.getPosition(), pt.getBoundingBox().getHeight(),
+                    pt.getBoundingBox().getWidth())) {
                 p.resetX();
+            } else {
+                p.resetY();
             }
-            p.getState().setX(State.STATE_STANDING);
-
-        };
-    }
-
-    public Event hitMovablePlatformEvent(MovablePlatform pt, Player p) {
-        return game -> {
-            p.resetY();
-            p.getState().setX(State.STATE_STANDING);
-            if(p.getVector().x == 0){
-                p.setVectorX(pt.getVector().x);
+            if (p.getPosition().getY() < pt.getPosition().getY()) {
+                p.getState().setX(State.STATE_STANDING);
             }
-            p.setVectorY(p.getVector().y+pt.getVector().y);
         };
     }
 
@@ -44,13 +40,35 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitButtonEvent(ActivableObject o, Player p) {
+    public Event hitMovablePlatformEvent(final MovablePlatform pt, final Player p) {
         return game -> {
-            if(o.getPlayer().isEmpty()){
+            p.setVectorY(p.getVector().getY() + pt.getVector().getY());
+            if (p.getVector().getX() == 0 && pt.getLastVector().getX() != 0) {
+                p.setVectorX(pt.getLastVector().getX());
+            } else{
+                p.setVectorX(p.getVector().getX() + pt.getVector().getX() - pt.getLastVector().getX());
+            }
+            if (pt.getVector().getX() != 0 || pt.getLastVector().getX() != 0) {
+                pt.setLastVector(pt.getVector());
+            }
+            if(p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() && 
+                p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY() + pt.getBoundingBox().getHeight()){
+                    p.setPositionY(pt.getPosition().getY() - p.getBoundingBox().getHeight());
+            }
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event hitButtonEvent(final ActivableObjectImpl o, final Player p) {
+        return game -> {
+            if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);
-                if(!o.isActivated()){
+                if (!o.isActivated()) {
                     o.activate();
-                }else{
+                } else {
                     o.deactivate();
                     o.resetPlayer();
                 }
@@ -62,7 +80,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(Door d, Player p) {
+    public Event hitDoorEvent(final Door d, final Player p) {
         return game -> {
             d.openDoor(p);
         };
@@ -72,13 +90,13 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitLeverEvent(ActivableObject o, Player p) {
+    public Event hitLeverEvent(final ActivableObjectImpl o, final Player p) {
         return game -> {
-            if(o.getPlayer().isEmpty()){
+            if (o.getPlayer().isEmpty()) {
                 o.setPlayer(p);
-                if(o.isActivated()){
+                if (o.isActivated()) {
                     o.deactivate();
-                }else{
+                } else {
                     o.activate();
                 }
             }
@@ -89,7 +107,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDiamondEvent(Diamond d, Score s) {
+    public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
             game.removeEntity(d);
             s.addScore(d.getValue());
@@ -100,7 +118,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitBorderXEvent(Player p) {
+    public Event hitBorderXEvent(final Player p) {
         return game -> {
             p.resetY();
             p.getState().setX(State.STATE_STANDING);
@@ -111,9 +129,25 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitBorderYEvent(Player p) {
+    public Event hitBorderYEvent(final Player p) {
         return game -> {
             p.resetX();
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event soundEvent(String s) {
+        return game -> {
+            try {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
+                clip.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         };
     }
 

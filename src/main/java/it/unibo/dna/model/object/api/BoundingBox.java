@@ -12,15 +12,30 @@ public interface BoundingBox {
      * @param p the position of the other {@link Entity}
      * @param height the height of the other {@link Entity}
      * @param width the width of the other {@link Entity}
-     * @return
+     * @return true if the entities are colliding
      */
     boolean isCollidingWith(Position2d p, double height, double width);
+
+    /**
+     * Checks if the collision beetween the two entities is on the left or the right side.
+     * @param p the position of the other {@link Entity}
+     * @param height the height of the other {@link Entity}
+     * @param width the width of the other {@link Entity}
+     * @return true if the collision is on the left or the right side
+     */
+    boolean sideCollision(Position2d p, double height, double width);
 
     /**
      * 
      * @return the position (upper-left corner) of the box
      */
-    public Position2d getPosition();
+    Position2d getPosition();
+
+    /**
+     * 
+     * @param pos the position to set
+     */
+    void setPosition(Position2d pos);
 
     /**
      * 

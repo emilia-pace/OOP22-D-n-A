@@ -1,34 +1,38 @@
 package it.unibo.dna.model.object;
 
 
+
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.object.api.Entity;
 
 /**
  * A platform that can be moved by a button or a lever.
  */
-public class MovablePlatform extends MovableEntityImpl {
+public class MovablePlatform extends AbstractMovableEntity {
 
     private Position2d originalPos;
     private Position2d finalPos;
+    private Position2d lastPos;
     private Vector2d lastVector;
 
     /**
      * 
      * @param pos        the position of the platform
-     * @param vet        the vector of the platform
+     * @param vector        the vector of the platform
      * @param height     the height of the platform
      * @param width      the width of the platform
      * @param finalPos   the final position of the platform
      */
-    public MovablePlatform(final Position2d pos, final Vector2d vet, final double height, final double width,
-                            final Position2d finalPos) { // costruttore
-        super(pos, vet, height, width);
+    public MovablePlatform(final Position2d pos, final Vector2d vector, final double height, final double width,
+                            final Position2d finalPos) {
+        super(pos, vector, height, width,Entity.entityType.MOVABLEPLATFORM);
         this.originalPos = pos;
+        this.lastPos = pos;
         this.finalPos = finalPos;
         this.lastVector = new Vector2d(0, 0);
     }
-
+    
     /**
      * 
      * @return the final position of the platform
@@ -72,28 +76,22 @@ public class MovablePlatform extends MovableEntityImpl {
     }
 
     /**
-     * A method that finds the direction in which the platform needs to move.
+     * A method that finds the direction in which the platform needs to move, 
+     * and sets the vector accordingly.
      * 
      * @param p1 the starting position of the platform
      * @param p2 the position the platform wants to reach
      */
     public void findVector(final Position2d p1, final Position2d p2) {
-        double differenceX = p1.x - p2.x;
-        double differenceY = p1.y - p2.y;
-        if (differenceX > 0) {
-            this.setVectorX(-1.0);
-        } else if (differenceX < 0) {
-            this.setVectorX(+1.0);
-        } else {
-            this.setVectorX(0);
+        double x = 0.0;
+        double y = 0.0;
+        if(p1.getX() != p2.getX()){
+            x = p2.isOnTheRight(p1) ? +1.0 : -1.0;
         }
-        if (differenceY < 0) {
-            this.setVectorY(+1.0);
-        } else if (differenceY > 0) {
-                this.setVectorY(-1.0);
-        } else {
-            this.setVectorY(0);
-        }
+        if(p1.getY() != p2.getY()){
+            y = p2.isAbove(p1) ? -1.0 : +1.0;
+        } 
+        this.setVector(new Vector2d(x, y));
     }
 
     /**
@@ -109,43 +107,22 @@ public class MovablePlatform extends MovableEntityImpl {
     }
 
     /**
-     * 
+     * Saves the last position had by the platform, in order not to lose it once the position of 
+     * the platform has been updated.
      */
-    public void update() {
-        if (this.getPosition().equals(this.getOriginalPos()) || this.getPosition().equals(this.getFinalPosition())) {
-            this.setVector(new Vector2d(0, 0));
-        }
-        super.update();
+    public void setLastPosition() {
+        this.lastPos = this.getPosition();
     }
 
-    /**
-     * Checks whether the platform has gone out of range on the x-axis.
+    /*
+     * Checks whether the platform position is between its original position and its final position.
      */
-    public void checkHorizontal(){
-        if(this.originalPos.isBetweenHorizontally(this.getFinalPosition(), this.getPosition())){
-            this.setPositionX(this.getOriginalPos().x); 
-        } else if (this.finalPos.isBetweenHorizontally(this.getPosition(), this.getOriginalPos())) {
-            this.setPositionX(this.getFinalPosition().x);
-        } else if (this.originalPos.isBetweenHorizontally(this.getPosition(), this.getFinalPosition())) {
-            this.setPositionX(this.getOriginalPos().x);
-        } else if (this.finalPos.isBetweenHorizontally(this.getOriginalPos(), this.getPosition())) {
-            this.setPositionX(this.getFinalPosition().x);
-        }
-    }
-
-    /**
-     * Checks whether the platform has gone out of ranfe on the y-axis.
-     */
-    public void checkVertical() {
-        if (this.originalPos.isBetweenVertically(this.getFinalPosition(), this.getPosition())) {
-            this.setPositionY(this.getOriginalPos().y);
-        } else if (this.finalPos.isBetweenVertically(this.getPosition(), this.getOriginalPos())) {
-            this.setPositionY(this.getFinalPosition().y);
-        } else if (this.originalPos.isBetweenVertically(this.getPosition(), this.getFinalPosition())) {
-            this.setPositionY(this.getOriginalPos().y);
-        } else if (this.finalPos.isBetweenVertically(this.getOriginalPos(), this.getPosition())) {
-            this.setPositionY(this.getFinalPosition().y);
-        }
+    public boolean isBetweenRange() {
+        double maxX = Math.max(this.originalPos.getX(),this.finalPos.getX());
+        double minX =  Math.min(this.originalPos.getX(),this.originalPos.getY());
+        double maxY = Math.max(this.originalPos.getY(),this.finalPos.getY());
+        double minY = Math.min(this.originalPos.getY(),this.finalPos.getY());
+        return this.getPosition().getX() >= minX && this.getPosition().getX() <= maxX && this.getPosition().getY() <= maxY && this.getPosition().getY() >= minY;
     }
 
     /**
@@ -153,10 +130,8 @@ public class MovablePlatform extends MovableEntityImpl {
      *  above or below the finalPosition of the platform.
      */
     public void findLimit() {
-        Position2d firstPos = this.getPosition();
-        checkVertical();
-        checkHorizontal();
-        if(!this.getPosition().equals(firstPos)){
+        if(!isBetweenRange()){
+            this.setPosition(this.lastPos);
             this.setVector(new Vector2d(0, 0));
         }
     }

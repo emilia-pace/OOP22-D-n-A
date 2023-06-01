@@ -1,54 +1,67 @@
 package it.unibo.dna.model.object;
 
+import it.unibo.dna.GameState;
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
-public class PlayerImpl extends MovableEntityImpl implements Player {
+/**
+ * Class that implements the {@link Player} interface.
+ */
+public class PlayerImpl extends AbstractMovableEntity implements Player {
 
     private Pair<State, State> state = new Pair<>(State.STATE_STANDING, State.STATE_STILL);
-    private Type type;
+    private PlayerType playerType;
+    private GameState game;
 
     /**
+     * @param game   the game of the player
      * @param pos    the position of the player
      * @param vet    the vector of the player
      * @param height the height of the player
      * @param width  the width of the player
      * @param type   the type (angel/devil) of the player
      */
-    public PlayerImpl(Position2d pos, Vector2d vet, double height, double width, Type type) {
-        super(pos, vet, height, width);
-        this.type = type;
+    public PlayerImpl(final GameState game, final Position2d pos, final Vector2d vet, final double height,
+            final double width, final PlayerType type) {
+        super(pos, vet, height, width, Entity.entityType.PLAYER);
+        this.playerType = type;
+        this.game = game;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<State, State> getState() {
         return this.state;
     }
 
+    /**
+     * {@inheritDoc}
+    */
     @Override
-    public Type getType() {
-        return this.type;
+    public PlayerType getPlayerType() {
+        return this.playerType;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean equals(final Object obj) {
-        if (!(obj instanceof Player)) {
-            return false;
-        }
-        final Player p = (Player) obj;
-        return this.type.equals(p.getType());
+    public GameState getGame() {
+        return this.game;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void resetX() {
-        this.setVectorX(0);
-    }
-
-    @Override
-    public void resetY() {
-        this.setVectorY(0);
+    public void setGame(final GameState game) {
+        this.game = game;
     }
 
 }

@@ -1,28 +1,23 @@
 package it.unibo.dna.model.object.api;
 
+import it.unibo.dna.GameState;
 import it.unibo.dna.common.Pair;
+
+/*
+ * An interface rappresenting the Game Character.
+ */
 
 public interface Player extends MovableEntity {
 
     /**
-     *
+     * The jump speed value
      */
-    public static final double JumpVelocity = 25;
+    double JUMPVELOCITY = 25;
 
     /**
-     *
+     * The standard velocity of the Player
      */
-    public static final double StandardVelocity = 2;
-
-    /**
-     * Make the first value of the player's vector zero
-     */
-    void resetX();
-
-    /**
-     * Make the second value of the player's vector zero
-     */
-    void resetY();
+    double STANDARDVELOCITY = 2;
 
     /**
      * @return the player's state
@@ -31,28 +26,56 @@ public interface Player extends MovableEntity {
 
     /**
      * @return the player's type
-     */
-    Type getType();
+    */
+    PlayerType getPlayerType();
 
     /**
-     * Compares two player, and returns true if the players
-     * have the same type, and false if not.
-     * 
-     * @param p player for the comparison
-     * @return true if p has the same type of player
+     * @return the game of the Player
      */
-    boolean equals(Object p);
+    GameState getGame();
 
-    public enum State {
+    /**
+     * @param game the new game of the player
+     */
+    void setGame(GameState game);
+
+    /**
+     * An enum rappresenting the state of the Player
+     */
+    enum State {
+        /**
+         * when player is on a platform
+         */
         STATE_STANDING,
+        /**
+         * when player is jumping
+         */
         STATE_JUMPING,
+        /**
+         * when player goes right
+         */
         STATE_RIGHT,
+        /**
+         * when player goes left
+         */
         STATE_LEFT,
+        /**
+         * when player is still
+         */
         STATE_STILL;
     }
 
-    public enum Type {
+    /*
+     * An enum rappresenting the type of the Player
+     */
+    enum PlayerType {
+        /**
+         * when player is a devil
+         */
         DEVIL,
+        /**
+         * when player is an angel
+         */
         ANGEL;
     }
 

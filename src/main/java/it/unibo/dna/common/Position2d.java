@@ -4,7 +4,7 @@ package it.unibo.dna.common;
  * A class rapresenting a point in a two dimensional space.
  */
 
-public class Position2d implements java.io.Serializable {
+public class Position2d {
 
     private double x, y;
 

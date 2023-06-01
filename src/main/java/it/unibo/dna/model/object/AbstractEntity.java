@@ -44,7 +44,7 @@ public abstract class AbstractEntity implements Entity {
      */
     @Override
     public BoundingBox getBoundingBox() {
-        return this.box;
+        return new RectBoundingBox(this.box.getPosition(), this.box.getHeight(), this.box.getWidth());
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class AbstractEntity implements Entity {
         this.setPosition(new Position2d(this.getPosition().getX(), y));
     }
 
-    public Entity.entityType getType(){
+    public Entity.entityType getType() {
         return this.type;
     }
 }

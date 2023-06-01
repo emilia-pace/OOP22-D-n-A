@@ -11,7 +11,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import it.unibo.dna.common.Pair;
 import it.unibo.dna.model.object.AbstractEntity;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
@@ -21,13 +20,13 @@ import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
 
 public class ImageManager {
 
     public static double LEVERHEIGHT = 30.0;
     public static double ACTIVABLEOBJECTWIDTH = 30.0;
     public static double BUTTONHEIGHT = 20.0;
+    public static int tileSize = 10;
 
     private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
 
@@ -54,6 +53,10 @@ public class ImageManager {
         return image;
     }
 
+    private Image resizeImage(Image image) {
+        return image.getScaledInstance(image.getHeight(null)*tileSize, image.getWidth(null)*tileSize,Image.SCALE_DEFAULT);
+    }
+
     private void loadImages() {
         String path = "src\\main\\resources\\";
         List<Image> doorImageList = new ArrayList<>();
@@ -63,20 +66,20 @@ public class ImageManager {
         List<Image> movablePlatformImageList = new ArrayList<>();
         List<Image> diamondImage = new ArrayList<>();
         try {
-            doorImageList.add(ImageIO.read(new File(path + "porta_angelo.PNG")));
-            doorImageList.add(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")));
-            doorImageList.add(ImageIO.read(new File(path + "porta_diavolo.PNG")));
-            doorImageList.add(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")));
-            activableObjectImageList.add(ImageIO.read(new File(path + "Bottone_off.PNG")));
-            activableObjectImageList.add(ImageIO.read(new File(path + "Bottone_on.PNG")));
-            activableObjectImageList.add(ImageIO.read(new File(path + "Leva_off.PNG")));
-            activableObjectImageList.add(ImageIO.read(new File(path + "Leva_on.PNG")));
-            puddleImageList.add(ImageIO.read(new File(path + "Pozza_azzurra.jpg")));
-            puddleImageList.add(ImageIO.read(new File(path + "Pozza_rossa.jpg")));
-            puddleImageList.add(ImageIO.read(new File(path + "Pozza_viola.jpg")));
-            platformImageList.add(ImageIO.read(new File(path + "Piattaforma_terra.jpg")));
-            movablePlatformImageList.add(ImageIO.read(new File(path + "MovablePlatform.jpg")));
-            diamondImage.add(ImageIO.read(new File(path + "diamond.png")));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG"))));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG"))));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG"))));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG"))));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG"))));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG"))));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG"))));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG"))));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg"))));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg"))));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg"))));
+            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg"))));
+            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg"))));
+            diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }

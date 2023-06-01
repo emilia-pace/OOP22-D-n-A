@@ -14,17 +14,17 @@ public class Puddle extends AbstractEntity {
 
     /**
      * 
-     * @param pos    the position of the puddle
+     * @param position    the position of the puddle
      * @param height the height of the puddle
      * @param width  the width of the puddle
      * @param type   the type of the puddle (PURPLE,BLUE,RED)
      */
-    public Puddle(final Position2d pos, final double height, final double width, final entityType type) {
-        super(pos, height, width, type);
+    public Puddle(final Position2d position, final double height, final double width, final entityType type) {
+        super(position, height, width, type);
     }
 
     /**
-     * Checks wether the player that is touching the puddle should die.
+     * Checks whether there should be a game over.
      * 
      * @param type      the type of the puddle
      * @param character the {@link Player} touching the puddle

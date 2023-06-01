@@ -12,84 +12,76 @@ import it.unibo.dna.model.object.api.Player;
  */
 public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
 
-    /**
-     * An enum explaining the two possible kinds of ActivableObject: Button and Lever.
-    
-    public enum Activator {
-        BUTTON, LEVER
-    } */
-
-    private boolean isActive=false; /*Tells whether the platform is moving towards its final position. */
-    //public Activator type;
-    private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject */
-    private MovablePlatform mp;
+    private boolean isActive=false; /*True when the platform is moving towards its final position*/
+    private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject*/
+    private MovablePlatform movablePlatform;
 
     /**
      * @param pos the position of the ActivableObject
      * @param height the height of the ActivableObject
      * @param width the width of the ActivableObject
-     * @param type the type of the ActivableObject
-     * @param mp the {@link MovablePlatform} that the ActivableObject moves
+     * @param movablePlatform the {@link MovablePlatform} that the ActivableObject moves
+     * @param type the type of the entityType of the ActivableObject (it can be BUTTON or LEVER)
      */
-    public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, final MovablePlatform mp, final entityType type) {
+    public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, final MovablePlatform movablePlatform, final entityType type) {
        super(pos,height,width,type);
-       //this.type=type;
-       this.mp=mp;
+       this.movablePlatform=movablePlatform;
     }
 
     /**
-     * @param p the {@link Player} that has touched the button
+     * @param player the {@link Player} that has touched the button
      */
-    public void setPlayer(final Player p) {
-        this.player = Optional.of(p);
+    public void setPlayer(final Player player) {
+        this.player = Optional.of(player);
     }
 
     /**
-     * @return the player that has touched the button
+     * @return the Player that has touched the button
      */
     public Optional<Player> getPlayer() {
         return this.player;
     }
 
     /**
-     * resets the player.
+     * Resets the player.
      */
     public void resetPlayer() {
         this.player = Optional.empty();
     }
 
     /** 
-     * @return the {@link MovablePlatform} controlled by the button
+     * @return the {@link MovablePlatform} controlled by the ActivableObject
      */
     public MovablePlatform getMovablePlatform() {
-        return this.mp;
+        return this.movablePlatform;
     }
 
-    /** 
-     * A setter for the MovablePlatform controlled by the button.
+    /**
+     * A setter for the MovablePlatform.
+     * @param movablePlatform the MovablePlatform the ActivableObject controls
      */
-    public void setMovablePlatform(final MovablePlatform m) {
-        this.mp=m;
+    public void setMovablePlatform(final MovablePlatform movablePlatform) {
+        this.movablePlatform=movablePlatform;
     }
 
     /** 
-     * A methods that moves the platform from its starting position towards its final position.
+     * A method that moves the MovablePlatform from its starting position towards its final position.
      */
     public void activate() {
         this.isActive = true;
-        mp.move(mp.getOriginalPos(),mp.getFinalPosition());
+        movablePlatform.move(movablePlatform.getOriginalPos(),movablePlatform.getFinalPosition());
     }
 
     /**
-     * A method that moves the platform from its final position towards its starting position. 
+     * A method that moves the MovablePlatform from its final position towards its starting position. 
      */
     public void deactivate() {
         this.isActive = false;
-        mp.move(mp.getFinalPosition(),mp.getOriginalPos());
+        movablePlatform.move(movablePlatform.getFinalPosition(),movablePlatform.getOriginalPos());
     }
 
     /**
-     * @return wether the platform is supposed to be moving from its current position towards its final position.
+     * @return whether the MovablePlatform is supposed to be moving from its current position towards its final position.
      */
     @Override
     public boolean isActivated() {

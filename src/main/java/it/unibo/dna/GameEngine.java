@@ -1,17 +1,23 @@
 package it.unibo.dna;
 
+import java.io.IOException;
+
 import it.unibo.dna.graphics.Display;
+import it.unibo.dna.model.Level;
 
 public class GameEngine implements Runnable {
-    /*Display display = new Display(600, 800, null);*/
+    Display display = new Display();
+    
 
     private GameState game;
+    private Level level;
 
     boolean running;
     private final double rateUpdate = 1.0d / 60.0d;
 
-    public GameEngine(GameState game) {
-        this.game = game;
+    public GameEngine(int lvl) throws IOException {
+        this.level = new Level(lvl);
+        this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level);
     }
 
     @Override
@@ -36,8 +42,7 @@ public class GameEngine implements Runnable {
     }
 
     private void render() {
-        game.render();
-        //display.render(game);
+        display.render(game.getEntities());
         
     }
 

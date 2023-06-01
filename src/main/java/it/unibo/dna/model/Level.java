@@ -32,10 +32,13 @@ public class Level {
     public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
     PlayerImpl angel;
     PlayerImpl devil;
+
+    public Level(int lvl){
+        getFile(lvl);
+    }
     
 
     public List<Entity> entitiesList() throws IOException{
-        getFile(lvl);
         ArrayList <Entity> entities = new ArrayList<>();
         FileReader f = new FileReader(nameFile);
         BufferedReader b;

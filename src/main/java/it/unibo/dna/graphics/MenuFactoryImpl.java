@@ -129,7 +129,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al= new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startMenu.setVisible(false);
-                new Thread(new GameEngine(new GameStateImpl(800, 600, level))).start();
+                new Thread(new GameEngine(level)).start();
             }
             
         };
@@ -173,7 +173,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al= new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gameOverMenu.setVisible(false);
-                new Thread(new GameEngine(new GameStateImpl(800, 600, level))).start();
+                new Thread(new GameEngine(level)).start();
             }
             
         };

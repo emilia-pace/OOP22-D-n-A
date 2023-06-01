@@ -23,7 +23,7 @@ import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
-public class ManageImage {
+public class ImageManager {
 
     public static double LEVERHEIGHT = 30.0;
     public static double ACTIVABLEOBJECTWIDTH = 30.0;
@@ -31,7 +31,7 @@ public class ManageImage {
 
     private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
 
-    public ManageImage() {
+    public ImageManager() {
         // caricamento di tutte le immagini
         loadImages();
     }

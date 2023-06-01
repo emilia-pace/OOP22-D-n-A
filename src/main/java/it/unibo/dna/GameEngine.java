@@ -1,6 +1,9 @@
 package it.unibo.dna;
 
+import it.unibo.dna.graphics.Display;
+
 public class GameEngine implements Runnable {
+    /*Display display = new Display(600, 800, null);*/
 
     private GameState game;
 
@@ -34,6 +37,8 @@ public class GameEngine implements Runnable {
 
     private void render() {
         game.render();
+        //display.render(game);
+        
     }
 
     private void update() {

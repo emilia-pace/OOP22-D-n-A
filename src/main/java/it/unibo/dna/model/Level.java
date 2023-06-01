@@ -29,7 +29,8 @@ public class Level {
     public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
     
 
-    ArrayList <Entity> entitiesList() throws IOException{
+    public ArrayList <Entity> entitiesList() throws IOException{
+        getFile(lvl);
         ArrayList <Entity> entities = new ArrayList<>();
         FileReader f = new FileReader(nameFile);
         BufferedReader b;
@@ -74,6 +75,17 @@ public class Level {
 
                 case "movablePlatform" : entities.add(entityFactoryImpl.createEntity(null, entityType.MOVABLEPLATFORM, 
                 new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+                case "rPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.RED_PUDDLE, 
+                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+                case "bPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.BLUE_PUDDLE, 
+                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+                case "pPuddle" : entities.add(entityFactoryImpl.createEntity(null, entityType.PURPLE_PUDDLE, 
+                new Position2d(Double.parseDouble(splittedC[1])*(tileSize), Double.parseDouble(splittedC[2])*(tileSize))));
+
+
     
             }
             b.readLine();
@@ -83,7 +95,7 @@ public class Level {
         return entities;
     }
 
-    void getFile(int lvl) {
+    private void getFile(int lvl) {
         switch(lvl){
             case 1: nameFile = "lvl1.txt";
             case 2: nameFile = "lvl2.txt";

@@ -1,7 +1,5 @@
 package it.unibo.dna.model.object.api;
 
-import it.unibo.dna.GameState;
-import it.unibo.dna.common.Pair;
 import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.State;
 

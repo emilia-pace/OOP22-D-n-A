@@ -37,8 +37,6 @@ public class Level {
         b=new BufferedReader(f);
         s = b.readLine();
         
-    
-
         while(s!= null){
             String[] splittedC = s.split("//s");
             switch(splittedC[0]){

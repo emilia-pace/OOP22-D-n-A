@@ -17,7 +17,7 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.MyObserver;
+import it.unibo.dna.model.object.StateObserver;
 import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
@@ -27,32 +27,14 @@ import it.unibo.dna.model.object.EntityFactory;
 
 public class ImageManager {
 
-    private int defaultButtonHeight = 20;
-    private int defaultWidth = 30;
-    private int defaultHeight = 4;
-    private double defaultPuddleWidth = 40;
-    private int defaultDoorHeight = 7;
-    private int defaultDoorWidth = 5;
-    private int defaultPlatformWidth = 30;
-    private int defaultMovablePlatformWidth = 1;
-    private double diamondDimension = 4;
-
-    private int diamondValue = 1;
-    private int tileSize;
-
     private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
-    private MyObserver obsPlayer1;
-    private MyObserver obsPlayer2;
+    private StateObserver obsPlayer1;
+    private StateObserver obsPlayer2;
 
-    public ImageManager(List<Player> playerList, int tileSize) {
+    public ImageManager(List<Player> playerList) {
         // caricamento di tutte le immagini
-        this.tileSize = tileSize;
-        obsPlayer1 = new MyObserver(playerList.get(0).getState(), playerList.get(0).getPlayerType(),
-                (int) playerList.get(0).getBoundingBox().getHeight(),
-                (int) playerList.get(0).getBoundingBox().getWidth(), this.tileSize);
-        obsPlayer2 = new MyObserver(playerList.get(1).getState(), playerList.get(1).getPlayerType(),
-                (int) playerList.get(1).getBoundingBox().getHeight(),
-                (int) playerList.get(1).getBoundingBox().getWidth(), this.tileSize);
+        obsPlayer1 = new StateObserver(playerList.get(0).getState(), playerList.get(0).getPlayerType());
+        obsPlayer2 = new StateObserver(playerList.get(1).getState(), playerList.get(1).getPlayerType());
         loadImages();
     }
 
@@ -80,8 +62,8 @@ public class ImageManager {
     }
 
     private Image resizeImage(Image image, int height, int width) {
-        return image.getScaledInstance(width * tileSize,
-                height * tileSize,
+        return image.getScaledInstance(width * Display.TILE_SIZE,
+                height * Display.TILE_SIZE,
                 Image.SCALE_DEFAULT);
     }
 
@@ -97,7 +79,7 @@ public class ImageManager {
             doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
             doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
             doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,defaultWidth));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG")),EntityFactory.LEVER_HEIGHT,EntityFactory.DEF_WIDTH));
@@ -119,7 +101,7 @@ public class ImageManager {
         this.map.put(Diamond.class, diamondImage);
     }
 
-    public List<MyObserver> getObservers() {
+    public List<StateObserver> getObservers() {
         return List.of(obsPlayer1, obsPlayer2);
     }
 

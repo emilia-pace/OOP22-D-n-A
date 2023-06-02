@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.unibo.dna.common.Pair;
+import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.object.State.StateEnum;
 import it.unibo.dna.model.object.api.Player;
 import javax.imageio.ImageIO;
@@ -16,7 +17,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class MyObserver implements PropertyChangeListener {
+public class StateObserver implements PropertyChangeListener {
 
     private State state;
     private Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
@@ -26,22 +27,23 @@ public class MyObserver implements PropertyChangeListener {
     private int frame = 0;
     private int imageIndex = 0;
 
-    public MyObserver(State state, Player.PlayerType type, int height, int width, double tileSize) {
+    public StateObserver(State state, Player.PlayerType type) {
         state.addChangeListener(this);
         this.state = state;
         this.type = type;
-        this.playerImage(playerMap, height * (int) tileSize, width * (int) tileSize);
-        playerImage = this.playerMap.get(state.getState()).get(0);
+        this.playerImage(playerMap, EntityFactory.PLAYER_HEIGHT * Display.TILE_SIZE,
+                EntityFactory.PLAYER_WIDTH * Display.TILE_SIZE);
+        playerImage = this.playerMap.get(state.getPairState()).get(0);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         this.state = ((State) event.getSource());
         if (event.getNewValue().equals(event.getOldValue())) {
-            playerImage = this.playerMap.get(((State) event.getSource()).getState()).get(imageIndex);
+            playerImage = this.playerMap.get(((State) event.getSource()).getPairState()).get(imageIndex);
             System.out.println("ciao");
         } else {
-            playerImage = this.playerMap.get(((State) event.getSource()).getState()).get(0);
+            playerImage = this.playerMap.get(((State) event.getSource()).getPairState()).get(0);
         }
     }
 

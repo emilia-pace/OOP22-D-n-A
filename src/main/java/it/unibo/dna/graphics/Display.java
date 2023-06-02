@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.List;
 
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.object.MyObserver;
+import it.unibo.dna.model.object.StateObserver;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
@@ -14,14 +14,12 @@ import java.awt.image.BufferStrategy;
 
 public class Display extends JFrame {
 
+        public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+        public static final int TILE_SIZE = (int) SCREEN_SIZE.getHeight() / 100;
+
         private Canvas canvas;
         public ImageManager imgMgr;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int tileSize = (int) screenSize.getHeight() / 100;
-        double width = screenSize.getWidth();
-
-        public MyObserver obsAngel;
-        public MyObserver obsDevil;
+        double width = SCREEN_SIZE.getWidth();
 
         public Display(List<Player> playerList) {
                 setTitle("D-n-A");
@@ -29,7 +27,7 @@ public class Display extends JFrame {
                 setResizable(true);
 
                 canvas = new Canvas();
-                canvas.setSize((int) (screenSize.getHeight()), (int) screenSize.getHeight());
+                canvas.setSize((int) (SCREEN_SIZE.getHeight()), (int) SCREEN_SIZE.getHeight());
                 canvas.setFocusable(false);
                 add(canvas);
                 pack();
@@ -39,7 +37,7 @@ public class Display extends JFrame {
                 setLocationRelativeTo(null);
                 setVisible(true);
 
-                imgMgr = new ImageManager(playerList, (int) this.tileSize);
+                imgMgr = new ImageManager(playerList);
 
                 playerList.forEach(p -> {
                         if (p.getPlayerType().equals(Player.PlayerType.ANGEL)) {
@@ -60,20 +58,18 @@ public class Display extends JFrame {
                 graphics.setColor(Color.BLACK);
                 graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-                for (Entity entity : entities) {
-                        graphics.drawImage(imgMgr.getImage(entity), (int) entity.getPosition().getX() * this.tileSize,
-                                        (int) entity.getPosition().getY() * this.tileSize, this);
-                }
+                entities.forEach(entity -> graphics.drawImage(imgMgr.getImage(entity),
+                                (int) entity.getPosition().getX() * TILE_SIZE,
+                                (int) entity.getPosition().getY() * TILE_SIZE, this));
 
-                for (Player p : players) {
-                        graphics.drawImage(imgMgr.getPlayerImage(p), (int) p.getPosition().getX() * this.tileSize,
-                                        (int) p.getPosition().getY() * this.tileSize, this);
-                }
+                players.forEach(p -> graphics.drawImage(imgMgr.getPlayerImage(p),
+                                (int) p.getPosition().getX() * TILE_SIZE,
+                                (int) p.getPosition().getY() * TILE_SIZE, this));
+
+                imgMgr.getObservers().forEach(o -> o.update());
 
                 graphics.dispose();
                 bufferStrategy.show();
-
-                imgMgr.getObservers().forEach(o -> o.update());
 
         }
 

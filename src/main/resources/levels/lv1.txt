@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-angel 5 50 20 10
-devil 17 50 20 10
-platform 5 80
-platform 30 80 
-platform 80 80
-=======
-angel 5 50 10 10
-devil 17 50 10 10
+angel 5 50
+devil 17 50
 platform 0 80
 platform 30 80
 platform 7 20
 platform 90 10
 platform 100 3
 platform 5 60
->>>>>>> 076c3a67abad80e0aa1ebd22732339d873a1e1bd
 

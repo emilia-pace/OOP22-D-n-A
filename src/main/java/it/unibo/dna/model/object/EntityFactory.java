@@ -18,8 +18,8 @@ public interface EntityFactory {
     public static int PUDDLE_WIDTH = 5;
     public static int DOOR_HEIGHT = 10;
     public static int PLATFORM_WIDTH = 30;
-    public static int PLAYER_HEIGHT = 4;
-    public static int PLAYER_WIDTH = 3;
+    public static int PLAYER_HEIGHT = 5;
+    public static int PLAYER_WIDTH = 4;
     /**
      * A method that creates an Entity of a wanted type.
      * @param movablePlatform the optional MovablePlatform that the Entity can control. It shoudl be present if a BUTTON or a LEVER is being created

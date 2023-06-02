@@ -32,13 +32,13 @@ public class State {
         this.notifyListeners(this, null, this.stateY, this.stateY = stateY);
     }
 
-    public Pair<StateEnum, StateEnum> getState() {
+    public Pair<StateEnum, StateEnum> getPairState() {
         return new Pair<>(stateX, stateY);
     }
 
     private void notifyListeners(Object object, String property, StateEnum oldValue, StateEnum newValue) {
         listener.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue));
-        // System.out.println(((State) object).getState());
+
     }
 
     public void addChangeListener(PropertyChangeListener newListener) {

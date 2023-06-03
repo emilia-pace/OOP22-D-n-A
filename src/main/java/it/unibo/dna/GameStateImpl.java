@@ -30,7 +30,7 @@ public class GameStateImpl implements GameState {
     private final List<Player> characters;
     private BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
-    private final Score score;
+    private Score score;
     private final EventQueue eventQueue = new EventQueue();
 
     /**
@@ -44,7 +44,7 @@ public class GameStateImpl implements GameState {
     public GameStateImpl(final int width, final int height, final List<Entity> level, List<Player> players)
             throws IOException {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
-        this.score = new Score();
+        this.score = new Score(0.0);
         this.entities = level;
         this.characters = players;
     }
@@ -122,6 +122,9 @@ public class GameStateImpl implements GameState {
         return this.entities;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<Player> getCharacters() {
         return this.characters;
     }
@@ -132,6 +135,20 @@ public class GameStateImpl implements GameState {
     @Override
     public EventQueue getEventQueue() {
         return this.eventQueue;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Score getScore(){
+        return this.score;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void updateScore(Score score){
+        this.score = score;
     }
 
     /**
@@ -183,6 +200,7 @@ public class GameStateImpl implements GameState {
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
                         }
                         case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {
+                            this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                             this.eventQueue.addEvent(event.hitPuddleEvent((Puddle) e, character));
                         }
                         default -> throw new IllegalArgumentException();

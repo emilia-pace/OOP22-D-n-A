@@ -10,8 +10,8 @@ public class Score {
     /**
      * {@link Score} constructor.
      */
-    public Score() {
-        this.total = 0;
+    public Score(Double value) {
+        this.total = value;
     }
 
     /**
@@ -34,8 +34,8 @@ public class Score {
      * 
      * @param value the value to add to the total score
      */
-    public void addScore(final double value) {
-        this.total = this.total + value;
+    public double addScore(final double value) {
+        return this.total + value;
     }
 
     /**

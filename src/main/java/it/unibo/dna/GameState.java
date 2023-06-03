@@ -3,6 +3,7 @@ package it.unibo.dna;
 import java.util.List;
 
 import it.unibo.dna.model.EventQueue;
+import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
@@ -36,7 +37,7 @@ public interface GameState {
      */
     void addEntity(Entity e);
 
-    List<Player> getCharacters();
+    
 
     /**
      * Removes an {@link Entity} from the game.
@@ -53,7 +54,25 @@ public interface GameState {
 
     /**
      * 
+     * @return the list of characters of the game
+     */
+    List<Player> getCharacters();
+
+    /**
+     * 
      * @return the list of {@link Event}
      */
     EventQueue getEventQueue();
+
+    /**
+     * 
+     * @return the score of the actual game
+     */
+    Score getScore();
+
+    /**
+     * 
+     * @param score the score to set
+     */
+    void updateScore(Score score);
 }

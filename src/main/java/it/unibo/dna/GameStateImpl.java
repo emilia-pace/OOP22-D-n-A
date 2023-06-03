@@ -8,11 +8,11 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.EventQueue;
-import it.unibo.dna.model.Level;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
+import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
@@ -65,13 +65,10 @@ public class GameStateImpl implements GameState {
 
         characters.stream().forEach((c) -> c.update());
 
-        for (Entity ent : entities) {
-            if (ent instanceof MovablePlatform) {
-                ((MovablePlatform) ent).setLastPosition();
-                ((MovablePlatform) ent).update();
-                ((MovablePlatform) ent).findLimit();
-            }
-        }
+        entities.stream()
+            .filter(entity -> entity instanceof MovablePlatform)
+            .map(entity -> (MovablePlatform) entity)
+            .forEach(entity -> entity.movablePlatformUpdate());
     }
 
     /**
@@ -180,10 +177,13 @@ public class GameStateImpl implements GameState {
                             this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
                         case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
                         case ANGEL_DOOR, DEVIL_DOOR ->
-                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score));
                         case DIAMOND -> {
                             this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
+                        }
+                        case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {
+                            this.eventQueue.addEvent(event.hitPuddleEvent((Puddle) e, character));
                         }
                         default -> throw new IllegalArgumentException();
                     }

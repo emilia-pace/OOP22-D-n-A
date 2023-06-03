@@ -6,4 +6,8 @@ platform 7 20
 platform 90 10
 platform 100 3
 platform 5 60
+pPuddle 60 60 
+movablePlatform 60 50 70 50
+lever 40 60
+dDevil 70 10
 

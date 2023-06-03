@@ -9,9 +9,10 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.api.Entity;
 
 /**
  * Class that implements the {@link EventFactory} interface.
@@ -82,9 +83,9 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(final Door door, final Player player) {
+    public Event hitDoorEvent(final Door door, final Player player, final Score score) {
         return game -> {
-            door.openDoor(player);
+            door.openDoor(player, score);
         };
     }
 
@@ -152,6 +153,13 @@ public class EventFactoryImpl implements EventFactory {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        };
+    }
+
+    @Override
+    public Event hitPuddleEvent(Puddle puddle, Player player) {
+        return game -> {
+            puddle.killPlayer(player);
         };
     }
 

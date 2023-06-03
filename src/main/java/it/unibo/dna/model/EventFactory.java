@@ -4,6 +4,7 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
+import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -57,7 +58,7 @@ public interface EventFactory {
      * @param p the player
      * @return the new event
      */
-    Event hitDoorEvent(Door d, Player p);
+    Event hitDoorEvent(Door door, Player player, Score score);
 
     /**
      * Models the collision event with a lever.
@@ -80,4 +81,12 @@ public interface EventFactory {
      * @return
      */
     Event soundEvent(String s);
+
+    /**
+     * Models the collision event with a puddle.
+     * @param puddle the hit puddle
+     * @param player the player that touched the puddle
+     * @return the new event
+     */
+    Event hitPuddleEvent(Puddle puddle, Player player);
 }

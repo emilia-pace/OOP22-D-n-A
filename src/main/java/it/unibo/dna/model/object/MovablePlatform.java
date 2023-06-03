@@ -136,4 +136,10 @@ public class MovablePlatform extends AbstractMovableEntity {
         }
     }
 
+    public void movablePlatformUpdate() {
+        this.setLastPosition();
+        this.update();
+        this.findLimit();
+    }
+
 }

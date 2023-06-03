@@ -1,6 +1,9 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.graphics.MenuFactory;
+import it.unibo.dna.graphics.MenuFactoryImpl;
+import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -14,6 +17,7 @@ public class Door extends  AbstractEntity {
     }
 
     private doorState state;
+    private MenuFactory menuFactory = new MenuFactoryImpl();
 
     /**
      * 
@@ -41,16 +45,18 @@ public class Door extends  AbstractEntity {
      * 
      * @param player the player standing in front of the door
      */
-    public void openDoor(Player player) {
+    public void openDoor(Player player, Score score) {
         switch (player.getPlayerType()) {
             case ANGEL -> {
                 if (this.getType().equals(entityType.ANGEL_DOOR)) {
                     this.state = doorState.OPEN_DOOR;
+                    menuFactory.victoryMenu(score).createMenuFrame();
                 }
             }
             case DEVIL -> {
                 if (this.getType().equals(entityType.DEVIL_DOOR)) {
                     this.state = doorState.OPEN_DOOR;
+                    menuFactory.victoryMenu(score).createMenuFrame();
                 }
             }
             default -> throw new IllegalArgumentException();

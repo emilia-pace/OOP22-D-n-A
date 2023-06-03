@@ -15,18 +15,18 @@ public class Display extends JFrame {
 
         public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
         public static final int TILE_SIZE = (int) SCREEN_SIZE.getHeight() / 100;
-
+        public static final int BORDER = 70;
         private Canvas canvas;
         public ImageManager imgMgr;
-        double width = SCREEN_SIZE.getWidth();
+        private int dim = (int) SCREEN_SIZE.getHeight() - BORDER;
 
         public Display(List<Player> playerList) {
                 setTitle("D-n-A");
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
-                setResizable(true);
+                setResizable(false);
 
                 canvas = new Canvas();
-                canvas.setSize((int) (SCREEN_SIZE.getHeight()), (int) SCREEN_SIZE.getHeight());
+                canvas.setSize(dim, dim);
                 canvas.setFocusable(false);
                 add(canvas);
                 pack();
@@ -72,7 +72,7 @@ public class Display extends JFrame {
 
         }
 
-        public double getBoh() {
-                return width;
+        public int getScreenDimension() {
+                return this.dim / TILE_SIZE;
         }
 }

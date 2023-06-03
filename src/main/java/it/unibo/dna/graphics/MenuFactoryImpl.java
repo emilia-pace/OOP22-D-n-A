@@ -124,7 +124,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 try {
                     new Thread(new GameEngine(1)).start();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

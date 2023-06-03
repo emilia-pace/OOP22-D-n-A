@@ -1,0 +1,4 @@
+platform 10 80
+movablePlatform 40 80 40 50
+button 10 76
+dDevil 30 50

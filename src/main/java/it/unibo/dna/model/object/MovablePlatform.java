@@ -98,8 +98,8 @@ public class MovablePlatform extends AbstractMovableEntity {
      * A method that allows the platform to move from a starting point to a final
      * point.
      * 
-     * @param pos1 the starting position of the platform
-     * @param pos2 the final position that the platform wants to reach
+     * @param position1 the starting position of the platform
+     * @param position2 the final position that the platform wants to reach
      */
     public void move(final Position2d position1, final Position2d position2) {
         this.lastVector = this.getVector();

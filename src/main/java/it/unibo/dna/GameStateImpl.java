@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.graphics.MenuFactory;
+import it.unibo.dna.graphics.MenuFactoryImpl;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.EventQueue;
@@ -30,6 +32,7 @@ public class GameStateImpl implements GameState {
     private final List<Player> characters;
     private BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
+    private final MenuFactory menuFactory = new MenuFactoryImpl();
     private Score score;
     private final EventQueue eventQueue = new EventQueue();
 
@@ -47,6 +50,17 @@ public class GameStateImpl implements GameState {
         this.score = new Score(0.0);
         this.entities = level;
         this.characters = players;
+    }
+
+    private void checkForEndGame() {
+        long numberOfOpenedDoors = entities.stream()
+                                    .filter(entity -> entity instanceof Door)
+                                    .map(entity -> (Door)entity)
+                                    .filter(entity -> entity.getDoorState().equals(Door.doorState.OPEN_DOOR))
+                                    .count();
+        if (numberOfOpenedDoors == 2) {
+            menuFactory.victoryMenu(score).createMenuFrame();
+        }
     }
 
     /**
@@ -193,8 +207,10 @@ public class GameStateImpl implements GameState {
                         case BUTTON ->
                             this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
                         case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
-                        case ANGEL_DOOR, DEVIL_DOOR ->
+                        case ANGEL_DOOR, DEVIL_DOOR -> {
                             this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score));
+                            this.checkForEndGame();
+                        }
                         case DIAMOND -> {
                             this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));

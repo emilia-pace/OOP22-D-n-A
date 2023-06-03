@@ -113,7 +113,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
             game.removeEntity(d);
-            s.addScore(d.getValue());
+            game.updateScore(new Score(s.addScore(d.getValue())));
         };
     }
 

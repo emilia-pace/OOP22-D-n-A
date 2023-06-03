@@ -10,4 +10,5 @@ pPuddle 60 60
 movablePlatform 60 50 70 50
 lever 40 60
 dDevil 70 10
-
+diamond 40 75
+diamond 10 50

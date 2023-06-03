@@ -2,9 +2,7 @@ package it.unibo.dna;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
-import org.apache.commons.lang3.ObjectUtils.Null;
+import java.io.IOException;
 import org.junit.jupiter.api.*;
 
 import it.unibo.dna.common.Pair;
@@ -23,12 +21,19 @@ class MovementTest {
     private static final Vector2d START_VECTOR = new Vector2d(1, 0);
     private static final double HEIGHT = 10.0;
     private static final double WIDTH = 10.0;
-    private final GameState game;
+    private GameState game;
     private static final PlayerImpl.PlayerType TYPE = PlayerImpl.PlayerType.ANGEL;
-    private final Player player = new PlayerImpl(this.game, START_POSITION, START_VECTOR, HEIGHT, WIDTH, TYPE);
+    private final Player player = new PlayerImpl(null, START_POSITION, START_VECTOR, HEIGHT, WIDTH, TYPE);
     private final CommandFactory command = new CommandFactoryImpl(this.player);
-    private final StateObserver observer = new StateObserver(player.getState(), player.getPlayerType(), (int) HEIGHT,
-            (int) WIDTH, 1);
+
+    {
+        try {
+            this.game = new GameStateImpl((int) WIDTH, (int) HEIGHT, null, null);
+            this.player.setGame(this.game);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
 
     /**
      * 
@@ -50,14 +55,14 @@ class MovementTest {
                 StateEnum.STATE_RIGHT);
         this.command.right().execute();
         assertEquals(expectedVectorRight, this.player.getVector());
-        assertEquals(expectedStateRight, this.player.getState().getState());
+        assertEquals(expectedStateRight, this.player.getState().getPairState());
 
         final Vector2d expectedVectorLeft = new Vector2d(-Player.STANDARDVELOCITY, 0);
         final Pair<StateEnum, StateEnum> expectedStateLeft = new Pair<>(StateEnum.STATE_STANDING,
                 StateEnum.STATE_LEFT);
         this.command.left().execute();
         assertEquals(expectedVectorLeft, this.player.getVector());
-        assertEquals(expectedStateLeft, this.player.getState().getState());
+        assertEquals(expectedStateLeft, this.player.getState().getPairState());
 
         final Vector2d expectedVectorJump = new Vector2d(0, -Player.JUMPVELOCITY);
         final Pair<StateEnum, StateEnum> expectedStateJump = new Pair<>(StateEnum.STATE_JUMPING,
@@ -65,7 +70,7 @@ class MovementTest {
         this.command.stop().execute();
         this.command.jump().execute();
         assertEquals(expectedVectorJump, this.player.getVector());
-        assertEquals(expectedStateJump, this.player.getState().getState());
+        assertEquals(expectedStateJump, this.player.getState().getPairState());
 
     }
 }

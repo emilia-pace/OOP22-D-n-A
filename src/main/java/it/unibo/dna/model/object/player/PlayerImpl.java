@@ -36,6 +36,15 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
+    public void update() {
+        super.update();
+        this.playerState.update();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public State getState() {
         return this.playerState;
     }
@@ -60,7 +69,7 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void setGame(GameState game) {
+    public void setGame(final GameState game) {
         this.game = game;
     }
 

@@ -24,12 +24,6 @@ import java.io.IOException;
  */
 public class StateObserver implements PropertyChangeListener {
 
-    private final int MAXFRAME = 100;
-
-    private int frame = 0;
-    private int imageIndex = 0;
-
-    private State state;
     private Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
     private Player.PlayerType type;
     private Image playerImage;
@@ -40,7 +34,6 @@ public class StateObserver implements PropertyChangeListener {
      */
     public StateObserver(final State state, final Player.PlayerType type) {
         state.addChangeListener(this);
-        this.state = state;
         this.type = type;
         this.loadPlayerImage(playerMap, EntityFactory.PLAYER_HEIGHT * Display.TILE_SIZE,
                 EntityFactory.PLAYER_WIDTH * Display.TILE_SIZE);
@@ -52,30 +45,10 @@ public class StateObserver implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(final PropertyChangeEvent event) {
-        this.state = ((State) event.getSource());
-        if (event.getNewValue().equals(event.getOldValue())) {
-            playerImage = this.playerMap.get(((State) event.getSource()).getPairState()).get(imageIndex);
-            System.out.println("ciao");
-        } else {
-            playerImage = this.playerMap.get(((State) event.getSource()).getPairState()).get(0);
-        }
-    }
-
-    /**
-     * A method that control the change of images when the player is walking to the
-     * right or to the left.
-     */
-    public void update() {
-        this.frame++;
-        if (frame >= this.MAXFRAME) {
-            this.imageIndex = (this.imageIndex == 0) ? 1 : 0;
-            this.frame = 0;
-            if (this.state.getX().equals(StateEnum.STATE_STANDING)
-                    && (this.state.getY().equals(StateEnum.STATE_LEFT)
-                            || this.state.getY().equals(StateEnum.STATE_RIGHT))) {
-                this.propertyChange(new PropertyChangeEvent(this.state, null, this.state.getY(), this.state.getY()));
-            }
-        }
+        State state = ((State) event.getSource());
+        playerImage = (event.getNewValue().equals(event.getOldValue()))
+                ? this.playerMap.get(state.getPairState()).get(state.getImageIndex())
+                : this.playerMap.get(state.getPairState()).get(0);
     }
 
     /**

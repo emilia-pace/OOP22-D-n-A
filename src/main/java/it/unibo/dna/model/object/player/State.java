@@ -10,6 +10,11 @@ import it.unibo.dna.common.Pair;
  */
 public class State {
 
+    private final int MAXFRAME = 10;
+
+    private int frame = 0;
+    private int imageIndex = 0;
+
     private StateEnum stateX;
     private StateEnum stateY;
     private PropertyChangeListener listener;
@@ -43,7 +48,7 @@ public class State {
      * @param stateX the new first state
      */
     public void setStateX(final StateEnum stateX) {
-        this.notifyListener(this, null, this.stateX, this.stateX = stateX);
+        this.notifyListener(this, "changeX", this.stateX, this.stateX = stateX);
     }
 
     /**
@@ -52,7 +57,7 @@ public class State {
      * @param stateY the new second state
      */
     public void setStateY(final StateEnum stateY) {
-        this.notifyListener(this, null, this.stateY, this.stateY = stateY);
+        this.notifyListener(this, "changeY", this.stateY, this.stateY = stateY);
     }
 
     /**
@@ -80,6 +85,30 @@ public class State {
      */
     public void addChangeListener(final PropertyChangeListener newListener) {
         this.listener = newListener;
+    }
+
+    /**
+     * A method that control the change of images when the player is walking to the
+     * right or to the left.
+     */
+    public void update() {
+        this.frame++;
+        if (frame >= this.MAXFRAME) {
+            this.imageIndex = (this.imageIndex == 0) ? 1 : 0;
+            this.frame = 0;
+            if (this.getX().equals(StateEnum.STATE_STANDING)
+                    && (this.getY().equals(StateEnum.STATE_LEFT)
+                            || this.getY().equals(StateEnum.STATE_RIGHT))) {
+                this.notifyListener(this, "changeY", this.getY(), this.getY());
+            }
+        }
+    }
+
+    /**
+     * @return the value of imageIndex
+     */
+    public int getImageIndex() {
+        return this.imageIndex;
     }
 
     /**

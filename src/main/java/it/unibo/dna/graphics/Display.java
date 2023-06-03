@@ -65,8 +65,6 @@ public class Display extends JFrame {
                                 (int) p.getPosition().getX() * TILE_SIZE,
                                 (int) p.getPosition().getY() * TILE_SIZE, this));
 
-                imgMgr.getObservers().forEach(o -> o.update());
-
                 graphics.dispose();
                 bufferStrategy.show();
 

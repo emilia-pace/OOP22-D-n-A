@@ -8,7 +8,6 @@ import it.unibo.dna.model.object.player.State;
 /*
  * An interface rappresenting the Game Character.
  */
-
 public interface Player extends MovableEntity {
 
     /**
@@ -42,15 +41,15 @@ public interface Player extends MovableEntity {
     void setGame(GameState game);
 
     /*
-     * An enum rappresenting the type of the Player
+     * An enum rappresenting the type of the Player.
      */
     enum PlayerType {
         /**
-         * when player is a devil
+         * when player is a devil.
          */
         DEVIL,
         /**
-         * when player is an angel
+         * when player is an angel.
          */
         ANGEL;
     }

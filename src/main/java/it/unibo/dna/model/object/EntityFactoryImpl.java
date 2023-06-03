@@ -28,8 +28,8 @@ public class EntityFactoryImpl implements EntityFactory {
                 new Puddle(position[0], (double)DEF_HEIGHT, (double)DEF_WIDTH, Entity.entityType.BLUE_PUDDLE);
             case PURPLE_PUDDLE ->
                 new Puddle(position[0], (double)DEF_HEIGHT, (double)PUDDLE_WIDTH, Entity.entityType.PURPLE_PUDDLE);
-            case ANGEL_DOOR -> new Door(position[0], (double)DOOR_HEIGHT, (double)DEF_WIDTH, Entity.entityType.ANGEL_DOOR);
-            case DEVIL_DOOR -> new Door(position[0], (double)DOOR_HEIGHT, (double)DEF_WIDTH, Entity.entityType.DEVIL_DOOR);
+            case ANGEL_DOOR -> new Door(position[0], (double)DOOR_HEIGHT, (double)DOOR_WIDTH, Entity.entityType.ANGEL_DOOR);
+            case DEVIL_DOOR -> new Door(position[0], (double)DOOR_HEIGHT, (double)DOOR_WIDTH, Entity.entityType.DEVIL_DOOR);
             case PLATFORM -> new Platform(position[0], (double)DEF_HEIGHT, (double)PLATFORM_WIDTH);
             case MOVABLEPLATFORM -> new MovablePlatform(position[0], defaultVector,(double)DEF_HEIGHT, (double)PLATFORM_WIDTH, position[1]);
             case DIAMOND -> new Diamond((double)DEF_HEIGHT, (double)DEF_WIDTH, diamondValue, position[0]);

@@ -49,7 +49,6 @@ public class GameEngine implements Runnable {
 
     private void render() {
         display.render(game.getEntities(), this.game.getCharacters());
-
     }
 
     private void update() {

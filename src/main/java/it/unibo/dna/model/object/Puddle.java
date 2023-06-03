@@ -1,6 +1,11 @@
 package it.unibo.dna.model.object;
 
+import java.awt.Menu;
+import java.util.Optional;
+
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.graphics.MenuFactory;
+import it.unibo.dna.graphics.MenuFactoryImpl;
 import it.unibo.dna.model.object.api.Player;
 //import it.unibo.dna.model.object.api.Player.Type;
 
@@ -11,6 +16,9 @@ import it.unibo.dna.model.object.api.Player;
  * - RED: kills the Angel if it falls in it. Does nothing to the Devil.
  */
 public class Puddle extends AbstractEntity {
+
+    private MenuFactory menuFactory = new MenuFactoryImpl();
+    private Optional<Player> player = Optional.empty();
 
     /**
      * 
@@ -30,21 +38,24 @@ public class Puddle extends AbstractEntity {
      * @param character the {@link Player} touching the puddle
      */
     public void killPlayer( final Player character) {
-        switch (this.getType()) {
-            case PURPLE_PUDDLE -> {
-                /* the character that fell in the puddle dies. */
-            }
-            case BLUE_PUDDLE -> {
-                if (character.getPlayerType().equals(Player.PlayerType.DEVIL)) {
-                    // character dies
-                } /* altrimenti tutto ok */
-            }
-            case RED_PUDDLE -> {
-                if (character.getPlayerType().equals(Player.PlayerType.ANGEL)) {
-                    // angel dies
+        if(player.isEmpty()){
+            player = Optional.of(character);
+            switch (this.getType()) {
+                case PURPLE_PUDDLE -> {
+                    menuFactory.gameOverMenu().createMenuFrame();
                 }
+                case BLUE_PUDDLE -> {
+                    if (character.getPlayerType().equals(Player.PlayerType.DEVIL)) {
+                        menuFactory.gameOverMenu().createMenuFrame();;
+                    }
+                }
+                case RED_PUDDLE -> {
+                    if (character.getPlayerType().equals(Player.PlayerType.ANGEL)) {
+                        menuFactory.gameOverMenu();
+                    }
+                }
+                default -> throw new IllegalArgumentException();
             }
-            default -> throw new IllegalArgumentException();
         }
     }
 }

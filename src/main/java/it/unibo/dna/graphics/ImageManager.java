@@ -76,10 +76,10 @@ public class ImageManager {
         List<Image> movablePlatformImageList = new ArrayList<>();
         List<Image> diamondImage = new ArrayList<>();
         try {
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DOOR_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DOOR_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DOOR_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DOOR_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG")),EntityFactory.LEVER_HEIGHT,EntityFactory.DEF_WIDTH));

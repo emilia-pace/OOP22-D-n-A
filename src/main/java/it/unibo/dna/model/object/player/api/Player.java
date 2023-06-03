@@ -12,12 +12,12 @@ import it.unibo.dna.model.object.player.State;
 public interface Player extends MovableEntity {
 
     /**
-     * The jump speed value
+     * The jump speed value.
      */
     double JUMPVELOCITY = 5;
 
     /**
-     * The standard velocity of the Player
+     * The standard velocity of the Player.
      */
     double STANDARDVELOCITY = 0.4;
 
@@ -36,6 +36,9 @@ public interface Player extends MovableEntity {
      */
     EventQueue getGameEventQueue();
 
+    /**
+     * @param game the new player's GameState
+     */
     void setGame(GameState game);
 
     /*

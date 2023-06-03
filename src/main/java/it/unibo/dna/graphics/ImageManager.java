@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 

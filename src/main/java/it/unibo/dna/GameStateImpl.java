@@ -8,7 +8,6 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.EventQueue;
-import it.unibo.dna.model.Level;
 import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.Door;

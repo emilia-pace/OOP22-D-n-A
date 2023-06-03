@@ -1,11 +1,9 @@
 package it.unibo.dna;
 
 import java.io.IOException;
-import java.util.List;
 
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.Level;
-import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
 public class GameEngine implements Runnable {
@@ -20,7 +18,7 @@ public class GameEngine implements Runnable {
     public GameEngine(int lvl) throws IOException {
         this.level = new Level(lvl);
         this.display = new Display(this.level.getCharacters());
-        this.game = new GameStateImpl(display.getWidth(), display.getWidth(), this.level.getEntities(),
+        this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(), this.level.getEntities(),
                 this.level.getCharacters());
         for (Player p : this.game.getCharacters()) {
             p.setGame(this.game);

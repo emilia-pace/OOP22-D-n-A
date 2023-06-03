@@ -1,8 +1,9 @@
-package it.unibo.dna.model.object.api;
+package it.unibo.dna.model.object.player.api;
 
 import it.unibo.dna.GameState;
 import it.unibo.dna.model.EventQueue;
-import it.unibo.dna.model.object.State;
+import it.unibo.dna.model.object.movableEntity.api.MovableEntity;
+import it.unibo.dna.model.object.player.State;
 
 /*
  * An interface rappresenting the Game Character.

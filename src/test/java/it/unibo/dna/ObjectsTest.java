@@ -13,10 +13,10 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.PlayerImpl;
 import it.unibo.dna.model.object.api.BoundingBox;
-import it.unibo.dna.model.object.api.Player;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.PlayerImpl;
+import it.unibo.dna.model.object.player.api.Player;
 
 public class ObjectsTest {
     private static final EntityFactoryImpl ENTITYFACTORY = new EntityFactoryImpl();

@@ -5,7 +5,7 @@ import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Interface of a factory that creates {@link Event}.

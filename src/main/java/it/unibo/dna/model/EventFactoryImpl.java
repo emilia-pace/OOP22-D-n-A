@@ -9,9 +9,9 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.State.StateEnum;
-import it.unibo.dna.model.object.api.Player;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.State.StateEnum;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Class that implements the {@link EventFactory} interface.

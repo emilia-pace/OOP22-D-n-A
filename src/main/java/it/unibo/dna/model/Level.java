@@ -15,10 +15,10 @@ import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.EntityFactory;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.PlayerImpl;
 import it.unibo.dna.model.object.api.Entity.entityType;
+import it.unibo.dna.model.object.player.PlayerImpl;
+import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
 
 public class Level {
 

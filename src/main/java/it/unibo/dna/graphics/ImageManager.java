@@ -17,30 +17,30 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.StateObserver;
 import it.unibo.dna.model.object.Platform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.Door.doorState;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.StateObserver;
+import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.EntityFactory;
 
 public class ImageManager {
 
     private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
-    private StateObserver obsPlayer1;
-    private StateObserver obsPlayer2;
+    private List<StateObserver> obsPlayers = new ArrayList<>();
 
     public ImageManager(List<Player> playerList) {
         // caricamento di tutte le immagini
-        obsPlayer1 = new StateObserver(playerList.get(0).getState(), playerList.get(0).getPlayerType());
-        obsPlayer2 = new StateObserver(playerList.get(1).getState(), playerList.get(1).getPlayerType());
+        for (int i = 0; i < playerList.size(); i++) {
+            obsPlayers.add(new StateObserver(playerList.get(i).getState(), playerList.get(i).getPlayerType()));
+        }
         loadImages();
     }
 
     public Image getPlayerImage(Player player) {
-        return (obsPlayer1.getType().equals(player.getPlayerType())) ? obsPlayer1.getPlayerImage()
-                : obsPlayer2.getPlayerImage();
+        return obsPlayers.stream().filter(e -> e.getPlayerType().equals(player.getPlayerType())).findFirst().get()
+                .getImage();
     }
 
     public Image getImage(Entity entity) {
@@ -76,20 +76,34 @@ public class ImageManager {
         List<Image> movablePlatformImageList = new ArrayList<>();
         List<Image> diamondImage = new ArrayList<>();
         try {
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),EntityFactory.DOOR_HEIGHT,EntityFactory.DEF_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG")),EntityFactory.BUTTON_HEIGHT,EntityFactory.DEF_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG")),EntityFactory.LEVER_HEIGHT,EntityFactory.DEF_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG")),EntityFactory.LEVER_HEIGHT,EntityFactory.DEF_WIDTH));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PUDDLE_WIDTH));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PUDDLE_WIDTH));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PUDDLE_WIDTH));
-            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PLATFORM_WIDTH));
-            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")),EntityFactory.DEF_HEIGHT,EntityFactory.PLATFORM_WIDTH));
-            diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png")),EntityFactory.DEF_HEIGHT,EntityFactory.DEF_HEIGHT));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DEF_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DEF_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DEF_WIDTH));
+            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG")),
+                    EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG")),
+                    EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG")),
+                    EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG")),
+                    EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg")),
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg")),
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg")),
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")),
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
+            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")),
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
+            diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png")), EntityFactory.DEF_HEIGHT,
+                    EntityFactory.DEF_HEIGHT));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,7 +116,7 @@ public class ImageManager {
     }
 
     public List<StateObserver> getObservers() {
-        return List.of(obsPlayer1, obsPlayer2);
+        return this.obsPlayers;
     }
 
     /**

@@ -3,8 +3,8 @@ package it.unibo.dna.input;
 import it.unibo.dna.input.api.Command;
 import it.unibo.dna.input.api.CommandFactory;
 import it.unibo.dna.model.EventFactoryImpl;
-import it.unibo.dna.model.object.State.StateEnum;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.State.StateEnum;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Class that implements the {@link CommandFactory} interface.

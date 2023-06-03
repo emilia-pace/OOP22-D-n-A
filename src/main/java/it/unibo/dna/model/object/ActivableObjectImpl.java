@@ -2,7 +2,7 @@ package it.unibo.dna.model.object;
 
 import java.util.Optional;
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * An ActivableObject that moves its platform when activated by the player.

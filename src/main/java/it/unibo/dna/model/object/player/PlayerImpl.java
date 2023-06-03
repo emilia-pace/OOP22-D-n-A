@@ -1,11 +1,12 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.player;
 
 import it.unibo.dna.GameState;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Class that implements the {@link Player} interface.

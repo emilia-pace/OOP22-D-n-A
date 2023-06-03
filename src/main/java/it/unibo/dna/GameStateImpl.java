@@ -17,7 +17,7 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Class that implements {@link GameState}.

@@ -5,6 +5,7 @@ package it.unibo.dna.model.object;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
 
 /**
  * A platform that can be moved by a button or a lever.

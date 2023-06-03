@@ -2,7 +2,7 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * A door that can be opend only by the corresponding player.

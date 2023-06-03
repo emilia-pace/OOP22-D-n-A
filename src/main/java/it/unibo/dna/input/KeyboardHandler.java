@@ -1,7 +1,7 @@
 package it.unibo.dna.input;
 
 import it.unibo.dna.input.api.CommandFactory;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

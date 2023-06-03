@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -43,10 +43,6 @@ public class State {
 
     public void addChangeListener(PropertyChangeListener newListener) {
         this.listener = newListener;
-    }
-
-    public PropertyChangeListener getListener() {
-        return this.listener;
     }
 
     public enum StateEnum {

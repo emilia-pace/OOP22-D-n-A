@@ -4,9 +4,8 @@ import javax.swing.*;
 import java.util.List;
 
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.object.StateObserver;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

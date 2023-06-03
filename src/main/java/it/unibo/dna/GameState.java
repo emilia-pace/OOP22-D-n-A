@@ -5,7 +5,7 @@ import java.util.List;
 import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Interface that models the state of the game.

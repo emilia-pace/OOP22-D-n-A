@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -9,8 +9,10 @@ import java.util.Map;
 
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.graphics.Display;
-import it.unibo.dna.model.object.State.StateEnum;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.EntityFactory;
+import it.unibo.dna.model.object.player.State.StateEnum;
+import it.unibo.dna.model.object.player.api.Player;
+
 import javax.imageio.ImageIO;
 
 import java.awt.*;
@@ -31,7 +33,7 @@ public class StateObserver implements PropertyChangeListener {
         state.addChangeListener(this);
         this.state = state;
         this.type = type;
-        this.playerImage(playerMap, EntityFactory.PLAYER_HEIGHT * Display.TILE_SIZE,
+        this.loadPlayerImage(playerMap, EntityFactory.PLAYER_HEIGHT * Display.TILE_SIZE,
                 EntityFactory.PLAYER_WIDTH * Display.TILE_SIZE);
         playerImage = this.playerMap.get(state.getPairState()).get(0);
     }
@@ -63,7 +65,7 @@ public class StateObserver implements PropertyChangeListener {
         }
     }
 
-    private void playerImage(final Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap,
+    private void loadPlayerImage(final Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap,
             final int width, final int height) {
         String path = (this.type.equals(Player.PlayerType.ANGEL)) ? "angel" : "devil";
         List.of(State.StateEnum.STATE_JUMPING, State.StateEnum.STATE_STANDING).forEach(state -> {
@@ -96,11 +98,11 @@ public class StateObserver implements PropertyChangeListener {
         }
     }
 
-    public Image getPlayerImage() {
+    public Image getImage() {
         return this.playerImage;
     }
 
-    public Player.PlayerType getType() {
+    public Player.PlayerType getPlayerType() {
         return this.type;
     }
 

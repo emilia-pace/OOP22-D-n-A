@@ -147,10 +147,10 @@ public class Level {
                 nameFile = "src\\main\\resources\\levels\\lv1.txt";
                 break;
             case 2:
-                nameFile = "lvl2.txt";
+                nameFile = "src\\main\\resources\\levels\\lv2.txt";
                 break;
             case 3:
-                nameFile = "lvl3.txt";
+                nameFile = "src\\main\\resources\\levels\\lv3.txt";
                 break;
         }
 

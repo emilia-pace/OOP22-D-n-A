@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.EntityFactory;

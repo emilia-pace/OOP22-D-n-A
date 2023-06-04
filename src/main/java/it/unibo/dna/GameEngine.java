@@ -1,11 +1,8 @@
 package it.unibo.dna;
 
 import java.io.IOException;
-import java.util.List;
-
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.Level;
-import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.Player;
 
 public class GameEngine implements Runnable {
@@ -54,5 +51,12 @@ public class GameEngine implements Runnable {
     private void update() {
         game.update();
     }
+
+    public void stop() {
+        display.dispose();
+        display.getGraphics().dispose();
+        running = false;
+    }
+    
 
 }

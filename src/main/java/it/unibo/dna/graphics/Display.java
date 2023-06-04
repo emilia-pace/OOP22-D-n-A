@@ -72,6 +72,7 @@ public class Display extends JFrame {
                 bufferStrategy.show();
 
         }
+        
 
         public double getBoh() {
                 return width;

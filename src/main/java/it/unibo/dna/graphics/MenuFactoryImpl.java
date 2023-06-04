@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,6 +21,8 @@ import it.unibo.dna.model.Score;
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
     Score totalScore;
+    Thread gameThread;
+    GameEngine gameEngine;
 
     @Override
     public GameMenu startMenu() {
@@ -120,10 +123,11 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         JButton startButton = new JButton("Start");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                startMenu.setVisible(false);
+                startMenu.dispose();
                 try {
-                    new Thread(new GameEngine(1)).start();
+                    startThread();
                 } catch (IOException e1) {
+                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
@@ -168,43 +172,58 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         JButton restartButton = new JButton("Restart Level");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gameOverMenu.setVisible(false);
+                interruptThread();
+                gameOverMenu.dispose();;
                 try {
-                    new Thread(new GameEngine(level)).start();
+                    startThread(); // Ensure gameEngine is initialized before interrupting the thread
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
-
         };
         restartButton.addActionListener(al);
-
+    
         return restartButton;
     }
-
+    
     public JButton getNextLevelButton(JFrame victoryMenu) {
-        JButton restartButton = new JButton("Restart");
+        JButton nextLevelButton = new JButton("Next");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                victoryMenu.setVisible(false);
+                victoryMenu.dispose();;
+                interruptThread();
                 level++;
                 try {
-                    new Thread(new GameEngine(level)).start();
+                    startThread(); // Ensure gameEngine is initialized before interrupting the thread
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
-
         };
-        restartButton.addActionListener(al);
-
-        return restartButton;
+        nextLevelButton.addActionListener(al);
+    
+        return nextLevelButton;
     }
+    
 
     public JLabel getScorLabel() {
         return new JLabel("Score: %d" + totalScore);
     }
 
+    void startThread() throws IOException {
+        gameEngine = new GameEngine(level);
+        gameThread = new Thread(gameEngine);
+        gameThread.start();
+    }
+
+    void interruptThread() {
+            System.out.print(gameThread);
+            gameThread.interrupt();
+    }
 }
+  
+    
+    
+    
+
+

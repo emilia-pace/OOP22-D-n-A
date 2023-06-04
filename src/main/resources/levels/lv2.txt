@@ -1,0 +1,13 @@
+angel 5 50
+devil 17 50
+platform 0 80
+platform 30 80
+platform 7 20
+platform 40 10
+platform 50 3
+platform 7 60
+pPuddle 60 60 
+movablePlatform 60 50 70 50
+lever 40 60
+dDevil 70 10
+

@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.dna.GameEngine;
+import it.unibo.dna.GameStateImpl;
 import it.unibo.dna.model.Score;
 
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
-    Score totalScore;
 
     @Override
     public GameMenu startMenu() {
@@ -204,7 +204,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     public JLabel getScorLabel() {
-        return new JLabel("Score: %d" + totalScore);
+        return new JLabel("Score: " + GameStateImpl.score.getTotal());
     }
 
 }

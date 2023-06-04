@@ -5,6 +5,7 @@ import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import it.unibo.dna.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -113,7 +114,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
             game.removeEntity(d);
-            game.updateScore(new Score(s.addScore(d.getValue())));
+            GameStateImpl.score.setTotal(s.addScore(d.getValue()));
         };
     }
 

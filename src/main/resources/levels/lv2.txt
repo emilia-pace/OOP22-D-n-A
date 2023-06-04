@@ -1,4 +1,6 @@
+angel 5 50
+devil 17 50
 platform 10 80
-movablePlatform 40 80 40 50
-button 10 76
+movablePlatform 40 80 80 80
+lever 10 76
 dDevil 30 50

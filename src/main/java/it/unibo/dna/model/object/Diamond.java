@@ -18,7 +18,7 @@ public class Diamond extends  AbstractEntity {
      * @param p the position of the diamond
      */
     public Diamond(final double h, final double w, final double v, final Position2d p) {
-        super(p, h, w, Entity.entityType.DIAMOND);
+        super(p, h, w, Entity.EntityType.DIAMOND);
         this.value = v;
     }
 

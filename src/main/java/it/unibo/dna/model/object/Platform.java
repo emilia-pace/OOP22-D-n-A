@@ -2,10 +2,11 @@ package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.api.Entity;
+
 /**
  * A still platform.
  */
-public class Platform extends  AbstractEntity{
+public class Platform extends  AbstractEntity {
 
     /**
      * 
@@ -14,7 +15,7 @@ public class Platform extends  AbstractEntity{
      * @param width the width of the Platform
      */
     public Platform(final Position2d position, final double height, final double width) {
-        super(position, height, width, Entity.entityType.PLATFORM);
+        super(position, height, width, Entity.EntityType.PLATFORM);
     }
     
 }

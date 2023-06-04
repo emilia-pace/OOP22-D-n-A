@@ -45,16 +45,16 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitMovablePlatformEvent(final MovablePlatform pt, final Player p) {
         return game -> {
             p.setVectorY(p.getVector().getY() + pt.getVector().getY());
-            if (p.getVector().getX() == 0 && pt.getLastVector().getX() != 0) {
-                p.setVectorX(pt.getLastVector().getX());
+            if (p.getVector().getX() == 0 && pt.getPreviousVector().getX() != 0) {
+                p.setVectorX(pt.getPreviousVector().getX());
             } else {
-                p.setVectorX(p.getVector().getX() + pt.getVector().getX() - pt.getLastVector().getX());
+                p.setVectorX(p.getVector().getX() + pt.getVector().getX() - pt.getPreviousVector().getX());
             }
-            if (pt.getVector().getX() != 0 || pt.getLastVector().getX() != 0) {
-                pt.setLastVector(pt.getVector());
+            if (pt.getVector().getX() != 0 || pt.getPreviousVector().getX() != 0) {
+                pt.setPreviousVector(pt.getVector());
             }
-            if (p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() &&
-                    p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY()
+            if (p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() 
+                    && p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY()
                             + pt.getBoundingBox().getHeight()) {
                 p.setPositionY(pt.getPosition().getY() - p.getBoundingBox().getHeight());
             }
@@ -85,7 +85,9 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitDoorEvent(final Door door, final Player player, final Score score) {
         return game -> {
-            door.openDoor(player, score);
+            if (door.getPlayer().isEmpty()) {
+                door.openDoor(player);
+            }
         };
     }
 
@@ -144,7 +146,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event soundEvent(String s) {
+    public Event soundEvent(final String s) {
         return game -> {
             try {
                 Clip clip = AudioSystem.getClip();
@@ -156,8 +158,11 @@ public class EventFactoryImpl implements EventFactory {
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Event hitPuddleEvent(Puddle puddle, Player player) {
+    public Event hitPuddleEvent(final Puddle puddle, final Player player) {
         return game -> {
             puddle.killPlayer(player);
         };

@@ -27,7 +27,7 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      */
     public PlayerImpl(final GameState game, final Position2d pos, final Vector2d vet, final double height,
             final double width, final PlayerType type) {
-        super(pos, vet, height, width, Entity.entityType.PLAYER);
+        super(pos, vet, height, width, Entity.EntityType.PLAYER);
         this.playerType = type;
         this.game = game;
     }

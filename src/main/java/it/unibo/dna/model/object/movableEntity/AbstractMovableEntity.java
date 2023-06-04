@@ -20,7 +20,7 @@ public abstract class AbstractMovableEntity extends AbstractEntity implements Mo
      * @param type   the type of the Entity
      */
     public AbstractMovableEntity(final Position2d pos, final Vector2d vet, final double height, final double width,
-            final entityType type) {
+            final EntityType type) {
         super(pos, height, width, type);
         this.vector = vet;
     }

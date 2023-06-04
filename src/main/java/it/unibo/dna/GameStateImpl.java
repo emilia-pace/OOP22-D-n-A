@@ -56,7 +56,7 @@ public class GameStateImpl implements GameState {
         long numberOfOpenedDoors = entities.stream()
                                     .filter(entity -> entity instanceof Door)
                                     .map(entity -> (Door)entity)
-                                    .filter(entity -> entity.getDoorState().equals(Door.doorState.OPEN_DOOR))
+                                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                                     .count();
         if (numberOfOpenedDoors == 2) {
             menuFactory.victoryMenu(score).createMenuFrame();
@@ -174,14 +174,30 @@ public class GameStateImpl implements GameState {
         final var box = character.getBoundingBox();
         this.getEntities().stream()
                 .filter((e) -> !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth()))
-                .filter((e) -> (e.getType().equals(Entity.entityType.BUTTON))
-                        || e.getType().equals(Entity.entityType.LEVER))
+                .filter((e) -> (e.getType().equals(Entity.EntityType.BUTTON))
+                        || e.getType().equals(Entity.EntityType.LEVER))
                 .forEach((e) -> {
                     final Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
                     if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                        if (e.getType().equals(Entity.entityType.BUTTON))
+                        if (e.getType().equals(Entity.EntityType.BUTTON))
                             ((ActivableObjectImpl) e).deactivate();
                         ((ActivableObjectImpl) e).resetPlayer();
+                    }
+                });
+    }
+
+    private void freeDoor(final Player character) {
+        final var box = character.getBoundingBox();
+        this.getEntities().stream()
+                .filter((e) -> !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth()))
+                .filter((e) -> (e.getType().equals(Entity.EntityType.DEVIL_DOOR))
+                        || e.getType().equals(Entity.EntityType.ANGEL_DOOR))
+                .map((e) -> (Door) e)
+                .forEach((e) -> {
+                    final Optional<Player> doorPlayer = e.getPlayer();
+                    if(doorPlayer.isPresent() && doorPlayer.get().equals(character)) {
+                        e.closeDoor();
+                        e.resetPlayer();
                     }
                 });
     }
@@ -224,6 +240,7 @@ public class GameStateImpl implements GameState {
                 });
 
         freeActivableObject(character);
+        freeDoor(character);
     }
 
     /**

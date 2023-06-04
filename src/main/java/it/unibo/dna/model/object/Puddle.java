@@ -1,13 +1,11 @@
 package it.unibo.dna.model.object;
 
-import java.awt.Menu;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.graphics.MenuFactory;
 import it.unibo.dna.graphics.MenuFactoryImpl;
 import it.unibo.dna.model.object.player.api.Player;
-//import it.unibo.dna.model.object.api.Player.Type;
 
 /**
  * A puddle with the following characteristics:
@@ -27,7 +25,7 @@ public class Puddle extends AbstractEntity {
      * @param width  the width of the puddle
      * @param type   the type of the puddle (PURPLE,BLUE,RED)
      */
-    public Puddle(final Position2d position, final double height, final double width, final entityType type) {
+    public Puddle(final Position2d position, final double height, final double width, final EntityType type) {
         super(position, height, width, type);
     }
 
@@ -38,7 +36,7 @@ public class Puddle extends AbstractEntity {
      * @param character the {@link Player} touching the puddle
      */
     public void killPlayer( final Player character) {
-        if(player.isEmpty()){
+        if (player.isEmpty()){
             player = Optional.of(character);
             switch (this.getType()) {
                 case PURPLE_PUDDLE -> {
@@ -46,7 +44,7 @@ public class Puddle extends AbstractEntity {
                 }
                 case BLUE_PUDDLE -> {
                     if (character.getPlayerType().equals(Player.PlayerType.DEVIL)) {
-                        menuFactory.gameOverMenu().createMenuFrame();;
+                        menuFactory.gameOverMenu().createMenuFrame();
                     }
                 }
                 case RED_PUDDLE -> {

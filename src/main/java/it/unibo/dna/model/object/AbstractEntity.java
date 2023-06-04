@@ -11,7 +11,7 @@ import it.unibo.dna.model.object.api.Entity;
 public abstract class AbstractEntity implements Entity {
 
     private BoundingBox box;
-    private final Entity.entityType type;
+    private final Entity.EntityType type;
 
     /**
      * @param pos    the position of the entity
@@ -19,7 +19,7 @@ public abstract class AbstractEntity implements Entity {
      * @param width  the width of the entity
      * @param type   the entity type
      */
-    public AbstractEntity(final Position2d pos, final double height, final double width, Entity.entityType type) {
+    public AbstractEntity(final Position2d pos, final double height, final double width, final Entity.EntityType type) {
         box = new RectBoundingBox(pos, height, width);
         this.type = type;
     }
@@ -68,7 +68,7 @@ public abstract class AbstractEntity implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public Entity.entityType getType() {
+    public Entity.EntityType getType() {
         return this.type;
     }
 }

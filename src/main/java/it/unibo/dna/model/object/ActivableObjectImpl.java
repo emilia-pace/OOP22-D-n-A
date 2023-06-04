@@ -12,7 +12,7 @@ import it.unibo.dna.model.object.player.api.Player;
  */
 public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
 
-    private boolean isActive=false; /*True when the platform is moving towards its final position*/
+    private boolean isActive = false; /*True when the platform is moving towards its final position*/
     private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject*/
     private MovablePlatform movablePlatform;
 
@@ -21,11 +21,12 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
      * @param height the height of the ActivableObject
      * @param width the width of the ActivableObject
      * @param movablePlatform the {@link MovablePlatform} that the ActivableObject moves
-     * @param type the type of the entityType of the ActivableObject (it can be BUTTON or LEVER)
+     * @param type the type of the EntityType of the ActivableObject (it can be BUTTON or LEVER)
      */
-    public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, final MovablePlatform movablePlatform, final entityType type) {
-       super(pos,height,width,type);
-       this.movablePlatform=movablePlatform;
+    public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, 
+                                final MovablePlatform movablePlatform, final EntityType type) {
+       super(pos, height, width, type);
+       this.movablePlatform = movablePlatform;
     }
 
     /**
@@ -61,7 +62,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
      * @param movablePlatform the MovablePlatform the ActivableObject controls
      */
     public void setMovablePlatform(final MovablePlatform movablePlatform) {
-        this.movablePlatform=movablePlatform;
+        this.movablePlatform = movablePlatform;
     }
 
     /** 
@@ -69,7 +70,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
      */
     public void activate() {
         this.isActive = true;
-        movablePlatform.move(movablePlatform.getOriginalPosition(),movablePlatform.getFinalPosition());
+        movablePlatform.move(movablePlatform.getOriginalPosition(), movablePlatform.getFinalPosition());
     }
 
     /**
@@ -77,7 +78,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
      */
     public void deactivate() {
         this.isActive = false;
-        movablePlatform.move(movablePlatform.getFinalPosition(),movablePlatform.getOriginalPosition());
+        movablePlatform.move(movablePlatform.getFinalPosition(), movablePlatform.getOriginalPosition());
     }
 
     /**
@@ -87,5 +88,4 @@ public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
     public boolean isActivated() {
         return this.isActive;
     }
-    
 }

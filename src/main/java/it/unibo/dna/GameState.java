@@ -3,7 +3,6 @@ package it.unibo.dna;
 import java.util.List;
 
 import it.unibo.dna.model.EventQueue;
-import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
@@ -12,6 +11,7 @@ import it.unibo.dna.model.object.player.api.Player;
  * Interface that models the state of the game.
  */
 public interface GameState {
+
 
     /**
      * Updates the state of the game.
@@ -63,16 +63,4 @@ public interface GameState {
      * @return the list of {@link Event}
      */
     EventQueue getEventQueue();
-
-    /**
-     * 
-     * @return the score of the actual game
-     */
-    Score getScore();
-
-    /**
-     * 
-     * @param score the score to set
-     */
-    void updateScore(Score score);
 }

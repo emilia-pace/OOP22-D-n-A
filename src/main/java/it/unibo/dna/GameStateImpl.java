@@ -33,7 +33,7 @@ public class GameStateImpl implements GameState {
     private BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
     private final MenuFactory menuFactory = new MenuFactoryImpl();
-    private Score score;
+    public static Score score;
     private final EventQueue eventQueue = new EventQueue();
 
     /**
@@ -47,7 +47,7 @@ public class GameStateImpl implements GameState {
     public GameStateImpl(final int width, final int height, final List<Entity> level, List<Player> players)
             throws IOException {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
-        this.score = new Score(0.0);
+        score = new Score(0.0);
         this.entities = level;
         this.characters = players;
     }
@@ -149,20 +149,6 @@ public class GameStateImpl implements GameState {
     @Override
     public EventQueue getEventQueue() {
         return this.eventQueue;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Score getScore(){
-        return this.score;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void updateScore(Score score){
-        this.score = score;
     }
 
     /**

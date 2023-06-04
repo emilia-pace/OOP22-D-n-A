@@ -2,6 +2,8 @@ package it.unibo.dna.model.object.player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import it.unibo.dna.common.Pair;
 
@@ -17,7 +19,7 @@ public class State {
 
     private StateEnum stateX;
     private StateEnum stateY;
-    private PropertyChangeListener listener;
+    private List<PropertyChangeListener> listeners = new ArrayList<>();
 
     /**
      * stateX indicate if the player is touching the floor or is jumping
@@ -48,7 +50,7 @@ public class State {
      * @param stateX the new first state
      */
     public void setStateX(final StateEnum stateX) {
-        this.notifyListener(this, "changeX", this.stateX, this.stateX = stateX);
+        this.notifyListeners(this, "changeX", this.stateX, this.stateX = stateX);
     }
 
     /**
@@ -57,7 +59,7 @@ public class State {
      * @param stateY the new second state
      */
     public void setStateY(final StateEnum stateY) {
-        this.notifyListener(this, "changeY", this.stateY, this.stateY = stateY);
+        this.notifyListeners(this, "changeY", this.stateY, this.stateY = stateY);
     }
 
     /**
@@ -75,16 +77,25 @@ public class State {
      * @param oldValue the old value
      * @param newValue the new new value
      */
-    private void notifyListener(final Object object, final String property, final StateEnum oldValue,
+    private void notifyListeners(final Object object, final String property, final StateEnum oldValue,
             final StateEnum newValue) {
-        listener.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue));
+        listeners.forEach(e -> e.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue)));
     }
 
     /**
      * @param newListener the new listener
      */
-    public void addChangeListener(final PropertyChangeListener newListener) {
-        this.listener = newListener;
+    public void addChangeListeners(final PropertyChangeListener newListener) {
+        this.listeners.add(newListener);
+    }
+
+    /**
+     * @param listener the listener to remove
+     */
+    public void removeChangeListeners(final PropertyChangeListener listener) {
+        if (this.listeners.contains(listener)) {
+            this.listeners.remove(listener);
+        }
     }
 
     /**
@@ -99,7 +110,7 @@ public class State {
             if (this.getX().equals(StateEnum.STATE_STANDING)
                     && (this.getY().equals(StateEnum.STATE_LEFT)
                             || this.getY().equals(StateEnum.STATE_RIGHT))) {
-                this.notifyListener(this, "changeY", this.getY(), this.getY());
+                this.notifyListeners(this, "changeY", this.getY(), this.getY());
             }
         }
     }

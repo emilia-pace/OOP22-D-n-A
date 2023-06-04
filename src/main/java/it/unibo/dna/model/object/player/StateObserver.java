@@ -46,9 +46,10 @@ public class StateObserver implements PropertyChangeListener {
     @Override
     public void propertyChange(final PropertyChangeEvent event) {
         State state = ((State) event.getSource());
-        playerImage = (event.getNewValue().equals(event.getOldValue()))
-                ? this.playerMap.get(state.getPairState()).get(state.getImageIndex())
-                : this.playerMap.get(state.getPairState()).get(0);
+        playerImage = (state.getX().equals(StateEnum.STATE_STANDING)
+                && (state.getY().equals(StateEnum.STATE_LEFT) || state.getY().equals(StateEnum.STATE_RIGHT)))
+                        ? this.playerMap.get(state.getPairState()).get(state.getImageIndex())
+                        : this.playerMap.get(state.getPairState()).get(0);
     }
 
     /**

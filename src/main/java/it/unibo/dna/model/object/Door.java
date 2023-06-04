@@ -1,23 +1,22 @@
 package it.unibo.dna.model.object;
 
+import java.util.Optional;
+
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.graphics.MenuFactory;
-import it.unibo.dna.graphics.MenuFactoryImpl;
-import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * A door that can be opend only by the corresponding player.
  */
 public class Door extends  AbstractEntity {
 
-    public static enum doorState {
+    public enum DoorState {
         OPEN_DOOR, CLOSED_DOOR;
     }
 
-    private doorState state;
-    private MenuFactory menuFactory = new MenuFactoryImpl();
+    private DoorState state;
+    private Optional<Player> player = Optional.empty();
 
     /**
      * 
@@ -26,16 +25,16 @@ public class Door extends  AbstractEntity {
      * @param width the width of the Door
      * @param type the type of the Door (Angel door, Devil door)
      */
-    public Door(Position2d position, double height, double width, Entity.entityType type) {
-        super(position,height,width,type);
-        this.state = doorState.CLOSED_DOOR;
+    public Door(final Position2d position, final double height, final double width, final Entity.EntityType type) {
+        super(position, height, width, type);
+        this.state = DoorState.CLOSED_DOOR;
     }
 
     /**
      * 
      * @return the state of the door (open, closed)
      */
-    public doorState getDoorState() {
+    public DoorState getDoorState() {
         return this.state;
     }
 
@@ -45,22 +44,35 @@ public class Door extends  AbstractEntity {
      * 
      * @param player the player standing in front of the door
      */
-    public void openDoor(Player player, Score score) {
-        switch (player.getPlayerType()) {
-            case ANGEL -> {
-                if (this.getType().equals(entityType.ANGEL_DOOR)) {
-                    this.state = doorState.OPEN_DOOR;
-                    menuFactory.victoryMenu(score).createMenuFrame();
+    public void openDoor(final Player player) {
+        if (this.state.equals(DoorState.CLOSED_DOOR)) {
+            switch (player.getPlayerType()) {
+                case ANGEL -> {
+                    if (this.getType().equals(EntityType.ANGEL_DOOR)) {
+                        this.state = DoorState.OPEN_DOOR;
+                        this.player = Optional.of(player);
+                    }
                 }
-            }
-            case DEVIL -> {
-                if (this.getType().equals(entityType.DEVIL_DOOR)) {
-                    this.state = doorState.OPEN_DOOR;
-                    menuFactory.victoryMenu(score).createMenuFrame();
+                case DEVIL -> {
+                    if (this.getType().equals(EntityType.DEVIL_DOOR)) {
+                        this.state = DoorState.OPEN_DOOR;
+                        this.player = Optional.of(player);
+                    }
                 }
+                default -> throw new IllegalArgumentException();
             }
-            default -> throw new IllegalArgumentException();
         }
     }
 
+    public Optional<Player> getPlayer() {
+        return this.player;
+    }
+
+    public void resetPlayer() {
+        this.player = Optional.empty();
+    }
+
+    public void closeDoor() {
+        this.state = DoorState.CLOSED_DOOR;
+    }
 }

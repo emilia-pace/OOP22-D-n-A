@@ -1,8 +1,9 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.movableEntity;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.api.MovableEntity;
+import it.unibo.dna.model.object.AbstractEntity;
+import it.unibo.dna.model.object.movableEntity.api.MovableEntity;
 
 /**
  * Abstract Class that implements the {@link MovableEntity} interface.
@@ -18,7 +19,8 @@ public abstract class AbstractMovableEntity extends AbstractEntity implements Mo
      * @param width  the width of the Entity
      * @param type   the type of the Entity
      */
-    public AbstractMovableEntity(final Position2d pos, final Vector2d vet, final double height, final double width, final entityType type) {
+    public AbstractMovableEntity(final Position2d pos, final Vector2d vet, final double height, final double width,
+            final EntityType type) {
         super(pos, height, width, type);
         this.vector = vet;
     }

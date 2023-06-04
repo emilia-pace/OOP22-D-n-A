@@ -7,15 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.EntityFactory;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.PlayerImpl;
-import it.unibo.dna.model.object.api.Entity.entityType;
+import it.unibo.dna.model.object.api.Entity.EntityType;
+import it.unibo.dna.model.object.player.PlayerImpl;
+import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
 
 public class Level {
 
@@ -66,62 +67,62 @@ public class Level {
                     break;
 
                 case "dDevil":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.DEVIL_DOOR,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.DEVIL_DOOR,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     System.out.println("c \n");
                     break;
 
                 case "dAngel":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.ANGEL_DOOR,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.ANGEL_DOOR,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     System.out.println("c \n");
                     break;
 
                 case "diamond":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.DIAMOND,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.DIAMOND,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
 
                 case "button":
                     entities.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entities.stream()
-                            .filter(e -> e.getType().equals(entityType.MOVABLEPLATFORM))
+                            .filter(e -> e.getType().equals(EntityType.MOVABLEPLATFORM))
                             .reduce((first, second) -> second).get()),
-                            entityType.BUTTON,
+                            EntityType.BUTTON,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
 
                 case "lever":
                     entities.add(entityFactoryImpl.createEntity(Optional.of((MovablePlatform) entities.stream()
-                            .filter(e -> e.getType().equals(entityType.MOVABLEPLATFORM))
+                            .filter(e -> e.getType().equals(EntityType.MOVABLEPLATFORM))
                             .reduce((first, second) -> second).get()),
-                            entityType.LEVER,
+                            EntityType.LEVER,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
 
                 case "platform":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.PLATFORM,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.PLATFORM,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     System.out.println("1 \n");
                     break;
 
                 case "movablePlatform":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.MOVABLEPLATFORM,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.MOVABLEPLATFORM,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
                             new Position2d(Double.parseDouble(splittedC[3]), Double.parseDouble(splittedC[4]))));
                     break;
 
                 case "rPuddle":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.RED_PUDDLE,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.RED_PUDDLE,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
 
                 case "bPuddle":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.BLUE_PUDDLE,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.BLUE_PUDDLE,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
 
                 case "pPuddle":
-                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), entityType.PURPLE_PUDDLE,
+                    entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.PURPLE_PUDDLE,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
 
@@ -144,10 +145,10 @@ public class Level {
                 nameFile = "src\\main\\resources\\levels\\lv1.txt";
                 break;
             case 2:
-                nameFile = "lvl2.txt";
+                nameFile = "src\\main\\resources\\levels\\lv2.txt";
                 break;
             case 3:
-                nameFile = "lvl3.txt";
+                nameFile = "src\\main\\resources\\levels\\lv3.txt";
                 break;
         }
 

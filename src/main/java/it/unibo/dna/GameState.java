@@ -5,12 +5,13 @@ import java.util.List;
 import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Interface that models the state of the game.
  */
 public interface GameState {
+
 
     /**
      * Updates the state of the game.
@@ -36,7 +37,7 @@ public interface GameState {
      */
     void addEntity(Entity e);
 
-    List<Player> getCharacters();
+    
 
     /**
      * Removes an {@link Entity} from the game.
@@ -50,6 +51,12 @@ public interface GameState {
      * @return the list of {@link Entity} of the game
      */
     List<Entity> getEntities();
+
+    /**
+     * 
+     * @return the list of characters of the game
+     */
+    List<Player> getCharacters();
 
     /**
      * 

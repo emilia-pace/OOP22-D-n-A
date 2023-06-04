@@ -77,13 +77,16 @@ public class Pair<X, Y> {
 		}
 		Pair other = (Pair) obj;
 		if (x == null) {
-			if (other.x != null)
+			if (other.x != null) {
 				return false;
-		} else if (!x.equals(other.x))
+			}
+		} else if (!x.equals(other.x)) {
 			return false;
+		}
 		if (y == null) {
-			if (other.y != null)
+			if (other.y != null) {
 				return false;
+			}
 		} else if (!y.equals(other.y)) {
 			return false;
 		}

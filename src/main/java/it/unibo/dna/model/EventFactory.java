@@ -6,7 +6,7 @@ import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Interface of a factory that creates {@link Event}.
@@ -15,19 +15,19 @@ public interface EventFactory {
 
     /**
      * Models the collision event with a platform.
-     * @param pt the hit platform 
-     * @param p the player
+     * @param platform the hit platform 
+     * @param player the player
      * @return the new event
      */
-    Event hitPlatformEvent(Entity pt, Player p);
+    Event hitPlatformEvent(Entity platform, Player player);
 
      /**
      * Models the collision event with a movable platform.
-     * @param pt the hit movable platform 
-     * @param p the player
+     * @param movablePlatform the hit movable platform 
+     * @param player the player
      * @return the new event
      */
-    Event hitMovablePlatformEvent(MovablePlatform pt, Player p);
+    Event hitMovablePlatformEvent(MovablePlatform movablePlatform, Player player);
 
 
     /**
@@ -46,27 +46,27 @@ public interface EventFactory {
 
     /**
      * Models the collision event with a button.
-     * @param o the hit button
-     * @param p the player
+     * @param button the hit button
+     * @param player the player
      * @return the new event
      */
-    Event hitButtonEvent(ActivableObjectImpl o, Player p);
+    Event hitButtonEvent(ActivableObjectImpl button, Player player);
 
     /**
      * Models the collision event with a door.
-     * @param d the hit door
-     * @param p the player
+     * @param door the hit door
+     * @param player the player
      * @return the new event
      */
     Event hitDoorEvent(Door door, Player player, Score score);
 
     /**
      * Models the collision event with a lever.
-     * @param o the hit lever
-     * @param p the player
+     * @param lever the hit lever
+     * @param player the player
      * @return the new event
      */
-    Event hitLeverEvent(ActivableObjectImpl o, Player p);
+    Event hitLeverEvent(ActivableObjectImpl lever, Player player);
 
     /**
      * Models the collision event with a diamond.

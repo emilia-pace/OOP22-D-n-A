@@ -1,11 +1,12 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.player;
 
 import it.unibo.dna.GameState;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.api.Entity;
-import it.unibo.dna.model.object.api.Player;
+import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
+import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Class that implements the {@link Player} interface.
@@ -26,9 +27,18 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      */
     public PlayerImpl(final GameState game, final Position2d pos, final Vector2d vet, final double height,
             final double width, final PlayerType type) {
-        super(pos, vet, height, width, Entity.entityType.PLAYER);
+        super(pos, vet, height, width, Entity.EntityType.PLAYER);
         this.playerType = type;
         this.game = game;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update() {
+        super.update();
+        this.playerState.update();
     }
 
     /**
@@ -55,8 +65,11 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
         return this.game.getEventQueue();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setGame(GameState game) {
+    public void setGame(final GameState game) {
         this.game = game;
     }
 

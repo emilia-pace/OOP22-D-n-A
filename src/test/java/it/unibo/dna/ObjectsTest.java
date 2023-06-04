@@ -16,11 +16,10 @@ import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.PlayerImpl;
-import it.unibo.dna.model.object.Puddle;
+import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.api.BoundingBox;
-import it.unibo.dna.model.object.api.Player;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.api.Player;
 
 public class ObjectsTest {
     private static final EntityFactoryImpl ENTITYFACTORY = new EntityFactoryImpl();
@@ -44,7 +43,7 @@ public class ObjectsTest {
     private static final Player ANGEL = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
     private static final Player DEVIL = new PlayerImpl(GAME, POS2, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.DEVIL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);
-    private static final Score SCORE = new Score();
+    private static final Score SCORE = new Score(20.0);
 
     @Test
     public void testMovablePlatformMethods(){
@@ -76,20 +75,20 @@ public class ObjectsTest {
 
     @Test
     public void testDoor() {
-        Entity ANGELDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.entityType.ANGEL_DOOR, POS );
-        Entity DEVILDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.entityType.DEVIL_DOOR,POS2);
-        assertTrue(((Door)ANGELDOOR).getDoorState().equals(Door.doorState.CLOSED_DOOR));
-        assertTrue(((Door)DEVILDOOR).getDoorState().equals(Door.doorState.CLOSED_DOOR));
-        ((Door)ANGELDOOR).openDoor(ANGEL,SCORE);
-        ((Door)DEVILDOOR).openDoor(DEVIL,SCORE);
-        assertTrue(((Door)ANGELDOOR).getDoorState().equals(Door.doorState.OPEN_DOOR));
-        assertTrue(((Door)DEVILDOOR).getDoorState().equals(Door.doorState.OPEN_DOOR));
+        Entity ANGELDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.EntityType.ANGEL_DOOR, POS );
+        Entity DEVILDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.EntityType.DEVIL_DOOR,POS2);
+        assertTrue(((Door)ANGELDOOR).getDoorState().equals(Door.DoorState.CLOSED_DOOR));
+        assertTrue(((Door)DEVILDOOR).getDoorState().equals(Door.DoorState.CLOSED_DOOR));
+        ((Door)ANGELDOOR).openDoor(ANGEL);
+        ((Door)DEVILDOOR).openDoor(DEVIL);
+        assertTrue(((Door)ANGELDOOR).getDoorState().equals(Door.DoorState.OPEN_DOOR));
+        assertTrue(((Door)DEVILDOOR).getDoorState().equals(Door.DoorState.OPEN_DOOR));
     }
 
     @Test
     public void testActivableObject() {
-        Entity BUTTON = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.entityType.BUTTON, POS);
-        Entity LEVER = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.entityType.LEVER, POS2);
+        Entity BUTTON = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.BUTTON, POS);
+        Entity LEVER = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.LEVER, POS2);
         ((ActivableObjectImpl)BUTTON).activate();
         assertTrue(((ActivableObjectImpl)BUTTON).isActivated());
         assertTrue(((ActivableObjectImpl)BUTTON).getMovablePlatform().getPosition().equals(PLATFORM.getFinalPosition()));
@@ -98,11 +97,4 @@ public class ObjectsTest {
         assertTrue(((ActivableObjectImpl)LEVER).getMovablePlatform().getPosition().equals(PLATFORM.getOriginalPosition()));
     }
 
-    @Test
-    public void testPuddle() {
-        Entity REDPUDDLE = ENTITYFACTORY.createEntity(Optional.empty(), Entity.entityType.RED_PUDDLE,POS);
-        Entity BLUEPUDDLE = ENTITYFACTORY.createEntity(Optional.empty(), Entity.entityType.BLUE_PUDDLE,POS);
-        Entity PURPLEPUDDLE = ENTITYFACTORY.createEntity(Optional.empty(), Entity.entityType.PURPLE_PUDDLE,POS);
-        ((Puddle)REDPUDDLE).killPlayer(ANGEL);
-    }
 }

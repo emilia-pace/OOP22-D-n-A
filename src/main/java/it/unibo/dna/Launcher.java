@@ -5,18 +5,15 @@ import it.unibo.dna.graphics.MenuFactoryImpl;
 import it.unibo.dna.graphics.GameMenu;
 
 public class Launcher {
+    private static MenuFactory menuFactory;
+
     public static void main(String[] args) {
+        menuFactory = new MenuFactoryImpl();
+        GameMenu gameMenu = menuFactory.startMenu();
+        gameMenu.createMenuFrame();
+    }
 
-        GameMenu GameMenu;
-        MenuFactory boh;
-
-        boh = new MenuFactoryImpl();
-
-        GameMenu = boh.startMenu();
-
-        GameMenu.createMenuFrame();
-
-
-      
+    public static MenuFactory getMenuFactory() {
+        return menuFactory;
     }
 }

@@ -34,7 +34,7 @@ public class Vector2d  {
 
     /**
      * Change the first coordinate of the vector by adding
-     * a double number
+     * a double number.
      * 
      * @param d the double number to be summed
      */
@@ -44,7 +44,7 @@ public class Vector2d  {
 
     /**
      * Change the second coordinate of the vector by adding
-     * a double number
+     * a double number.
      * 
      * @param d the double number to be summed
      */

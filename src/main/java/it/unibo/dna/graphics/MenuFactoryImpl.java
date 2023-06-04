@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Set;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,11 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.dna.GameEngine;
+import it.unibo.dna.GameStateImpl;
 import it.unibo.dna.model.Score;
 
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
-    Score totalScore;
     Thread gameThread;
     GameEngine gameEngine;
 
@@ -83,6 +81,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 gameOverFrame.setLocationRelativeTo(null);
                 gameOverFrame.setVisible(true);
 
+                interruptThread();
+
                 return gameOverFrame;
             }
 
@@ -101,6 +101,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JLabel score = getScorLabel();
                 JPanel panel = new JPanel();
 
+
                 panel.add(score);
                 panel.add(nextLevel);
                 panel.add(quit);
@@ -112,6 +113,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 victoryFrame.setLocationRelativeTo(null);
                 victoryFrame.setVisible(true);
+                interruptThread();
 
                 return victoryFrame;
             }
@@ -172,8 +174,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         JButton restartButton = new JButton("Restart Level");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                interruptThread();
-                gameOverMenu.dispose();;
+                gameOverMenu.dispose();
                 try {
                     startThread(); // Ensure gameEngine is initialized before interrupting the thread
                 } catch (IOException e1) {
@@ -186,12 +187,11 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         return restartButton;
     }
     
-    public JButton getNextLevelButton(JFrame victoryMenu) {
+    public JButton getNextLevelButton(JFrame victoryFrame) {
         JButton nextLevelButton = new JButton("Next");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                victoryMenu.dispose();;
-                interruptThread();
+                victoryFrame.dispose();
                 level++;
                 try {
                     startThread(); // Ensure gameEngine is initialized before interrupting the thread
@@ -207,19 +207,26 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     
 
     public JLabel getScorLabel() {
-        return new JLabel("Score: %d" + totalScore);
+        return new JLabel("Score: " + GameStateImpl.score.getTotal());
     }
 
-    void startThread() throws IOException {
+
+    private void startThread() throws IOException{
         gameEngine = new GameEngine(level);
         gameThread = new Thread(gameEngine);
         gameThread.start();
+        System.out.println(gameThread);
     }
 
-    void interruptThread() {
-            System.out.print(gameThread);
+    private void interruptThread() {
+        System.out.println(gameThread);
+        if (gameThread != null && gameThread.isAlive()) {
             gameThread.interrupt();
+            gameEngine.stop();
+        }
     }
+    
+
 }
   
     

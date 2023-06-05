@@ -15,7 +15,7 @@ public class Display extends JFrame {
 
         public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
         public static final int TILE_SIZE = (int) SCREEN_SIZE.getHeight() / 100;
-        public static final int BORDER = 70;
+        public static final int BORDER = 100;
         private Canvas canvas;
         public ImageManager imgMgr;
         private int dim = (int) SCREEN_SIZE.getHeight() - BORDER;

@@ -9,8 +9,9 @@ public class Score {
 
     /**
      * {@link Score} constructor.
+     * @param value the value of the diamond
      */
-    public Score(Double value) {
+    public Score(final Double value) {
         this.total = value;
     }
 
@@ -31,8 +32,8 @@ public class Score {
     }
 
     /**
-     * 
      * @param value the value to add to the total score
+     * @return the value of the current score
      */
     public double addScore(final double value) {
         return this.total + value;

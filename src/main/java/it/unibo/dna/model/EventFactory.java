@@ -56,6 +56,7 @@ public interface EventFactory {
      * Models the collision event with a door.
      * @param door the hit door
      * @param player the player
+     * @param score the score
      * @return the new event
      */
     Event hitDoorEvent(Door door, Player player, Score score);

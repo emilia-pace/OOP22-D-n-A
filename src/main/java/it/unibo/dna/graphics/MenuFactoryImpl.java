@@ -207,7 +207,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     
 
     public JLabel getScorLabel() {
-        return new JLabel("Score: " + GameStateImpl.score.getTotal());
+        return new JLabel("Score: " + GameStateImpl.getScore().getTotal());
     }
 
 

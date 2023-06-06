@@ -32,7 +32,7 @@ public class StateObserver implements PropertyChangeListener {
      * @param type  The player's type to which the state belongs
      */
     public StateObserver(final State state, final Player.PlayerType type) {
-        state.addChangeListener(this);
+        state.addChangeListeners(this);
         this.type = type;
         this.loadPlayerImage(playerMap, EntityFactory.PLAYER_HEIGHT * Display.TILE_SIZE,
                 EntityFactory.PLAYER_WIDTH * Display.TILE_SIZE);
@@ -45,9 +45,10 @@ public class StateObserver implements PropertyChangeListener {
     @Override
     public void propertyChange(final PropertyChangeEvent event) {
         State state = ((State) event.getSource());
-        playerImage = (event.getNewValue().equals(event.getOldValue()))
-                ? this.playerMap.get(state.getPairState()).get(state.getImageIndex())
-                : this.playerMap.get(state.getPairState()).get(0);
+        playerImage = (state.getX().equals(StateEnum.STATE_STANDING)
+                && (state.getY().equals(StateEnum.STATE_LEFT) || state.getY().equals(StateEnum.STATE_RIGHT)))
+                        ? this.playerMap.get(state.getPairState()).get(state.getImageIndex())
+                        : this.playerMap.get(state.getPairState()).get(0);
     }
 
     /**

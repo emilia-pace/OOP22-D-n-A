@@ -37,8 +37,6 @@ public interface GameState {
      */
     void addEntity(Entity e);
 
-    
-
     /**
      * Removes an {@link Entity} from the game.
      * 

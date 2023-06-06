@@ -291,12 +291,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         return nextLevelButton;
     }
 
-    /**
-     * Creates and returns the score label for the menus.
-     * @return The JLabel representing the score label.
-     */
-    public JLabel getScoreLabel() {
-        return new JLabel("Score: " + GameStateImpl.score.getTotal());
+    public JLabel getScorLabel() {
+        return new JLabel("Score: " + GameStateImpl.getScore().getTotal());
     }
 
     /**

@@ -6,6 +6,7 @@ import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.EventQueue;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
+import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**
@@ -73,6 +74,16 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
     @Override
     public void setGame(final GameState game) {
         this.game = game;
+    }
+
+    @Override
+    public void setStateX(StateEnum stateX) {
+        this.getState().setState(stateX, this.getState().getY());
+    }
+
+    @Override
+    public void setStateY(StateEnum stateY) {
+        this.getState().setState(this.getState().getY(), stateY);
     }
 
 }

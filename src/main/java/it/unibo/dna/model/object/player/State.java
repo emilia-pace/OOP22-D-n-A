@@ -23,8 +23,8 @@ public class State {
     private List<PropertyChangeListener> listeners = new ArrayList<>();
 
     /**
-     * stateX indicate if the player is touching the floor or is jumping
-     * stateY indicates whether the player is facing front, right, or left
+     * stateX indicate if the player is touching the floor or is jumping.
+     * stateY indicates whether the player is facing front, right, or left.
      */
     private StateEnum stateX;
     private StateEnum stateY;
@@ -34,8 +34,13 @@ public class State {
      * The initial states are set to STATE_STANDING and STATE_STILL.
      */
     public State() {
-        stateX = StateEnum.STATE_STANDING;
-        stateY = StateEnum.STATE_STILL;
+        this.stateX = StateEnum.STATE_STANDING;
+        this.stateY = StateEnum.STATE_STILL;
+    }
+
+    public State(StateEnum stateX, StateEnum stateY) {
+        this.stateX = stateX;
+        this.stateY = stateY;
     }
 
     /**
@@ -56,22 +61,10 @@ public class State {
         return stateY;
     }
 
-    /**
-     * Sets the first state and notifies the listeners of the change.
-     * 
-     * @param stateX the new first state
-     */
-    public void setStateX(final StateEnum stateX) {
-        this.notifyListeners(this, "changeX", this.stateX, this.stateX = stateX);
-    }
-
-    /**
-     * Sets the second state and notifies the listeners of the change.
-     * 
-     * @param stateY the new second state
-     */
-    public void setStateY(final StateEnum stateY) {
-        this.notifyListeners(this, "changeY", this.stateY, this.stateY = stateY);
+    public void setState(final StateEnum stateX, final StateEnum stateY) {
+        this.notifyListeners(this, "change", this, new State(stateX, stateY));
+        this.stateX = stateX;
+        this.stateY = stateY;
     }
 
     /**
@@ -91,8 +84,8 @@ public class State {
      * @param oldValue the old value
      * @param newValue the new new value
      */
-    private void notifyListeners(final Object object, final String property, final StateEnum oldValue,
-            final StateEnum newValue) {
+    private void notifyListeners(final Object object, final String property, final State oldValue,
+            final State newValue) {
         listeners.forEach(e -> e.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue)));
     }
 
@@ -122,13 +115,13 @@ public class State {
      */
     public void update() {
         this.frame++;
-        if (frame >= this.MAXFRAME) {
+        if (frame >= MAXFRAME) {
             this.imageIndex = (this.imageIndex == 0) ? 1 : 0;
             this.frame = 0;
             if (this.getX().equals(StateEnum.STATE_STANDING)
                     && (this.getY().equals(StateEnum.STATE_LEFT)
                             || this.getY().equals(StateEnum.STATE_RIGHT))) {
-                this.notifyListeners(this, "changeY", this.getY(), this.getY());
+                this.notifyListeners(this, "change", this, this);
             }
         }
     }

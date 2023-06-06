@@ -1,7 +1,6 @@
 package it.unibo.dna.model;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,17 +17,23 @@ import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.api.Entity;
 
+/**
+ * Represents a level in the game, containing entities and characters.
+ */
 public class Level {
 
-    File lvlFile;
-    List<Entity> entities = new ArrayList<>();
-    List<Player> characters = new ArrayList<>();
-    String nameFile;
-    String s;
-    public EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
-    PlayerImpl angel;
-    PlayerImpl devil;
+    private List<Entity> entities = new ArrayList<>();
+    private List<Player> characters = new ArrayList<>();
+    private String nameFile;
+    private String s;
+    private EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
+    private PlayerImpl angel;
+    private PlayerImpl devil;
 
+    /**
+     * Constructs the Level object with the specified level number.
+     * @param lvl The level number.
+     */
     public Level(int lvl) {
         getFile(lvl);
         try {
@@ -38,6 +43,10 @@ public class Level {
         }
     }
 
+    /**
+     * Reads the level file and creates the list of entities and characters.
+     * @throws IOException if an I/O error occurs.
+     */
     public void entitiesList() throws IOException {
         FileReader f = new FileReader(nameFile);
         BufferedReader b;
@@ -125,7 +134,6 @@ public class Level {
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.PURPLE_PUDDLE,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
-
             }
             System.out.println(entities.size());
             System.out.println(characters.size());
@@ -135,6 +143,10 @@ public class Level {
         b.close();
     }
 
+    /**
+     * Returns the list of entities in the level.
+     * @return The list of entities.
+     */
     public List<Entity> getEntities() {
         return this.entities;
     }
@@ -151,11 +163,13 @@ public class Level {
                 nameFile = "src\\main\\resources\\levels\\lv3.txt";
                 break;
         }
-
     }
 
+    /**
+     * Returns the list of characters in the level.
+     * @return The list of characters.
+     */
     public List<Player> getCharacters() {
         return this.characters;
     }
-
 }

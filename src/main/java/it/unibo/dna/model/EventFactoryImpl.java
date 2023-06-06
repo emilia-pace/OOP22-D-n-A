@@ -2,6 +2,7 @@ package it.unibo.dna.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -87,10 +88,18 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(final Door door, final Player player, final Score score) {
+    public Event hitDoorEvent(final Door door, final Player player, final Score score, final List<Entity> entities) {
         return game -> {
             if (door.getPlayer().isEmpty()) {
                 door.openDoor(player);
+            }
+            long numberOfOpenedDoors = entities.stream()
+                                    .filter(entity -> entity instanceof Door)
+                                    .map(entity -> (Door)entity)
+                                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
+                                    .count();
+            if (numberOfOpenedDoors == 2) {
+                game.getEventQueue().addEvent(this.victoryEvent(score));
             }
         };
     }
@@ -174,6 +183,18 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             puddle.killPlayer(player);
         };
+    }
+
+    @Override
+    public Event victoryEvent(final Score score) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'victoryEvent'");
+    }
+
+    @Override
+    public Event gameOverEvent(final Score score) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'gameOverEvent'");
     }
 
 }

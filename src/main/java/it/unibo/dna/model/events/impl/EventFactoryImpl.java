@@ -1,14 +1,9 @@
 package it.unibo.dna.model.events.impl;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
+import it.unibo.dna.GameEngine;
+import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
@@ -97,10 +92,10 @@ public class EventFactoryImpl implements EventFactory {
                 door.openDoor(player);
             }
             final double numberOfOpenedDoors = entities.stream()
-                                    .filter(entity -> entity instanceof Door)
-                                    .map(entity -> (Door)entity)
-                                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
-                                    .count();
+                    .filter(entity -> entity instanceof Door)
+                    .map(entity -> (Door) entity)
+                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
+                    .count();
             if (numberOfOpenedDoors == 2) {
                 game.getEventQueue().addEvent(this.victoryEvent(score));
             }
@@ -132,6 +127,7 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             game.removeEntity(d);
             GameStateImpl.getScore().setTotal(s.addScore(d.getValue()));
+            GameEngine.playSound("diamond");
         };
     }
 
@@ -162,26 +158,6 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event soundEvent(final String s) {
-        return game -> {
-            try {
-                final Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
-                clip.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            }
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Event hitPuddleEvent(final Puddle puddle, final Player player, final Score score) {
         return game -> {
             if(puddle.killPlayer(player)) {
@@ -192,14 +168,19 @@ public class EventFactoryImpl implements EventFactory {
 
     @Override
     public Event victoryEvent(final Score score) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'victoryEvent'");
+        return game -> {
+            GameEngine.playSound("game_over");
+            GameEngine.getGameThread().victoryGame();
+        };
+        
     }
 
     @Override
     public Event gameOverEvent(final Score score) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'gameOverEvent'");
+        return game -> {
+        GameEngine.playSound("victory");
+        GameEngine.getGameThread().losingGame();
+        };
     }
 
 }

@@ -1,10 +1,13 @@
 package it.unibo.dna.input;
 
+import it.unibo.dna.GameEngine;
+import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.input.api.Command;
 import it.unibo.dna.input.api.CommandFactory;
 import it.unibo.dna.model.events.impl.EventFactoryImpl;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.player.api.Player.PlayerType;
 
 /**
  * Class that implements the {@link CommandFactory} interface.
@@ -53,11 +56,12 @@ public class CommandFactoryImpl implements CommandFactory {
             if (!this.player.getState().getX().equals(StateEnum.STATE_JUMPING)) {
                 this.player.setVectorY(-Player.JUMPVELOCITY);
                 this.player.setStateX(StateEnum.STATE_JUMPING);
-                String s = (this.player.getPlayerType().equals(Player.PlayerType.ANGEL)) ? "Angel_audio"
-                        : "Devil_audio";
-                this.player.getGameEventQueue()
-                        .addEvent(
-                                new EventFactoryImpl().soundEvent(s));
+                if (this.player.getPlayerType().equals(PlayerType.ANGEL)) {
+                    GameEngine.playSound("angel_jump");
+                } else {
+                    GameEngine.playSound("devil_jump");
+                }
+
             }
         };
     }

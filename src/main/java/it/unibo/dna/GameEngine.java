@@ -3,13 +3,14 @@ package it.unibo.dna;
 import java.io.IOException;
 
 import it.unibo.dna.graphics.Display;
+import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Level;
 import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.game.impl.GameStateImpl;
-import it.unibo.dna.model.object.player.api.Player;
 
 /**
- * Represents the game engine that manages the game loop and updates the game state.
+ * Represents the game engine that manages the game loop and updates the game
+ * state.
  */
 public class GameEngine implements Runnable {
     private Display display;
@@ -17,6 +18,7 @@ public class GameEngine implements Runnable {
     private Level level;
     private boolean running;
     private final double rateUpdate = 1.0d / 50.0d;
+    private static GameThread gameThread;
 
     /**
      * Constructs a GameEngine object with the specified level number.
@@ -29,9 +31,14 @@ public class GameEngine implements Runnable {
         this.display = new Display(this.level.getCharacters());
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
                 this.level.getEntities(), this.level.getCharacters());
-        for (Player p : this.game.getCharacters()) {
-            p.setGame(this.game);
-        }
+    }
+
+    public void setGameThread(GameThread gameT) {
+        gameThread = gameT;
+    }
+
+    public static GameThread getGameThread() {
+        return gameThread;
     }
 
     /**
@@ -77,5 +84,21 @@ public class GameEngine implements Runnable {
     public void stop() {
         display.dispose();
         running = false;
+    }
+
+    public static void playSound(String string) {
+        switch (string) {
+            case "angel_jump":
+                (new SoundFactoryImpl()).jumpAngelClip().start();
+            case "devil_jump":
+                (new SoundFactoryImpl()).jumpDevilClip().start();
+            case "diamond":
+                (new SoundFactoryImpl()).diamondClip().start();
+            case "game_over":
+                (new SoundFactoryImpl()).gameOverClip().start();
+            case "victory":
+                (new SoundFactoryImpl()).victoryClip().start();
+            default:
+        }
     }
 }

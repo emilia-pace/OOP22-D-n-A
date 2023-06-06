@@ -88,12 +88,6 @@ public interface EventFactory {
      */
     Event hitPuddleEvent(Puddle puddle, Player player, Score score);
 
-    /**
-     * @param s
-     * @return
-     */
-    Event soundEvent(String s);
-
     Event victoryEvent(Score score);
 
     Event gameOverEvent(Score score);

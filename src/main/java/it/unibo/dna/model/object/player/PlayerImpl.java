@@ -16,23 +16,20 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
 
     private PlayerType playerType;
     private State playerState = new State();
-    private GameState game;
 
     /**
      * Constructs a new PlayerImpl object.
      *
-     * @param game   the game of the player
      * @param pos    the position of the player
      * @param vet    the vector of the player
      * @param height the height of the player
      * @param width  the width of the player
      * @param type   the type (angel/devil) of the player
      */
-    public PlayerImpl(final GameState game, final Position2d pos, final Vector2d vet, final double height,
+    public PlayerImpl(final Position2d pos, final Vector2d vet, final double height,
             final double width, final PlayerType type) {
         super(pos, vet, height, width, Entity.EntityType.PLAYER);
         this.playerType = type;
-        this.game = game;
     }
 
     /**
@@ -58,22 +55,6 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
     @Override
     public PlayerType getPlayerType() {
         return this.playerType;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public EventQueue getGameEventQueue() {
-        return this.game.getEventQueue();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setGame(final GameState game) {
-        this.game = game;
     }
 
     @Override

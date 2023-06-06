@@ -39,19 +39,6 @@ public interface Player extends MovableEntity {
      */
     PlayerType getPlayerType();
 
-    /**
-     * Returns the event queue of the GameState.
-     *
-     * @return the GameState's event queue
-     */
-    EventQueue getGameEventQueue();
-
-    /**
-     * Sets the GameState for the player.
-     *
-     * @param game the new player's GameState
-     */
-    void setGame(GameState game);
 
     /*
      * An enum rappresenting the type of the Player.

@@ -32,6 +32,7 @@ public class Level {
 
     /**
      * Constructs the Level object with the specified level number.
+     * 
      * @param lvl The level number.
      */
     public Level(int lvl) {
@@ -45,6 +46,7 @@ public class Level {
 
     /**
      * Reads the level file and creates the list of entities and characters.
+     * 
      * @throws IOException if an I/O error occurs.
      */
     public void entitiesList() throws IOException {
@@ -58,7 +60,7 @@ public class Level {
             String[] splittedC = s.split(" ");
             switch (splittedC[0]) {
                 case "angel":
-                    angel = new PlayerImpl(null,
+                    angel = new PlayerImpl(
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.ANGEL);
@@ -67,7 +69,7 @@ public class Level {
                     break;
 
                 case "devil":
-                    devil = new PlayerImpl(null,
+                    devil = new PlayerImpl(
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.DEVIL);
@@ -145,6 +147,7 @@ public class Level {
 
     /**
      * Returns the list of entities in the level.
+     * 
      * @return The list of entities.
      */
     public List<Entity> getEntities() {
@@ -167,6 +170,7 @@ public class Level {
 
     /**
      * Returns the list of characters in the level.
+     * 
      * @return The list of characters.
      */
     public List<Player> getCharacters() {

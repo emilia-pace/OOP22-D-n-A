@@ -193,7 +193,6 @@ public class GameStateImpl implements GameState {
                             this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score, this.getEntities()));
                         }
                         case DIAMOND -> {
-                            this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
                         }
                         case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {

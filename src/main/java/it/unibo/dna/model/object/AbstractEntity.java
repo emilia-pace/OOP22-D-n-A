@@ -1,8 +1,8 @@
 package it.unibo.dna.model.object;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.RectBoundingBox;
-import it.unibo.dna.model.object.api.BoundingBox;
+import it.unibo.dna.model.box.api.BoundingBox;
+import it.unibo.dna.model.box.impl.RectBoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 
 /**

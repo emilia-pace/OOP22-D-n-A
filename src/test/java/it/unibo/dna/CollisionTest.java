@@ -10,8 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.RectBoundingBox;
-import it.unibo.dna.model.object.api.BoundingBox;
+import it.unibo.dna.model.box.api.BoundingBox;
+import it.unibo.dna.model.box.impl.RectBoundingBox;
+import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.api.Player.PlayerType;
@@ -19,7 +20,7 @@ import it.unibo.dna.model.object.player.api.Player.PlayerType;
 /**
  * Class for testing collisions.
  */
-public final class CollisionTest {
+class CollisionTest {
     private static final double X = 10;
     private static final double Y = 20;
     private static final Position2d POS = new Position2d(X, Y);
@@ -35,7 +36,7 @@ public final class CollisionTest {
      * test the collision between rectangular boxes.
      */
     @Test
-    private void testRectCollision() {
+    void testRectCollision() {
         //(0,0) angolo in alto a sx
         assertTrue(BOX.isCollidingWith(POS, HEIGHT, WIDTH));
         assertTrue(BOX.isCollidingWith(POS, HEIGHT / 2, WIDTH / 2));
@@ -56,7 +57,7 @@ public final class CollisionTest {
      * test if the collision is on the left or the right side.
      */
     @Test
-    private void testSideCollision() {
+    void testSideCollision() {
         //(0,0) angolo in alto a sx
         assertTrue(BOX.sideCollision(new Position2d(X + WIDTH, Y), HEIGHT, WIDTH));
         assertTrue(BOX.sideCollision(new Position2d(X - WIDTH, Y), HEIGHT, WIDTH));
@@ -76,7 +77,7 @@ public final class CollisionTest {
     * test the collision between the character and the borders.
     */
     @Test
-    private void testBordersCollision() {
+    void testBordersCollision() {
         //(0,0) angolo in alto a sx
         final double eastBorderX = GAME.getBoundingBox().getWidth();
         final double westBorderX = 0;

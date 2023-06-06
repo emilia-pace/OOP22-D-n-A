@@ -2,7 +2,7 @@ package it.unibo.dna.input;
 
 import it.unibo.dna.input.api.Command;
 import it.unibo.dna.input.api.CommandFactory;
-import it.unibo.dna.model.EventFactoryImpl;
+import it.unibo.dna.model.events.impl.EventFactoryImpl;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -29,7 +29,7 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command right() {
         return () -> {
             this.player.setVectorX(Player.STANDARDVELOCITY);
-            this.player.getState().setStateY(StateEnum.STATE_RIGHT);
+            this.player.setStateY(StateEnum.STATE_RIGHT);
         };
     }
 
@@ -40,7 +40,7 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command left() {
         return () -> {
             this.player.setVectorX(-Player.STANDARDVELOCITY);
-            this.player.getState().setStateY(StateEnum.STATE_LEFT);
+            this.player.setStateY(StateEnum.STATE_LEFT);
         };
     }
 
@@ -52,7 +52,7 @@ public class CommandFactoryImpl implements CommandFactory {
         return () -> {
             if (!this.player.getState().getX().equals(StateEnum.STATE_JUMPING)) {
                 this.player.setVectorY(-Player.JUMPVELOCITY);
-                this.player.getState().setStateX(StateEnum.STATE_JUMPING);
+                this.player.setStateX(StateEnum.STATE_JUMPING);
                 String s = (this.player.getPlayerType().equals(Player.PlayerType.ANGEL)) ? "Angel_audio"
                         : "Devil_audio";
                 this.player.getGameEventQueue()
@@ -69,7 +69,7 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command stop() {
         return () -> {
             this.player.setVectorX(0);
-            this.player.getState().setStateY(StateEnum.STATE_STILL);
+            this.player.setStateY(StateEnum.STATE_STILL);
         };
     }
 }

@@ -1,11 +1,12 @@
 package it.unibo.dna.model.object.player;
 
-import it.unibo.dna.GameState;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.EventQueue;
+import it.unibo.dna.model.events.impl.EventQueue;
+import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
+import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**
@@ -73,6 +74,16 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
     @Override
     public void setGame(final GameState game) {
         this.game = game;
+    }
+
+    @Override
+    public void setStateX(StateEnum stateX) {
+        this.playerState.setState(stateX, this.getState().getY());
+    }
+
+    @Override
+    public void setStateY(StateEnum stateY) {
+        this.playerState.setState(this.getState().getX(), stateY);
     }
 
 }

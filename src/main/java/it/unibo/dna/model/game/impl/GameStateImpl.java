@@ -1,21 +1,22 @@
-package it.unibo.dna;
+package it.unibo.dna.model.game.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.EventFactory;
-import it.unibo.dna.model.EventFactoryImpl;
-import it.unibo.dna.model.EventQueue;
-import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
+import it.unibo.dna.model.box.api.BoundingBox;
+import it.unibo.dna.model.box.impl.RectBoundingBox;
+import it.unibo.dna.model.events.api.EventFactory;
+import it.unibo.dna.model.events.impl.EventFactoryImpl;
+import it.unibo.dna.model.events.impl.EventQueue;
+import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
-import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 

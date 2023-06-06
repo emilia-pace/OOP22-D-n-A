@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import it.unibo.dna.GameEngine;
-import it.unibo.dna.GameStateImpl;
 import it.unibo.dna.model.Score;
+import it.unibo.dna.model.game.impl.GameStateImpl;
 
 /**
  * A concrete implementation of the {@link MenuFactory} interface.

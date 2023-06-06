@@ -1,9 +1,10 @@
 package it.unibo.dna.model.object.player.api;
 
-import it.unibo.dna.GameState;
-import it.unibo.dna.model.EventQueue;
+import it.unibo.dna.model.events.impl.EventQueue;
+import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.object.movableEntity.api.MovableEntity;
 import it.unibo.dna.model.object.player.State;
+import it.unibo.dna.model.object.player.State.StateEnum;
 
 /*
  * An interface rappresenting the Game Character.
@@ -26,6 +27,10 @@ public interface Player extends MovableEntity {
      * @return the player's state
      */
     State getState();
+
+    void setStateX(StateEnum stateX);
+
+    void setStateY(StateEnum stateY);
 
     /**
      * Returns the type of the player.

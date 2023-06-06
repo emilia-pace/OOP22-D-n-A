@@ -10,6 +10,8 @@ import org.junit.jupiter.api.*;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.game.api.GameState;
+import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.EntityFactoryImpl;

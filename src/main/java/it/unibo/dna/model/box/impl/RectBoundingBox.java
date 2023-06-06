@@ -1,7 +1,7 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.box.impl;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.api.BoundingBox;
+import it.unibo.dna.model.box.api.BoundingBox;
 
 /**
  * Class that implements the {@link BoundingBox} interface with a rectangular

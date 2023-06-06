@@ -1,4 +1,4 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.events.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,10 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import it.unibo.dna.GameStateImpl;
+import it.unibo.dna.model.Score;
+import it.unibo.dna.model.events.api.Event;
+import it.unibo.dna.model.events.api.EventFactory;
+import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -38,7 +41,7 @@ public class EventFactoryImpl implements EventFactory {
             }
             if (p.getState().getX().equals(StateEnum.STATE_JUMPING)
                     && p.getPosition().getY() < pt.getPosition().getY()) {
-                p.getState().setStateX(StateEnum.STATE_STANDING);
+                p.setStateX(StateEnum.STATE_STANDING);
             }
         };
     }
@@ -140,7 +143,7 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             p.resetY();
             if (p.getState().getX().equals(StateEnum.STATE_JUMPING)) {
-                p.getState().setStateX(StateEnum.STATE_STANDING);
+                p.setStateX(StateEnum.STATE_STANDING);
             }
         };
     }

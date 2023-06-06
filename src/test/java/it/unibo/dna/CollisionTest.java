@@ -19,7 +19,7 @@ import it.unibo.dna.model.object.player.api.Player.PlayerType;
 /**
  * Class for testing collisions.
  */
-public class CollisionTest {
+public final class CollisionTest {
     private static final double X = 10;
     private static final double Y = 20;
     private static final Position2d POS = new Position2d(X, Y);
@@ -28,14 +28,14 @@ public class CollisionTest {
     private static final BoundingBox BOX = new RectBoundingBox(POS, HEIGHT, WIDTH);
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
-    private static GameStateImpl GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(),new ArrayList<>());
+    private static final GameStateImpl GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(), new ArrayList<>());
     private static final Player CHARACTER = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerType.ANGEL);
 
     /**
      * test the collision between rectangular boxes.
      */
     @Test
-    protected void testRectCollision() {
+    private void testRectCollision() {
         //(0,0) angolo in alto a sx
         assertTrue(BOX.isCollidingWith(POS, HEIGHT, WIDTH));
         assertTrue(BOX.isCollidingWith(POS, HEIGHT / 2, WIDTH / 2));
@@ -56,7 +56,7 @@ public class CollisionTest {
      * test if the collision is on the left or the right side.
      */
     @Test
-    protected void testSideCollision() {
+    private void testSideCollision() {
         //(0,0) angolo in alto a sx
         assertTrue(BOX.sideCollision(new Position2d(X + WIDTH, Y), HEIGHT, WIDTH));
         assertTrue(BOX.sideCollision(new Position2d(X - WIDTH, Y), HEIGHT, WIDTH));
@@ -76,7 +76,7 @@ public class CollisionTest {
     * test the collision between the character and the borders.
     */
     @Test
-    protected void testBordersCollision() {
+    private void testBordersCollision() {
         //(0,0) angolo in alto a sx
         final double eastBorderX = GAME.getBoundingBox().getWidth();
         final double westBorderX = 0;

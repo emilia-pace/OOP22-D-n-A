@@ -8,7 +8,7 @@ import it.unibo.dna.model.object.api.Entity;
  */
 public class Diamond extends  AbstractEntity {
 
-    private double value;
+    private final double value;
 
     /**
      * {@link Diamond} constructor.

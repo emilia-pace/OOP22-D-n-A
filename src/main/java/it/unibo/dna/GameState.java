@@ -25,12 +25,6 @@ public interface GameState {
     BoundingBox getBoundingBox();
 
     /**
-     * 
-     * @param boundingBox the {@link BoundingBox}
-     */
-    void setBoundingBox(BoundingBox boundingBox);
-
-    /**
      * Adds a new {@link Entity} in the game.
      * 
      * @param e the {@link Entity} to add

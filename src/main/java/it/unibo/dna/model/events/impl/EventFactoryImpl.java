@@ -96,7 +96,7 @@ public class EventFactoryImpl implements EventFactory {
                                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                                     .count();
             if (numberOfOpenedDoors == 2) {
-                game.get().getEventQueue().addEvent(this.victoryEvent(score));
+                game.getEventQueue().addEvent(this.victoryEvent(score));
             }
         };
     }
@@ -124,7 +124,7 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
-            game.get().removeEntity(d);
+            game.removeEntity(d);
             GameStateImpl.getScore().setTotal(s.addScore(d.getValue()));
             (new SoundFactoryImpl()).diamondClip().start();
         };
@@ -160,7 +160,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitPuddleEvent(final Puddle puddle, final Player player, final Score score) {
         return game -> {
             if(puddle.killPlayer(player)) {
-                game.get().getEventQueue().addEvent(this.gameOverEvent(score));
+                game.getEventQueue().addEvent(this.gameOverEvent(score));
             }
         };
     }

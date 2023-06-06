@@ -78,12 +78,12 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
 
     @Override
     public void setStateX(StateEnum stateX) {
-        this.getState().setState(stateX, this.getState().getY());
+        this.playerState.setState(stateX, this.getState().getY());
     }
 
     @Override
     public void setStateY(StateEnum stateY) {
-        this.getState().setState(this.getState().getY(), stateY);
+        this.playerState.setState(this.getState().getX(), stateY);
     }
 
 }

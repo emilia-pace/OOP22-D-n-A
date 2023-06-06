@@ -62,9 +62,10 @@ public class State {
     }
 
     public void setState(final StateEnum stateX, final StateEnum stateY) {
-        this.notifyListeners(this, "change", this, new State(stateX, stateY));
+        State oldState = new State(this.stateX, this.stateY);
         this.stateX = stateX;
         this.stateY = stateY;
+        this.notifyListeners(this, "change", oldState, this);
     }
 
     /**

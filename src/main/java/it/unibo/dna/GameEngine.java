@@ -3,6 +3,8 @@ package it.unibo.dna;
 import java.io.IOException;
 
 import it.unibo.dna.graphics.Display;
+import it.unibo.dna.graphics.MenuFactory;
+import it.unibo.dna.graphics.MenuFactoryImpl;
 import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Level;
 import it.unibo.dna.model.game.api.GameState;
@@ -19,6 +21,8 @@ public class GameEngine implements Runnable {
     private boolean running;
     private final double rateUpdate = 1.0d / 50.0d;
     private static GameThread gameThread;
+    private MenuFactory menuFactory;
+
 
     /**
      * Constructs a GameEngine object with the specified level number.
@@ -32,6 +36,7 @@ public class GameEngine implements Runnable {
 
     public void setGameThread(GameThread gameT) {
         gameThread = gameT;
+        this.menuFactory = new MenuFactoryImpl(gameThread);
     }
 
     public static GameThread getGameThread() {
@@ -43,7 +48,7 @@ public class GameEngine implements Runnable {
      */
     @Override
     public void run() {
-        this.display = new Display(this.level.getCharacters());
+        this.display = new Display(this.level.getCharacters(), this.menuFactory);
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
                 this.level.getEntities(), this.level.getCharacters());
         running = true;
@@ -100,5 +105,9 @@ public class GameEngine implements Runnable {
                 (new SoundFactoryImpl()).victoryClip().start();
             default:
         }
+    }
+    
+    public MenuFactory getMenuFactory() {
+        return menuFactory;
     }
 }

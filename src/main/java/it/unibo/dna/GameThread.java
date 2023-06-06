@@ -8,48 +8,31 @@ import it.unibo.dna.model.Score;
 
 public class GameThread extends Thread {
     private GameEngine gameEngine;
-    private MenuFactory menuFactory = new MenuFactoryImpl(this);
-    int level = 1;
 
-    public GameThread(GameEngine gameEngine) {
-        this.gameEngine = gameEngine;
+    public GameThread(GameEngine gEngine) throws IOException {
+        this.gameEngine = gEngine;
         this.gameEngine.setGameThread(this);
     }
 
-    public void startThread(){
-        start();
-        gameEngine.run();
+    public void setGameEngine(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
     }
 
-    public void startGame(){
-        menuFactory.startMenu().createMenuFrame();
+    public void start() {
+        new Thread(gameEngine).start();
     }
 
-    public void victoryGame(){
-        gameEngine.stop();
+    public void victoryGame() {
         interrupt();
-        level++;
-        menuFactory.victoryMenu(Score.getTotal());
-    }
-
-    public void losingGame() {
         gameEngine.stop();
+        this.gameEngine.getMenuFactory().victoryMenu(Score.getTotal()).createMenuFrame();
+    }
+
+    public void loosingGame() {
         interrupt();
-        menuFactory.gameOverMenu().createMenuFrame();
-    }
-
-    public void nextLevel() throws IOException {
-        gameEngine = new GameEngine(level);
-        start();
-    }
-
-    public void restartLevel() throws IOException {
         gameEngine.stop();
-        interrupt();
-        gameEngine = new GameEngine(level);
-        start();
+        this.gameEngine.getMenuFactory().gameOverMenu().createMenuFrame();
     }
-
     
 
 }

@@ -3,6 +3,8 @@ package it.unibo.dna.model.events.impl;
 import java.util.List;
 
 import it.unibo.dna.GameEngine;
+import it.unibo.dna.GameThread;
+import it.unibo.dna.Launcher;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
@@ -19,6 +21,7 @@ import it.unibo.dna.model.object.api.Entity;
  * Class that implements the {@link EventFactory} interface.
  */
 public class EventFactoryImpl implements EventFactory {
+   
 
     /**
      * {@inheritDoc}
@@ -96,6 +99,7 @@ public class EventFactoryImpl implements EventFactory {
                     .count();
             if (numberOfOpenedDoors == 2) {
                 game.getEventQueue().addEvent(this.victoryEvent());
+                System.out.println("EventFactoryImpl.hitDoorEvent()");
             }
         };
     }
@@ -167,7 +171,7 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event victoryEvent() {
         return game -> {
-            GameEngine.playSound("game_over");
+            GameEngine.playSound("victory");
             GameEngine.getGameThread().victoryGame();
         };
         
@@ -176,8 +180,8 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event gameOverEvent() {
         return game -> {
-            GameEngine.playSound("victory");
-            GameEngine.getGameThread().losingGame();
+            GameEngine.playSound("gameOver");
+            GameEngine.getGameThread().loosingGame();
         };
     }
 

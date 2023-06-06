@@ -3,6 +3,7 @@ package it.unibo.dna.graphics;
 import javax.swing.*;
 import java.util.List;
 
+import it.unibo.dna.Launcher;
 import it.unibo.dna.input.KeyboardHandler;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
@@ -26,13 +27,15 @@ public class Display extends JFrame {
         private int dim = (int) SCREEN_SIZE.getHeight() - BORDER;
         private JPanel jpanel;
         private JButton pauseButton;
-        private MenuFactory menuFactory;
+        MenuFactory menuFactory;
 
     /**
      * Constructs a Display object with the specified player list.
      * @param playerList The list of players in the game.
+     * @param menuFactory2
      */
-    public Display(List<Player> playerList) {
+    public Display(List<Player> playerList, MenuFactory menuFact) {
+        this.menuFactory = menuFact;
         setTitle("D-n-A");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -69,7 +72,6 @@ public class Display extends JFrame {
 
         playerList.forEach(p -> {
             if (p.getPlayerType().equals(Player.PlayerType.ANGEL)) {
-                System.out.println("Display.Display()");
                 canvas.addKeyListener(new KeyboardHandler(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT,
                         KeyEvent.VK_UP, p));
             } else {

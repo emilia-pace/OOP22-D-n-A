@@ -15,6 +15,7 @@ import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,15 +30,21 @@ public class StateObserver implements PropertyChangeListener {
     private Image playerImage;
 
     /**
+     * Constructs a new StateObserver object.
+     *
      * @param state The player's state to observe
      * @param type  The player's type to which the state belongs
      */
     public StateObserver(final State state, final Player.PlayerType type) {
-        state.addChangeListeners(this);
+        this.inizialize(state);
         this.type = type;
         this.loadPlayerImage(playerMap, EntityFactory.PLAYER_HEIGHT * Display.TILE_SIZE,
                 EntityFactory.PLAYER_WIDTH * Display.TILE_SIZE);
         playerImage = this.playerMap.get(state.getPairState()).get(0);
+    }
+
+    private void inizialize(State state) {
+        state.addChangeListeners(this);
     }
 
     /**
@@ -53,6 +60,8 @@ public class StateObserver implements PropertyChangeListener {
     }
 
     /**
+     * Loads the player images based on the player's type and states.
+     *
      * @param playerMap The map with states as keys and images as values
      * @param width     The width of the players
      * @param height    The height of the player
@@ -91,13 +100,17 @@ public class StateObserver implements PropertyChangeListener {
     }
 
     /**
+     * Returns the player's image.
+     * 
      * @return the player's image
      */
     public Image getImage() {
-        return this.playerImage;
+        return new ImageIcon(this.playerImage).getImage();
     }
 
     /**
+     * Returns the typer of the player.
+     * 
      * @return the type of the player
      */
     public Player.PlayerType getPlayerType() {

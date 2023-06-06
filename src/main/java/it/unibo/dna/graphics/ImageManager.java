@@ -23,8 +23,10 @@ import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.StateObserver;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.EntityFactory;
+
 /**
- * A class for loading, storing and returning images of the elements of the levels.
+ * A class for loading, storing and returning images of the elements of the
+ * levels.
  */
 public class ImageManager {
 
@@ -39,13 +41,23 @@ public class ImageManager {
         loadImages();
     }
 
+    /**
+     * Returns the image that matches the specified player.
+     *
+     * @param player the player to retrieve the image for
+     * @return the image that matches the player
+     */
     public Image getPlayerImage(Player player) {
-        return obsPlayers.stream().filter(e -> e.getPlayerType().equals(player.getPlayerType())).findFirst().get()
+        return obsPlayers.stream()
+                .filter(e -> e.getPlayerType().equals(player.getPlayerType()))
+                .findFirst()
+                .get()
                 .getImage();
     }
 
     /**
      * A method to get the image for any Entity
+     * 
      * @param entity the Entity that needs its Image
      * @return the Image of the Entity
      */
@@ -69,9 +81,10 @@ public class ImageManager {
 
     /**
      * A method that resizes the image to fit the size of the entity.
-     * @param image the image that needs to be resized
+     * 
+     * @param image  the image that needs to be resized
      * @param height the height that the image needs to have
-     * @param width the width that the image needs to have
+     * @param width  the width that the image needs to have
      * @return the resized image
      */
     private Image resizeImage(final Image image, final int height, final int width) {
@@ -81,7 +94,8 @@ public class ImageManager {
     }
 
     /**
-     * A method that loads all the images for the entities and stores them in a map of images.
+     * A method that loads all the images for the entities and stores them in a map
+     * of images.
      */
     private void loadImages() {
         String path = "src\\main\\resources\\";
@@ -93,33 +107,33 @@ public class ImageManager {
         List<Image> diamondImage = new ArrayList<>();
         try {
             doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),
-                EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
             doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),
-                EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
             doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),
-                EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
             doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),
-                EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
+                    EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG")),
-                EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
+                    EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG")),
-                EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
+                    EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG")),
-                EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
+                    EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG")),
-                EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
+                    EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg")),
-                EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg")),
-                EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg")),
-                EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
             platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")),
-                EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
             movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")),
-                EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
+                    EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
             diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png")),
-                EntityFactory.DEF_HEIGHT, EntityFactory.DEF_HEIGHT));
+                    EntityFactory.DEF_HEIGHT, EntityFactory.DEF_HEIGHT));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -131,12 +145,19 @@ public class ImageManager {
         this.map.put(Diamond.class, diamondImage);
     }
 
+    /**
+     * Returns the list of players' StateObserver.
+     *
+     * @return the list of players' StateObserver
+     */
+    @SuppressWarnings("EI")
     public List<StateObserver> getObservers() {
         return this.obsPlayers;
     }
 
     /**
      * A method that gets the image for a {@link ActivableObject}
+     * 
      * @param activableObject the activableobject we need an image for
      * @return the image of the activableobject
      */
@@ -151,6 +172,7 @@ public class ImageManager {
 
     /**
      * A method that gets the image for the puddles.
+     * 
      * @param puddle the puddle we want the Image for
      * @return the Image of the puddle
      */
@@ -167,6 +189,7 @@ public class ImageManager {
 
     /**
      * A method that gets the image of the door.
+     * 
      * @param door the door we want an Image for
      * @return the Image of the door
      */
@@ -182,6 +205,7 @@ public class ImageManager {
 
     /**
      * A method that gets the image for the {@link MovablePlatform}
+     * 
      * @return the Image of the platform
      */
     public Image getPlatformImage() {
@@ -190,6 +214,7 @@ public class ImageManager {
 
     /**
      * A method that gets the image for the {@link MovablePlatform}.
+     * 
      * @return the image of the MovablePlatform
      */
     public Image getMovablePlatformImage() {
@@ -198,6 +223,7 @@ public class ImageManager {
 
     /**
      * A method that gets the image for the {@link Diamond}.
+     * 
      * @return the image of the diamond
      */
     public Image getDiamondImage() {

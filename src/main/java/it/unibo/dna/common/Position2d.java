@@ -1,14 +1,15 @@
 package it.unibo.dna.common;
 
 /**
- * A class rapresenting a point in a two dimensional space.
+ * A class representing a point in a 2-dimensional space.
  */
-
 public class Position2d {
 
     private double x, y;
 
     /**
+     * Constructs a new {@code Position2d} object with the specified coordinates.
+     *
      * @param x the first coordinate of the position
      * @param y the second coordinate of the position
      */
@@ -18,6 +19,8 @@ public class Position2d {
     }
 
     /**
+     * Returns the first coordinate of the position.
+     *
      * @return the first coordinate
      */
     public double getX() {
@@ -25,6 +28,8 @@ public class Position2d {
     }
 
     /**
+     * Returns the second coordinate of the position.
+     *
      * @return the second coordinate
      */
     public double getY() {
@@ -32,9 +37,9 @@ public class Position2d {
     }
 
     /**
-     * Move the position by adding a 2-dimensional vector
-     * 
-     * @param vector 2-dimensional vector
+     * Moves the position by adding a 2-dimensional vector.
+     *
+     * @param vector the 2-dimensional vector
      * @return the new position
      */
     public Position2d sum(final Vector2d vector) {

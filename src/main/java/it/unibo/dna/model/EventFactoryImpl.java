@@ -1,9 +1,12 @@
 package it.unibo.dna.model;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.dna.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
@@ -54,7 +57,7 @@ public class EventFactoryImpl implements EventFactory {
             if (pt.getVector().getX() != 0 || pt.getPreviousVector().getX() != 0) {
                 pt.setPreviousVector(pt.getVector());
             }
-            if (p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() 
+            if (p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY()
                     && p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY()
                             + pt.getBoundingBox().getHeight()) {
                 p.setPositionY(pt.getPosition().getY() - p.getBoundingBox().getHeight());
@@ -153,7 +156,11 @@ public class EventFactoryImpl implements EventFactory {
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
                 clip.start();
-            } catch (Exception e) {
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
         };

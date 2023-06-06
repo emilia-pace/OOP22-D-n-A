@@ -18,6 +18,8 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
     private GameState game;
 
     /**
+     * Constructs a new PlayerImpl object.
+     *
      * @param game   the game of the player
      * @param pos    the position of the player
      * @param vet    the vector of the player

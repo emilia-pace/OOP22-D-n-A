@@ -21,21 +21,29 @@ public interface Player extends MovableEntity {
     double STANDARDVELOCITY = 0.4;
 
     /**
+     * Returns the state of the player.
+     *
      * @return the player's state
      */
     State getState();
 
     /**
+     * Returns the type of the player.
+     *
      * @return the player's type
      */
     PlayerType getPlayerType();
 
     /**
-     * @return the game of the Player
+     * Returns the event queue of the GameState.
+     *
+     * @return the GameState's event queue
      */
     EventQueue getGameEventQueue();
 
     /**
+     * Sets the GameState for the player.
+     *
      * @param game the new player's GameState
      */
     void setGame(GameState game);
@@ -45,11 +53,11 @@ public interface Player extends MovableEntity {
      */
     enum PlayerType {
         /**
-         * when player is a devil.
+         * Represents when the player is a devil.
          */
         DEVIL,
         /**
-         * when player is an angel.
+         * Represents when the player is an angel.
          */
         ANGEL;
     }

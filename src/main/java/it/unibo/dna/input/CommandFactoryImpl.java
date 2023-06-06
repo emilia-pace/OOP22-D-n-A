@@ -11,13 +11,15 @@ import it.unibo.dna.model.object.player.api.Player;
  */
 public class CommandFactoryImpl implements CommandFactory {
 
-    private Player player;
+    private final Player player;
 
     /**
-     * @param p the player
+     * Creates a new CommandFactoryImpl instance with the specified player.
+     *
+     * @param player the player
      */
-    public CommandFactoryImpl(final Player p) {
-        this.player = p;
+    public CommandFactoryImpl(final Player player) {
+        this.player = player;
     }
 
     /**

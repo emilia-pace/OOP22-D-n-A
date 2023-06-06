@@ -8,22 +8,30 @@ import java.util.List;
 import it.unibo.dna.common.Pair;
 
 /**
- * A Class rappresenting the State of a Player.
+ * A Class rappresenting the state of a player.
  */
 public class State {
 
-    private final int MAXFRAME = 10;
+    /**
+     * The maximum frame value for image animation.
+     */
+    private final static int MAXFRAME = 10;
 
     private int frame = 0;
     private int imageIndex = 0;
 
-    private StateEnum stateX;
-    private StateEnum stateY;
     private List<PropertyChangeListener> listeners = new ArrayList<>();
 
     /**
      * stateX indicate if the player is touching the floor or is jumping
      * stateY indicates whether the player is facing front, right, or left
+     */
+    private StateEnum stateX;
+    private StateEnum stateY;
+
+    /**
+     * Constructs a new State object.
+     * The initial states are set to STATE_STANDING and STATE_STILL.
      */
     public State() {
         stateX = StateEnum.STATE_STANDING;
@@ -31,6 +39,8 @@ public class State {
     }
 
     /**
+     * Returns the first state.
+     * 
      * @return the first state
      */
     public StateEnum getX() {
@@ -38,6 +48,8 @@ public class State {
     }
 
     /**
+     * Returns the second state.
+     * 
      * @return the second state
      */
     public StateEnum getY() {
@@ -45,7 +57,7 @@ public class State {
     }
 
     /**
-     * Sets the first state and notifies the StateObserver of the change.
+     * Sets the first state and notifies the listeners of the change.
      * 
      * @param stateX the new first state
      */
@@ -54,7 +66,7 @@ public class State {
     }
 
     /**
-     * Sets the second state and notifies the observer of the change.
+     * Sets the second state and notifies the listeners of the change.
      * 
      * @param stateY the new second state
      */
@@ -63,14 +75,16 @@ public class State {
     }
 
     /**
-     * @return a Pair of state
+     * Returns a Pair of states.
+     * 
+     * @return a Pair of states
      */
     public Pair<StateEnum, StateEnum> getPairState() {
         return new Pair<>(stateX, stateY);
     }
 
     /**
-     * Notify the observer of an event.
+     * Notify the listeners of an event.
      * 
      * @param object   the observable object
      * @param property the name of the property
@@ -83,13 +97,17 @@ public class State {
     }
 
     /**
-     * @param newListener the new listener
+     * Adds a PropertyChangeListener to the list of listeners.
+     * 
+     * @param newListener the new listener to add
      */
     public void addChangeListeners(final PropertyChangeListener newListener) {
         this.listeners.add(newListener);
     }
 
     /**
+     * Removes a PropertyChangeListener from the list of listeners.
+     * 
      * @param listener the listener to remove
      */
     public void removeChangeListeners(final PropertyChangeListener listener) {
@@ -99,8 +117,8 @@ public class State {
     }
 
     /**
-     * A method that control the change of images when the player is walking to the
-     * right or to the left.
+     * Controls the change of images when the player is walking to the right or
+     * left.
      */
     public void update() {
         this.frame++;
@@ -116,6 +134,8 @@ public class State {
     }
 
     /**
+     * Returns the value of imageIndex.
+     *
      * @return the value of imageIndex
      */
     public int getImageIndex() {
@@ -123,27 +143,27 @@ public class State {
     }
 
     /**
-     * An enumeration describing the different states of the Player.
+     * An enumeration describing the different states of the player.
      */
     public enum StateEnum {
         /**
-         * when the player is on a platform.
+         * Represents when the player is on a platform.
          */
         STATE_STANDING,
         /**
-         * when the player is jumping.
+         * Represents when the player is jumping.
          */
         STATE_JUMPING,
         /**
-         * when the player goes right.
+         * Represents when the player is moving right.
          */
         STATE_RIGHT,
         /**
-         * when the player goes left.
+         * Represents when the player is moving left.
          */
         STATE_LEFT,
         /**
-         * when the player is still.
+         * Represents when the player is still.
          */
         STATE_STILL;
     }

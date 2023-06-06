@@ -13,11 +13,13 @@ public abstract class AbstractMovableEntity extends AbstractEntity implements Mo
     private Vector2d vector;
 
     /**
-     * @param pos    the position of the Entity
-     * @param vet    the start vector of the Entity
-     * @param height the height of the Entity
-     * @param width  the width of the Entity
-     * @param type   the type of the Entity
+     * Constructs a new AbstractMovableEntity object.
+     *
+     * @param pos    the position of the entity
+     * @param vet    the start vector of the entity
+     * @param height the height of the entity
+     * @param width  the width of the entity
+     * @param type   the type of the entity
      */
     public AbstractMovableEntity(final Position2d pos, final Vector2d vet, final double height, final double width,
             final EntityType type) {

@@ -3,7 +3,6 @@ package it.unibo.dna.graphics;
 import javax.swing.*;
 import java.util.List;
 
-import it.unibo.dna.Launcher;
 import it.unibo.dna.input.KeyboardHandler;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
@@ -20,11 +19,11 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
         public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-        public static final int TILE_SIZE = (int) SCREEN_SIZE.getHeight() / 100;
         public static final int BORDER = 100;
+        private static final int DIM = (int) SCREEN_SIZE.getHeight() - BORDER;
+        public static final int TILE_SIZE = DIM / 100;
         private Canvas canvas;
         public ImageManager imgMgr;
-        private int dim = (int) SCREEN_SIZE.getHeight() - BORDER;
         private JPanel jpanel;
         private JButton pauseButton;
         MenuFactory menuFactory;
@@ -54,7 +53,7 @@ public class Display extends JFrame {
 
         jpanel = new JPanel(new BorderLayout());
         canvas = new Canvas();
-        canvas.setSize(dim, dim);
+        canvas.setSize(DIM, DIM);
         canvas.setFocusable(true);
 
         jpanel.add(canvas, BorderLayout.CENTER);
@@ -112,6 +111,6 @@ public class Display extends JFrame {
      * @return The screen dimension in tile size.
      */
     public int getScreenDimension() {
-        return this.dim / TILE_SIZE;
+        return DIM / TILE_SIZE;
     }
 }

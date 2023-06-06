@@ -3,7 +3,6 @@ package it.unibo.dna;
 import java.io.IOException;
 
 import it.unibo.dna.graphics.MenuFactory;
-import it.unibo.dna.graphics.MenuFactoryImpl;
 
 public class Launcher {
     private static GameThread gameThread;

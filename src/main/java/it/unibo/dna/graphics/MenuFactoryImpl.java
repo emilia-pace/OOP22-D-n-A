@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
+import it.unibo.dna.GameEngine;
 import it.unibo.dna.GameThread;
 import it.unibo.dna.model.Score;
 
@@ -23,12 +23,12 @@ import it.unibo.dna.model.Score;
  */
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
-    private GameThread gameThread;
+    GameThread gameThread;
+    GameEngine gEngine;
 
-    public MenuFactoryImpl(GameThread gameT){
-        this.gameThread = gameT;
-    }
-   
+   public MenuFactoryImpl(GameThread gameT){
+    this.gameThread = gameT;
+   }
 
     @Override
     public GameMenu startMenu() {
@@ -180,7 +180,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startMenu.dispose();
-                gameThread.startThread();
+                gameThread.start();
+                
             }
 
         };
@@ -252,13 +253,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     menu.dispose();
+                    gameThread.interrupt();
+                    gameThread.start();
 
-                    try {
-                        gameThread.restartLevel();
-                    } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
             }
         };
         restartButton.addActionListener(al);
@@ -275,11 +272,16 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         JButton nextLevelButton = new JButton("Next");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                victoryFrame.dispose();
                 level++;
+                gameThread.interrupt();
+                victoryFrame.dispose();
                 try {
-                    gameThread.nextLevel();
+                    gEngine = new GameEngine(level);
+                    gameThread.setGameEngine(gEngine);
+                    gEngine.setGameThread(gameThread);
+                    gameThread.start();
                 } catch (IOException e1) {
+                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

@@ -35,8 +35,8 @@ public class Score {
      * @param value the value to add to the total score
      * @return the value of the current score
      */
-    public static double addScore(final double value) {
-        return total + value;
+    public static void addScore(final double value) {
+        total = total + value;
     }
 
     /**

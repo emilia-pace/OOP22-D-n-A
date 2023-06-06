@@ -1,7 +1,5 @@
 package it.unibo.dna.graphics;
 
-import it.unibo.dna.model.Score;
-
 /**
  * Represents a factory for creating game menus.
  */

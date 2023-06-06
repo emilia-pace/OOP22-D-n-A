@@ -1,15 +1,16 @@
 package it.unibo.dna.common;
 
 /**
- * A class rappresenting a vector in 2-dimensional space that describe
+ * A class representing a vector in 2-dimensional space that describes
  * the direction and velocity of a movement.
  */
-
-public class Vector2d  {
+public class Vector2d {
 
     private double x, y;
 
     /**
+     * Constructs a new {@code Vector2d} object with the specified coordinates.
+     *
      * @param x the first coordinate of the vector
      * @param y the second coordinate of the vector
      */
@@ -19,6 +20,8 @@ public class Vector2d  {
     }
 
     /**
+     * Returns the first coordinate of the vector.
+     *
      * @return the first coordinate
      */
     public double getX() {
@@ -26,6 +29,8 @@ public class Vector2d  {
     }
 
     /**
+     * Returns the second coordinate of the vector.
+     *
      * @return the second coordinate
      */
     public double getY() {
@@ -33,20 +38,18 @@ public class Vector2d  {
     }
 
     /**
-     * Change the first coordinate of the vector by adding
-     * a double number.
-     * 
-     * @param d the double number to be summed
+     * Changes the first coordinate of the vector by adding a double number.
+     *
+     * @param d the double number to be added
      */
     public void sumX(final double d) {
         x += d;
     }
 
     /**
-     * Change the second coordinate of the vector by adding
-     * a double number.
-     * 
-     * @param d the double number to be summed
+     * Changes the second coordinate of the vector by adding a double number.
+     *
+     * @param d the double number to be added
      */
     public void sumY(final double d) {
         y += d;

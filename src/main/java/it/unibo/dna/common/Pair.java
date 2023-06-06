@@ -1,16 +1,20 @@
 package it.unibo.dna.common;
 
-/*
- * A standard generic Pair<X,Y> saving couple of element 
+/**
+ * A standard generic Pair<X,Y> saving a couple of elements.
+ *
  * @param <X> the type of the first element
  * @param <Y> the type of the second element
  */
+
 public class Pair<X, Y> {
 
 	private X x;
 	private Y y;
 
 	/**
+	 * Creates a new Pair instance with the specified elements.
+	 *
 	 * @param x the first element
 	 * @param y the second element
 	 */
@@ -21,6 +25,8 @@ public class Pair<X, Y> {
 	}
 
 	/**
+	 * Returns the first element of the Pair.
+	 *
 	 * @return the first element
 	 */
 	public X getX() {
@@ -28,24 +34,12 @@ public class Pair<X, Y> {
 	}
 
 	/**
+	 * Returns the second element of the Pair.
+	 *
 	 * @return the second element
 	 */
 	public Y getY() {
 		return y;
-	}
-
-	/**
-	 * @param x the first element
-	 */
-	public void setX(final X x) {
-		this.x = x;
-	}
-
-	/**
-	 * @param y the second element
-	 */
-	public void setY(final Y y) {
-		this.y = y;
 	}
 
 	/**

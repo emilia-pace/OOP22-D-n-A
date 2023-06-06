@@ -1,9 +1,13 @@
 package it.unibo.dna.model;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.dna.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
@@ -54,7 +58,7 @@ public class EventFactoryImpl implements EventFactory {
             if (pt.getVector().getX() != 0 || pt.getPreviousVector().getX() != 0) {
                 pt.setPreviousVector(pt.getVector());
             }
-            if (p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY() 
+            if (p.getPosition().getY() + p.getBoundingBox().getHeight() > pt.getPosition().getY()
                     && p.getPosition().getY() + p.getBoundingBox().getHeight() < pt.getPosition().getY()
                             + pt.getBoundingBox().getHeight()) {
                 p.setPositionY(pt.getPosition().getY() - p.getBoundingBox().getHeight());
@@ -84,10 +88,18 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(final Door door, final Player player, final Score score) {
+    public Event hitDoorEvent(final Door door, final Player player, final Score score, final List<Entity> entities) {
         return game -> {
             if (door.getPlayer().isEmpty()) {
                 door.openDoor(player);
+            }
+            long numberOfOpenedDoors = entities.stream()
+                                    .filter(entity -> entity instanceof Door)
+                                    .map(entity -> (Door)entity)
+                                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
+                                    .count();
+            if (numberOfOpenedDoors == 2) {
+                game.getEventQueue().addEvent(this.victoryEvent(score));
             }
         };
     }
@@ -116,7 +128,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
             game.removeEntity(d);
-            GameStateImpl.score.setTotal(s.addScore(d.getValue()));
+            GameStateImpl.getScore().setTotal(s.addScore(d.getValue()));
         };
     }
 
@@ -153,7 +165,11 @@ public class EventFactoryImpl implements EventFactory {
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
                 clip.start();
-            } catch (Exception e) {
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (UnsupportedAudioFileException e) {
                 e.printStackTrace();
             }
         };
@@ -167,6 +183,18 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             puddle.killPlayer(player);
         };
+    }
+
+    @Override
+    public Event victoryEvent(final Score score) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'victoryEvent'");
+    }
+
+    @Override
+    public Event gameOverEvent(final Score score) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'gameOverEvent'");
     }
 
 }

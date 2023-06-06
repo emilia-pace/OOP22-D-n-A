@@ -1,11 +1,9 @@
 package it.unibo.dna;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.graphics.MenuFactory;
 import it.unibo.dna.model.EventFactory;
 import it.unibo.dna.model.EventFactoryImpl;
 import it.unibo.dna.model.EventQueue;
@@ -25,41 +23,35 @@ import it.unibo.dna.model.object.player.api.Player;
  */
 public class GameStateImpl implements GameState {
 
-    public static final double Gravity = 0.8;
+    public static final double GRAVITY = 0.8;
 
     private final List<Entity> entities;
     private final List<Player> characters;
     private BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
-    private final MenuFactory menuFactory = Launcher.getMenuFactory();
-    public static Score score;
+    private static Score score;
     private final EventQueue eventQueue = new EventQueue();
 
     /**
-     * {@link Game} constructor.
-     * 
-     * @param width  the width of the game
+     *  {@link Game} constructor.
+     * @param width the width of the game
      * @param height the height of the game
-     * @param level  the level of the game
-     * @throws IOException
+     * @param entities the entities of the game
+     * @param players the players of the game
      */
-    public GameStateImpl(final int width, final int height, final List<Entity> level, List<Player> players)
-            throws IOException {
+    public GameStateImpl(final int width, final int height, final List<Entity> entities, final List<Player> players) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         score = new Score(0.0);
-        this.entities = level;
+        this.entities = entities;
         this.characters = players;
     }
 
-    private void checkForEndGame() {
-        long numberOfOpenedDoors = entities.stream()
-                                    .filter(entity -> entity instanceof Door)
-                                    .map(entity -> (Door)entity)
-                                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
-                                    .count();
-        if (numberOfOpenedDoors == 2) {
-            menuFactory.victoryMenu(score).createMenuFrame();
-        }
+    /**
+     * 
+     * @return the score of the game.
+     */
+    public static Score getScore() {
+        return score;
     }
 
     /**
@@ -85,12 +77,12 @@ public class GameStateImpl implements GameState {
     }
 
     /**
-     * Manages the gravity of the player
+     * Manages the gravity of the player.
      * 
      * @param player the {@link Player} to manage
      */
-    private void gravity(Player player) {
-        if (player.getVector().getY() < Gravity) {
+    private void gravity(final Player player) {
+        if (player.getVector().getY() < GRAVITY) {
             player.getVector().sumY(Player.STANDARDVELOCITY);
         }
     }
@@ -155,34 +147,30 @@ public class GameStateImpl implements GameState {
      * 
      * @param character the {@link Player} to check
      */
-    private void freeActivableObject(final Player character) {
+    private void freeObject(final Player character) {
         final var box = character.getBoundingBox();
         this.getEntities().stream()
                 .filter((e) -> !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth()))
-                .filter((e) -> (e.getType().equals(Entity.EntityType.BUTTON))
-                        || e.getType().equals(Entity.EntityType.LEVER))
                 .forEach((e) -> {
-                    final Optional<Player> objPlayer = ((ActivableObjectImpl) e).getPlayer();
-                    if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                        if (e.getType().equals(Entity.EntityType.BUTTON))
-                            ((ActivableObjectImpl) e).deactivate();
-                        ((ActivableObjectImpl) e).resetPlayer();
-                    }
-                });
-    }
-
-    private void freeDoor(final Player character) {
-        final var box = character.getBoundingBox();
-        this.getEntities().stream()
-                .filter((e) -> !e.getBoundingBox().isCollidingWith(box.getPosition(), box.getHeight(), box.getWidth()))
-                .filter((e) -> (e.getType().equals(Entity.EntityType.DEVIL_DOOR))
-                        || e.getType().equals(Entity.EntityType.ANGEL_DOOR))
-                .map((e) -> (Door) e)
-                .forEach((e) -> {
-                    final Optional<Player> doorPlayer = e.getPlayer();
-                    if(doorPlayer.isPresent() && doorPlayer.get().equals(character)) {
-                        e.closeDoor();
-                        e.resetPlayer();
+                    Optional<Player> objPlayer;
+                    switch (e.getType()) {
+                        case BUTTON, LEVER -> {
+                            objPlayer = ((ActivableObjectImpl) e).getPlayer();
+                            if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
+                                if (e.getType().equals(Entity.EntityType.BUTTON)){
+                                    ((ActivableObjectImpl) e).deactivate();
+                                }
+                                ((ActivableObjectImpl) e).resetPlayer();
+                            }
+                        }
+                        case DEVIL_DOOR, ANGEL_DOOR -> {
+                            objPlayer = ((Door) e).getPlayer();
+                            if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
+                                ((Door) e).closeDoor();
+                                ((Door) e).resetPlayer();
+                            }
+                        }
+                        default -> { }
                     }
                 });
     }
@@ -205,12 +193,10 @@ public class GameStateImpl implements GameState {
                             this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
                             this.eventQueue.addEvent(event.hitMovablePlatformEvent((MovablePlatform) e, character));
                         }
-                        case BUTTON ->
-                            this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
+                        case BUTTON -> this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
                         case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
                         case ANGEL_DOOR, DEVIL_DOOR -> {
-                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score));
-                            this.checkForEndGame();
+                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score, this.getEntities()));
                         }
                         case DIAMOND -> {
                             this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
@@ -224,8 +210,7 @@ public class GameStateImpl implements GameState {
                     }
                 });
 
-        freeActivableObject(character);
-        freeDoor(character);
+        this.freeObject(character);
     }
 
     /**

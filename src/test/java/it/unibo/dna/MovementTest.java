@@ -11,7 +11,6 @@ import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.CommandFactoryImpl;
 import it.unibo.dna.input.api.CommandFactory;
 import it.unibo.dna.model.object.player.PlayerImpl;
-import it.unibo.dna.model.object.player.StateObserver;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -21,19 +20,10 @@ class MovementTest {
     private static final Vector2d START_VECTOR = new Vector2d(1, 0);
     private static final double HEIGHT = 10.0;
     private static final double WIDTH = 10.0;
-    private GameState game;
+    private GameState game = new GameStateImpl((int) WIDTH, (int) HEIGHT, null, null);
     private static final PlayerImpl.PlayerType TYPE = PlayerImpl.PlayerType.ANGEL;
-    private final Player player = new PlayerImpl(null, START_POSITION, START_VECTOR, HEIGHT, WIDTH, TYPE);
+    private final Player player = new PlayerImpl(this.game, START_POSITION, START_VECTOR, HEIGHT, WIDTH, TYPE);
     private final CommandFactory command = new CommandFactoryImpl(this.player);
-
-    {
-        try {
-            this.game = new GameStateImpl((int) WIDTH, (int) HEIGHT, null, null);
-            this.player.setGame(this.game);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-    }
 
     /**
      * 

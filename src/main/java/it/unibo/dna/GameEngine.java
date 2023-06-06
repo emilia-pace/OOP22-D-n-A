@@ -6,25 +6,35 @@ import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.Level;
 import it.unibo.dna.model.object.player.api.Player;
 
+/**
+ * Represents the game engine that manages the game loop and updates the game state.
+ */
 public class GameEngine implements Runnable {
-    Display display;
-
+    private Display display;
     private GameState game;
     private Level level;
+    private boolean running;
+    private final double rateUpdate = 1.0d / 50.0d;
 
-    boolean running;
-    private final double rateUpdate = 1.0d / 60.0d;
-
+    /**
+     * Constructs a GameEngine object with the specified level number.
+     *
+     * @param lvl The level number.
+     * @throws IOException if an I/O error occurs while loading the level.
+     */
     public GameEngine(int lvl) throws IOException {
         this.level = new Level(lvl);
         this.display = new Display(this.level.getCharacters());
-        this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(), this.level.getEntities(),
-                this.level.getCharacters());
+        this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
+                this.level.getEntities(), this.level.getCharacters());
         for (Player p : this.game.getCharacters()) {
             p.setGame(this.game);
         }
     }
 
+    /**
+     * Starts the game loop and keeps updating and rendering the game until stopped.
+     */
     @Override
     public void run() {
         running = true;
@@ -45,19 +55,25 @@ public class GameEngine implements Runnable {
         }
     }
 
+    /**
+     * Renders the game state on the display.
+     */
     private void render() {
         display.render(game.getEntities(), this.game.getCharacters());
     }
 
+    /**
+     * Updates the game state.
+     */
     private void update() {
         game.update();
     }
 
+    /**
+     * Stops the game engine and releases any resources.
+     */
     public void stop() {
         display.dispose();
-        display.getGraphics().dispose();
         running = false;
     }
-    
-
 }

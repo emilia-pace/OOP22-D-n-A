@@ -2,26 +2,36 @@ package it.unibo.dna.model.object.player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import it.unibo.dna.common.Pair;
 
 /**
- * A Class rappresenting the State of a Player.
+ * A Class rappresenting the state of a player.
  */
 public class State {
 
-    private final int MAXFRAME = 10;
+    /**
+     * The maximum frame value for image animation.
+     */
+    private final static int MAXFRAME = 10;
 
     private int frame = 0;
     private int imageIndex = 0;
 
-    private StateEnum stateX;
-    private StateEnum stateY;
-    private PropertyChangeListener listener;
+    private List<PropertyChangeListener> listeners = new ArrayList<>();
 
     /**
      * stateX indicate if the player is touching the floor or is jumping
      * stateY indicates whether the player is facing front, right, or left
+     */
+    private StateEnum stateX;
+    private StateEnum stateY;
+
+    /**
+     * Constructs a new State object.
+     * The initial states are set to STATE_STANDING and STATE_STILL.
      */
     public State() {
         stateX = StateEnum.STATE_STANDING;
@@ -29,6 +39,8 @@ public class State {
     }
 
     /**
+     * Returns the first state.
+     * 
      * @return the first state
      */
     public StateEnum getX() {
@@ -36,6 +48,8 @@ public class State {
     }
 
     /**
+     * Returns the second state.
+     * 
      * @return the second state
      */
     public StateEnum getY() {
@@ -43,53 +57,68 @@ public class State {
     }
 
     /**
-     * Sets the first state and notifies the StateObserver of the change.
+     * Sets the first state and notifies the listeners of the change.
      * 
      * @param stateX the new first state
      */
     public void setStateX(final StateEnum stateX) {
-        this.notifyListener(this, "changeX", this.stateX, this.stateX = stateX);
+        this.notifyListeners(this, "changeX", this.stateX, this.stateX = stateX);
     }
 
     /**
-     * Sets the second state and notifies the observer of the change.
+     * Sets the second state and notifies the listeners of the change.
      * 
      * @param stateY the new second state
      */
     public void setStateY(final StateEnum stateY) {
-        this.notifyListener(this, "changeY", this.stateY, this.stateY = stateY);
+        this.notifyListeners(this, "changeY", this.stateY, this.stateY = stateY);
     }
 
     /**
-     * @return a Pair of state
+     * Returns a Pair of states.
+     * 
+     * @return a Pair of states
      */
     public Pair<StateEnum, StateEnum> getPairState() {
         return new Pair<>(stateX, stateY);
     }
 
     /**
-     * Notify the observer of an event.
+     * Notify the listeners of an event.
      * 
      * @param object   the observable object
      * @param property the name of the property
      * @param oldValue the old value
      * @param newValue the new new value
      */
-    private void notifyListener(final Object object, final String property, final StateEnum oldValue,
+    private void notifyListeners(final Object object, final String property, final StateEnum oldValue,
             final StateEnum newValue) {
-        listener.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue));
+        listeners.forEach(e -> e.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue)));
     }
 
     /**
-     * @param newListener the new listener
+     * Adds a PropertyChangeListener to the list of listeners.
+     * 
+     * @param newListener the new listener to add
      */
-    public void addChangeListener(final PropertyChangeListener newListener) {
-        this.listener = newListener;
+    public void addChangeListeners(final PropertyChangeListener newListener) {
+        this.listeners.add(newListener);
     }
 
     /**
-     * A method that control the change of images when the player is walking to the
-     * right or to the left.
+     * Removes a PropertyChangeListener from the list of listeners.
+     * 
+     * @param listener the listener to remove
+     */
+    public void removeChangeListeners(final PropertyChangeListener listener) {
+        if (this.listeners.contains(listener)) {
+            this.listeners.remove(listener);
+        }
+    }
+
+    /**
+     * Controls the change of images when the player is walking to the right or
+     * left.
      */
     public void update() {
         this.frame++;
@@ -99,12 +128,14 @@ public class State {
             if (this.getX().equals(StateEnum.STATE_STANDING)
                     && (this.getY().equals(StateEnum.STATE_LEFT)
                             || this.getY().equals(StateEnum.STATE_RIGHT))) {
-                this.notifyListener(this, "changeY", this.getY(), this.getY());
+                this.notifyListeners(this, "changeY", this.getY(), this.getY());
             }
         }
     }
 
     /**
+     * Returns the value of imageIndex.
+     *
      * @return the value of imageIndex
      */
     public int getImageIndex() {
@@ -112,27 +143,27 @@ public class State {
     }
 
     /**
-     * An enumeration describing the different states of the Player.
+     * An enumeration describing the different states of the player.
      */
     public enum StateEnum {
         /**
-         * when the player is on a platform.
+         * Represents when the player is on a platform.
          */
         STATE_STANDING,
         /**
-         * when the player is jumping.
+         * Represents when the player is jumping.
          */
         STATE_JUMPING,
         /**
-         * when the player goes right.
+         * Represents when the player is moving right.
          */
         STATE_RIGHT,
         /**
-         * when the player goes left.
+         * Represents when the player is moving left.
          */
         STATE_LEFT,
         /**
-         * when the player is still.
+         * Represents when the player is still.
          */
         STATE_STILL;
     }

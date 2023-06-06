@@ -4,6 +4,8 @@ package it.unibo.dna;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import it.unibo.dna.common.Position2d;
@@ -26,7 +28,7 @@ public class CollisionTest {
     private static final BoundingBox BOX = new RectBoundingBox(POS, HEIGHT, WIDTH);
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
-    private static final GameStateImpl GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, 0);
+    private static GameStateImpl GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(),new ArrayList<>());
     private static final Player CHARACTER = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerType.ANGEL);
 
     /**

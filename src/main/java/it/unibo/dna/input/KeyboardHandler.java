@@ -12,13 +12,16 @@ import java.awt.event.KeyListener;
 public class KeyboardHandler implements KeyListener {
 
     private int commandRight, commandLeft, commandJump;
-    private Player character;
+    private final Player character;
     private CommandFactory command;
 
     /**
-     * @param commandRight the keycode for the command right
-     * @param commandLeft  the keycode for the command left
-     * @param commandJump  the keycode for jump
+     * Creates a new KeyboardHandler instance with the specified keycodes and
+     * player.
+     *
+     * @param commandRight the keycode for the command "right"
+     * @param commandLeft  the keycode for the command "left"
+     * @param commandJump  the keycode for the "jump" command
      * @param character    the player linked to this keylistener
      */
     public KeyboardHandler(final int commandRight, final int commandLeft, final int commandJump,

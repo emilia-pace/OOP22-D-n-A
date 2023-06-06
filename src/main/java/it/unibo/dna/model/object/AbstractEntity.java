@@ -14,6 +14,8 @@ public abstract class AbstractEntity implements Entity {
     private final Entity.EntityType type;
 
     /**
+     * Constructs a new AbstractEntity object.
+     *
      * @param pos    the position of the entity
      * @param height the height of the entity
      * @param width  the width of the entity

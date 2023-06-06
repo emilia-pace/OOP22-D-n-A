@@ -10,7 +10,7 @@ public class Launcher {
         gameThread.startGame();
     }
 
-    static GameThread getGameThread() {
+    public static GameThread getGameThread() {
         return gameThread;
     }
 

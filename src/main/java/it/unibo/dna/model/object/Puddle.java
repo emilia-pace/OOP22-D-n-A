@@ -15,7 +15,6 @@ import it.unibo.dna.model.object.player.api.Player;
  */
 public class Puddle extends AbstractEntity {
 
-    private MenuFactory menuFactory = Launcher.getMenuFactory();
     private Optional<Player> player = Optional.empty();
 
     /**
@@ -40,7 +39,7 @@ public class Puddle extends AbstractEntity {
             player = Optional.of(character);
             switch (this.getType()) {
                 case PURPLE_PUDDLE -> {
-                    menuFactory.gameOverMenu().createMenuFrame();
+                   | menuFactory.gameOverMenu().createMenuFrame();
                 }
                 case BLUE_PUDDLE -> {
                     if (character.getPlayerType().equals(Player.PlayerType.DEVIL)) {

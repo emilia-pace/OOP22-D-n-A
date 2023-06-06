@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import it.unibo.dna.GameEngine;
 import it.unibo.dna.GameStateImpl;
 import it.unibo.dna.GameThread;
 import it.unibo.dna.model.Score;
@@ -24,7 +23,6 @@ import it.unibo.dna.model.Score;
  */
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
-    GameEngine gameEngine;
     GameThread gameThread;
    
 
@@ -176,13 +174,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startMenu.dispose();
-                try {
-                    gameEngine = new GameEngine(level);
-                    gameThread = new GameThread(gameEngine);
-                    gameThread.startThread();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                gameThread.startGame();
             }
 
         };
@@ -255,8 +247,12 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             public void actionPerformed(ActionEvent e) {
                     menu.dispose();
 
-                    gameThread.interruptThread();
-                    gameThread = new GameThread(gameEngine);
+                    try {
+                        gameThread.restartLevel();
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
             }
         };
         restartButton.addActionListener(al);
@@ -274,11 +270,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 victoryFrame.dispose();
-                gameThread.interruptThread();
                 level++;
                 try {
-                    gameEngine = new GameEngine(level);
-                    gameThread = new GameThread(gameEngine);
+                    gameThread.nextLevel();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }

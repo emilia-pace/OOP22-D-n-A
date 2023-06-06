@@ -1,12 +1,13 @@
 package it.unibo.dna;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
@@ -14,77 +15,87 @@ import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Door;
+import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
-public class ObjectsTest {
+class ObjectsTest {
     private static final EntityFactoryImpl ENTITYFACTORY = new EntityFactoryImpl();
     private static final double X = 10;
     private static final double Y = 20;
     private static final Position2d POS = new Position2d(X, Y);
-    private static final Position2d POS2 = new Position2d(X+X, Y+Y);
+    private static final Position2d POS2 = new Position2d(X + X, Y + Y);
+    private static final Position2d POS3 = new Position2d(X + 15, Y + 15);
     private static final double HEIGHT = 4;
     private static final double WIDTH = 4;
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
-    private static GameState GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(),new ArrayList<>());
+    private static final GameState GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(), new ArrayList<>());
     private static final Player ANGEL = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
-    private static final Player DEVIL = new PlayerImpl(GAME, POS2, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.DEVIL);
+    private static final Player DEVIL = new PlayerImpl(GAME, POS2, new Vector2d(0, 0), HEIGHT, WIDTH, 
+                                                        PlayerImpl.PlayerType.DEVIL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);
+    private static final Entity BUTTON = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.BUTTON, POS);
+    private static final Entity LEVER = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.LEVER, POS2);
+    private static final Entity ANGELDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.EntityType.ANGEL_DOOR, POS);
+    private static final Entity DEVILDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.EntityType.DEVIL_DOOR, POS2);
+    private static final Entity RED_PUDDLE = ENTITYFACTORY.createEntity(Optional.empty(), Entity.EntityType.RED_PUDDLE, POS3);
 
     @Test
-    public void testMovablePlatformMethods(){
-        Position2d finalPos = new Position2d(X+100, Y+100); //test vettore 1,1
+    void testMovablePlatformMethods() {
+        Position2d finalPos = new Position2d(X + 100, Y + 100); //test vettore 0.5, 0.5
         PLATFORM.setFinalPosition(finalPos);
-        PLATFORM.findVector(PLATFORM.getOriginalPosition(),PLATFORM.getFinalPosition());
-        assertTrue(PLATFORM.getVector().equals(new Vector2d(+1, +1)));
+        PLATFORM.findVector(PLATFORM.getOriginalPosition(), PLATFORM.getFinalPosition());
+        assertEquals(PLATFORM.getVector(), new Vector2d(+0.5, +0.5));
 
-        finalPos = new Position2d(X+100, Y-100);//test vettore 1,-1
+        finalPos = new Position2d(X + 100, Y - 100); //test vettore 0.5, -0.5
         PLATFORM.setFinalPosition(finalPos);
-        PLATFORM.findVector(PLATFORM.getOriginalPosition(),PLATFORM.getFinalPosition());
-        assertTrue(PLATFORM.getVector().equals(new Vector2d(+1, -1)));
+        PLATFORM.findVector(PLATFORM.getOriginalPosition(), PLATFORM.getFinalPosition());
+        assertEquals(PLATFORM.getVector(), new Vector2d(+0.5, -0.5));
 
-        finalPos = new Position2d(X-100, Y+100);//test vettore -1,1
+        finalPos = new Position2d(X - 100, Y + 100); //test vettore -0.5, 0.5
         PLATFORM.setFinalPosition(finalPos);
-        PLATFORM.findVector(PLATFORM.getOriginalPosition(),PLATFORM.getFinalPosition());
-        assertTrue(PLATFORM.getVector().equals(new Vector2d(-1, +1)));
+        PLATFORM.findVector(PLATFORM.getOriginalPosition(), PLATFORM.getFinalPosition());
+        assertEquals(PLATFORM.getVector(), new Vector2d(-0.5, +0.5));
 
-        finalPos = new Position2d(X-100, Y-100);//test vettore -1,-1
+        finalPos = new Position2d(X - 100, Y - 100); //test vettore -0.5, -0.5
         PLATFORM.setFinalPosition(finalPos);
-        PLATFORM.findVector(PLATFORM.getOriginalPosition(),PLATFORM.getFinalPosition());
-        assertTrue(PLATFORM.getVector().equals(new Vector2d(-1, -1)));
+        PLATFORM.findVector(PLATFORM.getOriginalPosition(), PLATFORM.getFinalPosition());
+        assertEquals(PLATFORM.getVector(), new Vector2d(-0.5, -0.5));
 
         PLATFORM.setPosition(PLATFORM.getFinalPosition());
         PLATFORM.setLastPosition();
         PLATFORM.findLimit();
-        assertTrue(PLATFORM.getPosition().equals(PLATFORM.getFinalPosition()));
+        assertEquals(PLATFORM.getPosition(), PLATFORM.getFinalPosition());
     }
 
     @Test
-    public void testDoor() {
-        Entity ANGELDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.EntityType.ANGEL_DOOR, POS );
-        Entity DEVILDOOR = ENTITYFACTORY.createEntity(Optional.empty(), Entity.EntityType.DEVIL_DOOR,POS2);
-        assertTrue(((Door)ANGELDOOR).getDoorState().equals(Door.DoorState.CLOSED_DOOR));
-        assertTrue(((Door)DEVILDOOR).getDoorState().equals(Door.DoorState.CLOSED_DOOR));
-        ((Door)ANGELDOOR).openDoor(ANGEL);
-        ((Door)DEVILDOOR).openDoor(DEVIL);
-        assertTrue(((Door)ANGELDOOR).getDoorState().equals(Door.DoorState.OPEN_DOOR));
-        assertTrue(((Door)DEVILDOOR).getDoorState().equals(Door.DoorState.OPEN_DOOR));
+    void testDoor() {
+        assertEquals(((Door) ANGELDOOR).getDoorState(), Door.DoorState.CLOSED_DOOR);
+        assertEquals(((Door) DEVILDOOR).getDoorState(), Door.DoorState.CLOSED_DOOR);
+        ((Door) ANGELDOOR).openDoor(ANGEL);
+        ((Door) DEVILDOOR).openDoor(DEVIL);
+        assertEquals(((Door) ANGELDOOR).getDoorState(), Door.DoorState.OPEN_DOOR);
+        assertEquals(((Door) DEVILDOOR).getDoorState(), Door.DoorState.OPEN_DOOR);
     }
 
     @Test
-    public void testActivableObject() {
-        Entity BUTTON = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.BUTTON, POS);
-        Entity LEVER = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.LEVER, POS2);
-        ((ActivableObjectImpl)BUTTON).activate();
-        assertTrue(((ActivableObjectImpl)BUTTON).isActivated());
-        assertTrue(((ActivableObjectImpl)BUTTON).getMovablePlatform().getPosition().equals(PLATFORM.getFinalPosition()));
-        ((ActivableObjectImpl)LEVER).deactivate();
-        assertFalse(((ActivableObjectImpl)LEVER).isActivated());
-        assertTrue(((ActivableObjectImpl)LEVER).getMovablePlatform().getPosition().equals(PLATFORM.getOriginalPosition()));
+    void testActivableObject() {
+        ((ActivableObjectImpl) BUTTON).activate();
+        assertTrue(((ActivableObjectImpl) BUTTON).isActivated());
+        assertEquals(((ActivableObjectImpl) BUTTON).getMovablePlatform().getPosition(), PLATFORM.getFinalPosition());
+        ((ActivableObjectImpl) LEVER).deactivate();
+        assertFalse(((ActivableObjectImpl) LEVER).isActivated());
+        assertEquals(((ActivableObjectImpl) LEVER).getMovablePlatform().getPosition(), PLATFORM.getOriginalPosition());
+    }
+
+    @Test
+    void testPuddles() {
+        assertTrue(((Puddle) RED_PUDDLE).killPlayer(ANGEL));
+        assertFalse(((Puddle) RED_PUDDLE).killPlayer(DEVIL));
     }
 
 }

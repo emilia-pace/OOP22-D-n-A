@@ -1,14 +1,8 @@
 package it.unibo.dna.model.events.impl;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
+import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
@@ -102,7 +96,7 @@ public class EventFactoryImpl implements EventFactory {
                                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                                     .count();
             if (numberOfOpenedDoors == 2) {
-                game.getEventQueue().addEvent(this.victoryEvent(score));
+                game.get().getEventQueue().addEvent(this.victoryEvent(score));
             }
         };
     }
@@ -130,8 +124,9 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
-            game.removeEntity(d);
+            game.get().removeEntity(d);
             GameStateImpl.getScore().setTotal(s.addScore(d.getValue()));
+            (new SoundFactoryImpl()).diamondClip().start();
         };
     }
 
@@ -165,7 +160,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitPuddleEvent(final Puddle puddle, final Player player, final Score score) {
         return game -> {
             if(puddle.killPlayer(player)) {
-                game.getEventQueue().addEvent(this.gameOverEvent(score));
+                game.get().getEventQueue().addEvent(this.gameOverEvent(score));
             }
         };
     }

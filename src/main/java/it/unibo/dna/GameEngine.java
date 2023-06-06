@@ -28,9 +28,6 @@ public class GameEngine implements Runnable {
      */
     public GameEngine(int lvl) throws IOException {
         this.level = new Level(lvl);
-        this.display = new Display(this.level.getCharacters());
-        this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
-                this.level.getEntities(), this.level.getCharacters());
     }
 
     public void setGameThread(GameThread gameT) {
@@ -46,6 +43,9 @@ public class GameEngine implements Runnable {
      */
     @Override
     public void run() {
+        this.display = new Display(this.level.getCharacters());
+        this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
+                this.level.getEntities(), this.level.getCharacters());
         running = true;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();

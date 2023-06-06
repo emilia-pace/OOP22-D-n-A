@@ -8,7 +8,7 @@ import it.unibo.dna.model.game.impl.GameStateImpl;
 
 public class GameThread extends Thread {
     private GameEngine gameEngine;
-    private MenuFactory menuFactory = new MenuFactoryImpl();
+    private MenuFactory menuFactory = new MenuFactoryImpl(this);
     int level = 1;
 
     public GameThread(GameEngine gameEngine) {
@@ -16,21 +16,26 @@ public class GameThread extends Thread {
         this.gameEngine.setGameThread(this);
     }
 
+    public void startThread(){
+        start();
+        gameEngine.run();
+    }
+
     public void startGame(){
-        menuFactory.startMenu();
+        menuFactory.startMenu().createMenuFrame();
     }
 
     public void victoryGame(){
         gameEngine.stop();
         interrupt();
         level++;
-        menuFactory.victoryMenu(GameStateImpl.getScore());
+        menuFactory.victoryMenu(GameStateImpl.getScore()).createMenuFrame();
     }
 
     public void losingGame() {
         gameEngine.stop();
         interrupt();
-        menuFactory.gameOverMenu();
+        menuFactory.gameOverMenu().createMenuFrame();
     }
 
     public void nextLevel() throws IOException {

@@ -63,18 +63,16 @@ public class ImageManager {
      */
     public Image getImage(final Entity entity) {
         Image image = getDiamondImage();
-        if (entity.getClass().equals(Door.class)) {
+        if (entity instanceof Door) {
             image = getDoorImage(((Door) entity));
-        } else if (entity.getClass().equals(ActivableObjectImpl.class)) {
+        } else if (entity instanceof ActivableObjectImpl) {
             image = getActObjImage(((ActivableObjectImpl) entity));
-        } else if (entity.getClass().equals(Puddle.class)) {
+        } else if (entity instanceof Puddle) {
             image = getPuddleImage(((Puddle) entity));
-        } else if (entity.getClass().equals(Platform.class)) {
+        } else if (entity instanceof Platform) {
             image = getPlatformImage();
-        } else if (entity.getClass().equals(MovablePlatform.class)) {
+        } else if (entity instanceof MovablePlatform) {
             image = getMovablePlatformImage();
-        } else if (entity.getClass().equals(MovablePlatform.class)) {
-            image = getDiamondImage();
         }
         return image;
     }

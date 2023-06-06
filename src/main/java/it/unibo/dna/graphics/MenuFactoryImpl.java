@@ -83,7 +83,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JFrame gameOverFrame = new JFrame("GameOver");
                 JButton restart = getRestartButton(level, gameOverFrame);
                 JButton quit = getQuitButton();
-                JLabel score = getScoreLabel();
+                JLabel score = getScorLabel();
                 JPanel panel = new JPanel();
 
                 panel.add(score);
@@ -120,7 +120,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JFrame victoryFrame = new JFrame("You Won");
                 JButton nextLevel = getNextLevelButton(victoryFrame);
                 JButton quit = getQuitButton();
-                JLabel score = getScoreLabel();
+                JLabel score = getScorLabel();
                 JPanel panel = new JPanel();
 
 

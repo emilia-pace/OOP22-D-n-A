@@ -41,7 +41,7 @@ public class EventFactoryImpl implements EventFactory {
             }
             if (p.getState().getX().equals(StateEnum.STATE_JUMPING)
                     && p.getPosition().getY() < pt.getPosition().getY()) {
-                p.getState().setStateX(StateEnum.STATE_STANDING);
+                p.setStateX(StateEnum.STATE_STANDING);
             }
         };
     }
@@ -143,7 +143,7 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             p.resetY();
             if (p.getState().getX().equals(StateEnum.STATE_JUMPING)) {
-                p.getState().setStateX(StateEnum.STATE_STANDING);
+                p.setStateX(StateEnum.STATE_STANDING);
             }
         };
     }

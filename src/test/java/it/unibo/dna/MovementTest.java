@@ -2,7 +2,6 @@ package it.unibo.dna;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import org.junit.jupiter.api.*;
 
 import it.unibo.dna.common.Pair;

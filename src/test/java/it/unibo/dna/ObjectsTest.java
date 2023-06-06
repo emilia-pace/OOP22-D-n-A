@@ -10,7 +10,6 @@ import org.junit.jupiter.api.*;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.EntityFactoryImpl;
@@ -29,14 +28,7 @@ public class ObjectsTest {
     private static final double WIDTH = 4;
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
-    private static GameState GAME;
-    static {
-        try {
-            GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(),new ArrayList<>());
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+    private static GameState GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(),new ArrayList<>());
     private static final Player ANGEL = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
     private static final Player DEVIL = new PlayerImpl(GAME, POS2, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.DEVIL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);

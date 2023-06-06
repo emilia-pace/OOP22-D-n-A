@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import it.unibo.dna.GameEngine;
 import it.unibo.dna.GameStateImpl;
+import it.unibo.dna.GameThread;
 import it.unibo.dna.model.Score;
 
 /**
@@ -23,8 +24,9 @@ import it.unibo.dna.model.Score;
  */
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
-    Thread gameThread;
     GameEngine gameEngine;
+    GameThread gameThread;
+   
 
     @Override
     public GameMenu startMenu() {
@@ -99,7 +101,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 gameOverFrame.setLocationRelativeTo(null);
                 gameOverFrame.setVisible(true);
 
-                interruptThread();
 
                 return gameOverFrame;
             }
@@ -135,7 +136,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 victoryFrame.setLocationRelativeTo(null);
                 victoryFrame.setVisible(true);
-                interruptThread();
 
                 return victoryFrame;
             }
@@ -177,7 +177,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             public void actionPerformed(ActionEvent e) {
                 startMenu.dispose();
                 try {
-                    startThread();
+                    gameEngine = new GameEngine(level);
+                    gameThread = new GameThread(gameEngine);
+                    gameThread.startThread();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -253,14 +255,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             public void actionPerformed(ActionEvent e) {
                     menu.dispose();
 
-                if (gameThread.isAlive()){
-                    interruptThread();
-                }
-                try {
-                    startThread(); // Ensure gameEngine is initialized before interrupting the thread
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                    gameThread.interruptThread();
+                    gameThread = new GameThread(gameEngine);
             }
         };
         restartButton.addActionListener(al);
@@ -278,9 +274,11 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 victoryFrame.dispose();
+                gameThread.interruptThread();
                 level++;
                 try {
-                    startThread(); // Ensure gameEngine is initialized before interrupting the thread
+                    gameEngine = new GameEngine(level);
+                    gameThread = new GameThread(gameEngine);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -295,25 +293,4 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         return new JLabel("Score: " + GameStateImpl.getScore().getTotal());
     }
 
-    /**
-     * Starts the game thread and initializes the game engine.
-     * @throws IOException if an I/O error occurs.
-     */
-    private void startThread() throws IOException {
-        gameEngine = new GameEngine(level);
-        gameThread = new Thread(gameEngine);
-        gameThread.start();
-        System.out.println(gameThread);
-    }
-
-    /**
-     * Interrupts the game thread if it is alive and stops the game engine.
-     */
-    private void interruptThread() {
-        System.out.println(gameThread);
-        if (gameThread != null && gameThread.isAlive()) {
-            gameThread.interrupt();
-            gameEngine.stop();
-        }
-    }
 }

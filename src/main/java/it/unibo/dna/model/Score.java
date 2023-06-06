@@ -5,44 +5,44 @@ package it.unibo.dna.model;
  */
 public class Score {
  
-    private double total;
+    private static double total;
 
     /**
      * {@link Score} constructor.
      * @param value the value of the diamond
      */
     public Score(final Double value) {
-        this.total = value;
+        total = value;
     }
 
     /**
      * 
      * @return the total score
      */
-    public double getTotal() {
-        return this.total;
+    public static double getTotal() {
+        return total;
     }
 
     /**
      * 
      * @param value the value of the total score
      */
-    public void setTotal(final double value) {
-        this.total = value;
+    public static void setTotal(final double value) {
+        total = value;
     }
 
     /**
      * @param value the value to add to the total score
      * @return the value of the current score
      */
-    public double addScore(final double value) {
-        return this.total + value;
+    public static double addScore(final double value) {
+        return total + value;
     }
 
     /**
      * reset the score.
      */
-    public void resetScore() {
-        this.total = 0;
+    public static void resetScore() {
+        total = 0;
     }
 }

@@ -6,4 +6,5 @@ platform 7 20
 platform 90 10
 platform 100 3
 platform 5 60
-
+diamond 10 80
+pPuddle 40 80

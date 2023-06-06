@@ -10,8 +10,5 @@ public class Launcher {
         gameThread.startGame();
     }
 
-    public static GameThread getGameThread() {
-        return gameThread;
-    }
 
 }

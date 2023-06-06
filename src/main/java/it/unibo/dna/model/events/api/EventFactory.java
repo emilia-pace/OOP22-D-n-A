@@ -2,7 +2,6 @@ package it.unibo.dna.model.events.api;
 
 import java.util.List;
 
-import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -62,7 +61,7 @@ public interface EventFactory {
      * @param score the score
      * @return the new event
      */
-    Event hitDoorEvent(Door door, Player player, Score score, List<Entity> entities);
+    Event hitDoorEvent(Door door, Player player, List<Entity> entities);
 
     /**
      * Models the collision event with a lever.
@@ -78,7 +77,7 @@ public interface EventFactory {
      * @param s the actual score
      * @return the new event
      */
-    Event hitDiamondEvent(Diamond d, Score s);
+    Event hitDiamondEvent(Diamond d);
 
     /**
      * Models the collision event with a puddle.
@@ -86,9 +85,9 @@ public interface EventFactory {
      * @param player the player that touched the puddle
      * @return the new event
      */
-    Event hitPuddleEvent(Puddle puddle, Player player, Score score);
+    Event hitPuddleEvent(Puddle puddle, Player player);
 
-    Event victoryEvent(Score score);
+    Event victoryEvent();
 
-    Event gameOverEvent(Score score);
+    Event gameOverEvent();
 }

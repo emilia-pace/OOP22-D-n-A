@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 
 import it.unibo.dna.GameThread;
 import it.unibo.dna.model.Score;
-import it.unibo.dna.model.game.impl.GameStateImpl;
 
 /**
  * A concrete implementation of the {@link MenuFactory} interface.
@@ -24,7 +23,11 @@ import it.unibo.dna.model.game.impl.GameStateImpl;
  */
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
-    GameThread gameThread;
+    private GameThread gameThread;
+
+    public MenuFactoryImpl(GameThread gameT){
+        this.gameThread = gameT;
+    }
    
 
     @Override
@@ -42,6 +45,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JButton guide = getGuideButton();
                 JButton quit = getQuitButton();
                 JLabel logoLabel = new JLabel(new ImageIcon("src\\main\\resources\\logo.png"));
+
+                System.out.print("boh");
     
                 startMenu.getContentPane().setLayout(new BorderLayout());
                 startMenu.setSize(800, 600);
@@ -108,7 +113,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     @Override
-    public GameMenu victoryMenu(Score totalScore) {
+    public GameMenu victoryMenu(double totalScore) {
         return new GameMenu() {
 
             /**
@@ -175,7 +180,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startMenu.dispose();
-                gameThread.startGame();
+                gameThread.startThread();
             }
 
         };
@@ -285,7 +290,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     public JLabel getScorLabel() {
-        return new JLabel("Score: " + GameStateImpl.getScore().getTotal());
+        return new JLabel("Score: " + Score.getTotal());
     }
 
 }

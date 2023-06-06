@@ -162,26 +162,6 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event soundEvent(final String s) {
-        return game -> {
-            try {
-                final Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
-                clip.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            }
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Event hitPuddleEvent(final Puddle puddle, final Player player, final Score score) {
         return game -> {
             if(puddle.killPlayer(player)) {

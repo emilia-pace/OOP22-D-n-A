@@ -9,7 +9,8 @@ import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**
- * Represents the game engine that manages the game loop and updates the game state.
+ * Represents the game engine that manages the game loop and updates the game
+ * state.
  */
 public class GameEngine implements Runnable {
     private Display display;
@@ -29,9 +30,6 @@ public class GameEngine implements Runnable {
         this.display = new Display(this.level.getCharacters());
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
                 this.level.getEntities(), this.level.getCharacters());
-        for (Player p : this.game.getCharacters()) {
-            p.setGame(this.game);
-        }
     }
 
     /**

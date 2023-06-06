@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.box.api.BoundingBox;
 import it.unibo.dna.model.box.impl.RectBoundingBox;
@@ -193,7 +194,7 @@ public class GameStateImpl implements GameState {
                             this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score, this.getEntities()));
                         }
                         case DIAMOND -> {
-                            this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
+                            (new SoundFactoryImpl()).diamondClip().start();
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
                         }
                         case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {

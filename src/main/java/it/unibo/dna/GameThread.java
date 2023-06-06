@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import it.unibo.dna.graphics.MenuFactory;
 import it.unibo.dna.graphics.MenuFactoryImpl;
-import it.unibo.dna.model.game.impl.GameStateImpl;
+import it.unibo.dna.model.Score;
 
 public class GameThread extends Thread {
     private GameEngine gameEngine;
@@ -24,7 +24,7 @@ public class GameThread extends Thread {
         gameEngine.stop();
         interrupt();
         level++;
-        menuFactory.victoryMenu(GameStateImpl.getScore());
+        menuFactory.victoryMenu(Score.getTotal());
     }
 
     public void losingGame() {

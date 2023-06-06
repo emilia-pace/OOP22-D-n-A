@@ -3,11 +3,9 @@ package it.unibo.dna.model.events.impl;
 import java.util.List;
 
 import it.unibo.dna.GameEngine;
-import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
-import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -86,7 +84,7 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(final Door door, final Player player, final Score score, final List<Entity> entities) {
+    public Event hitDoorEvent(final Door door, final Player player, final List<Entity> entities) {
         return game -> {
             if (door.getPlayer().isEmpty()) {
                 door.openDoor(player);
@@ -97,7 +95,7 @@ public class EventFactoryImpl implements EventFactory {
                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                     .count();
             if (numberOfOpenedDoors == 2) {
-                game.getEventQueue().addEvent(this.victoryEvent(score));
+                game.getEventQueue().addEvent(this.victoryEvent());
             }
         };
     }
@@ -123,10 +121,10 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDiamondEvent(final Diamond d, final Score s) {
+    public Event hitDiamondEvent(final Diamond d) {
         return game -> {
             game.removeEntity(d);
-            GameStateImpl.getScore().setTotal(s.addScore(d.getValue()));
+            Score.addScore(d.getValue());
             GameEngine.playSound("diamond");
         };
     }
@@ -158,16 +156,16 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitPuddleEvent(final Puddle puddle, final Player player, final Score score) {
+    public Event hitPuddleEvent(final Puddle puddle, final Player player) {
         return game -> {
             if(puddle.killPlayer(player)) {
-                game.getEventQueue().addEvent(this.gameOverEvent(score));
+                game.getEventQueue().addEvent(this.gameOverEvent());
             }
         };
     }
 
     @Override
-    public Event victoryEvent(final Score score) {
+    public Event victoryEvent() {
         return game -> {
             GameEngine.playSound("game_over");
             GameEngine.getGameThread().victoryGame();
@@ -176,10 +174,10 @@ public class EventFactoryImpl implements EventFactory {
     }
 
     @Override
-    public Event gameOverEvent(final Score score) {
+    public Event gameOverEvent() {
         return game -> {
-        GameEngine.playSound("victory");
-        GameEngine.getGameThread().losingGame();
+            GameEngine.playSound("victory");
+            GameEngine.getGameThread().losingGame();
         };
     }
 

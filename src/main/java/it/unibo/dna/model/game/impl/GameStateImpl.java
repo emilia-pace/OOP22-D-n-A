@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.Score;
 import it.unibo.dna.model.box.api.BoundingBox;
 import it.unibo.dna.model.box.impl.RectBoundingBox;
 import it.unibo.dna.model.events.api.EventFactory;
@@ -31,7 +30,7 @@ public class GameStateImpl implements GameState {
     private final List<Player> characters;
     private final BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
-    private static Score score = new Score(0.0);
+    //private static Score score = new Score(0.0);
     private final EventQueue eventQueue = new EventQueue();
 
     /**
@@ -50,10 +49,10 @@ public class GameStateImpl implements GameState {
     /**
      * 
      * @return the score of the game.
-     */
+     
     public static Score getScore() {
         return score;
-    }
+    }*/
 
     /**
      * {@inheritDoc}
@@ -190,14 +189,14 @@ public class GameStateImpl implements GameState {
                         case BUTTON -> this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
                         case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
                         case ANGEL_DOOR, DEVIL_DOOR -> {
-                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score, this.getEntities()));
+                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, this.getEntities()));
                         }
                         case DIAMOND -> {
-                            this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
+                            this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e));
                         }
                         case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {
                             this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                            this.eventQueue.addEvent(event.hitPuddleEvent((Puddle) e, character, score));
+                            this.eventQueue.addEvent(event.hitPuddleEvent((Puddle) e, character));
                         }
                         default -> throw new IllegalArgumentException();
                     }
@@ -245,10 +244,10 @@ public class GameStateImpl implements GameState {
         final double chLenght = character.getBoundingBox().getWidth();
 
         if (this.checkVerticalBorders(chPos.getX(), chLenght)) {
-            event.hitBorderYEvent(character).manage(this);
+            this.eventQueue.addEvent(event.hitBorderYEvent(character));
         }
         if (this.checkHorizontalBorders(chPos.getY(), chHeight)) {
-            event.hitBorderXEvent(character).manage(this);
+            this.eventQueue.addEvent(event.hitBorderXEvent(character));
         }
     }
 }

@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 
 import it.unibo.dna.GameThread;
 import it.unibo.dna.model.Score;
-import it.unibo.dna.model.game.impl.GameStateImpl;
 
 /**
  * A concrete implementation of the {@link MenuFactory} interface.
@@ -108,7 +107,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     @Override
-    public GameMenu victoryMenu(Score totalScore) {
+    public GameMenu victoryMenu(double totalScore) {
         return new GameMenu() {
 
             /**
@@ -285,7 +284,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     public JLabel getScorLabel() {
-        return new JLabel("Score: " + GameStateImpl.getScore().getTotal());
+        return new JLabel("Score: " + Score.getTotal());
     }
 
 }

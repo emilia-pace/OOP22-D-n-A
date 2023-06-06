@@ -1,19 +1,17 @@
 package it.unibo.dna;
 
-import it.unibo.dna.graphics.MenuFactory;
-import it.unibo.dna.graphics.MenuFactoryImpl;
-import it.unibo.dna.graphics.GameMenu;
+import java.io.IOException;
 
 public class Launcher {
-    private static MenuFactory menuFactory;
+    static GameThread gameThread;
 
-    public static void main(String[] args) {
-        menuFactory = new MenuFactoryImpl();
-        GameMenu gameMenu = menuFactory.startMenu();
-        gameMenu.createMenuFrame();
+    public static void main(String[] args) throws IOException {
+        gameThread = new GameThread(new GameEngine(1));
+        gameThread.startGame();
     }
 
-    public static MenuFactory getMenuFactory() {
-        return menuFactory;
+    public static GameThread getGameThread() {
+        return gameThread;
     }
+
 }

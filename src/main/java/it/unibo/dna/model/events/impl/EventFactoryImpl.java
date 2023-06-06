@@ -2,6 +2,7 @@ package it.unibo.dna.model.events.impl;
 
 import java.util.List;
 
+import it.unibo.dna.GameEngine;
 import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
@@ -91,10 +92,10 @@ public class EventFactoryImpl implements EventFactory {
                 door.openDoor(player);
             }
             final double numberOfOpenedDoors = entities.stream()
-                                    .filter(entity -> entity instanceof Door)
-                                    .map(entity -> (Door)entity)
-                                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
-                                    .count();
+                    .filter(entity -> entity instanceof Door)
+                    .map(entity -> (Door) entity)
+                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
+                    .count();
             if (numberOfOpenedDoors == 2) {
                 game.getEventQueue().addEvent(this.victoryEvent(score));
             }
@@ -126,7 +127,7 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             game.removeEntity(d);
             GameStateImpl.getScore().setTotal(s.addScore(d.getValue()));
-            (new SoundFactoryImpl()).diamondClip().start();
+            GameEngine.playSound("diamond");
         };
     }
 
@@ -167,13 +168,13 @@ public class EventFactoryImpl implements EventFactory {
 
     @Override
     public Event victoryEvent(final Score score) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'victoryEvent'");
+        GameEngine.playSound("game_over");
+        throw new UnsupportedOperationException("Unimplemented method 'gameOverEvent'");
     }
 
     @Override
     public Event gameOverEvent(final Score score) {
-        // TODO Auto-generated method stub
+        GameEngine.playSound("victory");
         throw new UnsupportedOperationException("Unimplemented method 'gameOverEvent'");
     }
 

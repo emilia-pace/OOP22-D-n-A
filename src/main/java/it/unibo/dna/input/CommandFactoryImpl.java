@@ -1,5 +1,6 @@
 package it.unibo.dna.input;
 
+import it.unibo.dna.GameEngine;
 import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.input.api.Command;
 import it.unibo.dna.input.api.CommandFactory;
@@ -56,9 +57,9 @@ public class CommandFactoryImpl implements CommandFactory {
                 this.player.setVectorY(-Player.JUMPVELOCITY);
                 this.player.setStateX(StateEnum.STATE_JUMPING);
                 if (this.player.getPlayerType().equals(PlayerType.ANGEL)) {
-                    (new SoundFactoryImpl()).jumpAngelClip().start();
+                    GameEngine.playSound("angel_jump");
                 } else {
-                    (new SoundFactoryImpl()).jumpDevilClip().start();
+                    GameEngine.playSound("devil_jump");
                 }
 
             }

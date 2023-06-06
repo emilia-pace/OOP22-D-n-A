@@ -3,6 +3,7 @@ package it.unibo.dna;
 import java.io.IOException;
 
 import it.unibo.dna.graphics.Display;
+import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Level;
 import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.game.impl.GameStateImpl;
@@ -75,5 +76,21 @@ public class GameEngine implements Runnable {
     public void stop() {
         display.dispose();
         running = false;
+    }
+
+    public static void playSound(String string) {
+        switch (string) {
+            case "angel_jump":
+                (new SoundFactoryImpl()).jumpAngelClip().start();
+            case "devil_jump":
+                (new SoundFactoryImpl()).jumpDevilClip().start();
+            case "diamond":
+                (new SoundFactoryImpl()).diamondClip().start();
+            case "game_over":
+                (new SoundFactoryImpl()).gameOverClip().start();
+            case "victory":
+                (new SoundFactoryImpl()).victoryClip().start();
+            default:
+        }
     }
 }

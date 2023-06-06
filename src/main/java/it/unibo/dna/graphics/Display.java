@@ -3,7 +3,6 @@ package it.unibo.dna.graphics;
 import javax.swing.*;
 import java.util.List;
 
-import it.unibo.dna.Launcher;
 import it.unibo.dna.input.KeyboardHandler;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
@@ -34,7 +33,6 @@ public class Display extends JFrame {
      * @param playerList The list of players in the game.
      */
     public Display(List<Player> playerList) {
-        menuFactory = Launcher.getMenuFactory();
         setTitle("D-n-A");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);

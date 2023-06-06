@@ -85,7 +85,7 @@ public interface EventFactory {
      * @param player the player that touched the puddle
      * @return the new event
      */
-    Event hitPuddleEvent(Puddle puddle, Player player);
+    Event hitPuddleEvent(Puddle puddle, Player player, Score score);
 
     /**
      * @param s

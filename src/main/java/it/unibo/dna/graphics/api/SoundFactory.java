@@ -10,7 +10,7 @@ public interface SoundFactory {
 
     Clip diamondClip();
 
-    Clip GameOverClip();
+    Clip gameOverClip();
 
     Clip victoryClip();
 

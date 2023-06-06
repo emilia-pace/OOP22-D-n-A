@@ -61,7 +61,7 @@ public class SoundFactoryImpl implements SoundFactory {
     }
 
     @Override
-    public Clip GameOverClip() {
+    public Clip gameOverClip() {
         try {
             final Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\GameOver_sound.wav")));

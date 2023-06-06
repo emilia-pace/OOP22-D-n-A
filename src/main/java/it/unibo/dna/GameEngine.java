@@ -7,7 +7,6 @@ import it.unibo.dna.graphics.SoundFactoryImpl;
 import it.unibo.dna.model.Level;
 import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.game.impl.GameStateImpl;
-import it.unibo.dna.model.object.player.api.Player;
 
 /**
  * Represents the game engine that manages the game loop and updates the game
@@ -19,6 +18,7 @@ public class GameEngine implements Runnable {
     private Level level;
     private boolean running;
     private final double rateUpdate = 1.0d / 50.0d;
+    private static GameThread gameThread;
 
     /**
      * Constructs a GameEngine object with the specified level number.
@@ -31,6 +31,14 @@ public class GameEngine implements Runnable {
         this.display = new Display(this.level.getCharacters());
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
                 this.level.getEntities(), this.level.getCharacters());
+    }
+
+    public void setGameThread(GameThread gameT) {
+        gameThread = gameT;
+    }
+
+    public static GameThread getGameThread() {
+        return gameThread;
     }
 
     /**

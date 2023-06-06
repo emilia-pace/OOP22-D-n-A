@@ -168,14 +168,19 @@ public class EventFactoryImpl implements EventFactory {
 
     @Override
     public Event victoryEvent(final Score score) {
-        GameEngine.playSound("game_over");
-        throw new UnsupportedOperationException("Unimplemented method 'gameOverEvent'");
+        return game -> {
+            GameEngine.playSound("game_over");
+            GameEngine.getGameThread().victoryGame();
+        };
+        
     }
 
     @Override
     public Event gameOverEvent(final Score score) {
+        return game -> {
         GameEngine.playSound("victory");
-        throw new UnsupportedOperationException("Unimplemented method 'gameOverEvent'");
+        GameEngine.getGameThread().losingGame();
+        };
     }
 
 }

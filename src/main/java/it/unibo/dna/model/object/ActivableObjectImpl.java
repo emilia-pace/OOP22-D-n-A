@@ -10,7 +10,7 @@ import it.unibo.dna.model.object.player.api.Player;
  * The Lever moves the {@link MovablePlatform} when it is touched by the player.
  * The Button moves the {@link MovablePlatform} while it is being touched by the player.
  */
-public class ActivableObjectImpl extends  AbstractEntity implements GameObject {
+public class ActivableObjectImpl extends  AbstractEntity implements ActivableObject {
 
     private boolean isActive = false; /*True when the platform is moving towards its final position*/
     private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject*/

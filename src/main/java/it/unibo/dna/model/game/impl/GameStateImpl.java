@@ -1,20 +1,22 @@
-package it.unibo.dna;
+package it.unibo.dna.model.game.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.EventFactory;
-import it.unibo.dna.model.EventFactoryImpl;
-import it.unibo.dna.model.EventQueue;
-import it.unibo.dna.model.RectBoundingBox;
 import it.unibo.dna.model.Score;
+import it.unibo.dna.model.box.api.BoundingBox;
+import it.unibo.dna.model.box.impl.RectBoundingBox;
+import it.unibo.dna.model.events.api.EventFactory;
+import it.unibo.dna.model.events.impl.EventFactoryImpl;
+import it.unibo.dna.model.events.impl.EventQueue;
+import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.object.Door;
 import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
-import it.unibo.dna.model.object.api.BoundingBox;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -27,9 +29,9 @@ public class GameStateImpl implements GameState {
 
     private final List<Entity> entities;
     private final List<Player> characters;
-    private BoundingBox boundingBox;
+    private final BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
-    private static Score score;
+    private static Score score = new Score(0.0);
     private final EventQueue eventQueue = new EventQueue();
 
     /**
@@ -41,9 +43,8 @@ public class GameStateImpl implements GameState {
      */
     public GameStateImpl(final int width, final int height, final List<Entity> entities, final List<Player> players) {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
-        score = new Score(0.0);
-        this.entities = entities;
-        this.characters = players;
+        this.entities = new ArrayList<>(entities);
+        this.characters = new ArrayList<>(players);
     }
 
     /**
@@ -92,15 +93,7 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public BoundingBox getBoundingBox() {
-        return this.boundingBox;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setBoundingBox(final BoundingBox boundingBox) {
-        this.boundingBox = boundingBox;
+        return new RectBoundingBox(this.boundingBox.getPosition(), this.boundingBox.getHeight(), this.boundingBox.getWidth());
     }
 
     /**
@@ -124,14 +117,15 @@ public class GameStateImpl implements GameState {
      */
     @Override
     public List<Entity> getEntities() {
-        return this.entities;
+        return new ArrayList<>(entities);
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Player> getCharacters() {
-        return this.characters;
+        return new ArrayList<>(characters);
     }
 
     /**
@@ -199,12 +193,11 @@ public class GameStateImpl implements GameState {
                             this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, score, this.getEntities()));
                         }
                         case DIAMOND -> {
-                            this.eventQueue.addEvent(event.soundEvent("Diamond_sound"));
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e, score));
                         }
                         case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {
                             this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                            this.eventQueue.addEvent(event.hitPuddleEvent((Puddle) e, character));
+                            this.eventQueue.addEvent(event.hitPuddleEvent((Puddle) e, character, score));
                         }
                         default -> throw new IllegalArgumentException();
                     }

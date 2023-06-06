@@ -1,7 +1,8 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.events.api;
 
 import java.util.List;
 
+import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -85,13 +86,7 @@ public interface EventFactory {
      * @param player the player that touched the puddle
      * @return the new event
      */
-    Event hitPuddleEvent(Puddle puddle, Player player);
-
-    /**
-     * @param s
-     * @return
-     */
-    Event soundEvent(String s);
+    Event hitPuddleEvent(Puddle puddle, Player player, Score score);
 
     Event victoryEvent(Score score);
 

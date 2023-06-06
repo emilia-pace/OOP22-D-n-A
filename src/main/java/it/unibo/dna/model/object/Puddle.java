@@ -1,10 +1,7 @@
 package it.unibo.dna.model.object;
 
-import java.util.Optional;
 
-import it.unibo.dna.Launcher;
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.graphics.MenuFactory;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**
@@ -14,8 +11,6 @@ import it.unibo.dna.model.object.player.api.Player;
  * - RED: kills the Angel if it falls in it. Does nothing to the Devil.
  */
 public class Puddle extends AbstractEntity {
-
-    private Optional<Player> player = Optional.empty();
 
     /**
      * 
@@ -31,28 +26,26 @@ public class Puddle extends AbstractEntity {
     /**
      * Checks whether there should be a game over.
      * 
-     * @param type      the type of the puddle
      * @param character the {@link Player} touching the puddle
+     * @return True if there should be a game over, otherwise returns False
      */
-    public void killPlayer( final Player character) {
-        if (player.isEmpty()){
-            player = Optional.of(character);
-            switch (this.getType()) {
-                case PURPLE_PUDDLE -> {
-                   | menuFactory.gameOverMenu().createMenuFrame();
-                }
-                case BLUE_PUDDLE -> {
-                    if (character.getPlayerType().equals(Player.PlayerType.DEVIL)) {
-                        menuFactory.gameOverMenu().createMenuFrame();
-                    }
-                }
-                case RED_PUDDLE -> {
-                    if (character.getPlayerType().equals(Player.PlayerType.ANGEL)) {
-                        menuFactory.gameOverMenu();
-                    }
-                }
-                default -> throw new IllegalArgumentException();
+    public boolean killPlayer(final Player character) {
+        switch (this.getType()) {
+            case PURPLE_PUDDLE -> {
+                return true;
             }
+            case BLUE_PUDDLE -> {
+                if (character.getPlayerType().equals(Player.PlayerType.DEVIL)) {
+                    return true;
+                }
+            }
+            case RED_PUDDLE -> {
+                if (character.getPlayerType().equals(Player.PlayerType.ANGEL)) {      
+                    return true;
+                }
+            }
+            default -> throw new IllegalArgumentException();
         }
+        return false;
     }
 }

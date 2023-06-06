@@ -43,6 +43,11 @@ public class StateObserver implements PropertyChangeListener {
         playerImage = this.playerMap.get(state.getPairState()).get(0);
     }
 
+    /**
+     * Initializes the object with the provided state and sets up change listeners.
+     *
+     * @param state The state object to be initialized.
+     */
     private void inizialize(State state) {
         state.addChangeListeners(this);
     }

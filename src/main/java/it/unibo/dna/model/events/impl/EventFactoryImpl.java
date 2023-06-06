@@ -1,15 +1,12 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.events.impl;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import it.unibo.dna.GameStateImpl;
+import it.unibo.dna.graphics.SoundFactoryImpl;
+import it.unibo.dna.model.Score;
+import it.unibo.dna.model.events.api.Event;
+import it.unibo.dna.model.events.api.EventFactory;
+import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;
@@ -38,7 +35,7 @@ public class EventFactoryImpl implements EventFactory {
             }
             if (p.getState().getX().equals(StateEnum.STATE_JUMPING)
                     && p.getPosition().getY() < pt.getPosition().getY()) {
-                p.getState().setStateX(StateEnum.STATE_STANDING);
+                p.setStateX(StateEnum.STATE_STANDING);
             }
         };
     }
@@ -93,13 +90,13 @@ public class EventFactoryImpl implements EventFactory {
             if (door.getPlayer().isEmpty()) {
                 door.openDoor(player);
             }
-            long numberOfOpenedDoors = entities.stream()
+            final double numberOfOpenedDoors = entities.stream()
                                     .filter(entity -> entity instanceof Door)
                                     .map(entity -> (Door)entity)
                                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                                     .count();
             if (numberOfOpenedDoors == 2) {
-                game.getEventQueue().addEvent(this.victoryEvent(score));
+                game.get().getEventQueue().addEvent(this.victoryEvent(score));
             }
         };
     }
@@ -127,8 +124,9 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitDiamondEvent(final Diamond d, final Score s) {
         return game -> {
-            game.removeEntity(d);
+            game.get().removeEntity(d);
             GameStateImpl.getScore().setTotal(s.addScore(d.getValue()));
+            (new SoundFactoryImpl()).diamondClip().start();
         };
     }
 
@@ -140,7 +138,7 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             p.resetY();
             if (p.getState().getX().equals(StateEnum.STATE_JUMPING)) {
-                p.getState().setStateX(StateEnum.STATE_STANDING);
+                p.setStateX(StateEnum.STATE_STANDING);
             }
         };
     }
@@ -159,29 +157,11 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event soundEvent(final String s) {
+    public Event hitPuddleEvent(final Puddle puddle, final Player player, final Score score) {
         return game -> {
-            try {
-                Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
-                clip.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
+            if(puddle.killPlayer(player)) {
+                game.get().getEventQueue().addEvent(this.gameOverEvent(score));
             }
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Event hitPuddleEvent(final Puddle puddle, final Player player) {
-        return game -> {
-            puddle.killPlayer(player);
         };
     }
 

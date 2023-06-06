@@ -1,9 +1,9 @@
-package it.unibo.dna;
+package it.unibo.dna.model.game.api;
 
 import java.util.List;
 
-import it.unibo.dna.model.EventQueue;
-import it.unibo.dna.model.object.api.BoundingBox;
+import it.unibo.dna.model.box.api.BoundingBox;
+import it.unibo.dna.model.events.impl.EventQueue;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -23,12 +23,6 @@ public interface GameState {
      * @return the {@link BoundingBox}
      */
     BoundingBox getBoundingBox();
-
-    /**
-     * 
-     * @param boundingBox the {@link BoundingBox}
-     */
-    void setBoundingBox(BoundingBox boundingBox);
 
     /**
      * Adds a new {@link Entity} in the game.

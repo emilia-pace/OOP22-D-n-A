@@ -1,9 +1,10 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.events.impl;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-import it.unibo.dna.GameState;
+import it.unibo.dna.model.events.api.Event;
+import it.unibo.dna.model.game.api.GameState;
 
 /**
  * Class for a queue of {@link Event}.

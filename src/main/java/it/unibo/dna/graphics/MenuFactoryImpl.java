@@ -23,7 +23,11 @@ import it.unibo.dna.model.Score;
  */
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
-    GameThread gameThread;
+    private GameThread gameThread;
+
+    public MenuFactoryImpl(GameThread gameT){
+        this.gameThread = gameT;
+    }
    
 
     @Override
@@ -41,6 +45,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JButton guide = getGuideButton();
                 JButton quit = getQuitButton();
                 JLabel logoLabel = new JLabel(new ImageIcon("src\\main\\resources\\logo.png"));
+
+                System.out.print("boh");
     
                 startMenu.getContentPane().setLayout(new BorderLayout());
                 startMenu.setSize(800, 600);
@@ -174,7 +180,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startMenu.dispose();
-                gameThread.startGame();
+                gameThread.startThread();
             }
 
         };

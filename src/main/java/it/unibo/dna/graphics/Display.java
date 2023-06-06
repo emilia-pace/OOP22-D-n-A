@@ -69,6 +69,7 @@ public class Display extends JFrame {
 
         playerList.forEach(p -> {
             if (p.getPlayerType().equals(Player.PlayerType.ANGEL)) {
+                System.out.println("Display.Display()");
                 canvas.addKeyListener(new KeyboardHandler(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT,
                         KeyEvent.VK_UP, p));
             } else {

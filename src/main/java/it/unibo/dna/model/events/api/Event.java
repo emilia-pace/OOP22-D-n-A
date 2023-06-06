@@ -1,6 +1,6 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.events.api;
 
-import it.unibo.dna.GameState;
+import it.unibo.dna.model.game.api.GameState;
 
 /**
  * Functional interface for event management.

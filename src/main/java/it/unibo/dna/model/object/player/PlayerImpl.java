@@ -1,9 +1,9 @@
 package it.unibo.dna.model.object.player;
 
-import it.unibo.dna.GameState;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.EventQueue;
+import it.unibo.dna.model.events.impl.EventQueue;
+import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
 import it.unibo.dna.model.object.player.api.Player;

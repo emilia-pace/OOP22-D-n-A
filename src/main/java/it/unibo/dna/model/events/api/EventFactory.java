@@ -1,7 +1,8 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.events.api;
 
 import java.util.List;
 
+import it.unibo.dna.model.Score;
 import it.unibo.dna.model.object.ActivableObjectImpl;
 import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.Door;

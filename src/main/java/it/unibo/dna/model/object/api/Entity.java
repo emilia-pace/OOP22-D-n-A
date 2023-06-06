@@ -1,6 +1,7 @@
 package it.unibo.dna.model.object.api;
 
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.box.api.BoundingBox;
 /**
  * An interface that models a generic entity.
  */

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.Level;
+import it.unibo.dna.model.game.api.GameState;
+import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**

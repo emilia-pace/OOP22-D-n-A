@@ -10,6 +10,8 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.input.CommandFactoryImpl;
 import it.unibo.dna.input.api.CommandFactory;
+import it.unibo.dna.model.game.api.GameState;
+import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;

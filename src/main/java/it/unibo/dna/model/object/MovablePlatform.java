@@ -94,10 +94,10 @@ public class MovablePlatform extends AbstractMovableEntity {
         double x = 0.0;
         double y = 0.0;
         if (position1.getX() != position2.getX()) {
-            x = position2.isOnTheRight(position1) ? +1.0 : -1.0;
+            x = position2.isOnTheRight(position1) ? +0.5 : -0.5;
         }
         if (position1.getY() != position2.getY()) {
-            y = position2.isAbove(position1) ? -1.0 : +1.0;
+            y = position2.isAbove(position1) ? -0.5 : +0.5;
         } 
         this.setVector(new Vector2d(x, y));
     }

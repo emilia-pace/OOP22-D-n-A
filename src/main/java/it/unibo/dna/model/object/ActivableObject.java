@@ -3,9 +3,9 @@ package it.unibo.dna.model.object;
 import it.unibo.dna.model.object.api.Entity;
 
 /**
- * a class that allows some Entities to be activated or deactivated.
+ * A class that allows some Entities to be activated.
  */
-public interface GameObject extends Entity {
+public interface ActivableObject extends Entity {
 
     /**
      * Activates the Gameobject.

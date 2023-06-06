@@ -93,7 +93,7 @@ public class EventFactoryImpl implements EventFactory {
             if (door.getPlayer().isEmpty()) {
                 door.openDoor(player);
             }
-            long numberOfOpenedDoors = entities.stream()
+            final double numberOfOpenedDoors = entities.stream()
                                     .filter(entity -> entity instanceof Door)
                                     .map(entity -> (Door)entity)
                                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
@@ -162,7 +162,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event soundEvent(final String s) {
         return game -> {
             try {
-                Clip clip = AudioSystem.getClip();
+                final Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + s + ".wav")));
                 clip.start();
             } catch (IOException e) {
@@ -179,9 +179,11 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitPuddleEvent(final Puddle puddle, final Player player) {
+    public Event hitPuddleEvent(final Puddle puddle, final Player player, final Score score) {
         return game -> {
-            puddle.killPlayer(player);
+            if(puddle.killPlayer(player)) {
+                game.getEventQueue().addEvent(this.gameOverEvent(score));
+            }
         };
     }
 

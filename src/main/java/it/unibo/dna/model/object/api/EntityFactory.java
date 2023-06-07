@@ -18,7 +18,7 @@ public interface EntityFactory {
     static int DIAMOND_HEIGHT = 6;
     static int BUTTON_HEIGHT = 2;
     static int LEVER_HEIGHT = 3;
-    static int PUDDLE_HEIGHT = 2;
+    static int PUDDLE_HEIGHT = 3;
     static int PUDDLE_WIDTH = 8;
     static int DOOR_HEIGHT = 15;
     static int DOOR_WIDTH = 10;

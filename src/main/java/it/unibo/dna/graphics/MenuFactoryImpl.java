@@ -252,6 +252,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         JButton restartButton = new JButton("Restart Level");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Score.resetScore();
                 gameThread.interrupt();
                 menu.dispose();
                 try {
@@ -280,9 +281,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         JButton nextLevelButton = new JButton("Next");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                level++;
-                gameThread.interrupt();
                 victoryFrame.dispose();
+                level++;
                 try {
                     gEngine = new GameEngine(level);
                     gameThread.setGameEngine(gEngine);

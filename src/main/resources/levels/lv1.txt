@@ -1,12 +1,5 @@
-angel 5 80
-devil 17 80
-platform 0 75
-platform 55 75
-platform 7 20
-platform 90 10
-platform 100 3
-platform 5 60
-diamond 10 80
-pPuddle 40 80
-dDevil 30 80
-dAngel 20 80
+angel 5 90
+devil 17 90
+platform 0 85
+platform 60 85
+

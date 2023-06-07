@@ -2,8 +2,6 @@ package it.unibo.dna;
 
 import java.io.IOException;
 
-import it.unibo.dna.graphics.MenuFactory;
-import it.unibo.dna.graphics.MenuFactoryImpl;
 import it.unibo.dna.model.Score;
 
 public class GameThread extends Thread {
@@ -23,7 +21,7 @@ public class GameThread extends Thread {
     }
 
     public void victoryGame() {
-        interrupt();
+        this.interrupt();
         gameEngine.stop();
         this.gameEngine.getMenuFactory().victoryMenu(Score.getTotal()).createMenuFrame();
     }

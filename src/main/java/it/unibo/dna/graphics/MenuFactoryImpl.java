@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 
 import it.unibo.dna.GameEngine;
 import it.unibo.dna.GameThread;
-import it.unibo.dna.Launcher;
 import it.unibo.dna.model.Score;
 
 /**

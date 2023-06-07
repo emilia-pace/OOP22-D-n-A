@@ -18,7 +18,7 @@ public interface EntityFactory {
     static int PUDDLE_WIDTH = 20;
     static int DOOR_HEIGHT = 15;
     static int DOOR_WIDTH = 10;
-    static int PLATFORM_WIDTH = 30;
+    static int PLATFORM_WIDTH = 40;
     static int PLAYER_HEIGHT = 5;
     static int PLAYER_WIDTH = 4;
 

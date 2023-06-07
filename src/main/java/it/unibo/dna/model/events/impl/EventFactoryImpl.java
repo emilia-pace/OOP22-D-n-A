@@ -3,8 +3,6 @@ package it.unibo.dna.model.events.impl;
 import java.util.List;
 
 import it.unibo.dna.GameEngine;
-import it.unibo.dna.GameThread;
-import it.unibo.dna.Launcher;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;

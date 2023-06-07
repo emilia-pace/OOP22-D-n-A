@@ -72,7 +72,7 @@ public class Vector2d {
             return false;
         }
         final Vector2d vec = (Vector2d) obj;
-        return (Double.compare(vec.x, this.x) == 0 && Double.compare(vec.y, this.y) == 0);
+        return Double.compare(vec.x, this.x) == 0 && Double.compare(vec.y, this.y) == 0;
     }
 
     /**

@@ -30,8 +30,8 @@ import it.unibo.dna.model.object.stillEntity.impl.Door.DoorState;
  */
 public class ImageManager {
 
-    private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
-    private List<StateObserver> obsPlayers = new ArrayList<>();
+    private final Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
+    private final List<StateObserver> obsPlayers = new ArrayList<>();
 
     /**
      * Constructs an ImageManager object with the given player list.
@@ -39,9 +39,7 @@ public class ImageManager {
      * @param playerList the list of players in the game
      */
     public ImageManager(final List<Player> playerList) {
-        for (int i = 0; i < playerList.size(); i++) {
-            obsPlayers.add(new StateObserver(playerList.get(i).getState(), playerList.get(i).getPlayerType()));
-        }
+        playerList.forEach(p -> obsPlayers.add(new StateObserver(p.getState(), p.getPlayerType())));
         loadImages();
     }
 

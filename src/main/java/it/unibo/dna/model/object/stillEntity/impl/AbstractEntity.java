@@ -10,7 +10,7 @@ import it.unibo.dna.model.object.player.Entity;
  */
 public abstract class AbstractEntity implements Entity {
 
-    private BoundingBox box;
+    private final BoundingBox box;
     private final Entity.EntityType type;
 
     /**

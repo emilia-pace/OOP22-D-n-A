@@ -17,10 +17,10 @@ public class State {
      */
     private static final int MAXFRAME = 10;
 
-    private int frame = 0;
-    private int imageIndex = 0;
+    private int frame;
+    private int imageIndex;
 
-    private List<PropertyChangeListener> listeners = new ArrayList<>();
+    private final List<PropertyChangeListener> listeners = new ArrayList<>();
 
     /**
      * stateX indicate if the player is touching the floor or is jumping.
@@ -36,6 +36,9 @@ public class State {
     public State() {
         this.stateX = StateEnum.STATE_STANDING;
         this.stateY = StateEnum.STATE_STILL;
+
+        this.frame = 0;
+        this.imageIndex = 0;
     }
 
     /**
@@ -47,6 +50,9 @@ public class State {
     public State(final StateEnum stateX, final StateEnum stateY) {
         this.stateX = stateX;
         this.stateY = stateY;
+
+        this.frame = 0;
+        this.imageIndex = 0;
     }
 
     /**
@@ -74,7 +80,7 @@ public class State {
      * @param stateY the second state to set
      */
     public void setState(final StateEnum stateX, final StateEnum stateY) {
-        State oldState = new State(this.stateX, this.stateY);
+        final State oldState = new State(this.stateX, this.stateY);
         this.stateX = stateX;
         this.stateY = stateY;
         this.notifyListeners(this, "change", oldState, this);

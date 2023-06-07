@@ -5,7 +5,7 @@ package it.unibo.dna.common;
  */
 public class Position2d {
 
-    private double x, y;
+    private final double x, y;
 
     /**
      * Constructs a new {@code Position2d} object with the specified coordinates.
@@ -71,7 +71,7 @@ public class Position2d {
             return false;
         }
         final Position2d pos = (Position2d) obj;
-        return (Double.compare(pos.getX(), this.x) == 0 && Double.compare(pos.getY(), this.y) == 0);
+        return Double.compare(pos.getX(), this.x) == 0 && Double.compare(pos.getY(), this.y) == 0;
     }
 
     /**

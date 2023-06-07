@@ -11,8 +11,8 @@ import it.unibo.dna.model.object.player.api.Player;
  */
 public class PlayerImpl extends AbstractMovableEntity implements Player {
 
-    private PlayerType playerType;
-    private State playerState = new State();
+    private final PlayerType playerType;
+    private final State playerState = new State();
 
     /**
      * Constructs a new PlayerImpl object.

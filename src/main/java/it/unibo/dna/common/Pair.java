@@ -8,8 +8,8 @@ package it.unibo.dna.common;
  */
 public class Pair<X, Y> {
 
-	private X x;
-	private Y y;
+	private final X x;
+	private final Y y;
 
 	/**
 	 * Constructs a Pair object with the given elements.
@@ -67,7 +67,7 @@ public class Pair<X, Y> {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Pair other = (Pair) obj;
+		final Pair other = (Pair) obj;
 		if (x == null) {
 			if (other.x != null) {
 				return false;

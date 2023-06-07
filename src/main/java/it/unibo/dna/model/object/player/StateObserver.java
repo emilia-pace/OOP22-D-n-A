@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  */
 public class StateObserver implements PropertyChangeListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(StateObserver.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StateObserver.class);
 
     private final Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
     private final Player.PlayerType type;
@@ -95,7 +95,7 @@ public class StateObserver implements PropertyChangeListener {
                         .add(ImageIO.read(new File(relativePath + path + "_front.PNG"))
                                 .getScaledInstance(height, width, Image.SCALE_DEFAULT));
             } catch (IOException e) {
-                logger.error("IOexception occured", e);
+                LOGGER.error("IOexception occured", e);
             }
         });
         try {
@@ -106,7 +106,7 @@ public class StateObserver implements PropertyChangeListener {
                     .add(ImageIO.read(new File(relativePath + path + "_right2.PNG"))
                             .getScaledInstance(height, width, Image.SCALE_DEFAULT));
         } catch (IOException e) {
-            logger.error("IOexception occured", e);
+            LOGGER.error("IOexception occured", e);
         }
     }
 

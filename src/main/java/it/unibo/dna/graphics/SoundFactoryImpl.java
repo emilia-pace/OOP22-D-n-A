@@ -17,7 +17,7 @@ import it.unibo.dna.graphics.api.SoundFactory;
  */
 public class SoundFactoryImpl implements SoundFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(SoundFactoryImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SoundFactoryImpl.class);
 
     /**
      * {@inheritDoc}
@@ -29,11 +29,11 @@ public class SoundFactoryImpl implements SoundFactory {
             clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\Angel_audio.wav")));
             return clip;
         } catch (IOException e) {
-            logger.error("IOException occurred", e);
+            LOGGER.error("IOException occurred", e);
         } catch (LineUnavailableException e) {
-            logger.error("LineUnavailableException occurred", e);
+            LOGGER.error("LineUnavailableException occurred", e);
         } catch (UnsupportedAudioFileException e) {
-            logger.error("UnsupportedAudioFileException occurred", e);
+            LOGGER.error("UnsupportedAudioFileException occurred", e);
         }
         return null;
     }
@@ -48,11 +48,11 @@ public class SoundFactoryImpl implements SoundFactory {
             clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\Devil_audio.wav")));
             return clip;
         } catch (IOException e) {
-            logger.error("IOException occurred", e);
+            LOGGER.error("IOException occurred", e);
         } catch (LineUnavailableException e) {
-            logger.error("LineUnavailableException occurred", e);
+            LOGGER.error("LineUnavailableException occurred", e);
         } catch (UnsupportedAudioFileException e) {
-            logger.error("UnsupportedAudioFileException occurred", e);
+            LOGGER.error("UnsupportedAudioFileException occurred", e);
         }
         return null;
     }
@@ -67,11 +67,11 @@ public class SoundFactoryImpl implements SoundFactory {
             clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\Diamond_sound.wav")));
             return clip;
         } catch (IOException e) {
-            logger.error("IOException occurred", e);
+            LOGGER.error("IOException occurred", e);
         } catch (LineUnavailableException e) {
-            logger.error("LineUnavailableException occurred", e);
+            LOGGER.error("LineUnavailableException occurred", e);
         } catch (UnsupportedAudioFileException e) {
-            logger.error("UnsupportedAudioFileException occurred", e);
+            LOGGER.error("UnsupportedAudioFileException occurred", e);
         }
         return null;
     }
@@ -86,11 +86,11 @@ public class SoundFactoryImpl implements SoundFactory {
             clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\GameOver_sound.wav")));
             return clip;
         } catch (IOException e) {
-            logger.error("IOException occurred", e);
+            LOGGER.error("IOException occurred", e);
         } catch (LineUnavailableException e) {
-            logger.error("LineUnavailableException occurred", e);
+            LOGGER.error("LineUnavailableException occurred", e);
         } catch (UnsupportedAudioFileException e) {
-            logger.error("UnsupportedAudioFileException occurred", e);
+            LOGGER.error("UnsupportedAudioFileException occurred", e);
         }
         return null;
     }
@@ -105,11 +105,11 @@ public class SoundFactoryImpl implements SoundFactory {
             clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\Victory_sound.wav")));
             return clip;
         } catch (IOException e) {
-            logger.error("IOException occurred", e);
+            LOGGER.error("IOException occurred", e);
         } catch (LineUnavailableException e) {
-            logger.error("LineUnavailableException occurred", e);
+            LOGGER.error("LineUnavailableException occurred", e);
         } catch (UnsupportedAudioFileException e) {
-            logger.error("UnsupportedAudioFileException occurred", e);
+            LOGGER.error("UnsupportedAudioFileException occurred", e);
         }
         return null;
     }

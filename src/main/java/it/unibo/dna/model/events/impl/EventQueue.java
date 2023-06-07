@@ -28,6 +28,13 @@ public class EventQueue {
     }
 
     /**
+     * Clears the queue of events.
+     */
+    public void clearQueue(){
+        events.clear();
+    }
+
+    /**
      * Manages all the Events in the queue.
      * @param game the game state to manage 
      */

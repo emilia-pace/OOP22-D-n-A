@@ -95,6 +95,7 @@ public class EventFactoryImpl implements EventFactory {
                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                     .count();
             if (numberOfOpenedDoors == 2) {
+                game.getEventQueue().clearQueue();
                 game.getEventQueue().addEvent(this.victoryEvent());
                 System.out.println("EventFactoryImpl.hitDoorEvent()");
             }

@@ -10,8 +10,14 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.dna.graphics.api.SoundFactory;
 
+/**
+ * Class that implements the {@link SoundFactory} interface.
+ */
 public class SoundFactoryImpl implements SoundFactory {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Clip jumpAngelClip() {
         try {
@@ -28,6 +34,9 @@ public class SoundFactoryImpl implements SoundFactory {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Clip jumpDevilClip() {
         try {
@@ -44,6 +53,9 @@ public class SoundFactoryImpl implements SoundFactory {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Clip diamondClip() {
         try {
@@ -60,6 +72,9 @@ public class SoundFactoryImpl implements SoundFactory {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Clip gameOverClip() {
         try {
@@ -76,6 +91,9 @@ public class SoundFactoryImpl implements SoundFactory {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Clip victoryClip() {
         try {

@@ -2,8 +2,6 @@ package it.unibo.dna.model.object.player;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.events.impl.EventQueue;
-import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
 import it.unibo.dna.model.object.player.State.StateEnum;
@@ -45,8 +43,17 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("internalRepresentation")
     public State getState() {
         return this.playerState;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public State getStateCopy() {
+        return new State(this.playerState.getX(), this.playerState.getY());
     }
 
     /**
@@ -57,13 +64,19 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
         return this.playerType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setStateX(StateEnum stateX) {
+    public void setStateX(final StateEnum stateX) {
         this.playerState.setState(stateX, this.getState().getY());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setStateY(StateEnum stateY) {
+    public void setStateY(final StateEnum stateY) {
         this.playerState.setState(this.getState().getX(), stateY);
     }
 

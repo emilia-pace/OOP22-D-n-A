@@ -32,7 +32,7 @@ public class EventFactoryImpl implements EventFactory {
             } else {
                 p.resetY();
             }
-            if (p.getState().getX().equals(StateEnum.STATE_JUMPING)
+            if (p.getStateCopy().getX().equals(StateEnum.STATE_JUMPING)
                     && p.getPosition().getY() < pt.getPosition().getY()) {
                 p.setStateX(StateEnum.STATE_STANDING);
             }
@@ -137,7 +137,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitBorderXEvent(final Player p) {
         return game -> {
             p.resetY();
-            if (p.getState().getX().equals(StateEnum.STATE_JUMPING)) {
+            if (p.getStateCopy().getX().equals(StateEnum.STATE_JUMPING)) {
                 p.setStateX(StateEnum.STATE_STANDING);
             }
         };

@@ -48,7 +48,7 @@ public class StateObserver implements PropertyChangeListener {
      *
      * @param state The state object to be initialized.
      */
-    private void inizialize(State state) {
+    private void inizialize(final State state) {
         state.addChangeListeners(this);
     }
 

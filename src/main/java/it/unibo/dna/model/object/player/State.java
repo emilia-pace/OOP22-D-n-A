@@ -15,7 +15,7 @@ public class State {
     /**
      * The maximum frame value for image animation.
      */
-    private final static int MAXFRAME = 10;
+    private static final int MAXFRAME = 10;
 
     private int frame = 0;
     private int imageIndex = 0;
@@ -38,7 +38,13 @@ public class State {
         this.stateY = StateEnum.STATE_STILL;
     }
 
-    public State(StateEnum stateX, StateEnum stateY) {
+    /**
+     * Constructs a new State object with the specified X and Y states.
+     *
+     * @param stateX the firse state
+     * @param stateY the second state
+     */
+    public State(final StateEnum stateX, final StateEnum stateY) {
         this.stateX = stateX;
         this.stateY = stateY;
     }
@@ -61,6 +67,12 @@ public class State {
         return stateY;
     }
 
+    /**
+     * Sets the X and Y states of the player.
+     *
+     * @param stateX the first state to set
+     * @param stateY the second state to set
+     */
     public void setState(final StateEnum stateX, final StateEnum stateY) {
         State oldState = new State(this.stateX, this.stateY);
         this.stateX = stateX;

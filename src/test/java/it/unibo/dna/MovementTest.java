@@ -46,14 +46,14 @@ class MovementTest {
                 StateEnum.STATE_RIGHT);
         this.command.right().execute();
         assertEquals(expectedVectorRight, this.player.getVector());
-        assertEquals(expectedStateRight, this.player.getState().getPairState());
+        assertEquals(expectedStateRight, this.player.getStateCopy().getPairState());
 
         final Vector2d expectedVectorLeft = new Vector2d(-Player.STANDARDVELOCITY, 0);
         final Pair<StateEnum, StateEnum> expectedStateLeft = new Pair<>(StateEnum.STATE_STANDING,
                 StateEnum.STATE_LEFT);
         this.command.left().execute();
         assertEquals(expectedVectorLeft, this.player.getVector());
-        assertEquals(expectedStateLeft, this.player.getState().getPairState());
+        assertEquals(expectedStateLeft, this.player.getStateCopy().getPairState());
 
         final Vector2d expectedVectorJump = new Vector2d(0, -Player.JUMPVELOCITY);
         final Pair<StateEnum, StateEnum> expectedStateJump = new Pair<>(StateEnum.STATE_JUMPING,
@@ -61,7 +61,7 @@ class MovementTest {
         this.command.stop().execute();
         this.command.jump().execute();
         assertEquals(expectedVectorJump, this.player.getVector());
-        assertEquals(expectedStateJump, this.player.getState().getPairState());
+        assertEquals(expectedStateJump, this.player.getStateCopy().getPairState());
 
     }
 }

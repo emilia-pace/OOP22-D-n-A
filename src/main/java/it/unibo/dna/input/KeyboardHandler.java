@@ -1,6 +1,7 @@
 package it.unibo.dna.input;
 
 import it.unibo.dna.input.api.CommandFactory;
+import it.unibo.dna.model.object.player.State;
 import it.unibo.dna.model.object.player.api.Player;
 
 import java.awt.event.KeyEvent;
@@ -12,7 +13,7 @@ import java.awt.event.KeyListener;
 public class KeyboardHandler implements KeyListener {
 
     private int commandRight, commandLeft, commandJump;
-    private final Player character;
+    private final State state;
     private CommandFactory command;
 
     /**
@@ -29,7 +30,7 @@ public class KeyboardHandler implements KeyListener {
         this.commandRight = commandRight;
         this.commandLeft = commandLeft;
         this.commandJump = commandJump;
-        this.character = character;
+        this.state = character.getState();
         this.command = new CommandFactoryImpl(character);
     }
 
@@ -56,7 +57,7 @@ public class KeyboardHandler implements KeyListener {
     @Override
     public void keyReleased(final KeyEvent e) {
         int key = e.getKeyCode();
-        switch (character.getState().getY()) {
+        switch (state.getY()) {
             case STATE_RIGHT:
                 if (key == this.commandRight) {
                     this.command.stop().execute();

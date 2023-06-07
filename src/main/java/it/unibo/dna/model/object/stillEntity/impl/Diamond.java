@@ -1,7 +1,7 @@
 package it.unibo.dna.model.object.stillEntity.impl;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.Entity;
 
 /**
  * {@link Entity} that allows to increase the game score.

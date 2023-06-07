@@ -11,9 +11,9 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
-import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.EntityFactory;
 import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.StateObserver;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.stillEntity.impl.AbstractEntity;
@@ -125,17 +125,17 @@ public class ImageManager {
             activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG")),
                     EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg")),
-                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+                    EntityFactory.PUDDLE_HEIGHT, EntityFactory.PUDDLE_WIDTH));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg")),
-                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+                    EntityFactory.PUDDLE_HEIGHT, EntityFactory.PUDDLE_WIDTH));
             puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg")),
-                    EntityFactory.DEF_HEIGHT, EntityFactory.PUDDLE_WIDTH));
+                    EntityFactory.PUDDLE_HEIGHT, EntityFactory.PUDDLE_WIDTH));
             platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")),
                     EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
             movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")),
                     EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
             diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png")),
-                    EntityFactory.DEF_HEIGHT, EntityFactory.DEF_HEIGHT));
+                    EntityFactory.DIAMOND_HEIGHT, EntityFactory.DIAMOND_WIDTH));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -173,7 +173,7 @@ public class ImageManager {
         List<Image> puddleImages = this.map.get(Puddle.class);
         if (type.equals(Entity.EntityType.BLUE_PUDDLE)) {
             return puddleImages.get(0);
-        } else if (type.equals(Entity.EntityType.BLUE_PUDDLE)) {
+        } else if (type.equals(Entity.EntityType.RED_PUDDLE)) {
             return puddleImages.get(1);
         }
         return puddleImages.get(2);

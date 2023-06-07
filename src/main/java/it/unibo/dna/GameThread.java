@@ -21,7 +21,7 @@ public class GameThread extends Thread {
     }
 
     public void victoryGame() {
-        interrupt();
+        this.interrupt();
         gameEngine.stop();
         this.gameEngine.getMenuFactory().victoryMenu(Score.getTotal()).createMenuFrame();
     }

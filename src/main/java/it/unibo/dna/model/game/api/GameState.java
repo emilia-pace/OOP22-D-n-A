@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.unibo.dna.model.box.api.BoundingBox;
 import it.unibo.dna.model.events.impl.EventQueue;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**

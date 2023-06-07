@@ -6,13 +6,13 @@ import it.unibo.dna.GameEngine;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
+import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillEntity.impl.Diamond;
 import it.unibo.dna.model.object.stillEntity.impl.Door;
 import it.unibo.dna.model.object.stillEntity.impl.Puddle;
-import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 
 /**
@@ -95,6 +95,7 @@ public class EventFactoryImpl implements EventFactory {
                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                     .count();
             if (numberOfOpenedDoors == 2) {
+                game.getEventQueue().clearQueue();
                 game.getEventQueue().addEvent(this.victoryEvent());
                 System.out.println("EventFactoryImpl.hitDoorEvent()");
             }

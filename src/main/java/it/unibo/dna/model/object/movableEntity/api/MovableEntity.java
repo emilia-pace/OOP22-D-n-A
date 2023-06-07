@@ -1,7 +1,7 @@
 package it.unibo.dna.model.object.movableEntity.api;
 
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.Entity;
 
 /**
  * An Interface that models an Entity that is able to move throught the use of a

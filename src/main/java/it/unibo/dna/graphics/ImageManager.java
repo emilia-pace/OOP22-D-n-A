@@ -131,7 +131,7 @@ public class ImageManager {
             movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")),
                     EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
             diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png")),
-                    EntityFactory.DEF_HEIGHT, EntityFactory.DEF_HEIGHT));
+                    EntityFactory.DIAMOND_HEIGHT, EntityFactory.DIAMOND_WIDTH));
         } catch (IOException e) {
             e.printStackTrace();
         }

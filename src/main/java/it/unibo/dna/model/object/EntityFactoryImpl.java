@@ -39,7 +39,7 @@ public class EntityFactoryImpl implements EntityFactory {
             case DEVIL_DOOR -> new Door(position[0], (double)DOOR_HEIGHT, (double)DOOR_WIDTH, Entity.EntityType.DEVIL_DOOR);
             case PLATFORM -> new Platform(position[0], (double)DEF_HEIGHT, (double)PLATFORM_WIDTH);
             case MOVABLEPLATFORM -> new MovablePlatform(position[0], defaultVector,(double)DEF_HEIGHT, (double)PLATFORM_WIDTH, position[1]);
-            case DIAMOND -> new Diamond((double)DEF_HEIGHT, (double)DEF_WIDTH, diamondValue, position[0]);
+            case DIAMOND -> new Diamond((double)DIAMOND_HEIGHT, (double)DIAMOND_WIDTH, diamondValue, position[0]);
             default -> throw new IllegalArgumentException();
         };
     }

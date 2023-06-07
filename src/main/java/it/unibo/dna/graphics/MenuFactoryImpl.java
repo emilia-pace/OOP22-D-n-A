@@ -252,9 +252,17 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         JButton restartButton = new JButton("Restart Level");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    menu.dispose();
-                    gameThread.interrupt();
+                gameThread.interrupt();
+                menu.dispose();
+                try {
+                    gEngine = new GameEngine(level);
+                    gameThread.setGameEngine(gEngine);
+                    gEngine.setGameThread(gameThread);
                     gameThread.start();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
 
             }
         };

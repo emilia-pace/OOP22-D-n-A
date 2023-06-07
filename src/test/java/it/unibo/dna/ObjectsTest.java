@@ -13,14 +13,14 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.game.impl.GameStateImpl;
-import it.unibo.dna.model.object.ActivableObjectImpl;
-import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.EntityFactoryImpl;
-import it.unibo.dna.model.object.MovablePlatform;
 import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillEntity.impl.Door;
+import it.unibo.dna.model.object.stillEntity.impl.Puddle;
 
 class ObjectsTest {
     private static final EntityFactoryImpl ENTITYFACTORY = new EntityFactoryImpl();

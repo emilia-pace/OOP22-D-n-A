@@ -10,7 +10,7 @@ import java.util.Map;
 
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.graphics.Display;
-import it.unibo.dna.model.object.EntityFactory;
+import it.unibo.dna.model.object.api.EntityFactory;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 

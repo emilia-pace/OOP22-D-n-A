@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.stillEntity.api;
 
 import it.unibo.dna.model.object.api.Entity;
 

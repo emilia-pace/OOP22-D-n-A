@@ -11,18 +11,18 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import it.unibo.dna.model.object.AbstractEntity;
-import it.unibo.dna.model.object.ActivableObjectImpl;
-import it.unibo.dna.model.object.Diamond;
-import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.Platform;
-import it.unibo.dna.model.object.Puddle;
-import it.unibo.dna.model.object.Door.DoorState;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.EntityFactory;
+import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 import it.unibo.dna.model.object.player.StateObserver;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.EntityFactory;
+import it.unibo.dna.model.object.stillEntity.impl.AbstractEntity;
+import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillEntity.impl.Diamond;
+import it.unibo.dna.model.object.stillEntity.impl.Door;
+import it.unibo.dna.model.object.stillEntity.impl.Platform;
+import it.unibo.dna.model.object.stillEntity.impl.Puddle;
+import it.unibo.dna.model.object.stillEntity.impl.Door.DoorState;
 
 /**
  * A class for loading, storing and returning images of the elements of the

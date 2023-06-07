@@ -5,7 +5,14 @@ import java.util.Optional;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.api.EntityFactory;
 import it.unibo.dna.model.object.api.Entity.EntityType;
+import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillEntity.impl.Diamond;
+import it.unibo.dna.model.object.stillEntity.impl.Door;
+import it.unibo.dna.model.object.stillEntity.impl.Platform;
+import it.unibo.dna.model.object.stillEntity.impl.Puddle;
 
 /**
  * A class that implements the createEntity method from the EntityFactory

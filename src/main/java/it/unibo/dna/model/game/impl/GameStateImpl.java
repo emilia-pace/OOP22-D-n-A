@@ -11,26 +11,28 @@ import it.unibo.dna.model.events.api.EventFactory;
 import it.unibo.dna.model.events.impl.EventFactoryImpl;
 import it.unibo.dna.model.events.impl.EventQueue;
 import it.unibo.dna.model.game.api.GameState;
-import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.Puddle;
-import it.unibo.dna.model.object.ActivableObjectImpl;
-import it.unibo.dna.model.object.Diamond;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillEntity.impl.Diamond;
+import it.unibo.dna.model.object.stillEntity.impl.Door;
+import it.unibo.dna.model.object.stillEntity.impl.Puddle;
 
 /**
  * Class that implements {@link GameState}.
  */
 public class GameStateImpl implements GameState {
 
+    /**
+     * The costant value of the game's gravity.
+     */
     public static final double GRAVITY = 0.8;
 
     private final List<Entity> entities;
     private final List<Player> characters;
     private final BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
-    //private static Score score = new Score(0.0);
     private final EventQueue eventQueue = new EventQueue();
 
     /**
@@ -45,14 +47,6 @@ public class GameStateImpl implements GameState {
         this.entities = new ArrayList<>(entities);
         this.characters = new ArrayList<>(players);
     }
-
-    /**
-     * 
-     * @return the score of the game.
-     
-    public static Score getScore() {
-        return score;
-    }*/
 
     /**
      * {@inheritDoc}
@@ -150,7 +144,7 @@ public class GameStateImpl implements GameState {
                         case BUTTON, LEVER -> {
                             objPlayer = ((ActivableObjectImpl) e).getPlayer();
                             if (objPlayer.isPresent() && objPlayer.get().equals(character)) {
-                                if (e.getType().equals(Entity.EntityType.BUTTON)){
+                                if (e.getType().equals(Entity.EntityType.BUTTON)) {
                                     ((ActivableObjectImpl) e).deactivate();
                                 }
                                 ((ActivableObjectImpl) e).resetPlayer();

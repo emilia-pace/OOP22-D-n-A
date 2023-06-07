@@ -5,15 +5,7 @@ package it.unibo.dna.model;
  */
 public class Score {
  
-    private static double total;
-
-    /**
-     * {@link Score} constructor.
-     * @param value the value of the diamond
-     */
-    public Score(final Double value) {
-        total = value;
-    }
+    private static double total = 0;
 
     /**
      * 
@@ -33,10 +25,9 @@ public class Score {
 
     /**
      * @param value the value to add to the total score
-     * @return the value of the current score
      */
-    public static double addScore(final double value) {
-        return total + value;
+    public static void addScore(final double value) {
+        total = total + value;
     }
 
     /**

@@ -1,8 +1,10 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.stillEntity.impl;
 
 import java.util.Optional;
 import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.stillEntity.api.ActivableObject;
 
 /**
  * An ActivableObject that moves its platform when activated by the player.

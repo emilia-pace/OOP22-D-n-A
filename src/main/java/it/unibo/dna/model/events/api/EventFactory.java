@@ -2,13 +2,13 @@ package it.unibo.dna.model.events.api;
 
 import java.util.List;
 
-import it.unibo.dna.model.object.ActivableObjectImpl;
-import it.unibo.dna.model.object.Diamond;
-import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillEntity.impl.Diamond;
+import it.unibo.dna.model.object.stillEntity.impl.Door;
+import it.unibo.dna.model.object.stillEntity.impl.Puddle;
 
 /**
  * Interface of a factory that creates {@link Event}.
@@ -58,7 +58,7 @@ public interface EventFactory {
      * Models the collision event with a door.
      * @param door the hit door
      * @param player the player
-     * @param score the score
+     * @param entities the list of {@link Entity}
      * @return the new event
      */
     Event hitDoorEvent(Door door, Player player, List<Entity> entities);
@@ -74,7 +74,6 @@ public interface EventFactory {
     /**
      * Models the collision event with a diamond.
      * @param d the hit diamond
-     * @param s the actual score
      * @return the new event
      */
     Event hitDiamondEvent(Diamond d);
@@ -87,7 +86,15 @@ public interface EventFactory {
      */
     Event hitPuddleEvent(Puddle puddle, Player player);
 
+    /**
+     * Models the successful completion of the level.
+     * @return the new event
+     */
     Event victoryEvent();
 
+    /**
+     * Models the failure of the level.
+     * @return the new event
+     */
     Event gameOverEvent();
 }

@@ -6,20 +6,19 @@ import it.unibo.dna.GameEngine;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
-import it.unibo.dna.model.object.ActivableObjectImpl;
-import it.unibo.dna.model.object.Diamond;
-import it.unibo.dna.model.object.Door;
-import it.unibo.dna.model.object.MovablePlatform;
-import it.unibo.dna.model.object.Puddle;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillEntity.impl.Diamond;
+import it.unibo.dna.model.object.stillEntity.impl.Door;
+import it.unibo.dna.model.object.stillEntity.impl.Puddle;
 import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 
 /**
  * Class that implements the {@link EventFactory} interface.
  */
 public class EventFactoryImpl implements EventFactory {
-   
 
     /**
      * {@inheritDoc}
@@ -160,21 +159,26 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitPuddleEvent(final Puddle puddle, final Player player) {
         return game -> {
-            if(puddle.killPlayer(player)) {
+            if (puddle.killPlayer(player)) {
                 game.getEventQueue().addEvent(this.gameOverEvent());
             }
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Event victoryEvent() {
         return game -> {
             GameEngine.playSound("victory");
             GameEngine.getGameThread().victoryGame();
         };
-        
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Event gameOverEvent() {
         return game -> {

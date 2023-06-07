@@ -1,10 +1,11 @@
 package it.unibo.dna.graphics;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.List;
 
 import it.unibo.dna.input.KeyboardHandler;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
 import java.awt.*;
@@ -12,6 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Represents the display window of the game.
@@ -27,6 +31,7 @@ public class Display extends JFrame {
         private JPanel jpanel;
         private JButton pauseButton;
         MenuFactory menuFactory;
+        private BufferedImage backgroundImage;
 
     /**
      * Constructs a Display object with the specified player list.
@@ -79,8 +84,17 @@ public class Display extends JFrame {
                         new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, p));
             }
         });
+        loadBackgroundImage("src\\main\\resources\\background.jpg");
 
      }
+
+    private void loadBackgroundImage(String string) {
+        try {
+            backgroundImage = ImageIO.read(new File(string));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Renders the entities and players on the display.
@@ -92,8 +106,7 @@ public class Display extends JFrame {
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
 
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        graphics.drawImage(backgroundImage, 0, 0, canvas.getWidth(), canvas.getHeight(), this);
 
         entities.forEach(entity -> graphics.drawImage(imgMgr.getImage(entity),
                 (int) entity.getPosition().getX() * TILE_SIZE,

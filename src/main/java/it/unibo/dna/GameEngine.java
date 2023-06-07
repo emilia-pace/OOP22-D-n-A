@@ -19,7 +19,7 @@ public class GameEngine implements Runnable {
     private GameState game;
     private Level level;
     private boolean running;
-    private final double rateUpdate = 1.0d / 50.0d;
+    private final double rateUpdate = 1.0d / 60.0d;
     private static GameThread gameThread;
     private MenuFactory menuFactory;
 

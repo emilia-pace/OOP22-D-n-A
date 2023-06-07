@@ -10,11 +10,11 @@ import java.util.Optional;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.EntityFactoryImpl;
-import it.unibo.dna.model.object.api.Entity.EntityType;
 import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.PlayerImpl;
+import it.unibo.dna.model.object.player.Entity.EntityType;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.api.Entity;
 import it.unibo.dna.model.object.api.EntityFactory;
 
 /**

@@ -3,7 +3,7 @@ package it.unibo.dna.model.object.stillEntity.impl;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.box.api.BoundingBox;
 import it.unibo.dna.model.box.impl.RectBoundingBox;
-import it.unibo.dna.model.object.api.Entity;
+import it.unibo.dna.model.object.player.Entity;
 
 /**
  * Abstract Class that implements {@link Entity} interface.

@@ -30,7 +30,7 @@ class CollisionTest {
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
     private static final GameStateImpl GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(), new ArrayList<>());
-    private static final Player CHARACTER = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerType.ANGEL);
+    private static final Player CHARACTER = new PlayerImpl(POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerType.ANGEL);
 
     /**
      * test the collision between rectangular boxes.

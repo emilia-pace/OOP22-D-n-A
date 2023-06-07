@@ -19,7 +19,6 @@ import it.unibo.dna.model.object.api.Entity;
  * Class that implements the {@link EventFactory} interface.
  */
 public class EventFactoryImpl implements EventFactory {
-   
 
     /**
      * {@inheritDoc}
@@ -160,21 +159,26 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event hitPuddleEvent(final Puddle puddle, final Player player) {
         return game -> {
-            if(puddle.killPlayer(player)) {
+            if (puddle.killPlayer(player)) {
                 game.getEventQueue().addEvent(this.gameOverEvent());
             }
         };
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Event victoryEvent() {
         return game -> {
             GameEngine.playSound("victory");
             GameEngine.getGameThread().victoryGame();
         };
-        
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Event gameOverEvent() {
         return game -> {

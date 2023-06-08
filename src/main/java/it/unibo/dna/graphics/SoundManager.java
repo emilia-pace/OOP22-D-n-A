@@ -1,6 +1,5 @@
 package it.unibo.dna.graphics;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.sound.sampled.AudioSystem;
@@ -17,10 +16,17 @@ public class SoundManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SoundManager.class);
 
+    /**
+     * Retrieves an audio clip based on the specified file path.
+     * 
+     * @param namePath the name or path of the audio file
+     * @return the audio clip associated with the specified file, or {@code null} if
+     *         an error occurs
+     */
     public Clip getClip(String namePath) {
         try {
             final Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(new File("src\\main\\resources\\sounds\\" + namePath + ".wav")));
+            clip.open(AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("sounds/" + namePath + ".wav")));
             return clip;
         } catch (IOException e) {
             LOGGER.error("IOException occurred", e);
@@ -31,5 +37,5 @@ public class SoundManager {
         }
         return null;
     }
-    
+
 }

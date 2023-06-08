@@ -1,10 +1,12 @@
-package it.unibo.dna.model.object.stillEntity.impl;
+package it.unibo.dna.model.object.stillentity.impl;
 
 import java.util.Optional;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.stillEntity.api.ActivableObject;
+import it.unibo.dna.model.object.stillentity.api.ActivableObject;
 
 /**
  * An ActivableObject that moves its platform when activated by the player.
@@ -14,7 +16,7 @@ import it.unibo.dna.model.object.stillEntity.api.ActivableObject;
  */
 public class ActivableObjectImpl extends  AbstractEntity implements ActivableObject {
 
-    private boolean isActive = false; /*True when the platform is moving towards its final position*/
+    private boolean isActive; /*True when the platform is moving towards its final position*/
     private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject*/
     private MovablePlatform movablePlatform;
 
@@ -25,6 +27,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements ActivableObj
      * @param movablePlatform the {@link MovablePlatform} that the ActivableObject moves
      * @param type the type of the EntityType of the ActivableObject (it can be BUTTON or LEVER)
      */
+    @SuppressFBWarnings(value = "MVEI")
     public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, 
                                 final MovablePlatform movablePlatform, final EntityType type) {
        super(pos, height, width, type);
@@ -55,21 +58,15 @@ public class ActivableObjectImpl extends  AbstractEntity implements ActivableObj
     /** 
      * @return the {@link MovablePlatform} controlled by the ActivableObject
      */
+    @SuppressWarnings(value = "MVEI")
     public MovablePlatform getMovablePlatform() {
         return this.movablePlatform;
-    }
-
-    /**
-     * A setter for the MovablePlatform.
-     * @param movablePlatform the MovablePlatform the ActivableObject controls
-     */
-    public void setMovablePlatform(final MovablePlatform movablePlatform) {
-        this.movablePlatform = movablePlatform;
     }
 
     /** 
      * A method that moves the MovablePlatform from its starting position towards its final position.
      */
+    @Override
     public void activate() {
         this.isActive = true;
         movablePlatform.move(movablePlatform.getOriginalPosition(), movablePlatform.getFinalPosition());

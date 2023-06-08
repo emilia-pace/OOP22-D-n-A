@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.movableEntity;
+package it.unibo.dna.model.object.movableentity;
 
 
 
@@ -126,10 +126,10 @@ public class MovablePlatform extends AbstractMovableEntity {
      * @return false it the platform has gone out of range. 
      */
     public boolean isBetweenRange() {
-        double maxX = Math.max(this.originalPosition.getX(), this.finalPosition.getX());
-        double minX =  Math.min(this.originalPosition.getX(), this.finalPosition.getX());
-        double maxY = Math.max(this.originalPosition.getY(), this.finalPosition.getY());
-        double minY = Math.min(this.originalPosition.getY(), this.finalPosition.getY());
+        final double maxX = Math.max(this.originalPosition.getX(), this.finalPosition.getX());
+        final double minX =  Math.min(this.originalPosition.getX(), this.finalPosition.getX());
+        final double maxY = Math.max(this.originalPosition.getY(), this.finalPosition.getY());
+        final double minY = Math.min(this.originalPosition.getY(), this.finalPosition.getY());
         return this.getPosition().getX() >= minX && this.getPosition().getX() <= maxX 
             && this.getPosition().getY() <= maxY && this.getPosition().getY() >= minY;
     }

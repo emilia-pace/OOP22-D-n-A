@@ -247,7 +247,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                     gEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
 
@@ -275,7 +274,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                     gEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

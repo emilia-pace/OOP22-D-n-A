@@ -2,7 +2,7 @@ package it.unibo.dna.model.object.player;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.movableEntity.AbstractMovableEntity;
+import it.unibo.dna.model.object.movableentity.AbstractMovableEntity;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -42,7 +42,7 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("internalRepresentation")
+    @SuppressWarnings(value = "MVEI")
     public State getState() {
         return this.playerState;
     }

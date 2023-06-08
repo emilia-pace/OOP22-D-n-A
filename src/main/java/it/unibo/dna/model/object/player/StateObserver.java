@@ -17,7 +17,6 @@ import it.unibo.dna.model.object.player.api.Player;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -79,20 +78,20 @@ public class StateObserver implements PropertyChangeListener {
     private void loadPlayerImage(final Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap,
             final int width, final int height) {
         final String path = this.type.equals(Player.PlayerType.ANGEL) ? "angel" : "devil";
-        final String relativePath = "src\\main\\resources\\playerImage\\";
+        final String relativePath = "playerImage/";
         List.of(State.StateEnum.STATE_JUMPING, State.StateEnum.STATE_STANDING).forEach(state -> {
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_LEFT), new ArrayList<>());
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_RIGHT), new ArrayList<>());
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_STILL), new ArrayList<>());
             try {
                 playerMap.get(new Pair<>(state, State.StateEnum.STATE_LEFT))
-                        .add(ImageIO.read(new File(relativePath + path + "_left1.PNG"))
+                        .add(ImageIO.read(ClassLoader.getSystemResource(relativePath + path + "_left1.PNG"))
                                 .getScaledInstance(height, width, Image.SCALE_DEFAULT));
                 playerMap.get(new Pair<>(state, State.StateEnum.STATE_RIGHT))
-                        .add(ImageIO.read(new File(relativePath + path + "_right1.PNG"))
+                        .add(ImageIO.read(ClassLoader.getSystemResource(relativePath + path + "_right1.PNG"))
                                 .getScaledInstance(height, width, Image.SCALE_DEFAULT));
                 playerMap.get(new Pair<>(state, State.StateEnum.STATE_STILL))
-                        .add(ImageIO.read(new File(relativePath + path + "_front.PNG"))
+                        .add(ImageIO.read(ClassLoader.getSystemResource(relativePath + path + "_front.PNG"))
                                 .getScaledInstance(height, width, Image.SCALE_DEFAULT));
             } catch (IOException e) {
                 LOGGER.error("IOexception occured", e);
@@ -100,10 +99,10 @@ public class StateObserver implements PropertyChangeListener {
         });
         try {
             playerMap.get(new Pair<>(State.StateEnum.STATE_STANDING, State.StateEnum.STATE_LEFT))
-                    .add(ImageIO.read(new File(relativePath + path + "_left2.PNG"))
+                    .add(ImageIO.read(ClassLoader.getSystemResource(relativePath + path + "_left2.PNG"))
                             .getScaledInstance(height, width, Image.SCALE_DEFAULT));
             playerMap.get(new Pair<>(State.StateEnum.STATE_STANDING, State.StateEnum.STATE_RIGHT))
-                    .add(ImageIO.read(new File(relativePath + path + "_right2.PNG"))
+                    .add(ImageIO.read(ClassLoader.getSystemResource(relativePath + path + "_right2.PNG"))
                             .getScaledInstance(height, width, Image.SCALE_DEFAULT));
         } catch (IOException e) {
             LOGGER.error("IOexception occured", e);

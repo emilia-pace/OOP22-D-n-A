@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stillEntity.impl;
+package it.unibo.dna.model.object.stillentity.impl;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.object.player.Entity;
@@ -21,7 +21,7 @@ public class Diamond extends  AbstractEntity {
         super(p, h, w, Entity.EntityType.DIAMOND);
         this.value = v;
     }
-
+    
     /**
      * 
      * @return the value of the diamond

@@ -90,6 +90,11 @@ public class GameEngine implements Runnable {
         running = false;
     }
 
+    /**
+     * Plays an audio clip based on the specified file name or path.
+     * 
+     * @param string the name or path of the audio file
+     */
     public static void playSound(String string) {
         (new SoundManager()).getClip(string).start();
     }

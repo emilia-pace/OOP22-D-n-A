@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stillEntity.api;
+package it.unibo.dna.model.object.stillentity.api;
 
 import it.unibo.dna.model.object.player.Entity;
 
@@ -11,7 +11,7 @@ public interface ActivableObject extends Entity {
      * Activates the Gameobject.
      */
     void activate();
-
+    
     /**
      * 
      * @return True if the GameObject is activated.

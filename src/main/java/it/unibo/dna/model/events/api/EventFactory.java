@@ -1,14 +1,11 @@
 package it.unibo.dna.model.events.api;
 
-import java.util.List;
-
-import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
-import it.unibo.dna.model.object.stillEntity.impl.Diamond;
-import it.unibo.dna.model.object.stillEntity.impl.Door;
-import it.unibo.dna.model.object.stillEntity.impl.Puddle;
+import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillentity.impl.Diamond;
+import it.unibo.dna.model.object.stillentity.impl.Door;
 
 /**
  * Interface of a factory that creates {@link Event}.
@@ -61,7 +58,7 @@ public interface EventFactory {
      * @param entities the list of {@link Entity}
      * @return the new event
      */
-    Event hitDoorEvent(Door door, Player player, List<Entity> entities);
+    Event hitDoorEvent(Door door, Player player);
 
     /**
      * Models the collision event with a lever.
@@ -77,14 +74,6 @@ public interface EventFactory {
      * @return the new event
      */
     Event hitDiamondEvent(Diamond d);
-
-    /**
-     * Models the collision event with a puddle.
-     * @param puddle the hit puddle
-     * @param player the player that touched the puddle
-     * @return the new event
-     */
-    Event hitPuddleEvent(Puddle puddle, Player player);
 
     /**
      * Models the successful completion of the level.

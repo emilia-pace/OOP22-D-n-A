@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stillEntity.impl;
+package it.unibo.dna.model.object.stillentity.impl;
 
 
 import it.unibo.dna.common.Position2d;
@@ -11,7 +11,7 @@ import it.unibo.dna.model.object.player.api.Player;
  * - RED: kills the Angel if it falls in it. Does nothing to the Devil.
  */
 public class Puddle extends AbstractEntity {
-
+    
     /**
      * 
      * @param position    the position of the puddle

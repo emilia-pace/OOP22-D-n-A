@@ -7,11 +7,8 @@ import it.unibo.dna.model.box.api.BoundingBox;
  */
 public interface Entity {
 
-    /**
-     * 
-     */
     enum EntityType { PLAYER, ANGEL_DOOR, DEVIL_DOOR, LEVER, BUTTON, BLUE_PUDDLE,
-                     RED_PUDDLE, PURPLE_PUDDLE, PLATFORM, MOVABLEPLATFORM, DIAMOND};
+                     RED_PUDDLE, PURPLE_PUDDLE, PLATFORM, MOVABLEPLATFORM, DIAMOND}
 
     /**
      * @return the position of the entity

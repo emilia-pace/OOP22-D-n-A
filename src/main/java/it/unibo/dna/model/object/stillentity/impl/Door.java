@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stillEntity.impl;
+package it.unibo.dna.model.object.stillentity.impl;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ public class Door extends  AbstractEntity {
 
     private DoorState state;
     private Optional<Player> player = Optional.empty();
-
+    
     /**
      * 
      * @param position  the position of the Door

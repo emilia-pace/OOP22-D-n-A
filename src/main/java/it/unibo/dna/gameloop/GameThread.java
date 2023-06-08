@@ -14,6 +14,10 @@ public class GameThread extends Thread {
         this.gameEngine = gameEngine;
     }
 
+    public GameEngine getGameEngine() {
+        return this.gameEngine;
+    }
+
     public void start() {
         new Thread(gameEngine).start();
     }
@@ -21,7 +25,7 @@ public class GameThread extends Thread {
     public void victoryGame() {
         this.interrupt();
         gameEngine.stop();
-        this.gameEngine.getMenuFactory().victoryMenu(Score.getTotal()).createMenuFrame();
+        this.gameEngine.getMenuFactory().victoryMenu(gameEngine.getScore()).createMenuFrame();
     }
 
     public void loosingGame() {

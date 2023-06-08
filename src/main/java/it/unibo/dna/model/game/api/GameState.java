@@ -3,7 +3,6 @@ package it.unibo.dna.model.game.api;
 import java.util.List;
 
 import it.unibo.dna.model.box.api.BoundingBox;
-import it.unibo.dna.model.events.impl.EventQueue;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
@@ -49,10 +48,4 @@ public interface GameState {
      * @return the list of characters of the game
      */
     List<Player> getCharacters();
-
-    /**
-     * 
-     * @return the list of {@link Event}
-     */
-    EventQueue getEventQueue();
 }

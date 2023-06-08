@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class GameThread extends Thread {
     private GameEngine gameEngine;
+    private int lvl;
 
     public GameThread(final GameEngine gEngine) throws IOException {
         this.gameEngine = gEngine;
@@ -23,15 +24,22 @@ public class GameThread extends Thread {
     }
 
     public void victoryGame() {
+        lvl = gameEngine.getLvl();
+        if(lvl == 3){
+            this.gameEngine.getMenuFactory().lastVictoryMenu().createMenuFrame();
+        } else {
+        lvl++;
+        this.gameEngine.getMenuFactory().victoryMenu(lvl).createMenuFrame();
         this.interrupt();
         gameEngine.stop();
-        this.gameEngine.getMenuFactory().victoryMenu().createMenuFrame();
+        }
     }
 
     public void loosingGame() {
+        lvl = gameEngine.getLvl();
+        this.gameEngine.getMenuFactory().gameOverMenu(lvl).createMenuFrame();
         this.interrupt();
         gameEngine.stop();
-        this.gameEngine.getMenuFactory().gameOverMenu().createMenuFrame();
     }
 
 }

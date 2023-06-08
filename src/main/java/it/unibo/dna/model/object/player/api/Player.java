@@ -12,12 +12,12 @@ public interface Player extends MovableEntity {
     /**
      * The jump speed value.
      */
-    double JUMPVELOCITY = 5.3;
+    double JUMPVELOCITY = 5.6;
 
     /**
      * The standard velocity of the Player.
      */
-    double STANDARDVELOCITY = 0.55;
+    double STANDARDVELOCITY = 0.64;
 
     /**
      * Returns the state of the player.

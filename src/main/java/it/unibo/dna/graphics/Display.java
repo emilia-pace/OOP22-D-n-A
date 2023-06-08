@@ -60,7 +60,6 @@ public class Display extends JFrame {
         canvas = new Canvas();
         canvas.setSize(DIM, DIM);
         canvas.setFocusable(true);
-        canvas.requestFocus();
 
         jpanel.add(pauseButton, BorderLayout.NORTH);
         jpanel.add(canvas, BorderLayout.CENTER);
@@ -85,6 +84,7 @@ public class Display extends JFrame {
             }
         });
         loadBackgroundImage("src\\main\\resources\\background.jpg");
+        canvas.requestFocus();
 
      }
 

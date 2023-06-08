@@ -42,7 +42,7 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("internalRepresentation")
+    @SuppressWarnings(value = "MVEI")
     public State getState() {
         return this.playerState;
     }

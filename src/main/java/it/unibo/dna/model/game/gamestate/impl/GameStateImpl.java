@@ -1,4 +1,4 @@
-package it.unibo.dna.model.game.impl;
+package it.unibo.dna.model.game.gamestate.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import it.unibo.dna.model.box.impl.RectBoundingBox;
 import it.unibo.dna.model.events.api.EventFactory;
 import it.unibo.dna.model.events.impl.EventFactoryImpl;
 import it.unibo.dna.model.events.impl.EventQueue;
-import it.unibo.dna.model.game.api.GameState;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.game.gamestate.api.GameState;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;

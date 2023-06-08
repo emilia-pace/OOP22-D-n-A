@@ -1,9 +1,9 @@
-package it.unibo.dna.model.game.api;
+package it.unibo.dna.model.game.gamestate.api;
 
 import java.util.List;
 
 import it.unibo.dna.model.box.api.BoundingBox;
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**

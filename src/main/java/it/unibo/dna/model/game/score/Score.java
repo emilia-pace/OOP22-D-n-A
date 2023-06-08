@@ -1,4 +1,4 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.game.score;
 
 /**
  * Class that manages the score of the game.

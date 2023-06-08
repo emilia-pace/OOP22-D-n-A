@@ -1,8 +1,8 @@
 package it.unibo.dna.model.object.player.api;
 
 import it.unibo.dna.model.object.movableentity.api.MovableEntity;
-import it.unibo.dna.model.object.player.State;
-import it.unibo.dna.model.object.player.State.StateEnum;
+import it.unibo.dna.model.object.player.impl.State;
+import it.unibo.dna.model.object.player.impl.State.StateEnum;
 
 /**
  * An interface rappresenting the Game Character.

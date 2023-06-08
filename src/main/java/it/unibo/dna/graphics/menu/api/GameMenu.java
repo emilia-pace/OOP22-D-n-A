@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics;
+package it.unibo.dna.graphics.menu.api;
 
 import javax.swing.JFrame;
 

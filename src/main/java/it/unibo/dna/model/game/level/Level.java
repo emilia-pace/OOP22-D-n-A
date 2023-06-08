@@ -1,4 +1,4 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.game.level;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,13 +9,13 @@ import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.EntityFactoryImpl;
-import it.unibo.dna.model.object.player.Entity;
-import it.unibo.dna.model.object.player.PlayerImpl;
-import it.unibo.dna.model.object.player.Entity.EntityType;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.api.EntityFactory;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
+import it.unibo.dna.model.object.player.impl.PlayerImpl;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.entity.api.EntityFactory;
+import it.unibo.dna.model.object.entity.api.Entity.EntityType;
+import it.unibo.dna.model.object.entity.impl.EntityFactoryImpl;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 
 /**
  * Represents a level in the game, containing entities and characters.

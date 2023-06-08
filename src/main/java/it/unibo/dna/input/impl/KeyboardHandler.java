@@ -1,8 +1,8 @@
-package it.unibo.dna.input;
+package it.unibo.dna.input.impl;
 
 import it.unibo.dna.input.api.CommandFactory;
-import it.unibo.dna.model.object.player.State;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.player.impl.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

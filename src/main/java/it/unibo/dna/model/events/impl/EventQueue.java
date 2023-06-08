@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import it.unibo.dna.model.events.api.Event;
-import it.unibo.dna.model.game.api.GameState;
+import it.unibo.dna.model.game.gamestate.api.GameState;
 
 /**
  * Class for a queue of {@link Event}.

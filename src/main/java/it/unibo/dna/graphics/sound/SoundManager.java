@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics;
+package it.unibo.dna.graphics.sound;
 
 import java.io.IOException;
 
@@ -23,7 +23,7 @@ public class SoundManager {
      * @return the audio clip associated with the specified file, or {@code null} if
      *         an error occurs
      */
-    public Clip getClip(String namePath) {
+    public Clip getClip(final String namePath) {
         try {
             final Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(ClassLoader.getSystemResource("sounds/" + namePath + ".wav")));

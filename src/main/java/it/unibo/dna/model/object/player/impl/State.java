@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.player;
+package it.unibo.dna.model.object.player.impl;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

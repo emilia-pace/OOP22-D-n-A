@@ -1,7 +1,7 @@
 package it.unibo.dna.model.events.api;
 
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;

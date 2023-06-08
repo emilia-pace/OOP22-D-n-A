@@ -1,13 +1,13 @@
 package it.unibo.dna.model.events.impl;
 
-import it.unibo.dna.GameEngine;
-import it.unibo.dna.model.Score;
+import it.unibo.dna.gameloop.GameEngine;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
-import it.unibo.dna.model.object.player.Entity;
-import it.unibo.dna.model.object.player.State.StateEnum;
+import it.unibo.dna.model.game.score.Score;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.player.impl.State.StateEnum;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;
 import it.unibo.dna.model.object.stillentity.impl.Door;

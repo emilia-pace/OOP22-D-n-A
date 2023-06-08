@@ -1,6 +1,6 @@
 package it.unibo.dna.model.object.stillentity.api;
 
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.object.entity.api.Entity;
 
 /**
  * A class that allows some Entities to be activated.

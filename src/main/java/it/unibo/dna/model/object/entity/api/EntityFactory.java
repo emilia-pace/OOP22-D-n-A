@@ -1,11 +1,10 @@
-package it.unibo.dna.model.object.api;
+package it.unibo.dna.model.object.entity.api;
 
 
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 
 /**
  * A factory with the purpose of being able to create various types of entities.

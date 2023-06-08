@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics;
+package it.unibo.dna.graphics.menu.api;
 
 /**
  * Represents a factory for creating game menus.

@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.player;
+package it.unibo.dna.model.object.entity.api;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.box.api.BoundingBox;

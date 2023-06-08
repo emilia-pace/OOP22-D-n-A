@@ -1,13 +1,13 @@
-package it.unibo.dna.model.object;
+package it.unibo.dna.model.object.entity.impl;
 
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.api.EntityFactory;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
-import it.unibo.dna.model.object.player.Entity;
-import it.unibo.dna.model.object.player.Entity.EntityType;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.entity.api.EntityFactory;
+import it.unibo.dna.model.object.entity.api.Entity.EntityType;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;
 import it.unibo.dna.model.object.stillentity.impl.Door;

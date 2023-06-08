@@ -1,8 +1,8 @@
-package it.unibo.dna;
+package it.unibo.dna.gameloop;
 
 import java.io.IOException;
 
-import it.unibo.dna.model.Score;
+import it.unibo.dna.model.game.score.Score;
 
 public class GameThread extends Thread {
     private GameEngine gameEngine;

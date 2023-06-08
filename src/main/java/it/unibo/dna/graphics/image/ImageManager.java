@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics;
+package it.unibo.dna.graphics.image;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +13,12 @@ import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.IOException;
 
-import it.unibo.dna.model.object.api.EntityFactory;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
-import it.unibo.dna.model.object.player.Entity;
-import it.unibo.dna.model.object.player.StateObserver;
+import it.unibo.dna.graphics.Display;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.entity.api.EntityFactory;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.player.impl.StateObserver;
 import it.unibo.dna.model.object.stillentity.impl.AbstractEntity;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;

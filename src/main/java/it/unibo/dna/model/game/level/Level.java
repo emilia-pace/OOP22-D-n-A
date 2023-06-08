@@ -24,7 +24,8 @@ public class Level {
 
     private List<Entity> entities = new ArrayList<>();
     private List<Player> characters = new ArrayList<>();
-    private String nameFile;
+    //private String nameFile;
+    private InputStream nameFile;
     private String s;
     private EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
     private PlayerImpl angel;

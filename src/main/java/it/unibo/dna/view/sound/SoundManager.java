@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics.sound;
+package it.unibo.dna.view.sound;
 
 import java.io.IOException;
 

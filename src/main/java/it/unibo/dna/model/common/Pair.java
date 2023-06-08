@@ -1,4 +1,4 @@
-package it.unibo.dna.common;
+package it.unibo.dna.model.common;
 
 /**
  * A standard generic Pair<X,Y> saving a couple of elements.

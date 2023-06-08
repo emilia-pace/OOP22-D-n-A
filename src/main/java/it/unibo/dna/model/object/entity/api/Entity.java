@@ -1,7 +1,7 @@
 package it.unibo.dna.model.object.entity.api;
 
-import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.box.api.BoundingBox;
+import it.unibo.dna.model.common.Position2d;
 /**
  * An interface that models a generic entity.
  */

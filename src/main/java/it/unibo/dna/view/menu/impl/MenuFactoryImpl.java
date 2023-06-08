@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics.menu.impl;
+package it.unibo.dna.view.menu.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,10 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import it.unibo.dna.gameloop.GameEngine;
-import it.unibo.dna.gameloop.GameThread;
-import it.unibo.dna.graphics.menu.api.GameMenu;
-import it.unibo.dna.graphics.menu.api.MenuFactory;
+import it.unibo.dna.controller.core.GameEngine;
+import it.unibo.dna.controller.core.GameThread;
+import it.unibo.dna.view.menu.api.GameMenu;
+import it.unibo.dna.view.menu.api.MenuFactory;
 
 /**
  * A concrete implementation of the {@link MenuFactory} interface.

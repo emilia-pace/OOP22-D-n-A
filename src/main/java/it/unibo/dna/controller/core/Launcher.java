@@ -1,10 +1,8 @@
-package it.unibo.dna;
+package it.unibo.dna.controller.core;
 
 import java.io.IOException;
 
-import it.unibo.dna.gameloop.GameEngine;
-import it.unibo.dna.gameloop.GameThread;
-import it.unibo.dna.graphics.menu.api.MenuFactory;
+import it.unibo.dna.view.menu.api.MenuFactory;
 
 /**
  * The main launcher class for starting the game.

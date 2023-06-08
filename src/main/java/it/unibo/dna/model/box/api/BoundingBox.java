@@ -1,6 +1,6 @@
 package it.unibo.dna.model.box.api;
 
-import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.common.Position2d;
 
 /** 
  * Interface for the boundaries of an {@link Entity}.

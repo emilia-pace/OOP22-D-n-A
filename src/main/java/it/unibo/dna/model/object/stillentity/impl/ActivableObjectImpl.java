@@ -3,7 +3,7 @@ package it.unibo.dna.model.object.stillentity.impl;
 import java.util.Optional;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.stillentity.api.ActivableObject;

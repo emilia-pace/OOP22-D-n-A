@@ -1,7 +1,7 @@
 package it.unibo.dna.model.object.player.impl;
 
-import it.unibo.dna.common.Position2d;
-import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.common.Position2d;
+import it.unibo.dna.model.common.Vector2d;
 import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.movableentity.impl.AbstractMovableEntity;
 import it.unibo.dna.model.object.player.api.Player;

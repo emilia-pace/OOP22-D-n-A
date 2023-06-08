@@ -1,4 +1,4 @@
-package it.unibo.dna.input.api;
+package it.unibo.dna.model.command.api;
 
 /**
  * Interface of a factory that creates {@link Command}s that can

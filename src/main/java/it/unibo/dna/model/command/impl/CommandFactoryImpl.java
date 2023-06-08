@@ -1,8 +1,8 @@
-package it.unibo.dna.input.impl;
+package it.unibo.dna.model.command.impl;
 
-import it.unibo.dna.gameloop.GameEngine;
-import it.unibo.dna.input.api.Command;
-import it.unibo.dna.input.api.CommandFactory;
+import it.unibo.dna.controller.core.GameEngine;
+import it.unibo.dna.model.command.api.Command;
+import it.unibo.dna.model.command.api.CommandFactory;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.api.Player.PlayerType;
 import it.unibo.dna.model.object.player.impl.State.StateEnum;

@@ -1,4 +1,4 @@
-package it.unibo.dna.common;
+package it.unibo.dna.model.common;
 
 /**
  * A class representing a point in a 2-dimensional space.

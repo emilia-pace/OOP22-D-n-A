@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics.image;
+package it.unibo.dna.view.image;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.IOException;
 
-import it.unibo.dna.graphics.Display;
 import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.entity.api.EntityFactory;
 import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
@@ -26,6 +25,7 @@ import it.unibo.dna.model.object.stillentity.impl.Door;
 import it.unibo.dna.model.object.stillentity.impl.Platform;
 import it.unibo.dna.model.object.stillentity.impl.Puddle;
 import it.unibo.dna.model.object.stillentity.impl.Door.DoorState;
+import it.unibo.dna.view.Display;
 
 /**
  * A class for loading, storing and returning images of the elements of the

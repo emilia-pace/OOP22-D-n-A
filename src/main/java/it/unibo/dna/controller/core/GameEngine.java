@@ -1,16 +1,16 @@
-package it.unibo.dna.gameloop;
+package it.unibo.dna.controller.core;
 
 import java.io.IOException;
 
-import it.unibo.dna.graphics.Display;
-import it.unibo.dna.graphics.menu.api.MenuFactory;
-import it.unibo.dna.graphics.menu.impl.MenuFactoryImpl;
-import it.unibo.dna.graphics.sound.SoundManager;
-import it.unibo.dna.input.api.InputControl;
-import it.unibo.dna.input.impl.InputControlImpl;
+import it.unibo.dna.controller.inputcontrol.api.InputControl;
+import it.unibo.dna.controller.inputcontrol.impl.InputControlImpl;
 import it.unibo.dna.model.game.gamestate.api.GameState;
 import it.unibo.dna.model.game.gamestate.impl.GameStateImpl;
 import it.unibo.dna.model.game.level.Level;
+import it.unibo.dna.view.Display;
+import it.unibo.dna.view.menu.api.MenuFactory;
+import it.unibo.dna.view.menu.impl.MenuFactoryImpl;
+import it.unibo.dna.view.sound.SoundManager;
 
 /**
  * Represents the game engine that manages the game loop and updates the game

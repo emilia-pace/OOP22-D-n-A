@@ -1,6 +1,6 @@
 package it.unibo.dna.model.events.impl;
 
-import it.unibo.dna.gameloop.GameEngine;
+import it.unibo.dna.controller.core.GameEngine;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
 import it.unibo.dna.model.object.entity.api.Entity;

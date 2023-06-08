@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.dna.common.Pair;
-import it.unibo.dna.common.Position2d;
-import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.input.api.CommandFactory;
-import it.unibo.dna.input.impl.CommandFactoryImpl;
+import it.unibo.dna.model.command.api.CommandFactory;
+import it.unibo.dna.model.command.impl.CommandFactoryImpl;
+import it.unibo.dna.model.common.Pair;
+import it.unibo.dna.model.common.Position2d;
+import it.unibo.dna.model.common.Vector2d;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.impl.PlayerImpl;
 import it.unibo.dna.model.object.player.impl.State.StateEnum;

@@ -5,7 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.dna.common.Pair;
+import it.unibo.dna.model.common.Pair;
 
 /**
  * A Class rappresenting the state of a player.

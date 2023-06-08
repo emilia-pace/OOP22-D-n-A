@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics;
+package it.unibo.dna.view;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -7,12 +7,12 @@ import javax.swing.JPanel;
 
 import java.util.List;
 
-import it.unibo.dna.graphics.image.ImageManager;
-import it.unibo.dna.graphics.menu.api.MenuFactory;
-import it.unibo.dna.input.api.InputControl;
-import it.unibo.dna.input.impl.KeyboardHandler;
+import it.unibo.dna.controller.inputcontrol.api.InputControl;
 import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.view.image.ImageManager;
+import it.unibo.dna.view.input.KeyboardHandler;
+import it.unibo.dna.view.menu.api.MenuFactory;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;

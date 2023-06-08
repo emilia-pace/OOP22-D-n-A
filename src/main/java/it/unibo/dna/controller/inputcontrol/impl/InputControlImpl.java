@@ -1,10 +1,10 @@
-package it.unibo.dna.input.impl;
+package it.unibo.dna.controller.inputcontrol.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.dna.input.api.Command;
-import it.unibo.dna.input.api.InputControl;
+import it.unibo.dna.controller.inputcontrol.api.InputControl;
+import it.unibo.dna.model.command.api.Command;
 
 /**
  * Class that implements the {@link InputControl} interface.

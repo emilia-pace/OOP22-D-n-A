@@ -1,4 +1,4 @@
-package it.unibo.dna.input.api;
+package it.unibo.dna.model.command.api;
 
 /**
  * A functional interface rappresenting a generic command.

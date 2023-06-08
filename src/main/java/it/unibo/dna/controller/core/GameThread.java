@@ -1,4 +1,4 @@
-package it.unibo.dna.gameloop;
+package it.unibo.dna.controller.core;
 
 import java.io.IOException;
 

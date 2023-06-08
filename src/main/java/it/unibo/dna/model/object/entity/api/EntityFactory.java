@@ -3,7 +3,7 @@ package it.unibo.dna.model.object.entity.api;
 
 import java.util.Optional;
 
-import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 
 /**

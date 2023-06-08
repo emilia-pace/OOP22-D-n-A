@@ -1,7 +1,8 @@
-package it.unibo.dna.input.impl;
+package it.unibo.dna.view.input;
 
-import it.unibo.dna.input.api.CommandFactory;
-import it.unibo.dna.input.api.InputControl;
+import it.unibo.dna.controller.inputcontrol.api.InputControl;
+import it.unibo.dna.model.command.api.CommandFactory;
+import it.unibo.dna.model.command.impl.CommandFactoryImpl;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.impl.State;
 

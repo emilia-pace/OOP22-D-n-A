@@ -1,4 +1,4 @@
-package it.unibo.dna.common;
+package it.unibo.dna.model.common;
 
 /**
  * A class representing a vector in 2-dimensional space that describes

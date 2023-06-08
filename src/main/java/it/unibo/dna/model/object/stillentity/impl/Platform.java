@@ -1,6 +1,6 @@
 package it.unibo.dna.model.object.stillentity.impl;
 
-import it.unibo.dna.common.Position2d;
+import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.object.entity.api.Entity;
 
 /**

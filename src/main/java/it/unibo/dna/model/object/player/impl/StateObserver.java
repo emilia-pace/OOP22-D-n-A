@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.unibo.dna.common.Pair;
-import it.unibo.dna.graphics.Display;
+import it.unibo.dna.model.common.Pair;
 import it.unibo.dna.model.object.entity.api.EntityFactory;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.impl.State.StateEnum;
+import it.unibo.dna.view.Display;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;

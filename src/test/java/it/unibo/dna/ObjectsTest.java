@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.dna.common.Position2d;
-import it.unibo.dna.common.Vector2d;
+import it.unibo.dna.model.common.Position2d;
+import it.unibo.dna.model.common.Vector2d;
 import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.entity.impl.EntityFactoryImpl;
 import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;

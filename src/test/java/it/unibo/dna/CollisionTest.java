@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.dna.common.Position2d;
-import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.box.api.BoundingBox;
 import it.unibo.dna.model.box.impl.RectBoundingBox;
+import it.unibo.dna.model.common.Position2d;
+import it.unibo.dna.model.common.Vector2d;
 import it.unibo.dna.model.game.gamestate.impl.GameStateImpl;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.api.Player.PlayerType;

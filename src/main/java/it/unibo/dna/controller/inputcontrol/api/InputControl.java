@@ -1,4 +1,6 @@
-package it.unibo.dna.input.api;
+package it.unibo.dna.controller.inputcontrol.api;
+
+import it.unibo.dna.model.command.api.Command;
 
 /**
  * The InputControl interface provides methods for managing a queue of commands

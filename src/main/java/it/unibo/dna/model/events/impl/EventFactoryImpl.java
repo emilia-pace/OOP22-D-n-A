@@ -127,7 +127,7 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             game.removeEntity(d);
             Score.addScore(d.getValue());
-            GameEngine.playSound("diamond");
+            GameEngine.playSound("Diamond_sound");
         };
     }
 
@@ -172,7 +172,7 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event victoryEvent() {
         return game -> {
-            GameEngine.playSound("victory");
+            GameEngine.playSound("Victory_sound");
             GameEngine.getGameThread().victoryGame();
         };
     }
@@ -183,7 +183,7 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event gameOverEvent() {
         return game -> {
-            GameEngine.playSound("gameOver");
+            GameEngine.playSound("GameOver_sound");
             GameEngine.getGameThread().loosingGame();
         };
     }

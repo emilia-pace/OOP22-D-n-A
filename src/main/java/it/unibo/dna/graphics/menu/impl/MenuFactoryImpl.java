@@ -48,7 +48,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JButton start = getStartButton(startMenu);
                 JButton guide = getGuideButton();
                 JButton quit = getQuitButton();
-                JLabel logoLabel = new JLabel(new ImageIcon("src\\main\\resources\\logo.png"));
+                JLabel logoLabel = new JLabel(new ImageIcon(ClassLoader.getSystemResource("logo.png")));
 
                 startMenu.getContentPane().setLayout(new BorderLayout());
                 startMenu.setSize(MENUWIDTH, MENUHEIGH);
@@ -133,7 +133,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 panel.add(nextLevel);
                 panel.add(quit);
                 victoryFrame.getContentPane().setLayout(new BoxLayout(victoryFrame.getContentPane(), BoxLayout.Y_AXIS));
-                victoryFrame.setSize(800, 600);
+                victoryFrame.setSize(MENUWIDTH, MENUHEIGH);
                 victoryFrame.getContentPane().setBackground(Color.BLACK);
 
                 victoryFrame.getContentPane().add(panel);

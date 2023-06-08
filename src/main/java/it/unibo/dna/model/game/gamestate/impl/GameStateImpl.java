@@ -216,7 +216,7 @@ public class GameStateImpl implements GameState {
                         default -> throw new IllegalArgumentException();
                     }
                 });     
- 
+
         this.freeObject(character);
     }
 

@@ -6,12 +6,12 @@ public class GameThread extends Thread {
     private GameEngine gameEngine;
     private int lvl;
 
-    public GameThread(GameEngine gEngine) throws IOException {
+    public GameThread(final GameEngine gEngine) throws IOException {
         this.gameEngine = gEngine;
         this.gameEngine.setGameThread(this);
     }
 
-    public void setGameEngine(GameEngine gameEngine) {
+    public void setGameEngine(final GameEngine gameEngine) {
         this.gameEngine = gameEngine;
     }
 

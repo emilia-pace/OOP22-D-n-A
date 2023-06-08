@@ -64,8 +64,8 @@ public class Display extends JFrame {
      * @param playerList The list of players in the game.
      * @param menuFact
      */
-    public Display(final List<Player> playerList, final MenuFactory menuFact, InputControl angelInputControl,
-            InputControl devilInputControl) {
+    public Display(final List<Player> playerList, final MenuFactory menuFact, final InputControl angelInputControl,
+            final InputControl devilInputControl) {
         this.menuFactory = menuFact;
         setTitle("D-n-A");
         setDefaultCloseOperation(EXIT_ON_CLOSE);

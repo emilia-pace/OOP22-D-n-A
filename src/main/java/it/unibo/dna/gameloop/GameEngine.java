@@ -39,7 +39,7 @@ public class GameEngine implements Runnable {
         this.lvl = lvl;
     }
 
-    public void setGameThread(GameThread gameT) {
+    public void setGameThread(final GameThread gameT) {
         gameThread = gameT;
         this.menuFactory = new MenuFactoryImpl(gameThread);
     }
@@ -114,7 +114,7 @@ public class GameEngine implements Runnable {
      * 
      * @param string the name or path of the audio file
      */
-    public static void playSound(String string) {
+    public static void playSound(final String string) {
         (new SoundManager()).getClip(string).start();
     }
 

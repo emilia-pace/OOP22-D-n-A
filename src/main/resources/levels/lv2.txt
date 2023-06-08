@@ -13,6 +13,7 @@ platform 0 20
 platform 75 20
 bPuddle 80 75
 bPuddle 90 75
+bPuddle 28 55
 rPuddle 11 20
 rPuddle 21 20
 movablePlatform 90 95 120 95
@@ -21,6 +22,10 @@ movablePlatform 0 75 20 75
 button 60 93
 button 105 73
 movablePlatform 75 55 30 20
-button 10 53
+button 5 53
 lever 5 15
+diamond 90 37
+diamond 18 12
+diamond 87 67
+diamond 15 48
 

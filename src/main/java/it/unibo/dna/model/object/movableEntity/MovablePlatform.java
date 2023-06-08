@@ -127,7 +127,7 @@ public class MovablePlatform extends AbstractMovableEntity {
      */
     public boolean isBetweenRange() {
         double maxX = Math.max(this.originalPosition.getX(), this.finalPosition.getX());
-        double minX =  Math.min(this.originalPosition.getX(), this.originalPosition.getY());
+        double minX =  Math.min(this.originalPosition.getX(), this.finalPosition.getX());
         double maxY = Math.max(this.originalPosition.getY(), this.finalPosition.getY());
         double minY = Math.min(this.originalPosition.getY(), this.finalPosition.getY());
         return this.getPosition().getX() >= minX && this.getPosition().getX() <= maxX 

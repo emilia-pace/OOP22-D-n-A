@@ -84,7 +84,7 @@ public class Display extends JFrame {
             }
         });
         loadBackgroundImage("src\\main\\resources\\background.jpg");
-        canvas.requestFocus();
+                canvas.requestFocus();
 
      }
 

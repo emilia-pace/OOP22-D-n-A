@@ -14,6 +14,10 @@ public class GameThread extends Thread {
         this.gameEngine = gameEngine;
     }
 
+    public GameEngine getGameEngine() {
+        return this.gameEngine;
+    }
+
     public void start() {
         new Thread(gameEngine).start();
     }

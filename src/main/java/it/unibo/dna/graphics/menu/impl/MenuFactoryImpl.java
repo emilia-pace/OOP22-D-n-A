@@ -17,7 +17,6 @@ import it.unibo.dna.gameloop.GameEngine;
 import it.unibo.dna.gameloop.GameThread;
 import it.unibo.dna.graphics.menu.api.GameMenu;
 import it.unibo.dna.graphics.menu.api.MenuFactory;
-import it.unibo.dna.model.game.score.Score;
 
 /**
  * A concrete implementation of the {@link MenuFactory} interface.
@@ -26,10 +25,11 @@ import it.unibo.dna.model.game.score.Score;
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
     GameThread gameThread;
-    GameEngine gEngine;
+    GameEngine gameEngine;
 
    public MenuFactoryImpl(GameThread gameT){
     this.gameThread = gameT;
+    this.gameEngine = this.gameThread.getGameEngine();
    }
 
     @Override
@@ -240,13 +240,12 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         int lvl = getLevel();
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Score.resetScore();
                 gameThread.interrupt();
                 menu.dispose();
                 try {
-                    gEngine = new GameEngine(lvl);
-                    gameThread.setGameEngine(gEngine);
-                    gEngine.setGameThread(gameThread);
+                    gameEngine = new GameEngine(lvl);
+                    gameThread.setGameEngine(gameEngine);
+                    gameEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -271,9 +270,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 victoryFrame.dispose();
                 setNextLevel();
                 try {
-                    gEngine = new GameEngine(getLevel());
-                    gameThread.setGameEngine(gEngine);
-                    gEngine.setGameThread(gameThread);
+                    gameEngine = new GameEngine(getLevel());
+                    gameThread.setGameEngine(gameEngine);
+                    gameEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -295,7 +294,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     public JLabel getScorLabel() {
-        return new JLabel("Score: " + Score.getTotal());
+        return new JLabel("Score: " + this.gameEngine.getScore());
     }
 
 }

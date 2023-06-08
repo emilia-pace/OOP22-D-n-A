@@ -48,4 +48,10 @@ public interface GameState {
      * @return the list of characters of the game
      */
     List<Player> getCharacters();
+
+    /**
+     * 
+     * @return the score of the game
+     */
+    double getScore();
 }

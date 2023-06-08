@@ -42,6 +42,10 @@ public class GameEngine implements Runnable {
         return gameThread;
     }
 
+    public double getScore(){
+        return game.getScore();
+    }
+
     /**
      * Starts the game loop and keeps updating and rendering the game until stopped.
      */
@@ -61,7 +65,9 @@ public class GameEngine implements Runnable {
             lastUpdate = currentTime;
 
             while (accumulator >= rateUpdate) {
-                update();
+                if(running) {
+                    update();
+                }
                 accumulator -= rateUpdate;
             }
             render();
@@ -86,8 +92,8 @@ public class GameEngine implements Runnable {
      * Stops the game engine and releases any resources.
      */
     public void stop() {
-        display.dispose();
         running = false;
+        display.dispose();
     }
 
     /**

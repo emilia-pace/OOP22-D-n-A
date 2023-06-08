@@ -34,6 +34,7 @@ public class GameStateImpl implements GameState {
     private final BoundingBox boundingBox;
     private final EventFactory event = new EventFactoryImpl();
     private final EventQueue eventQueue = new EventQueue();
+    private double score;
 
     /**
      *  {@link Game} constructor.
@@ -46,6 +47,7 @@ public class GameStateImpl implements GameState {
         this.boundingBox = new RectBoundingBox(new Position2d(0, 0), height, width);
         this.entities = new ArrayList<>(entities);
         this.characters = new ArrayList<>(players);
+        this.score = 0;
     }
 
     /**
@@ -122,6 +124,14 @@ public class GameStateImpl implements GameState {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getScore() {
+        return this.score;
+    }
+
+    /**
      * Manages when a character leaves an {@link ActivableObjectImpl}.
      * 
      * @param character the {@link Player} to check
@@ -195,6 +205,7 @@ public class GameStateImpl implements GameState {
                         }
                         case DIAMOND -> {
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e));
+                            this.score = this.score + ((Diamond) e).getValue();
                         }
                         case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {
                             this.eventQueue.addEvent(event.hitPlatformEvent(e, character));

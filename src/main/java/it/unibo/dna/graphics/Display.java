@@ -71,7 +71,7 @@ public class Display extends JFrame {
 
         setLocationRelativeTo(null);
         setVisible(true);
-
+        
         imgMgr = new ImageManager(playerList);
 
         playerList.forEach(p -> {

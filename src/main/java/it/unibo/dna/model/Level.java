@@ -65,7 +65,6 @@ public class Level {
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.ANGEL);
                     characters.add(angel);
-                    System.out.println("a \n");
                     break;
 
                 case "devil":
@@ -74,19 +73,16 @@ public class Level {
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.DEVIL);
                     characters.add(devil);
-                    System.out.println("d \n");
                     break;
 
                 case "dDevil":
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.DEVIL_DOOR,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
-                    System.out.println("c \n");
                     break;
 
                 case "dAngel":
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.ANGEL_DOOR,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
-                    System.out.println("c \n");
                     break;
 
                 case "diamond":
@@ -113,7 +109,6 @@ public class Level {
                 case "platform":
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.PLATFORM,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
-                    System.out.println("1 \n");
                     break;
 
                 case "movablePlatform":
@@ -137,8 +132,6 @@ public class Level {
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
             }
-            System.out.println(entities.size());
-            System.out.println(characters.size());
             s = b.readLine();
         }
 

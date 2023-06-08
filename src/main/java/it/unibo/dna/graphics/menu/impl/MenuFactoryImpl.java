@@ -222,8 +222,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * Creates and returns the restart button for the game over menu.
      * @return The JButton representing the restart button.
      */
-    public JButton getRestartButton(JFrame menu, int lvl) {
-    public JButton getRestartButton(final JFrame menu) {
+    public JButton getRestartButton(final JFrame menu, int lvl) {
         JButton restartButton = new JButton("Restart");
         ActionListener al = new ActionListener() {
             public void actionPerformed(final ActionEvent e) {

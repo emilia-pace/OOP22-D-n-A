@@ -25,10 +25,14 @@ public class GameThread extends Thread {
 
     public void victoryGame() {
         lvl = gameEngine.getLvl();
+        if(lvl == 3){
+            this.gameEngine.getMenuFactory().lastVictoryMenu().createMenuFrame();
+        } else {
         lvl++;
         this.gameEngine.getMenuFactory().victoryMenu(lvl).createMenuFrame();
         this.interrupt();
         gameEngine.stop();
+        }
     }
 
     public void loosingGame() {

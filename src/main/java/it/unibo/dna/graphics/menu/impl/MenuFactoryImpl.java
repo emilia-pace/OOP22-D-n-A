@@ -1,4 +1,4 @@
-package it.unibo.dna.graphics;
+package it.unibo.dna.graphics.menu.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,8 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import it.unibo.dna.GameEngine;
-import it.unibo.dna.GameThread;
+import it.unibo.dna.gameloop.GameEngine;
+import it.unibo.dna.gameloop.GameThread;
+import it.unibo.dna.graphics.menu.api.GameMenu;
+import it.unibo.dna.graphics.menu.api.MenuFactory;
+import it.unibo.dna.model.game.score.Score;
 
 /**
  * A concrete implementation of the {@link MenuFactory} interface.
@@ -23,11 +26,10 @@ import it.unibo.dna.GameThread;
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private int level = 1;
     GameThread gameThread;
-    GameEngine gameEngine;
+    GameEngine gEngine;
 
    public MenuFactoryImpl(GameThread gameT){
     this.gameThread = gameT;
-    this.gameEngine = this.gameThread.getGameEngine();
    }
 
     @Override
@@ -87,7 +89,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             @Override
             public JFrame createMenuFrame() {
                 JFrame gameOverFrame = new JFrame("GameOver");
-                JButton restart = getRestartButton(level, gameOverFrame);
+                JButton restart = getRestartButton(gameOverFrame);
                 JButton quit = getQuitButton();
                 JLabel score = getScorLabel();
                 JPanel panel = new JPanel();
@@ -152,13 +154,12 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         return new GameMenu() {
             @Override
             public JFrame createMenuFrame() {
+                System.err.println(getLevel());
                 JFrame pauseMenu = new JFrame();
-                JButton continueButton = getContinueButton(pauseMenu);
-                JButton restart = getRestartButton(level, pauseMenu);
+                JButton restart = getRestartButton(pauseMenu);
                 JButton quit = getQuitButton();
                 JPanel panel = new JPanel();
     
-                panel.add(continueButton);
                 panel.add(restart);
                 panel.add(quit);
     
@@ -188,20 +189,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         startButton.addActionListener(al);
 
         return startButton;
-    }
-
-    public JButton getContinueButton(JFrame pauseMenu) {
-        JButton continueButton = new JButton("Continue");
-        ActionListener al = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                pauseMenu.dispose();
-            }
-
-        };
-        continueButton.addActionListener(al);
-        return continueButton;
     }
 
     /**
@@ -248,16 +235,18 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * @param gameOverMenu The JFrame of the game over menu.
      * @return The JButton representing the restart button.
      */
-    public JButton getRestartButton(int level, JFrame menu) {
-        JButton restartButton = new JButton("Restart Level");
+    public JButton getRestartButton(JFrame menu) {
+        JButton restartButton = new JButton("Restart");
+        int lvl = getLevel();
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Score.resetScore();
                 gameThread.interrupt();
                 menu.dispose();
                 try {
-                    gameEngine = new GameEngine(level);
-                    gameThread.setGameEngine(gameEngine);
-                    gameEngine.setGameThread(gameThread);
+                    gEngine = new GameEngine(lvl);
+                    gameThread.setGameEngine(gEngine);
+                    gEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -280,11 +269,11 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 victoryFrame.dispose();
-                level++;
+                setNextLevel();
                 try {
-                    gameEngine = new GameEngine(level);
-                    gameThread.setGameEngine(gameEngine);
-                    gameEngine.setGameThread(gameThread);
+                    gEngine = new GameEngine(getLevel());
+                    gameThread.setGameEngine(gEngine);
+                    gEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -296,8 +285,17 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         return nextLevelButton;
     }
 
+    private int getLevel() {
+        return this.level;
+    }
+    
+    private int setNextLevel() {
+        this.level++;
+        return this.level;
+    }
+
     public JLabel getScorLabel() {
-        return new JLabel("Score: " + gameEngine.getScore());
+        return new JLabel("Score: " + Score.getTotal());
     }
 
 }

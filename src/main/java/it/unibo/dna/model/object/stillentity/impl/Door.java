@@ -3,7 +3,7 @@ package it.unibo.dna.model.object.stillentity.impl;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**
@@ -11,13 +11,23 @@ import it.unibo.dna.model.object.player.api.Player;
  */
 public class Door extends  AbstractEntity {
 
+    /**
+     * An enumeration that describes two states the door can be in.
+     */
     public enum DoorState {
-        OPEN_DOOR, CLOSED_DOOR;
+        /**
+         * Describes that the door is open.
+         */
+        OPEN_DOOR, 
+        /**
+         * Describes that the door is closed.
+         */
+        CLOSED_DOOR;
     }
 
     private DoorState state;
     private Optional<Player> player = Optional.empty();
-    
+
     /**
      * 
      * @param position  the position of the Door
@@ -64,14 +74,24 @@ public class Door extends  AbstractEntity {
         }
     }
 
+    /**
+     * A method that returns the player that is opening the door.
+     * @return the player opening the door.
+     */
     public Optional<Player> getPlayer() {
         return this.player;
     }
 
+    /**
+     * A method that empties the player.
+     */
     public void resetPlayer() {
         this.player = Optional.empty();
     }
 
+    /**
+     * A method that closes the door.
+     */
     public void closeDoor() {
         this.state = DoorState.CLOSED_DOOR;
     }

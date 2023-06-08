@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import it.unibo.dna.common.Pair;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.input.CommandFactoryImpl;
 import it.unibo.dna.input.api.CommandFactory;
-import it.unibo.dna.model.object.player.PlayerImpl;
-import it.unibo.dna.model.object.player.State.StateEnum;
+import it.unibo.dna.input.impl.CommandFactoryImpl;
 import it.unibo.dna.model.object.player.api.Player;
+import it.unibo.dna.model.object.player.impl.PlayerImpl;
+import it.unibo.dna.model.object.player.impl.State.StateEnum;
 
 /**
  * Test class for testing the movement of the player.

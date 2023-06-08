@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.movableentity;
+package it.unibo.dna.model.object.movableentity.impl;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;

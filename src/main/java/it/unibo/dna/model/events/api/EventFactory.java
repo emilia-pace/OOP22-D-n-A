@@ -1,7 +1,7 @@
 package it.unibo.dna.model.events.api;
 
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;
@@ -55,7 +55,6 @@ public interface EventFactory {
      * Models the collision event with a door.
      * @param door the hit door
      * @param player the player
-     * @param entities the list of {@link Entity}
      * @return the new event
      */
     Event hitDoorEvent(Door door, Player player);

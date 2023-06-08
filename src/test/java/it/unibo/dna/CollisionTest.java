@@ -12,10 +12,10 @@ import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.box.api.BoundingBox;
 import it.unibo.dna.model.box.impl.RectBoundingBox;
-import it.unibo.dna.model.game.impl.GameStateImpl;
-import it.unibo.dna.model.object.player.PlayerImpl;
+import it.unibo.dna.model.game.gamestate.impl.GameStateImpl;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.api.Player.PlayerType;
+import it.unibo.dna.model.object.player.impl.PlayerImpl;
 
 /**
  * Class for testing collisions.

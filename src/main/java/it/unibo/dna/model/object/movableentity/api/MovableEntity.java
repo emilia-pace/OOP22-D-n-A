@@ -1,7 +1,7 @@
 package it.unibo.dna.model.object.movableentity.api;
 
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.player.Entity;
+import it.unibo.dna.model.object.entity.api.Entity;
 
 /**
  * An Interface that models an Entity that is able to move throught the use of a
@@ -36,12 +36,12 @@ public interface MovableEntity extends Entity {
     void setVectorY(double y);
 
     /**
-     * Make the first value of the player's vector zero
+     * Make the first value of the player's vector zero.
      */
     void resetX();
 
     /**
-     * Make the second value of the player's vector zero
+     * Make the second value of the player's vector zero.
      */
     void resetY();
 

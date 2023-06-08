@@ -1,4 +1,4 @@
-package it.unibo.dna.model;
+package it.unibo.dna.model.game.level;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,13 +9,13 @@ import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.EntityFactoryImpl;
-import it.unibo.dna.model.object.player.Entity;
-import it.unibo.dna.model.object.player.PlayerImpl;
-import it.unibo.dna.model.object.player.Entity.EntityType;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.api.EntityFactory;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
+import it.unibo.dna.model.object.player.impl.PlayerImpl;
+import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.entity.api.EntityFactory;
+import it.unibo.dna.model.object.entity.api.Entity.EntityType;
+import it.unibo.dna.model.object.entity.impl.EntityFactoryImpl;
+import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 
 /**
  * Represents a level in the game, containing entities and characters.
@@ -65,7 +65,6 @@ public class Level {
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.ANGEL);
                     characters.add(angel);
-                    System.out.println("a \n");
                     break;
 
                 case "devil":
@@ -74,19 +73,16 @@ public class Level {
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.DEVIL);
                     characters.add(devil);
-                    System.out.println("d \n");
                     break;
 
                 case "dDevil":
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.DEVIL_DOOR,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
-                    System.out.println("c \n");
                     break;
 
                 case "dAngel":
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.ANGEL_DOOR,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
-                    System.out.println("c \n");
                     break;
 
                 case "diamond":
@@ -113,7 +109,6 @@ public class Level {
                 case "platform":
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.PLATFORM,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
-                    System.out.println("1 \n");
                     break;
 
                 case "movablePlatform":
@@ -137,8 +132,6 @@ public class Level {
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
             }
-            System.out.println(entities.size());
-            System.out.println(characters.size());
             s = b.readLine();
         }
 

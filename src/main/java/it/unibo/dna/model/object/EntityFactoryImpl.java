@@ -5,14 +5,14 @@ import java.util.Optional;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.api.EntityFactory;
-import it.unibo.dna.model.object.movableentity.MovablePlatform;
+import it.unibo.dna.model.object.movablentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.Entity.EntityType;
-import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
-import it.unibo.dna.model.object.stillentity.impl.Diamond;
-import it.unibo.dna.model.object.stillentity.impl.Door;
-import it.unibo.dna.model.object.stillentity.impl.Platform;
-import it.unibo.dna.model.object.stillentity.impl.Puddle;
+import it.unibo.dna.model.object.stilentity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stilentity.impl.Diamond;
+import it.unibo.dna.model.object.stilentity.impl.Door;
+import it.unibo.dna.model.object.stilentity.impl.Platform;
+import it.unibo.dna.model.object.stilentity.impl.Puddle;
 
 /**
  * A class that implements the createEntity method from the EntityFactory

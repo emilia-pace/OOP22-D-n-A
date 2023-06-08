@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stillentity.impl;
+package it.unibo.dna.model.object.stilentity.impl;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.model.box.api.BoundingBox;

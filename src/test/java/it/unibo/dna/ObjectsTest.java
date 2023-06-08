@@ -4,15 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.game.api.GameState;
-import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.EntityFactoryImpl;
 import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
@@ -31,9 +28,6 @@ class ObjectsTest {
     private static final Position2d POS3 = new Position2d(X + 15, Y + 15);
     private static final double HEIGHT = 4;
     private static final double WIDTH = 4;
-    private static final int GAMEHEIGHT = 400;
-    private static final int GAMEWIDTH = 400;
-    private static final GameState GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(), new ArrayList<>());
     private static final Player ANGEL = new PlayerImpl(POS, new Vector2d(0,0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
     private static final Player DEVIL = new PlayerImpl(POS2, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.DEVIL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);

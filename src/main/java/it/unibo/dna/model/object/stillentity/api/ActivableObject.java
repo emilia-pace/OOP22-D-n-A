@@ -11,7 +11,7 @@ public interface ActivableObject extends Entity {
      * Activates the Gameobject.
      */
     void activate();
-
+    
     /**
      * 
      * @return True if the GameObject is activated.

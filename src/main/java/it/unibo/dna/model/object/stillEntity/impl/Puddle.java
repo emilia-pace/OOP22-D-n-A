@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stillEntity.impl;
+package it.unibo.dna.model.object.stillentity.impl;
 
 
 import it.unibo.dna.common.Position2d;

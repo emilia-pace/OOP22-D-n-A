@@ -14,13 +14,13 @@ import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.game.impl.GameStateImpl;
 import it.unibo.dna.model.object.EntityFactoryImpl;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.PlayerImpl;
-import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
-import it.unibo.dna.model.object.stillEntity.impl.Door;
-import it.unibo.dna.model.object.stillEntity.impl.Puddle;
+import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillentity.impl.Door;
+import it.unibo.dna.model.object.stillentity.impl.Puddle;
 
 class ObjectsTest {
     private static final EntityFactoryImpl ENTITYFACTORY = new EntityFactoryImpl();
@@ -34,9 +34,8 @@ class ObjectsTest {
     private static final int GAMEHEIGHT = 400;
     private static final int GAMEWIDTH = 400;
     private static final GameState GAME = new GameStateImpl(GAMEWIDTH, GAMEHEIGHT, new ArrayList<>(), new ArrayList<>());
-    private static final Player ANGEL = new PlayerImpl(GAME, POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
-    private static final Player DEVIL = new PlayerImpl(GAME, POS2, new Vector2d(0, 0), HEIGHT, WIDTH, 
-                                                        PlayerImpl.PlayerType.DEVIL);
+    private static final Player ANGEL = new PlayerImpl(POS, new Vector2d(0,0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
+    private static final Player DEVIL = new PlayerImpl(POS2, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.DEVIL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);
     private static final Entity BUTTON = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.BUTTON, POS);
     private static final Entity LEVER = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.LEVER, POS2);

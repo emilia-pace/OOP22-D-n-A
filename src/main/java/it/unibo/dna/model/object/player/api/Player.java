@@ -1,6 +1,6 @@
 package it.unibo.dna.model.object.player.api;
 
-import it.unibo.dna.model.object.movableEntity.api.MovableEntity;
+import it.unibo.dna.model.object.movableentity.api.MovableEntity;
 import it.unibo.dna.model.object.player.State;
 import it.unibo.dna.model.object.player.State.StateEnum;
 

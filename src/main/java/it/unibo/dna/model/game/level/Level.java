@@ -150,13 +150,13 @@ public class Level {
     private void getFile(int lvl) {
         switch (lvl) {
             case 1:
-                nameFile = "src\\main\\resources\\levels\\lvl1.txt";
+                nameFile = ClassLoader.getSystemResource("levels/lvl1.txt").toString();
                 break;
             case 2:
-                nameFile = "src\\main\\resources\\levels\\lvl2.txt";
+                nameFile = ClassLoader.getSystemResource("levels/lvl2.txt").toString();
                 break;
             case 3:
-                nameFile = "src\\main\\resources\\levels\\lvl3.txt";
+                nameFile = ClassLoader.getSystemResource("levels/lvl3.txt").toString();
                 break;
         }
     }

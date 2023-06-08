@@ -30,7 +30,7 @@ public class EventQueue {
     /**
      * Clears the queue of events.
      */
-    public void clearQueue(){
+    public void clearQueue() {
         events.clear();
     }
 

@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stilentity.impl;
+package it.unibo.dna.model.object.stillentity.impl;
 
 import java.util.Optional;
 

@@ -4,7 +4,7 @@ package it.unibo.dna.model.object.api;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.movablentity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 
 /**

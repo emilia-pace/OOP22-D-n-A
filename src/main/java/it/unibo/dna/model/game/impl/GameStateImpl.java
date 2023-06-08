@@ -11,13 +11,13 @@ import it.unibo.dna.model.events.api.EventFactory;
 import it.unibo.dna.model.events.impl.EventFactoryImpl;
 import it.unibo.dna.model.events.impl.EventQueue;
 import it.unibo.dna.model.game.api.GameState;
-import it.unibo.dna.model.object.movablentity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.stilentity.impl.ActivableObjectImpl;
-import it.unibo.dna.model.object.stilentity.impl.Diamond;
-import it.unibo.dna.model.object.stilentity.impl.Door;
-import it.unibo.dna.model.object.stilentity.impl.Puddle;
+import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillentity.impl.Diamond;
+import it.unibo.dna.model.object.stillentity.impl.Door;
+import it.unibo.dna.model.object.stillentity.impl.Puddle;
 
 /**
  * Class that implements {@link GameState}.

@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.movablentity;
+package it.unibo.dna.model.object.movableentity;
 
 
 

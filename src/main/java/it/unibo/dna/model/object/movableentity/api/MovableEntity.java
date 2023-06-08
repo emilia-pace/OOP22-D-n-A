@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.movablentity.api;
+package it.unibo.dna.model.object.movableentity.api;
 
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.player.Entity;

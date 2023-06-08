@@ -2,7 +2,7 @@ package it.unibo.dna.model.object.player;
 
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
-import it.unibo.dna.model.object.movablentity.AbstractMovableEntity;
+import it.unibo.dna.model.object.movableentity.AbstractMovableEntity;
 import it.unibo.dna.model.object.player.State.StateEnum;
 import it.unibo.dna.model.object.player.api.Player;
 

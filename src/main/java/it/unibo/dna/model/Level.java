@@ -15,7 +15,7 @@ import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.player.Entity.EntityType;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.api.EntityFactory;
-import it.unibo.dna.model.object.movablentity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 
 /**
  * Represents a level in the game, containing entities and characters.

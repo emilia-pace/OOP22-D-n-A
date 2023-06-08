@@ -1,7 +1,6 @@
 package it.unibo.dna.model.events.impl;
 
 import it.unibo.dna.GameEngine;
-import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
 import it.unibo.dna.model.object.movableentity.MovablePlatform;
@@ -113,7 +112,6 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDiamondEvent(final Diamond d) {
         return game -> {
             game.removeEntity(d);
-            Score.addScore(d.getValue());
             GameEngine.playSound("Diamond_sound");
         };
     }

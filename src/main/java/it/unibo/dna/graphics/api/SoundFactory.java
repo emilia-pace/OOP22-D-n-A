@@ -8,37 +8,37 @@ import javax.sound.sampled.Clip;
 public interface SoundFactory {
 
     /**
-     * Returns the sound clip for an angel jump.
+     * Returns the sound clip for the angel's jump.
      *
-     * @return the sound clip for an angel jump
+     * @return the sound clip for the angel's jump
      */
     Clip jumpAngelClip();
 
     /**
-     * Returns the sound clip for a devil jump.
+     * Returns the sound clip for the devil's jump.
      *
-     * @return the sound clip for a devil jump
+     * @return the sound clip for the devil's jump
      */
     Clip jumpDevilClip();
 
     /**
-     * Returns the sound clip for a diamond.
+     * Returns the sound clip for reaching a diamond 
      *
-     * @return the sound clip for a diamond
+     * @return the sound clip for reaching a diamond
      */
     Clip diamondClip();
 
     /**
-     * Returns the sound clip for game over of a level.
+     * Returns the sound clip for the game over of a level.
      *
-     * @return the sound clip for game over
+     * @return the sound clip for the game over
      */
     Clip gameOverClip();
 
     /**
-     * Returns the sound clip for victory of a level.
+     * Returns the sound clip for the victory of a level.
      *
-     * @return the sound clip for victory
+     * @return the sound clip for the victory
      */
     Clip victoryClip();
 

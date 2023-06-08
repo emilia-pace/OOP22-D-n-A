@@ -49,7 +49,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JButton guide = getGuideButton();
                 JButton quit = getQuitButton();
                 JLabel logoLabel = new JLabel(new ImageIcon(ClassLoader.getSystemResource("logo.png")));
-    
+
                 startMenu.getContentPane().setLayout(new BorderLayout());
                 startMenu.setSize(MENUWIDTH, MENUHEIGH);
                 startMenu.getContentPane().setBackground(Color.BLACK);
@@ -129,9 +129,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 panel.add(score);
                 panel.add(nextLevel);
                 panel.add(quit);
-                victoryFrame.getContentPane().setLayout(new BoxLayout(victoryFrame.getContentPane(), BoxLayout.Y_AXIS));
-                victoryFrame.setSize(MENUWIDTH, MENUHEIGH);
-                victoryFrame.getContentPane().setBackground(Color.BLACK);
+                victoryFrame.setSize(MENUWIDTH, MENUHEIGH);      
 
                 victoryFrame.getContentPane().add(panel);
                 victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -224,8 +222,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * Creates and returns the restart button for the game over menu.
      * @return The JButton representing the restart button.
      */
-    public JButton getRestartButton(JFrame menu, int lvl) {
-    public JButton getRestartButton(final JFrame menu) {
+    public JButton getRestartButton(final JFrame menu, final int lvl) {
         JButton restartButton = new JButton("Restart");
         ActionListener al = new ActionListener() {
             public void actionPerformed(final ActionEvent e) {

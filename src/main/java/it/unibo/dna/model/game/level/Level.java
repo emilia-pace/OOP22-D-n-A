@@ -1,8 +1,10 @@
 package it.unibo.dna.model.game.level;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +26,7 @@ public class Level {
 
     private List<Entity> entities = new ArrayList<>();
     private List<Player> characters = new ArrayList<>();
-    private String nameFile;
+    private InputStream nameFile;
     private String s;
     private EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
     private PlayerImpl angel;
@@ -50,10 +52,10 @@ public class Level {
      * @throws IOException if an I/O error occurs.
      */
     public void entitiesList() throws IOException {
-        FileReader f = new FileReader(nameFile);
         BufferedReader b;
 
-        b = new BufferedReader(f);
+        Reader reader = new InputStreamReader(nameFile);
+        b = new BufferedReader(reader);
         s = b.readLine();
 
         while (s != null) {
@@ -152,13 +154,13 @@ public class Level {
     private void getFile(final int lvl) {
         switch (lvl) {
             case 1:
-                nameFile = ClassLoader.getSystemResource("levels/lvl1.txt").toString();
+                nameFile = getClass().getClassLoader().getResourceAsStream("levels/lvl1.txt");
                 break;
             case 2:
-                nameFile = ClassLoader.getSystemResource("levels/lvl2.txt").toString();
+                nameFile = getClass().getClassLoader().getResourceAsStream("levels/lvl2.txt");
                 break;
             case 3:
-                nameFile = ClassLoader.getSystemResource("levels/lvl3.txt").toString();
+                nameFile = getClass().getClassLoader().getResourceAsStream("levels/lvl3.txt");
                 break;
             default:
                 break;

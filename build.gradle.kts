@@ -46,7 +46,6 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass.set("it.unibo.dna.main")
-    from('src/main/resources')
 }
 
 tasks.test {

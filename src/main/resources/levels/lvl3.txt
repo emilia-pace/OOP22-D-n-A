@@ -1,0 +1,14 @@
+angel 5 100
+devil 95 100
+platform 0 112
+platform 40 112
+platform 80 112
+pPuddle 30 112
+pPuddle 40 112
+pPuddle 50 112
+pPuddle 60 112
+pPuddle 70 112
+pPuddle 80 112
+movablePlatform 60 95 40 75
+button 15 110
+

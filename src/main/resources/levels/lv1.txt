@@ -12,9 +12,9 @@ platform 105 37
 platform 0 20
 platform 40 20
 bPuddle 10 95
-bPuddle 18 95
+bPuddle 20 95
 rPuddle 85 95
-rPuddle 93 95
+rPuddle 95 95
 pPuddle 25 55
 diamond 3 89
 diamond 105 89

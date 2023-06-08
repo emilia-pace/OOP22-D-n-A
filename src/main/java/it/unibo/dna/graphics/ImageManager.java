@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 
 import it.unibo.dna.model.object.api.EntityFactory;

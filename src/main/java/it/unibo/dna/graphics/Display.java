@@ -22,16 +22,16 @@ import java.io.IOException;
  */
 public class Display extends JFrame {
 
-    public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-    public static final int BORDER = (int) SCREEN_SIZE.getHeight() / 5;
-    private static final int DIM = (int) SCREEN_SIZE.getHeight() - BORDER;
-    public static final int TILE_SIZE = DIM / 100;
-    private Canvas canvas;
-    public ImageManager imgMgr;
-    private JPanel jpanel;
-    private JButton pauseButton;
-    MenuFactory menuFactory;
-    private BufferedImage backgroundImage;
+        public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+        public static final int BORDER = (int) SCREEN_SIZE.getHeight() / 5;
+        private static final int DIM = (int) SCREEN_SIZE.getHeight() - BORDER;
+        public static final int TILE_SIZE = DIM / 100;
+        private Canvas canvas;
+        public transient ImageManager imgMgr;
+        private JPanel jpanel;
+        private JButton pauseButton;
+        MenuFactory menuFactory;
+        private transient BufferedImage backgroundImage;
 
     /**
      * Constructs a Display object with the specified player list.
@@ -70,7 +70,7 @@ public class Display extends JFrame {
 
         setLocationRelativeTo(null);
         setVisible(true);
-
+        
         imgMgr = new ImageManager(playerList);
 
         playerList.forEach(p -> {

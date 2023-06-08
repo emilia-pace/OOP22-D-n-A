@@ -11,13 +11,13 @@ import it.unibo.dna.model.events.api.EventFactory;
 import it.unibo.dna.model.events.impl.EventFactoryImpl;
 import it.unibo.dna.model.events.impl.EventQueue;
 import it.unibo.dna.model.game.api.GameState;
-import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
-import it.unibo.dna.model.object.stillEntity.impl.Diamond;
-import it.unibo.dna.model.object.stillEntity.impl.Door;
-import it.unibo.dna.model.object.stillEntity.impl.Puddle;
+import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillentity.impl.Diamond;
+import it.unibo.dna.model.object.stillentity.impl.Door;
+import it.unibo.dna.model.object.stillentity.impl.Puddle;
 
 /**
  * Class that implements {@link GameState}.
@@ -122,14 +122,6 @@ public class GameStateImpl implements GameState {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public EventQueue getEventQueue() {
-        return this.eventQueue;
-    }
-
-    /**
      * Manages when a character leaves an {@link ActivableObjectImpl}.
      * 
      * @param character the {@link Player} to check
@@ -163,6 +155,18 @@ public class GameStateImpl implements GameState {
     }
 
     /**
+     * Checks if both doors are open.
+     * @return true if they are both open
+     */
+    private boolean checkForEndGame(){
+        return entities.stream()
+            .filter(entity -> entity instanceof Door)
+            .map(entity -> (Door) entity)
+            .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
+            .count() == 2;
+    }
+    
+    /**
      * Checks the collision of a character with the entities in the game.
      * 
      * @param character the moving {@link Player}
@@ -183,19 +187,25 @@ public class GameStateImpl implements GameState {
                         case BUTTON -> this.eventQueue.addEvent(event.hitButtonEvent((ActivableObjectImpl) e, character));
                         case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
                         case ANGEL_DOOR, DEVIL_DOOR -> {
-                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character, this.getEntities()));
+                            this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
+                            if(this.checkForEndGame()){
+                                this.eventQueue.clearQueue();
+                                this.eventQueue.addEvent(event.victoryEvent());
+                            }
                         }
                         case DIAMOND -> {
                             this.eventQueue.addEvent(event.hitDiamondEvent((Diamond) e));
                         }
                         case RED_PUDDLE, BLUE_PUDDLE, PURPLE_PUDDLE -> {
                             this.eventQueue.addEvent(event.hitPlatformEvent(e, character));
-                            this.eventQueue.addEvent(event.hitPuddleEvent((Puddle) e, character));
+                            if (((Puddle) e).killPlayer(character)) {
+                                this.eventQueue.addEvent(event.gameOverEvent());
+                            }
                         }
                         default -> throw new IllegalArgumentException();
                     }
                 });
-
+                
         this.freeObject(character);
     }
 

@@ -10,12 +10,12 @@ import java.util.Optional;
 import it.unibo.dna.common.Position2d;
 import it.unibo.dna.common.Vector2d;
 import it.unibo.dna.model.object.EntityFactoryImpl;
-import it.unibo.dna.model.object.movableEntity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.PlayerImpl;
 import it.unibo.dna.model.object.player.Entity.EntityType;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.api.EntityFactory;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 
 /**
  * Represents a level in the game, containing entities and characters.
@@ -157,7 +157,7 @@ public class Level {
     private void getFile(int lvl) {
         switch (lvl) {
             case 1:
-                nameFile = "src\\main\\resources\\levels\\lv2.txt";
+                nameFile = "src\\main\\resources\\levels\\lv1.txt";
                 break;
             case 2:
                 nameFile = "src\\main\\resources\\levels\\lv2.txt";

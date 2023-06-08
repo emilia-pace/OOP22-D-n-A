@@ -4,7 +4,7 @@ package it.unibo.dna.model.object.api;
 import java.util.Optional;
 
 import it.unibo.dna.common.Position2d;
-import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 
 /**
@@ -12,19 +12,19 @@ import it.unibo.dna.model.object.player.Entity;
  */
 public interface EntityFactory {
 
-    static int DEF_HEIGHT = 4;
-    static int DEF_WIDTH = 4;
-    static int DIAMOND_WIDTH = 6;
-    static int DIAMOND_HEIGHT = 6;
-    static int BUTTON_HEIGHT = 2;
-    static int LEVER_HEIGHT = 5;
-    static int PUDDLE_HEIGHT = 3;
-    static int PUDDLE_WIDTH = 10;
-    static int DOOR_HEIGHT = 15;
-    static int DOOR_WIDTH = 10;
-    static int PLATFORM_WIDTH = 40;
-    static int PLAYER_HEIGHT = 7;
-    static int PLAYER_WIDTH = 6;
+    int DEF_HEIGHT = 4;
+    int DEF_WIDTH = 4;
+    int DIAMOND_WIDTH = 6;
+    int DIAMOND_HEIGHT = 6;
+    int BUTTON_HEIGHT = 2;
+    int LEVER_HEIGHT = 5;
+    int PUDDLE_HEIGHT = 3;
+    int PUDDLE_WIDTH = 10;
+    int DOOR_HEIGHT = 15;
+    int DOOR_WIDTH = 10;
+    int PLATFORM_WIDTH = 40;
+    int PLAYER_HEIGHT = 7;
+    int PLAYER_WIDTH = 6;
 
     /**
      * A method that creates an Entity of a wanted type.
@@ -36,6 +36,6 @@ public interface EntityFactory {
      * Two positions should be passed if the Entity being created is of the type MOVABLEPLATFORM
      * @return the Entity created
      */
-    public Entity createEntity(Optional<MovablePlatform> movablePlatform,Entity.EntityType type, Position2d ... position); 
+    Entity createEntity(Optional<MovablePlatform> movablePlatform,Entity.EntityType type, Position2d ... position); 
 
 }

@@ -1,5 +1,9 @@
 package it.unibo.dna.graphics;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.LoggerFactoryFriend;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,17 +16,17 @@ import java.io.File;
 import java.io.IOException;
 
 import it.unibo.dna.model.object.api.EntityFactory;
-import it.unibo.dna.model.object.movableEntity.MovablePlatform;
+import it.unibo.dna.model.object.movableentity.MovablePlatform;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.StateObserver;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.stillEntity.impl.AbstractEntity;
-import it.unibo.dna.model.object.stillEntity.impl.ActivableObjectImpl;
-import it.unibo.dna.model.object.stillEntity.impl.Diamond;
-import it.unibo.dna.model.object.stillEntity.impl.Door;
-import it.unibo.dna.model.object.stillEntity.impl.Platform;
-import it.unibo.dna.model.object.stillEntity.impl.Puddle;
-import it.unibo.dna.model.object.stillEntity.impl.Door.DoorState;
+import it.unibo.dna.model.object.stillentity.impl.AbstractEntity;
+import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
+import it.unibo.dna.model.object.stillentity.impl.Diamond;
+import it.unibo.dna.model.object.stillentity.impl.Door;
+import it.unibo.dna.model.object.stillentity.impl.Platform;
+import it.unibo.dna.model.object.stillentity.impl.Puddle;
+import it.unibo.dna.model.object.stillentity.impl.Door.DoorState;
 
 /**
  * A class for loading, storing and returning images of the elements of the
@@ -32,6 +36,7 @@ public class ImageManager {
 
     private final Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
     private final List<StateObserver> obsPlayers = new ArrayList<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageManager.class);
 
     /**
      * Constructs an ImageManager object with the given player list.
@@ -66,11 +71,11 @@ public class ImageManager {
     public Image getImage(final Entity entity) {
         Image image = getDiamondImage();
         if (entity instanceof Door) {
-            image = getDoorImage(((Door) entity));
+            image = getDoorImage((Door) entity);
         } else if (entity instanceof ActivableObjectImpl) {
-            image = getActObjImage(((ActivableObjectImpl) entity));
+            image = getActObjImage((ActivableObjectImpl) entity);
         } else if (entity instanceof Puddle) {
-            image = getPuddleImage(((Puddle) entity));
+            image = getPuddleImage((Puddle) entity);
         } else if (entity instanceof Platform) {
             image = getPlatformImage();
         } else if (entity instanceof MovablePlatform) {
@@ -136,7 +141,7 @@ public class ImageManager {
             diamondImage.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("diamond.png")),
                     EntityFactory.DIAMOND_HEIGHT, EntityFactory.DIAMOND_WIDTH));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("IOEexception occurred", e);
         }
         this.map.put(Door.class, doorImageList);
         this.map.put(ActivableObjectImpl.class, activableObjectImageList);
@@ -168,8 +173,8 @@ public class ImageManager {
      * @return the Image of the puddle
      */
     public Image getPuddleImage(final Puddle puddle) {
-        Entity.EntityType type = puddle.getType();
-        List<Image> puddleImages = this.map.get(Puddle.class);
+        final Entity.EntityType type = puddle.getType();
+        final List<Image> puddleImages = this.map.get(Puddle.class);
         if (type.equals(Entity.EntityType.BLUE_PUDDLE)) {
             return puddleImages.get(0);
         } else if (type.equals(Entity.EntityType.RED_PUDDLE)) {

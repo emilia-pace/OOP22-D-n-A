@@ -14,17 +14,21 @@ public interface MenuFactory {
 
     /**
      * Creates and returns a game over menu.
+     * @param i
      *
      * @return The created game over menu.
      */
-    GameMenu gameOverMenu();
+    GameMenu gameOverMenu(int i);
 
     /**
      * Creates and returns a victory menu with the specified total score.
+     * @param i
      *
      * @return The created victory menu.
      */
-    GameMenu victoryMenu();
+    GameMenu victoryMenu(int i);
+
+    GameMenu lastVictoryMenu();
 
     GameMenu pauseMenu();
 }

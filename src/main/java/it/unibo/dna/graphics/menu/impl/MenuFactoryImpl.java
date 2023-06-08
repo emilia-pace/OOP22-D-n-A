@@ -23,11 +23,11 @@ import it.unibo.dna.graphics.menu.api.MenuFactory;
  * Provides methods to create different menus for the game.
  */
 public class MenuFactoryImpl extends JFrame implements MenuFactory {
-    private int level = 1;
     private static final int MENUHEIGH = 600;
     private static final int MENUWIDTH = 800;
     private GameThread gameThread;
     private GameEngine gameEngine;
+
 
    public MenuFactoryImpl(final GameThread gameT) {
         this.gameThread = gameT;
@@ -49,7 +49,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JButton guide = getGuideButton();
                 JButton quit = getQuitButton();
                 JLabel logoLabel = new JLabel(new ImageIcon(ClassLoader.getSystemResource("logo.png")));
-
+    
                 startMenu.getContentPane().setLayout(new BorderLayout());
                 startMenu.setSize(MENUWIDTH, MENUHEIGH);
                 startMenu.getContentPane().setBackground(Color.BLACK);
@@ -78,7 +78,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     @Override
-    public GameMenu gameOverMenu() {
+    public GameMenu gameOverMenu(int lvl) {
         return new GameMenu() {
 
             /**
@@ -88,18 +88,15 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             @Override
             public JFrame createMenuFrame() {
                 JFrame gameOverFrame = new JFrame("GameOver");
-                JButton restart = getRestartButton(gameOverFrame);
+                JButton restart = getRestartButton(gameOverFrame, lvl);
                 JButton quit = getQuitButton();
-                JLabel score = getScorLabel();
+                JLabel score = getScoreLabel();
                 JPanel panel = new JPanel();
 
                 panel.add(score);
                 panel.add(restart);
                 panel.add(quit);
-                gameOverFrame.getContentPane()
-                        .setLayout(new BoxLayout(gameOverFrame.getContentPane(), BoxLayout.Y_AXIS));
                 gameOverFrame.setSize(MENUWIDTH, MENUWIDTH);
-                gameOverFrame.getContentPane().setBackground(Color.BLACK);
 
                 gameOverFrame.getContentPane().add(panel);
                 gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,7 +110,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     @Override
-    public GameMenu victoryMenu() {
+    public GameMenu victoryMenu(int lvl) {
         return new GameMenu() {
 
             /**
@@ -123,9 +120,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             @Override
             public JFrame createMenuFrame() {
                 JFrame victoryFrame = new JFrame("You Won");
-                JButton nextLevel = getNextLevelButton(victoryFrame);
+                JButton nextLevel = getNextLevelButton(victoryFrame, lvl);
                 JButton quit = getQuitButton();
-                JLabel score = getScorLabel();
+                JLabel score = getScoreLabel();
                 JPanel panel = new JPanel();
 
 
@@ -152,9 +149,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         return new GameMenu() {
             @Override
             public JFrame createMenuFrame() {
-                System.err.println(getLevel());
                 JFrame pauseMenu = new JFrame();
-                JButton restart = getRestartButton(pauseMenu);
+                JButton restart = getRestartButton(pauseMenu, gameEngine.getLvl());
                 JButton quit = getQuitButton();
                 JPanel panel = new JPanel();
 
@@ -228,9 +224,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * Creates and returns the restart button for the game over menu.
      * @return The JButton representing the restart button.
      */
+    public JButton getRestartButton(JFrame menu, int lvl) {
     public JButton getRestartButton(final JFrame menu) {
         JButton restartButton = new JButton("Restart");
-        int lvl = getLevel();
         ActionListener al = new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 gameThread.interrupt();
@@ -254,16 +250,16 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     /**
      * Creates and returns the next level button for the victory menu.
      * @param victoryFrame The JFrame of the victory menu.
+     * @param lvl
      * @return The JButton representing the next level button.
      */
-    public JButton getNextLevelButton(final JFrame victoryFrame) {
+    public JButton getNextLevelButton(final JFrame victoryFrame, int lvl) {
         JButton nextLevelButton = new JButton("Next");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 victoryFrame.dispose();
-                setNextLevel();
                 try {
-                    gameEngine = new GameEngine(getLevel());
+                    gameEngine = new GameEngine(lvl);
                     gameThread.setGameEngine(gameEngine);
                     gameEngine.setGameThread(gameThread);
                     gameThread.start();
@@ -277,17 +273,41 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         return nextLevelButton;
     }
 
-    private int getLevel() {
-        return this.level;
+    private JLabel getScoreLabel() {
+        return new JLabel("Score:   " + gameEngine.getScore());
+
     }
 
-    private int setNextLevel() {
-        this.level++;
-        return this.level;
-    }
+    @Override
+    public GameMenu lastVictoryMenu() {
+        return new GameMenu() {
 
-    public JLabel getScorLabel() {
-        return new JLabel("Score: " + this.gameEngine.getScore());
+            @Override
+            public JFrame createMenuFrame() {
+                JFrame victoryFrame = new JFrame("You Won");
+                JButton quit = getQuitButton();
+                JLabel score = getScoreLabel();
+                JLabel winner = new JLabel("WINNER");
+                JPanel panel = new JPanel();
+
+
+                panel.add(score);
+                panel.add(quit);
+                panel.add(winner);
+                victoryFrame.setSize(800, 600);
+
+
+                victoryFrame.getContentPane().add(panel);
+                victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                victoryFrame.setLocationRelativeTo(null);
+                victoryFrame.setVisible(true);
+
+                return victoryFrame;
+            }
+
+        };
     }
+    
+
 
 }

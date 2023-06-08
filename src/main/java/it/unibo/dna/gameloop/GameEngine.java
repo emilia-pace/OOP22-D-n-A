@@ -19,13 +19,14 @@ import it.unibo.dna.model.game.level.Level;
 public class GameEngine implements Runnable {
     private Display display;
     private GameState game;
-    private Level level;
+    private Level levelConstruct;
     private boolean running;
     private final double rateUpdate = 1.0d / 60.0d;
     private static GameThread gameThread;
     private MenuFactory menuFactory;
     private InputControl angelInputControl = new InputControlImpl();
     private InputControl devilInputControl = new InputControlImpl();
+    private int lvl;
 
     /**
      * Constructs a GameEngine object with the specified level number.
@@ -34,7 +35,8 @@ public class GameEngine implements Runnable {
      * @throws IOException if an I/O error occurs while loading the level.
      */
     public GameEngine(int lvl) throws IOException {
-        this.level = new Level(lvl);
+        this.levelConstruct = new Level(lvl);
+        this.lvl = lvl;
     }
 
     public void setGameThread(GameThread gameT) {
@@ -50,14 +52,19 @@ public class GameEngine implements Runnable {
         return game.getScore();
     }
 
+    public int getLvl() {
+        return this.lvl;
+
+    }
+
     /**
      * Starts the game loop and keeps updating and rendering the game until stopped.
      */
     @Override
     public void run() {
-        this.display = new Display(this.level.getCharacters(), this.menuFactory, this.angelInputControl, this.devilInputControl);
+        this.display = new Display(this.levelConstruct.getCharacters(), this.menuFactory, this.angelInputControl, this.devilInputControl);
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
-                this.level.getEntities(), this.level.getCharacters());
+                this.levelConstruct.getEntities(), this.levelConstruct.getCharacters());
         running = true;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();

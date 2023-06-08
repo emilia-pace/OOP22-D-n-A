@@ -21,7 +21,7 @@ public class Diamond extends  AbstractEntity {
         super(p, h, w, Entity.EntityType.DIAMOND);
         this.value = v;
     }
-    
+
     /**
      * 
      * @return the value of the diamond

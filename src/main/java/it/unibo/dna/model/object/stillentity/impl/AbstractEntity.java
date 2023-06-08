@@ -12,7 +12,7 @@ public abstract class AbstractEntity implements Entity {
 
     private final BoundingBox box;
     private final Entity.EntityType type;
-    
+
     /**
      * Constructs a new AbstractEntity object.
      *

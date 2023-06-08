@@ -55,7 +55,6 @@ public interface EventFactory {
      * Models the collision event with a door.
      * @param door the hit door
      * @param player the player
-     * @param entities the list of {@link Entity}
      * @return the new event
      */
     Event hitDoorEvent(Door door, Player player);

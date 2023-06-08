@@ -17,5 +17,5 @@ public class Platform extends  AbstractEntity {
     public Platform(final Position2d position, final double height, final double width) {
         super(position, height, width, Entity.EntityType.PLATFORM);
     }
-    
+
 }

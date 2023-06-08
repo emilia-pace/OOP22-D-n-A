@@ -7,8 +7,55 @@ import it.unibo.dna.model.box.api.BoundingBox;
  */
 public interface Entity {
 
-    enum EntityType { PLAYER, ANGEL_DOOR, DEVIL_DOOR, LEVER, BUTTON, BLUE_PUDDLE,
-                     RED_PUDDLE, PURPLE_PUDDLE, PLATFORM, MOVABLEPLATFORM, DIAMOND}
+    /**
+     * An enumeration that describes the different types of entities.
+     */
+    enum EntityType { 
+        /**
+         * Represents the player.
+         */
+        PLAYER,
+        /**
+         * Represents the door that the angel can open.
+         */ 
+        ANGEL_DOOR, 
+        /**
+         * Represents the door that the devil can open.
+         */
+        DEVIL_DOOR, 
+        /**
+         * Represents a lever.
+         */
+        LEVER, 
+        /**
+         * Represents a button.
+         */
+        BUTTON, 
+        /**
+         * Represents a puddle that only the angel can walk on.
+         */
+        BLUE_PUDDLE,
+        /**
+         * Represents a puddle that only the devil can walk on.
+         */
+        RED_PUDDLE, 
+        /**
+         * Represents a puddle that no character can walk on.
+         */
+        PURPLE_PUDDLE, 
+        /**
+         * Represents a platform.
+         */
+        PLATFORM, 
+        /**
+         * Represents a platform that can be moved by a button or a lever.
+         */
+        MOVABLEPLATFORM, 
+        /**
+         * Represents a diamond.
+         */
+        DIAMOND;
+    }
 
     /**
      * @return the position of the entity

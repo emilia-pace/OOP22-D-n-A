@@ -75,7 +75,7 @@ public class MovablePlatform extends AbstractMovableEntity {
     }
 
     /**
-     * A setter for the last vector of the movableplatform
+     * A setter for the last vector of the movableplatform.
      * @param previousVector the vector to be set
      */
     public void setPreviousVector(final Vector2d previousVector) {

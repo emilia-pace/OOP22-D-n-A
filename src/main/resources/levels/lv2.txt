@@ -6,6 +6,7 @@ platform 50 95
 platform 40 75
 platform 60 75
 platform 80 75
+platform 20 60
 bPuddle 60 75
 bPuddle 70 75
 movablePlatform 90 95 120 95
@@ -13,3 +14,5 @@ lever 50 110
 movablePlatform 0 75 20 75
 button 60 93
 button 85 73
+movablePlatform 60 60 40 40
+button 25 58

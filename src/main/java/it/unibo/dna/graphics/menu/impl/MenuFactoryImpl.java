@@ -49,7 +49,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 JButton guide = getGuideButton();
                 JButton quit = getQuitButton();
                 JLabel logoLabel = new JLabel(new ImageIcon(ClassLoader.getSystemResource("logo.png")));
-
+    
                 startMenu.getContentPane().setLayout(new BorderLayout());
                 startMenu.setSize(MENUWIDTH, MENUHEIGH);
                 startMenu.getContentPane().setBackground(Color.BLACK);
@@ -78,7 +78,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     @Override
-    public GameMenu gameOverMenu(int lvl) {
+    public GameMenu gameOverMenu(final int lvl) {
         return new GameMenu() {
 
             /**
@@ -96,7 +96,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 panel.add(score);
                 panel.add(restart);
                 panel.add(quit);
-                gameOverFrame.setSize(MENUWIDTH, MENUWIDTH);
+                gameOverFrame.setSize(MENUWIDTH, MENUHEIGH);
 
                 gameOverFrame.getContentPane().add(panel);
                 gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,7 +110,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     @Override
-    public GameMenu victoryMenu(int lvl) {
+    public GameMenu victoryMenu(final int lvl) {
         return new GameMenu() {
 
             /**
@@ -129,7 +129,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 panel.add(score);
                 panel.add(nextLevel);
                 panel.add(quit);
-                victoryFrame.setSize(MENUWIDTH, MENUHEIGH);      
+                victoryFrame.setSize(MENUWIDTH, MENUHEIGH);       
 
                 victoryFrame.getContentPane().add(panel);
                 victoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -250,7 +250,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * @param lvl
      * @return The JButton representing the next level button.
      */
-    public JButton getNextLevelButton(final JFrame victoryFrame, int lvl) {
+    public JButton getNextLevelButton(final JFrame victoryFrame, final int lvl) {
         JButton nextLevelButton = new JButton("Next");
         ActionListener al = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -291,7 +291,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 panel.add(score);
                 panel.add(quit);
                 panel.add(winner);
-                victoryFrame.setSize(800, 600);
+                victoryFrame.setSize(MENUWIDTH, MENUHEIGH);
 
 
                 victoryFrame.getContentPane().add(panel);

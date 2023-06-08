@@ -6,6 +6,8 @@ import it.unibo.dna.graphics.Display;
 import it.unibo.dna.graphics.menu.api.MenuFactory;
 import it.unibo.dna.graphics.menu.impl.MenuFactoryImpl;
 import it.unibo.dna.graphics.sound.SoundManager;
+import it.unibo.dna.input.api.InputControl;
+import it.unibo.dna.input.impl.InputControlImpl;
 import it.unibo.dna.model.game.gamestate.api.GameState;
 import it.unibo.dna.model.game.gamestate.impl.GameStateImpl;
 import it.unibo.dna.model.game.level.Level;
@@ -22,6 +24,8 @@ public class GameEngine implements Runnable {
     private final double rateUpdate = 1.0d / 60.0d;
     private static GameThread gameThread;
     private MenuFactory menuFactory;
+    private InputControl angelInputControl = new InputControlImpl();
+    private InputControl devilInputControl = new InputControlImpl();
     private int lvl;
 
     /**
@@ -44,7 +48,7 @@ public class GameEngine implements Runnable {
         return gameThread;
     }
 
-    public double getScore(){
+    public double getScore() {
         return game.getScore();
     }
 
@@ -58,7 +62,7 @@ public class GameEngine implements Runnable {
      */
     @Override
     public void run() {
-        this.display = new Display(this.levelConstruct.getCharacters(), this.menuFactory);
+        this.display = new Display(this.levelConstruct.getCharacters(), this.menuFactory, this.angelInputControl, this.devilInputControl);
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
                 this.levelConstruct.getEntities(), this.levelConstruct.getCharacters());
         running = true;
@@ -72,7 +76,9 @@ public class GameEngine implements Runnable {
             lastUpdate = currentTime;
 
             while (accumulator >= rateUpdate) {
-                if(running) {
+                if (running) {
+                    this.angelInputControl.computeAll();
+                    this.devilInputControl.computeAll();
                     update();
                 }
                 accumulator -= rateUpdate;

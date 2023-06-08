@@ -9,6 +9,7 @@ import java.util.List;
 
 import it.unibo.dna.graphics.image.ImageManager;
 import it.unibo.dna.graphics.menu.api.MenuFactory;
+import it.unibo.dna.input.api.InputControl;
 import it.unibo.dna.input.impl.KeyboardHandler;
 import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.player.api.Player;
@@ -63,7 +64,8 @@ public class Display extends JFrame {
      * @param playerList The list of players in the game.
      * @param menuFact
      */
-    public Display(final List<Player> playerList, final MenuFactory menuFact) {
+    public Display(final List<Player> playerList, final MenuFactory menuFact, InputControl angelInputControl,
+            InputControl devilInputControl) {
         this.menuFactory = menuFact;
         setTitle("D-n-A");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -100,10 +102,10 @@ public class Display extends JFrame {
         playerList.forEach(p -> {
             if (p.getPlayerType().equals(Player.PlayerType.ANGEL)) {
                 canvas.addKeyListener(new KeyboardHandler(KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT,
-                        KeyEvent.VK_UP, p));
+                        KeyEvent.VK_UP, p, angelInputControl));
             } else {
                 canvas.addKeyListener(
-                        new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, p));
+                        new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, p, devilInputControl));
             }
         });
         loadBackgroundImage("background.jpg");

@@ -168,14 +168,14 @@ public class GameStateImpl implements GameState {
      * Checks if both doors are open.
      * @return true if they are both open
      */
-    private boolean checkForEndGame(){
+    private boolean checkForEndGame() {
         return entities.stream()
             .filter(entity -> entity instanceof Door)
             .map(entity -> (Door) entity)
             .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
             .count() == 2;
     }
-    
+
     /**
      * Checks the collision of a character with the entities in the game.
      * 
@@ -198,7 +198,7 @@ public class GameStateImpl implements GameState {
                         case LEVER -> this.eventQueue.addEvent(event.hitLeverEvent((ActivableObjectImpl) e, character));
                         case ANGEL_DOOR, DEVIL_DOOR -> {
                             this.eventQueue.addEvent(event.hitDoorEvent((Door) e, character));
-                            if(this.checkForEndGame()){
+                            if (this.checkForEndGame()) {
                                 this.eventQueue.clearQueue();
                                 this.eventQueue.addEvent(event.victoryEvent());
                             }
@@ -215,8 +215,8 @@ public class GameStateImpl implements GameState {
                         }
                         default -> throw new IllegalArgumentException();
                     }
-                });
-                
+                });     
+ 
         this.freeObject(character);
     }
 

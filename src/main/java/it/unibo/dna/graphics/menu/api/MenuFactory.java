@@ -24,7 +24,6 @@ public interface MenuFactory {
      * Creates and returns a victory menu with the specified total score.
      * @param i
      *
-     * @param totalScore The total score to display in the victory menu.
      * @return The created victory menu.
      */
     GameMenu victoryMenu(int i);

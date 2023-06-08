@@ -98,7 +98,6 @@ public class ImageManager {
      * of images.
      */
     private void loadImages() {
-        String path = "src\\main\\resources\\";
         List<Image> doorImageList = new ArrayList<>();
         List<Image> activableObjectImageList = new ArrayList<>();
         List<Image> puddleImageList = new ArrayList<>();
@@ -106,33 +105,35 @@ public class ImageManager {
         List<Image> movablePlatformImageList = new ArrayList<>();
         List<Image> diamondImage = new ArrayList<>();
         try {
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo.PNG")),
+            doorImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("porta_angelo.PNG")),
                     EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_angelo_aperta.PNG")),
+            doorImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("porta_angelo_aperta.PNG")),
                     EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo.PNG")),
+            doorImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("porta_diavolo.PNG")),
                     EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
-            doorImageList.add(this.resizeImage(ImageIO.read(new File(path + "porta_diavolo_aperta.PNG")),
+            doorImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("porta_diavolo_aperta.PNG")),
                     EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_off.PNG")),
+            activableObjectImageList
+                    .add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Bottone_off.PNG")),
+                            EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Bottone_on.PNG")),
                     EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Bottone_on.PNG")),
-                    EntityFactory.BUTTON_HEIGHT, EntityFactory.DEF_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_off.PNG")),
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Leva_off.PNG")),
                     EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
-            activableObjectImageList.add(this.resizeImage(ImageIO.read(new File(path + "Leva_on.PNG")),
+            activableObjectImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Leva_on.PNG")),
                     EntityFactory.LEVER_HEIGHT, EntityFactory.DEF_WIDTH));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_azzurra.jpg")),
+            puddleImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Pozza_azzurra.jpg")),
                     EntityFactory.PUDDLE_HEIGHT, EntityFactory.PUDDLE_WIDTH));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_rossa.jpg")),
+            puddleImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Pozza_rossa.jpg")),
                     EntityFactory.PUDDLE_HEIGHT, EntityFactory.PUDDLE_WIDTH));
-            puddleImageList.add(this.resizeImage(ImageIO.read(new File(path + "Pozza_viola.jpg")),
+            puddleImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Pozza_viola.jpg")),
                     EntityFactory.PUDDLE_HEIGHT, EntityFactory.PUDDLE_WIDTH));
-            platformImageList.add(this.resizeImage(ImageIO.read(new File(path + "Piattaforma_terra.jpg")),
+            platformImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("Piattaforma_terra.jpg")),
                     EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
-            movablePlatformImageList.add(this.resizeImage(ImageIO.read(new File(path + "MovablePlatform.jpg")),
-                    EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
-            diamondImage.add(this.resizeImage(ImageIO.read(new File(path + "diamond.png")),
+            movablePlatformImageList
+                    .add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("MovablePlatform.jpg")),
+                            EntityFactory.DEF_HEIGHT, EntityFactory.PLATFORM_WIDTH));
+            diamondImage.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("diamond.png")),
                     EntityFactory.DIAMOND_HEIGHT, EntityFactory.DIAMOND_WIDTH));
         } catch (IOException e) {
             e.printStackTrace();

@@ -19,7 +19,7 @@ public class CommandFactoryImpl implements CommandFactory {
      *
      * @param player the player
      */
-    @SuppressWarnings("mutable")
+    @SuppressWarnings(value = "M V EI2")
     public CommandFactoryImpl(final Player player) {
         this.player = player;
     }

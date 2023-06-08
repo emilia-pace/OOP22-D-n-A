@@ -22,20 +22,21 @@ import java.io.IOException;
  */
 public class Display extends JFrame {
 
-        public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-        public static final int BORDER = (int) SCREEN_SIZE.getHeight() / 5;
-        private static final int DIM = (int) SCREEN_SIZE.getHeight() - BORDER;
-        public static final int TILE_SIZE = DIM / 100;
-        private Canvas canvas;
-        public ImageManager imgMgr;
-        private JPanel jpanel;
-        private JButton pauseButton;
-        MenuFactory menuFactory;
-        private BufferedImage backgroundImage;
+    public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final int BORDER = (int) SCREEN_SIZE.getHeight() / 5;
+    private static final int DIM = (int) SCREEN_SIZE.getHeight() - BORDER;
+    public static final int TILE_SIZE = DIM / 100;
+    private Canvas canvas;
+    public ImageManager imgMgr;
+    private JPanel jpanel;
+    private JButton pauseButton;
+    MenuFactory menuFactory;
+    private BufferedImage backgroundImage;
 
     /**
      * Constructs a Display object with the specified player list.
-     * @param playerList The list of players in the game.
+     * 
+     * @param playerList   The list of players in the game.
      * @param menuFactory2
      */
     public Display(List<Player> playerList, MenuFactory menuFact) {
@@ -44,7 +45,6 @@ public class Display extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setUndecorated(true);
-        
 
         pauseButton = new JButton("\u23F8");
 
@@ -67,7 +67,6 @@ public class Display extends JFrame {
         pack();
 
         canvas.createBufferStrategy(3);
-        
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -83,14 +82,14 @@ public class Display extends JFrame {
                         new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, p));
             }
         });
-        loadBackgroundImage("src\\main\\resources\\background.jpg");
-                canvas.requestFocus();
+        loadBackgroundImage("background.jpg");
+        canvas.requestFocus();
 
-     }
+    }
 
     private void loadBackgroundImage(String string) {
         try {
-            backgroundImage = ImageIO.read(new File(string));
+            backgroundImage = ImageIO.read(ClassLoader.getSystemResource(string));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,13 +97,13 @@ public class Display extends JFrame {
 
     /**
      * Renders the entities and players on the display.
+     * 
      * @param entities The list of entities to render.
-     * @param players The list of players to render.
+     * @param players  The list of players to render.
      */
     public void render(List<Entity> entities, List<Player> players) {
         BufferStrategy bufferStrategy = canvas.getBufferStrategy();
         Graphics graphics = bufferStrategy.getDrawGraphics();
-
 
         graphics.drawImage(backgroundImage, 0, 0, canvas.getWidth(), canvas.getHeight(), this);
 
@@ -122,6 +121,7 @@ public class Display extends JFrame {
 
     /**
      * Returns the screen dimension in terms of tile size.
+     * 
      * @return The screen dimension in tile size.
      */
     public int getScreenDimension() {

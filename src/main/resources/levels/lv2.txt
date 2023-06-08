@@ -14,5 +14,5 @@ lever 50 110
 movablePlatform 0 75 20 75
 button 60 93
 button 85 73
-movablePlatform 60 60 40 40
+movablePlatform 60 60 10 40
 button 25 58

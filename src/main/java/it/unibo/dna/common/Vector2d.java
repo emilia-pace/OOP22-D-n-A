@@ -9,7 +9,7 @@ public class Vector2d {
     private double x, y;
 
     /**
-     * Constructs a new {@code Vector2d} object with the specified coordinates.
+     * Constructs a new Vector2d object with the specified coordinates.
      *
      * @param x the first coordinate of the vector
      * @param y the second coordinate of the vector

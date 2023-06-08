@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-import java.awt.*;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -30,14 +30,16 @@ import it.unibo.dna.model.object.stillEntity.impl.Door.DoorState;
  */
 public class ImageManager {
 
-    private Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
-    private List<StateObserver> obsPlayers = new ArrayList<>();
+    private final Map<Class<? extends AbstractEntity>, List<Image>> map = new HashMap<>();
+    private final List<StateObserver> obsPlayers = new ArrayList<>();
 
-    public ImageManager(List<Player> playerList) {
-        // caricamento di tutte le immagini
-        for (int i = 0; i < playerList.size(); i++) {
-            obsPlayers.add(new StateObserver(playerList.get(i).getState(), playerList.get(i).getPlayerType()));
-        }
+    /**
+     * Constructs an ImageManager object with the given player list.
+     *
+     * @param playerList the list of players in the game
+     */
+    public ImageManager(final List<Player> playerList) {
+        playerList.forEach(p -> obsPlayers.add(new StateObserver(p.getState(), p.getPlayerType())));
         loadImages();
     }
 
@@ -47,7 +49,7 @@ public class ImageManager {
      * @param player the player to retrieve the image for
      * @return the image that matches the player
      */
-    public Image getPlayerImage(Player player) {
+    public Image getPlayerImage(final Player player) {
         return obsPlayers.stream()
                 .filter(e -> e.getPlayerType().equals(player.getPlayerType()))
                 .findFirst()
@@ -56,7 +58,7 @@ public class ImageManager {
     }
 
     /**
-     * A method to get the image for any Entity
+     * A method to get the image for any Entity.
      * 
      * @param entity the Entity that needs its Image
      * @return the Image of the Entity
@@ -144,17 +146,7 @@ public class ImageManager {
     }
 
     /**
-     * Returns the list of players' StateObserver.
-     *
-     * @return the list of players' StateObserver
-     */
-    @SuppressWarnings("EI")
-    public List<StateObserver> getObservers() {
-        return this.obsPlayers;
-    }
-
-    /**
-     * A method that gets the image for a {@link ActivableObject}
+     * A method that gets the image for a {@link ActivableObject}.
      * 
      * @param activableObject the activableobject we need an image for
      * @return the image of the activableobject
@@ -202,7 +194,7 @@ public class ImageManager {
     }
 
     /**
-     * A method that gets the image for the {@link MovablePlatform}
+     * A method that gets the image for the {@link MovablePlatform}.
      * 
      * @return the Image of the platform
      */

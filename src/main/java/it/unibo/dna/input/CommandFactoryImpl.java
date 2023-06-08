@@ -19,6 +19,7 @@ public class CommandFactoryImpl implements CommandFactory {
      *
      * @param player the player
      */
+    @SuppressWarnings("mutable")
     public CommandFactoryImpl(final Player player) {
         this.player = player;
     }
@@ -51,7 +52,7 @@ public class CommandFactoryImpl implements CommandFactory {
     @Override
     public Command jump() {
         return () -> {
-            if (!this.player.getState().getX().equals(StateEnum.STATE_JUMPING)) {
+            if (!this.player.getStateCopy().getX().equals(StateEnum.STATE_JUMPING)) {
                 this.player.setVectorY(-Player.JUMPVELOCITY);
                 this.player.setStateX(StateEnum.STATE_JUMPING);
                 if (this.player.getPlayerType().equals(PlayerType.ANGEL)) {

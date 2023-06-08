@@ -31,6 +31,5 @@ public class GameThread extends Thread {
         gameEngine.stop();
         this.gameEngine.getMenuFactory().gameOverMenu().createMenuFrame();
     }
-    
 
 }

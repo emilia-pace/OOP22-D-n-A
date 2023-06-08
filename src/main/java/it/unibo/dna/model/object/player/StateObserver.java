@@ -20,13 +20,18 @@ import javax.swing.ImageIcon;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * A observer class of a player's state.
  */
 public class StateObserver implements PropertyChangeListener {
 
-    private Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
-    private Player.PlayerType type;
+    private static final Logger LOGGER = LoggerFactory.getLogger(StateObserver.class);
+
+    private final Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap = new HashMap<>();
+    private final Player.PlayerType type;
     private Image playerImage;
 
     /**
@@ -48,7 +53,7 @@ public class StateObserver implements PropertyChangeListener {
      *
      * @param state The state object to be initialized.
      */
-    private void inizialize(State state) {
+    private void inizialize(final State state) {
         state.addChangeListeners(this);
     }
 
@@ -57,9 +62,9 @@ public class StateObserver implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(final PropertyChangeEvent event) {
-        State state = ((State) event.getSource());
-        playerImage = (state.getX().equals(StateEnum.STATE_STANDING)
-                && (state.getY().equals(StateEnum.STATE_LEFT) || state.getY().equals(StateEnum.STATE_RIGHT)))
+        final State state = (State) event.getSource();
+        playerImage = state.getX().equals(StateEnum.STATE_STANDING)
+                && (state.getY().equals(StateEnum.STATE_LEFT) || state.getY().equals(StateEnum.STATE_RIGHT))
                         ? this.playerMap.get(state.getPairState()).get(state.getImageIndex())
                         : this.playerMap.get(state.getPairState()).get(0);
     }
@@ -73,34 +78,35 @@ public class StateObserver implements PropertyChangeListener {
      */
     private void loadPlayerImage(final Map<Pair<State.StateEnum, State.StateEnum>, List<Image>> playerMap,
             final int width, final int height) {
-        String path = (this.type.equals(Player.PlayerType.ANGEL)) ? "angel" : "devil";
+        final String path = this.type.equals(Player.PlayerType.ANGEL) ? "angel" : "devil";
+        final String relativePath = "src\\main\\resources\\playerImage\\";
         List.of(State.StateEnum.STATE_JUMPING, State.StateEnum.STATE_STANDING).forEach(state -> {
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_LEFT), new ArrayList<>());
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_RIGHT), new ArrayList<>());
             playerMap.put(new Pair<>(state, State.StateEnum.STATE_STILL), new ArrayList<>());
             try {
                 playerMap.get(new Pair<>(state, State.StateEnum.STATE_LEFT))
-                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left1.PNG"))
+                        .add(ImageIO.read(new File(relativePath + path + "_left1.PNG"))
                                 .getScaledInstance(height, width, Image.SCALE_DEFAULT));
                 playerMap.get(new Pair<>(state, State.StateEnum.STATE_RIGHT))
-                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right1.PNG"))
+                        .add(ImageIO.read(new File(relativePath + path + "_right1.PNG"))
                                 .getScaledInstance(height, width, Image.SCALE_DEFAULT));
                 playerMap.get(new Pair<>(state, State.StateEnum.STATE_STILL))
-                        .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_front.PNG"))
+                        .add(ImageIO.read(new File(relativePath + path + "_front.PNG"))
                                 .getScaledInstance(height, width, Image.SCALE_DEFAULT));
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("IOexception occured", e);
             }
         });
         try {
             playerMap.get(new Pair<>(State.StateEnum.STATE_STANDING, State.StateEnum.STATE_LEFT))
-                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_left2.PNG"))
+                    .add(ImageIO.read(new File(relativePath + path + "_left2.PNG"))
                             .getScaledInstance(height, width, Image.SCALE_DEFAULT));
             playerMap.get(new Pair<>(State.StateEnum.STATE_STANDING, State.StateEnum.STATE_RIGHT))
-                    .add(ImageIO.read(new File("src\\main\\resources\\playerImage\\" + path + "_right2.PNG"))
+                    .add(ImageIO.read(new File(relativePath + path + "_right2.PNG"))
                             .getScaledInstance(height, width, Image.SCALE_DEFAULT));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("IOexception occured", e);
         }
     }
 

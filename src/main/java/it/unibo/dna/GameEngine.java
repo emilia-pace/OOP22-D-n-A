@@ -95,14 +95,19 @@ public class GameEngine implements Runnable {
         switch (string) {
             case "angel_jump":
                 (new SoundFactoryImpl()).jumpAngelClip().start();
+                break;
             case "devil_jump":
                 (new SoundFactoryImpl()).jumpDevilClip().start();
+                break;
             case "diamond":
                 (new SoundFactoryImpl()).diamondClip().start();
+                break;
             case "game_over":
                 (new SoundFactoryImpl()).gameOverClip().start();
+                break;
             case "victory":
                 (new SoundFactoryImpl()).victoryClip().start();
+                break;
             default:
         }
     }

@@ -6,20 +6,18 @@ package it.unibo.dna.common;
  * @param <X> the type of the first element
  * @param <Y> the type of the second element
  */
-
 public class Pair<X, Y> {
 
-	private X x;
-	private Y y;
+	private final X x;
+	private final Y y;
 
 	/**
-	 * Creates a new Pair instance with the specified elements.
+	 * Constructs a Pair object with the given elements.
 	 *
 	 * @param x the first element
 	 * @param y the second element
 	 */
 	public Pair(final X x, final Y y) {
-		super();
 		this.x = x;
 		this.y = y;
 	}
@@ -69,7 +67,7 @@ public class Pair<X, Y> {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Pair other = (Pair) obj;
+		final Pair other = (Pair) obj;
 		if (x == null) {
 			if (other.x != null) {
 				return false;

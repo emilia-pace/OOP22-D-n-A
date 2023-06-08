@@ -32,7 +32,7 @@ public class EventFactoryImpl implements EventFactory {
             } else {
                 p.resetY();
             }
-            if (p.getState().getX().equals(StateEnum.STATE_JUMPING)
+            if (p.getStateCopy().getX().equals(StateEnum.STATE_JUMPING)
                     && p.getPosition().getY() < pt.getPosition().getY()) {
                 p.setStateX(StateEnum.STATE_STANDING);
             }
@@ -95,6 +95,7 @@ public class EventFactoryImpl implements EventFactory {
                     .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
                     .count();
             if (numberOfOpenedDoors == 2) {
+                game.getEventQueue().clearQueue();
                 game.getEventQueue().addEvent(this.victoryEvent());
                 System.out.println("EventFactoryImpl.hitDoorEvent()");
             }
@@ -137,7 +138,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitBorderXEvent(final Player p) {
         return game -> {
             p.resetY();
-            if (p.getState().getX().equals(StateEnum.STATE_JUMPING)) {
+            if (p.getStateCopy().getX().equals(StateEnum.STATE_JUMPING)) {
                 p.setStateX(StateEnum.STATE_STANDING);
             }
         };

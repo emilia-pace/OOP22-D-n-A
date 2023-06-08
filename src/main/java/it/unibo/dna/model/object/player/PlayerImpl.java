@@ -11,8 +11,8 @@ import it.unibo.dna.model.object.player.api.Player;
  */
 public class PlayerImpl extends AbstractMovableEntity implements Player {
 
-    private PlayerType playerType;
-    private State playerState = new State();
+    private final PlayerType playerType;
+    private final State playerState = new State();
 
     /**
      * Constructs a new PlayerImpl object.
@@ -42,8 +42,17 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("internalRepresentation")
     public State getState() {
         return this.playerState;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public State getStateCopy() {
+        return new State(this.playerState.getX(), this.playerState.getY());
     }
 
     /**
@@ -54,13 +63,19 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
         return this.playerType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setStateX(StateEnum stateX) {
+    public void setStateX(final StateEnum stateX) {
         this.playerState.setState(stateX, this.getState().getY());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setStateY(StateEnum stateY) {
+    public void setStateY(final StateEnum stateY) {
         this.playerState.setState(this.getState().getX(), stateY);
     }
 

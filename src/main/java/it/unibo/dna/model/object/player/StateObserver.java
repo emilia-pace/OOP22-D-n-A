@@ -17,7 +17,6 @@ import it.unibo.dna.model.object.player.api.Player;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.slf4j.Logger;

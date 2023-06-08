@@ -11,7 +11,6 @@ import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;
 import it.unibo.dna.model.object.stillentity.impl.Door;
-import it.unibo.dna.model.object.stillentity.impl.Puddle;
 
 /**
  * Class that implements the {@link EventFactory} interface.

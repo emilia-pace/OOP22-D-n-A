@@ -2,7 +2,6 @@ package it.unibo.dna.graphics;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.LoggerFactoryFriend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 
 import it.unibo.dna.model.object.api.EntityFactory;

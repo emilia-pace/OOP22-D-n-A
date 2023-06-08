@@ -21,6 +21,7 @@ public class EventQueue {
 
     /**
      * Adds an {@link Event} in the queue.
+     * 
      * @param event the {@Event} to add
      */
     public void addEvent(final Event event) {
@@ -36,7 +37,8 @@ public class EventQueue {
 
     /**
      * Manages all the Events in the queue.
-     * @param game the game state to manage 
+     * 
+     * @param game the game state to manage
      */
     public void manageEvents(final GameState game) {
         while (!events.isEmpty()) {

@@ -1,6 +1,7 @@
 package it.unibo.dna.input.impl;
 
 import it.unibo.dna.input.api.CommandFactory;
+import it.unibo.dna.input.api.InputControl;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.impl.State;
 
@@ -15,6 +16,7 @@ public class KeyboardHandler implements KeyListener {
     private final int commandRight, commandLeft, commandJump;
     private final State state;
     private final CommandFactory command;
+    private final InputControl inputControl;
 
     /**
      * Creates a new KeyboardHandler instance with the specified keycodes and
@@ -24,14 +26,16 @@ public class KeyboardHandler implements KeyListener {
      * @param commandLeft  the keycode for the command "left"
      * @param commandJump  the keycode for the "jump" command
      * @param character    the player linked to this keylistener
+     * @param inputControl the input control instance
      */
     public KeyboardHandler(final int commandRight, final int commandLeft, final int commandJump,
-            final Player character) {
+            final Player character, final InputControl inputControl) {
         this.commandRight = commandRight;
         this.commandLeft = commandLeft;
         this.commandJump = commandJump;
         this.state = character.getState();
         this.command = new CommandFactoryImpl(character);
+        this.inputControl = inputControl;
     }
 
     /**
@@ -41,13 +45,13 @@ public class KeyboardHandler implements KeyListener {
     public void keyPressed(final KeyEvent e) {
         final int key = e.getKeyCode();
         if (key == this.commandRight) {
-            this.command.right().execute();
+            this.inputControl.addCommand(this.command.right());
         }
         if (key == this.commandLeft) {
-            this.command.left().execute();
+            this.inputControl.addCommand(this.command.left());
         }
         if (key == this.commandJump) {
-            this.command.jump().execute();
+            this.inputControl.addCommand(this.command.jump());
         }
     }
 
@@ -60,12 +64,12 @@ public class KeyboardHandler implements KeyListener {
         switch (state.getY()) {
             case STATE_RIGHT:
                 if (key == this.commandRight) {
-                    this.command.stop().execute();
+                    this.inputControl.addCommand(this.command.stop());
                 }
                 break;
             case STATE_LEFT:
                 if (key == this.commandLeft) {
-                    this.command.stop().execute();
+                    this.inputControl.addCommand(this.command.stop());
                 }
                 break;
             default:

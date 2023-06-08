@@ -56,9 +56,9 @@ public class CommandFactoryImpl implements CommandFactory {
                 this.player.setVectorY(-Player.JUMPVELOCITY);
                 this.player.setStateX(StateEnum.STATE_JUMPING);
                 if (this.player.getPlayerType().equals(PlayerType.ANGEL)) {
-                    GameEngine.playSound("angel_jump");
+                    GameEngine.playSound("Angel_audio");
                 } else {
-                    GameEngine.playSound("devil_jump");
+                    GameEngine.playSound("Devil_audio");
                 }
 
             }

@@ -61,7 +61,7 @@ public interface EventFactory {
      * @param entities the list of {@link Entity}
      * @return the new event
      */
-    Event hitDoorEvent(Door door, Player player, List<Entity> entities);
+    Event hitDoorEvent(Door door, Player player);
 
     /**
      * Models the collision event with a lever.
@@ -77,14 +77,6 @@ public interface EventFactory {
      * @return the new event
      */
     Event hitDiamondEvent(Diamond d);
-
-    /**
-     * Models the collision event with a puddle.
-     * @param puddle the hit puddle
-     * @param player the player that touched the puddle
-     * @return the new event
-     */
-    Event hitPuddleEvent(Puddle puddle, Player player);
 
     /**
      * Models the successful completion of the level.

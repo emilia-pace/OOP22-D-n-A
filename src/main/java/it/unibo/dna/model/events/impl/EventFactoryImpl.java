@@ -1,7 +1,5 @@
 package it.unibo.dna.model.events.impl;
 
-import java.util.List;
-
 import it.unibo.dna.GameEngine;
 import it.unibo.dna.model.Score;
 import it.unibo.dna.model.events.api.Event;
@@ -84,20 +82,10 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitDoorEvent(final Door door, final Player player, final List<Entity> entities) {
+    public Event hitDoorEvent(final Door door, final Player player) {
         return game -> {
             if (door.getPlayer().isEmpty()) {
                 door.openDoor(player);
-            }
-            final double numberOfOpenedDoors = entities.stream()
-                    .filter(entity -> entity instanceof Door)
-                    .map(entity -> (Door) entity)
-                    .filter(entity -> entity.getDoorState().equals(Door.DoorState.OPEN_DOOR))
-                    .count();
-            if (numberOfOpenedDoors == 2) {
-                game.getEventQueue().clearQueue();
-                game.getEventQueue().addEvent(this.victoryEvent());
-                System.out.println("EventFactoryImpl.hitDoorEvent()");
             }
         };
     }
@@ -127,7 +115,7 @@ public class EventFactoryImpl implements EventFactory {
         return game -> {
             game.removeEntity(d);
             Score.addScore(d.getValue());
-            GameEngine.playSound("diamond");
+            GameEngine.playSound("Diamond_sound");
         };
     }
 
@@ -158,21 +146,9 @@ public class EventFactoryImpl implements EventFactory {
      * {@inheritDoc}
      */
     @Override
-    public Event hitPuddleEvent(final Puddle puddle, final Player player) {
-        return game -> {
-            if (puddle.killPlayer(player)) {
-                game.getEventQueue().addEvent(this.gameOverEvent());
-            }
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Event victoryEvent() {
         return game -> {
-            GameEngine.playSound("victory");
+            GameEngine.playSound("Victory_sound");
             GameEngine.getGameThread().victoryGame();
         };
     }
@@ -183,7 +159,7 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event gameOverEvent() {
         return game -> {
-            GameEngine.playSound("gameOver");
+            GameEngine.playSound("GameOver_sound");
             GameEngine.getGameThread().loosingGame();
         };
     }

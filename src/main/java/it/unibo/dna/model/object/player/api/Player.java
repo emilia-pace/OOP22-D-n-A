@@ -22,14 +22,14 @@ public interface Player extends MovableEntity {
     /**
      * Returns the state of the player.
      *
-     * @return the player's state
+     * @return the state of the player
      */
     State getState();
 
     /**
-     * Returns a copy of the current state.
+     * Returns a copy of the current player's state.
      *
-     * @return a copy of the current state
+     * @return a copy of the current player's state
      */
     State getStateCopy();
 

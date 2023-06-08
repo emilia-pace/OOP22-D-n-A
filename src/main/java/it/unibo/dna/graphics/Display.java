@@ -27,11 +27,11 @@ public class Display extends JFrame {
         private static final int DIM = (int) SCREEN_SIZE.getHeight() - BORDER;
         public static final int TILE_SIZE = DIM / 100;
         private Canvas canvas;
-        public ImageManager imgMgr;
+        public transient ImageManager imgMgr;
         private JPanel jpanel;
         private JButton pauseButton;
         MenuFactory menuFactory;
-        private BufferedImage backgroundImage;
+        private transient BufferedImage backgroundImage;
 
     /**
      * Constructs a Display object with the specified player list.
@@ -71,7 +71,7 @@ public class Display extends JFrame {
 
         setLocationRelativeTo(null);
         setVisible(true);
-
+        
         imgMgr = new ImageManager(playerList);
 
         playerList.forEach(p -> {
@@ -84,7 +84,7 @@ public class Display extends JFrame {
             }
         });
         loadBackgroundImage("src\\main\\resources\\background.jpg");
-        canvas.requestFocus();
+                canvas.requestFocus();
 
      }
 

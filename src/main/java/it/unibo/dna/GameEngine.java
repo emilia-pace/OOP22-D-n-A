@@ -5,7 +5,7 @@ import java.io.IOException;
 import it.unibo.dna.graphics.Display;
 import it.unibo.dna.graphics.MenuFactory;
 import it.unibo.dna.graphics.MenuFactoryImpl;
-import it.unibo.dna.graphics.SoundFactoryImpl;
+import it.unibo.dna.graphics.SoundManager;
 import it.unibo.dna.model.Level;
 import it.unibo.dna.model.game.api.GameState;
 import it.unibo.dna.model.game.impl.GameStateImpl;
@@ -22,7 +22,6 @@ public class GameEngine implements Runnable {
     private final double rateUpdate = 1.0d / 60.0d;
     private static GameThread gameThread;
     private MenuFactory menuFactory;
-
 
     /**
      * Constructs a GameEngine object with the specified level number.
@@ -92,26 +91,9 @@ public class GameEngine implements Runnable {
     }
 
     public static void playSound(String string) {
-        switch (string) {
-            case "angel_jump":
-                (new SoundFactoryImpl()).jumpAngelClip().start();
-                break;
-            case "devil_jump":
-                (new SoundFactoryImpl()).jumpDevilClip().start();
-                break;
-            case "diamond":
-                (new SoundFactoryImpl()).diamondClip().start();
-                break;
-            case "game_over":
-                (new SoundFactoryImpl()).gameOverClip().start();
-                break;
-            case "victory":
-                (new SoundFactoryImpl()).victoryClip().start();
-                break;
-            default:
-        }
+        (new SoundManager()).getClip(string).start();
     }
-    
+
     public MenuFactory getMenuFactory() {
         return menuFactory;
     }

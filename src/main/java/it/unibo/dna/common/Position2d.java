@@ -8,7 +8,7 @@ public class Position2d {
     private final double x, y;
 
     /**
-     * Constructs a new {@code Position2d} object with the specified coordinates.
+     * Constructs a new Position2d object with the specified coordinates.
      *
      * @param x the first coordinate of the position
      * @param y the second coordinate of the position

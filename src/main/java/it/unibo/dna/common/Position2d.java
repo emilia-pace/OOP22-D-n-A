@@ -54,10 +54,25 @@ public class Position2d {
         return "Position2d(" + x + "," + y + ")";
     }
 
+    /**
+     * 
+     * Checks if this position is on the right of the specified position.
+     * 
+     * @param p the position to compare
+     * @return {@code true} if this position is on the right, {@code false}
+     *         otherwise
+     */
     public boolean isOnTheRight(final Position2d p) {
         return this.x > p.getX();
     }
 
+    /**
+     * 
+     * Checks if this position is above the specified position.
+     * 
+     * @param p the position to compare
+     * @return {@code true} if this position is above, {@code false} otherwise
+     */
     public boolean isAbove(final Position2d p) {
         return this.y < p.getY();
     }

@@ -35,7 +35,7 @@ public class Level {
      * 
      * @param lvl The level number.
      */
-    public Level(int lvl) {
+    public Level(final int lvl) {
         getFile(lvl);
         try {
             this.entitiesList();
@@ -131,6 +131,8 @@ public class Level {
                     entities.add(entityFactoryImpl.createEntity(Optional.empty(), EntityType.PURPLE_PUDDLE,
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2]))));
                     break;
+                default:
+                    break;
             }
             s = b.readLine();
         }
@@ -147,7 +149,7 @@ public class Level {
         return this.entities;
     }
 
-    private void getFile(int lvl) {
+    private void getFile(final int lvl) {
         switch (lvl) {
             case 1:
                 nameFile = ClassLoader.getSystemResource("levels/lvl1.txt").toString();
@@ -157,6 +159,8 @@ public class Level {
                 break;
             case 3:
                 nameFile = ClassLoader.getSystemResource("levels/lvl3.txt").toString();
+                break;
+            default:
                 break;
         }
     }

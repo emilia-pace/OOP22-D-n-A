@@ -26,9 +26,10 @@ public class KeyboardHandler implements KeyListener {
      * @param commandLeft  the keycode for the command "left"
      * @param commandJump  the keycode for the "jump" command
      * @param character    the player linked to this keylistener
+     * @param inputControl the input control instance
      */
     public KeyboardHandler(final int commandRight, final int commandLeft, final int commandJump,
-            final Player character, InputControl inputControl) {
+            final Player character, final InputControl inputControl) {
         this.commandRight = commandRight;
         this.commandLeft = commandLeft;
         this.commandJump = commandJump;

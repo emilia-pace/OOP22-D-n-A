@@ -11,14 +11,14 @@ import it.unibo.dna.input.api.InputControl;
  */
 public class InputControlImpl implements InputControl {
 
-    List<Command> commandQueue = new ArrayList<>();
+    final List<Command> commandQueue = new ArrayList<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void computeAll() {
-        List<Command> commands = new ArrayList<>(commandQueue);
+        final List<Command> commands = new ArrayList<>(commandQueue);
         this.commandQueue.clear();
         commands.forEach(c -> c.execute());
     }

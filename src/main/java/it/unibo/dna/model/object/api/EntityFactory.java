@@ -12,18 +12,57 @@ import it.unibo.dna.model.object.player.Entity;
  */
 public interface EntityFactory {
 
+    /**
+     * A constant for the height of some entities.
+     */
     int DEF_HEIGHT = 4;
+    /**
+     * A constant for the width of some entities.
+     */
     int DEF_WIDTH = 4;
+    /**
+     * A constant for the width of the diamond.
+     */
     int DIAMOND_WIDTH = 6;
+    /**
+     * A constant for the height of the diamond.
+     */
     int DIAMOND_HEIGHT = 6;
+    /**
+     * A constant for the height of the button.
+     */
     int BUTTON_HEIGHT = 2;
+    /**
+     * A constant for the height of the lever.
+     */
     int LEVER_HEIGHT = 5;
+    /**
+     * A constant for the height of the puddle.
+     */
     int PUDDLE_HEIGHT = 3;
+    /**
+     * A constant for the width of the puddle.
+     */
     int PUDDLE_WIDTH = 10;
+    /**
+     * A constant for the height of the door.
+     */
     int DOOR_HEIGHT = 15;
+    /**
+     * A constant for the width of the door.
+     */
     int DOOR_WIDTH = 10;
+    /**
+     * A constant for the width of the platforms.
+     */
     int PLATFORM_WIDTH = 40;
+    /**
+     * A constant for the height od the player.
+     */
     int PLAYER_HEIGHT = 7;
+    /**
+     * A constant for the width of the player.
+     */
     int PLAYER_WIDTH = 6;
 
     /**
@@ -36,6 +75,6 @@ public interface EntityFactory {
      * Two positions should be passed if the Entity being created is of the type MOVABLEPLATFORM
      * @return the Entity created
      */
-    Entity createEntity(Optional<MovablePlatform> movablePlatform,Entity.EntityType type, Position2d ... position); 
+    Entity createEntity(Optional<MovablePlatform> movablePlatform, Entity.EntityType type, Position2d... position); 
 
 }

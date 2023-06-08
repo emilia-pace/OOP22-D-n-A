@@ -36,12 +36,12 @@ public interface MovableEntity extends Entity {
     void setVectorY(double y);
 
     /**
-     * Make the first value of the player's vector zero
+     * Make the first value of the player's vector zero.
      */
     void resetX();
 
     /**
-     * Make the second value of the player's vector zero
+     * Make the second value of the player's vector zero.
      */
     void resetY();
 

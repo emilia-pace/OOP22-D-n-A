@@ -1,14 +1,21 @@
 package it.unibo.dna.graphics;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import java.util.List;
 
 import it.unibo.dna.input.KeyboardHandler;
 import it.unibo.dna.model.object.player.Entity;
 import it.unibo.dna.model.object.player.api.Player;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;

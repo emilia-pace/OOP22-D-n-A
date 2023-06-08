@@ -2,7 +2,6 @@ package it.unibo.dna.graphics;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.LoggerFactoryFriend;
 
 import java.util.ArrayList;
 import java.util.HashMap;

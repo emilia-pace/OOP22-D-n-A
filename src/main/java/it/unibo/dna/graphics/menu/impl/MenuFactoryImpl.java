@@ -115,7 +115,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     }
 
     @Override
-    public GameMenu victoryMenu(double totalScore) {
+    public GameMenu victoryMenu() {
         return new GameMenu() {
 
             /**

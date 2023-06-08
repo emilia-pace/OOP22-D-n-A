@@ -2,8 +2,6 @@ package it.unibo.dna.gameloop;
 
 import java.io.IOException;
 
-import it.unibo.dna.model.game.score.Score;
-
 public class GameThread extends Thread {
     private GameEngine gameEngine;
 
@@ -23,11 +21,11 @@ public class GameThread extends Thread {
     public void victoryGame() {
         this.interrupt();
         gameEngine.stop();
-        this.gameEngine.getMenuFactory().victoryMenu(Score.getTotal()).createMenuFrame();
+        this.gameEngine.getMenuFactory().victoryMenu().createMenuFrame();
     }
 
     public void loosingGame() {
-        interrupt();
+        this.interrupt();
         gameEngine.stop();
         this.gameEngine.getMenuFactory().gameOverMenu().createMenuFrame();
     }

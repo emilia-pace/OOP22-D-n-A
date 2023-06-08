@@ -1,14 +1,34 @@
 angel 5 100
 devil 95 100
+dDevil 100 0
+dAngel 0 20
 platform 0 112
 platform 40 112
 platform 80 112
-pPuddle 30 112
+platform 0 75
+platform 88 45
+platform 0 35
+platform 95 15
+platform 0 60
+platform 60 15
 pPuddle 40 112
 pPuddle 50 112
 pPuddle 60 112
 pPuddle 70 112
 pPuddle 80 112
+rPuddle 15 60
+rPuddle 25 60
+bPuddle 20 35
+bPuddle 30 35
 movablePlatform 60 95 40 75
 button 15 110
+movablePlatform 75 65 30 95
+button 7 73
+movablePlatform 40 35 40 75
+lever 110 40
+movablePlatform 30 15 60 15
+button 15 33
+movablePlatform 0 15 60 15
+button 15 33
+diamond 5 53
 

@@ -157,7 +157,7 @@ public class Level {
     private void getFile(int lvl) {
         switch (lvl) {
             case 1:
-                nameFile = "src\\main\\resources\\levels\\lv2.txt";
+                nameFile = "src\\main\\resources\\levels\\lv1.txt";
                 break;
             case 2:
                 nameFile = "src\\main\\resources\\levels\\lv2.txt";

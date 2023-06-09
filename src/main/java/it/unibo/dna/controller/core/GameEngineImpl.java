@@ -37,6 +37,9 @@ public class GameEngineImpl implements Runnable, GameEngine {
     public GameEngineImpl(final int lvl) throws IOException {
         this.levelConstruct = new Level(lvl);
         this.lvl = lvl;
+        this.display = null;
+        this.game = null;
+        this.running = false;
     }
 
     /**

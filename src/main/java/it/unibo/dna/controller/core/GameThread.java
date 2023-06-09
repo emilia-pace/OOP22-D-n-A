@@ -2,6 +2,8 @@ package it.unibo.dna.controller.core;
 
 import java.io.IOException;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * The GameThread class represents a thread that manages the game execution.
  * It interacts with the GameEngine to start, stop, and handle game events.
@@ -16,6 +18,8 @@ public class GameThread extends Thread {
      * @param gameEngine the GameEngine instance to associate with the thread
      * @throws IOException if an I/O error occurs.
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_BUF", 
+    justification =  "the gameEngine field is intentionally exposed to allow initialization with the current game engine")
     public GameThread(final GameEngine gameEngine) throws IOException {
         this.gameEngine = gameEngine;
         this.gameEngine.setGameThread(this);
@@ -26,6 +30,8 @@ public class GameThread extends Thread {
      *
      * @param gameEngine the GameEngine instance to set.
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_BUF", 
+    justification =  "the gameEngine field is intentionally exposed to allow initialization with the current game engine")
     public void setGameEngine(final GameEngine gameEngine) {
         this.gameEngine = gameEngine;
     }
@@ -35,6 +41,7 @@ public class GameThread extends Thread {
      *
      * @return the associated GameEngine instance.
      */
+    @SuppressWarnings(value = "M V EI2")
     public GameEngine getGameEngine() {
         return this.gameEngine;
     }

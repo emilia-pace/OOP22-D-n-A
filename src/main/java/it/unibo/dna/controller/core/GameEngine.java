@@ -43,7 +43,7 @@ public class GameEngine implements Runnable {
      *
      * @param gameT The game thread.
      */
-    public void setGameThread(final GameThread gameT) {
+    public final void setGameThread(final GameThread gameT) {
         gameThread = gameT;
         this.menuFactory = new MenuFactoryImpl(gameThread);
     }
@@ -53,7 +53,7 @@ public class GameEngine implements Runnable {
      *
      * @return The game thread.
      */
-    public static GameThread getGameThread() {
+    public static final GameThread getGameThread() {
         return gameThread;
     }
 

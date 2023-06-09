@@ -64,7 +64,7 @@ public class GameThread extends Thread {
             lvl++;
             this.gameEngine.getMenuFactory().victoryMenu(lvl).createMenuFrame();
             this.interrupt();
-            gameEngine.stop();
+            this.gameEngine.stop();
         }
     }
 
@@ -77,6 +77,11 @@ public class GameThread extends Thread {
         lvl = gameEngine.getLvl();
         this.gameEngine.getMenuFactory().gameOverMenu(lvl).createMenuFrame();
         this.interrupt();
-        gameEngine.stop();
+        this.gameEngine.stop();
+    }
+
+    public void interruptGame() {
+        this.interrupt();
+        this.gameEngine.stop();
     }
 }

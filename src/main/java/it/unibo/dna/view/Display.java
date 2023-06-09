@@ -71,7 +71,8 @@ public class Display extends JFrame {
      * @param angelInputControl
      * @param devilInputControl
      */
-    @SuppressFBWarnings(value = "MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR", justification = "The method pack should be called in the constructor")
+    @SuppressFBWarnings(value = "MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR", justification = "The method pack should be"
+            + "called in the constructor")
     public Display(final List<Player> playerList, final MenuFactory menuFact, final InputControl angelInputControl,
             final InputControl devilInputControl) {
         this.menuFactory = menuFact;

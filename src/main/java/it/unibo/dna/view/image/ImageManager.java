@@ -15,10 +15,9 @@ import java.io.IOException;
 
 import it.unibo.dna.model.object.entity.api.Entity;
 import it.unibo.dna.model.object.entity.api.EntityFactory;
+import it.unibo.dna.model.object.entity.impl.AbstractEntity;
 import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
 import it.unibo.dna.model.object.player.api.Player;
-import it.unibo.dna.model.object.player.impl.StateObserver;
-import it.unibo.dna.model.object.stillentity.impl.AbstractEntity;
 import it.unibo.dna.model.object.stillentity.impl.ActivableObjectImpl;
 import it.unibo.dna.model.object.stillentity.impl.Diamond;
 import it.unibo.dna.model.object.stillentity.impl.Door;

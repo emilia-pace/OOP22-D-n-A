@@ -2,8 +2,8 @@ package it.unibo.dna.model.object.movableentity.impl;
 
 import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.common.Vector2d;
+import it.unibo.dna.model.object.entity.impl.AbstractEntity;
 import it.unibo.dna.model.object.movableentity.api.MovableEntity;
-import it.unibo.dna.model.object.stillentity.impl.AbstractEntity;
 
 /**
  * Abstract Class that implements the {@link MovableEntity} interface.

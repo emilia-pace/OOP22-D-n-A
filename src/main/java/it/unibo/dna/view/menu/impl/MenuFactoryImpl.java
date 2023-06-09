@@ -1,5 +1,8 @@
 package it.unibo.dna.view.menu.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -16,6 +19,7 @@ import javax.swing.JPanel;
 
 import it.unibo.dna.controller.core.GameEngine;
 import it.unibo.dna.controller.core.GameThread;
+import it.unibo.dna.view.image.ImageManager;
 import it.unibo.dna.view.menu.api.GameMenu;
 import it.unibo.dna.view.menu.api.MenuFactory;
 
@@ -29,6 +33,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     private static final int MENUWIDTH = 800;
     private final GameThread gameThread;
     private GameEngine gameEngine;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageManager.class);
 
     /**
      * Constructs a MenuFactoryImpl object with the specified GameThread and sets variable gameEngine.
@@ -264,7 +269,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
 
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                JFrame guideFrame = new JFrame("Guide");
+                final JFrame guideFrame = new JFrame("Guide");
                 JOptionPane.showMessageDialog(guideFrame, "Angel controls: W:jump, A: left, D: right"
                         + "\n Devil controls: ↑: jump, \u2190: left, \u2192: right \n"
                         + "The goal of the game is to reach the doors together ");
@@ -316,7 +321,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                     gameEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+                    LOGGER.error("IOEexception occurred", e1);
                 }
 
             }
@@ -346,7 +351,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                     gameEngine.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+                    LOGGER.error("IOEexception occurred", e1);
                 }
             }
         };

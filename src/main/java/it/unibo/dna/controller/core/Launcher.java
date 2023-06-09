@@ -7,10 +7,13 @@ import it.unibo.dna.view.menu.api.MenuFactory;
 /**
  * The main launcher class for starting the game.
  */
-class Launcher {
+public class Launcher {
     private static GameThread gameThread;
     private static GameEngine gameEngine;
     private static MenuFactory menuFactory;
+
+    private Launcher() {
+    }
 
     /**
      * The main entry point of the game.

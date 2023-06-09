@@ -1,5 +1,8 @@
 package it.unibo.dna.model.game.level;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +14,7 @@ import java.util.Optional;
 
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.impl.PlayerImpl;
+import it.unibo.dna.view.image.ImageManager;
 import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.common.Vector2d;
 import it.unibo.dna.model.object.entity.api.Entity;
@@ -28,6 +32,7 @@ public class Level {
     private final List<Player> characters = new ArrayList<>();
     private InputStream nameFile;
     private final EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageManager.class);
 
     /**
      * Constructs the Level object with the specified level number.
@@ -39,7 +44,7 @@ public class Level {
         try {
             this.entitiesList();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("IOEexception occurred", e);
         }
     }
 
@@ -48,7 +53,7 @@ public class Level {
      * 
      * @throws IOException if an I/O error occurs.
      */
-    public void entitiesList() throws IOException {
+    public final void entitiesList() throws IOException {
         BufferedReader b;
 
         final Reader reader = new InputStreamReader(nameFile);
@@ -59,7 +64,7 @@ public class Level {
             final String[] splittedC = s.split(" ");
             switch (splittedC[0]) {
                 case "angel":
-                    PlayerImpl angel = new PlayerImpl(
+                    final PlayerImpl angel = new PlayerImpl(
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.ANGEL);
@@ -67,7 +72,7 @@ public class Level {
                     break;
 
                 case "devil":
-                    PlayerImpl devil = new PlayerImpl(
+                    final PlayerImpl devil = new PlayerImpl(
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.DEVIL);

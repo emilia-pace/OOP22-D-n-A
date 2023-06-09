@@ -1,5 +1,8 @@
 package it.unibo.dna.view;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -51,8 +54,10 @@ public class Display extends JFrame {
      */
     public static final int TILE_SIZE = DIM / 100;
 
+    public static final long serialVersionUID = 4328743;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageManager.class);
     private final Canvas canvas;
-    private transient final ImageManager imgMgr;
+    private final transient ImageManager imgMgr;
     private final MenuFactory menuFactory;
     private transient BufferedImage backgroundImage;
 
@@ -72,10 +77,10 @@ public class Display extends JFrame {
         setResizable(false);
         setUndecorated(true);
 
-        JButton pauseButton = new JButton("\u23F8");
+        final JButton pauseButton = new JButton("\u23F8");
 
         final ActionListener al = new ActionListener() {
-            
+
             @Override
             public void actionPerformed(final ActionEvent e) {
                 menuFactory.pauseMenu().createMenuFrame();
@@ -84,7 +89,7 @@ public class Display extends JFrame {
         };
         pauseButton.addActionListener(al);
 
-        JPanel jpanel = new JPanel(new BorderLayout());
+        final JPanel jpanel = new JPanel(new BorderLayout());
         canvas = new Canvas();
         canvas.setSize(DIM, DIM);
         canvas.setFocusable(true);
@@ -124,7 +129,7 @@ public class Display extends JFrame {
         try {
             backgroundImage = ImageIO.read(ClassLoader.getSystemResource(string));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("IOEexception occurred", e);
         }
     }
 

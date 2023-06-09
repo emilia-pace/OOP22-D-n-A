@@ -11,7 +11,7 @@ import it.unibo.dna.model.command.api.Command;
  */
 public class InputControlImpl implements InputControl {
 
-    final private List<Command> commandQueue = new ArrayList<>();
+    private final List<Command> commandQueue = new ArrayList<>();
 
     /**
      * {@inheritDoc}

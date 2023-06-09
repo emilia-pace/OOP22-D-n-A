@@ -79,7 +79,6 @@ public class Display extends JFrame {
         this.setTitle("D-n-A");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setUndecorated(true);
 
         final JButton pauseButton = new JButton("\u23F8");
 

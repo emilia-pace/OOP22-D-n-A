@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import javax.swing.BoxLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -66,7 +66,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 final JFrame startMenu = new JFrame();
                 final JButton start = getStartButton(startMenu);
                 final JButton guide = getGuideButton();
-                final JButton quit = getQuitButton(startMenu);
                 final JLabel logoLabel = new JLabel(new ImageIcon(ClassLoader.getSystemResource("logo.png")));
 
                 startMenu.getContentPane().setLayout(new BorderLayout());
@@ -77,15 +76,21 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 logoPanel.setBackground(Color.BLACK);
                 logoPanel.add(logoLabel);
 
-                final JPanel buttonPanel = new JPanel();
-                buttonPanel.setBackground(Color.BLACK);
-                buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-                buttonPanel.add(start);
-                buttonPanel.add(guide);
-                buttonPanel.add(quit);
+                final JPanel startPanel = new JPanel();
+                start.setBackground(Color.BLUE);
+                startPanel.setLayout(new BorderLayout());
+                startPanel.add(start);
+
+                final JPanel guidePanel = new JPanel();
+                guide.setBackground(Color.RED);
+                guidePanel.setLayout(new BorderLayout());
+                guidePanel.add(guide);
+
 
                 startMenu.getContentPane().add(logoPanel, BorderLayout.NORTH);
-                startMenu.getContentPane().add(buttonPanel, BorderLayout.CENTER);
+                startMenu.getContentPane().add(startPanel, BorderLayout.CENTER);
+                startMenu.getContentPane().add(guidePanel, BorderLayout.AFTER_LAST_LINE);
+
 
                 startMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 startMenu.setLocationRelativeTo(null);
@@ -95,6 +100,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             }
         };
     }
+
 
     /**
      * Creates the pause menu.
@@ -113,11 +119,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             public JFrame createMenuFrame() {
                 final JFrame pauseMenu = new JFrame();
                 final JButton restart = getRestartButton(pauseMenu, gameEngine.getLvl());
-                final JButton quit = getQuitButton(pauseMenu);
                 final JPanel panel = new JPanel();
 
                 panel.add(restart);
-                panel.add(quit);
 
                 JOptionPane.showMessageDialog(pauseMenu, panel, "Pause", JOptionPane.PLAIN_MESSAGE);
                 return null;
@@ -143,13 +147,11 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             public JFrame createMenuFrame() {
                 final JFrame gameOverFrame = new JFrame("GameOver");
                 final JButton restart = getRestartButton(gameOverFrame, lvl);
-                final JButton quit = getQuitButton(gameOverFrame);
                 final JLabel score = getScoreLabel();
                 final JPanel panel = new JPanel();
 
                 panel.add(score);
                 panel.add(restart);
-                panel.add(quit);
                 gameOverFrame.setSize(MENUWIDTH, MENUHEIGH);
 
                 gameOverFrame.getContentPane().add(panel);
@@ -181,13 +183,11 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             public JFrame createMenuFrame() {
                 final JFrame victoryFrame = new JFrame("You Won");
                 final JButton nextLevel = getNextLevelButton(victoryFrame, lvl);
-                final JButton quit = getQuitButton(victoryFrame);
                 final JLabel score = getScoreLabel();
                 final JPanel panel = new JPanel();
 
                 panel.add(score);
                 panel.add(nextLevel);
-                panel.add(quit);
                 victoryFrame.setSize(MENUWIDTH, MENUHEIGH);
 
                 victoryFrame.getContentPane().add(panel);
@@ -217,13 +217,11 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             @Override
             public JFrame createMenuFrame() {
                 final JFrame victoryFrame = new JFrame("You Won");
-                final JButton quit = getQuitButton(victoryFrame);
                 final JLabel score = getScoreLabel();
                 final JLabel winner = new JLabel("WINNER");
                 final JPanel panel = new JPanel();
 
                 panel.add(score);
-                panel.add(quit);
                 panel.add(winner);
                 victoryFrame.setSize(MENUWIDTH, MENUHEIGH);
 
@@ -281,30 +279,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
         };
         guideButton.addActionListener(al);
         return guideButton;
-    }
-
-    /**
-     * Creates and returns the quit button for the menus.
-     *
-     * @param frame the frame of the menu that has the button.
-     * @return The JButton that closes the game.
-     */
-    public JButton getQuitButton(final JFrame frame) {
-        final JButton quitButton = new JButton("Quit");
-        final ActionListener al = new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!gameThread.isInterrupted()) {
-                    gameThread.interruptGame();
-                }
-                frame.dispose();
-            }
-
-        };
-        quitButton.addActionListener(al);
-
-        return quitButton;
     }
 
     /**

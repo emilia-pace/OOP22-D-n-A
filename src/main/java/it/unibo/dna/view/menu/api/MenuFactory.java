@@ -13,22 +13,32 @@ public interface MenuFactory {
     GameMenu startMenu();
 
     /**
-     * Creates and returns a game over menu.
-     * @param i
+     * Creates and returns a game over menu with the current level number.
      *
+     * @param levelNumber The level number.
      * @return The created game over menu.
      */
-    GameMenu gameOverMenu(int i);
+    GameMenu gameOverMenu(int levelNumber);
 
     /**
      * Creates and returns a victory menu with the specified total score.
-     * @param i
      *
+     * @param lvl the number of the next level.
      * @return The created victory menu.
      */
-    GameMenu victoryMenu(int i);
+    GameMenu victoryMenu(int lvl);
 
+    /**
+     * Creates and returns the victory menu of the last level.
+     *
+     * @return The last victory menu.
+     */
     GameMenu lastVictoryMenu();
 
+    /**
+     * Creates and returns the pause menu.
+     *
+     * @return The created pause menu.
+     */
     GameMenu pauseMenu();
 }

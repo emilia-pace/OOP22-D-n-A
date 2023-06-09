@@ -24,13 +24,10 @@ import it.unibo.dna.model.object.movableentity.impl.MovablePlatform;
  */
 public class Level {
 
-    private List<Entity> entities = new ArrayList<>();
-    private List<Player> characters = new ArrayList<>();
+    private final List<Entity> entities = new ArrayList<>();
+    private final List<Player> characters = new ArrayList<>();
     private InputStream nameFile;
-    private String s;
-    private EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
-    private PlayerImpl angel;
-    private PlayerImpl devil;
+    private final EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
 
     /**
      * Constructs the Level object with the specified level number.
@@ -38,7 +35,7 @@ public class Level {
      * @param lvl The level number.
      */
     public Level(final int lvl) {
-        getFile(lvl);
+        nameFile(lvl);
         try {
             this.entitiesList();
         } catch (IOException e) {
@@ -54,15 +51,15 @@ public class Level {
     public void entitiesList() throws IOException {
         BufferedReader b;
 
-        Reader reader = new InputStreamReader(nameFile);
+        final Reader reader = new InputStreamReader(nameFile);
         b = new BufferedReader(reader);
-        s = b.readLine();
+        String s = b.readLine();
 
         while (s != null) {
-            String[] splittedC = s.split(" ");
+            final String[] splittedC = s.split(" ");
             switch (splittedC[0]) {
                 case "angel":
-                    angel = new PlayerImpl(
+                    PlayerImpl angel = new PlayerImpl(
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.ANGEL);
@@ -70,7 +67,7 @@ public class Level {
                     break;
 
                 case "devil":
-                    devil = new PlayerImpl(
+                    PlayerImpl devil = new PlayerImpl(
                             new Position2d(Double.parseDouble(splittedC[1]), Double.parseDouble(splittedC[2])),
                             new Vector2d(0, 0), EntityFactory.PLAYER_HEIGHT, EntityFactory.PLAYER_WIDTH,
                             PlayerImpl.PlayerType.DEVIL);
@@ -151,7 +148,7 @@ public class Level {
         return this.entities;
     }
 
-    private void getFile(final int lvl) {
+    private void nameFile(final int lvl) {
         switch (lvl) {
             case 1:
                 nameFile = getClass().getClassLoader().getResourceAsStream("levels/lvl1.txt");

@@ -13,48 +13,66 @@ import it.unibo.dna.view.menu.impl.MenuFactoryImpl;
 import it.unibo.dna.view.sound.SoundManager;
 
 /**
- * Represents the game engine that manages the game loop and updates the game
- * state.
+ * Represents the game engine that manages the game loop and updates the game state.
  */
 public class GameEngine implements Runnable {
     private Display display;
     private GameState game;
-    private Level levelConstruct;
+    private final Level levelConstruct;
     private boolean running;
     private final double rateUpdate = 1.0d / 60.0d;
     private static GameThread gameThread;
     private MenuFactory menuFactory;
-    private InputControl angelInputControl = new InputControlImpl();
-    private InputControl devilInputControl = new InputControlImpl();
-    private int lvl;
+    private final InputControl angelInputControl = new InputControlImpl();
+    private final InputControl devilInputControl = new InputControlImpl();
+    private final int lvl;
 
     /**
-     * Constructs a GameEngine object with the specified level number.
+     * Constructs a GameEngine object and creates the Level object.
      *
      * @param lvl The level number.
      * @throws IOException if an I/O error occurs while loading the level.
      */
-    public GameEngine(int lvl) throws IOException {
+    public GameEngine(final int lvl) throws IOException {
         this.levelConstruct = new Level(lvl);
         this.lvl = lvl;
     }
 
+    /**
+     * Sets the game thread for the game engine and creates the MenuFactory.
+     *
+     * @param gameT The game thread.
+     */
     public void setGameThread(final GameThread gameT) {
         gameThread = gameT;
         this.menuFactory = new MenuFactoryImpl(gameThread);
     }
 
+    /**
+     * Getter of the gameThread that runs the gameEngine.
+     *
+     * @return The game thread.
+     */
     public static GameThread getGameThread() {
         return gameThread;
     }
 
+    /**
+     * Retrieves the current score of the game.
+     *
+     * @return The current score of the game.
+     */
     public double getScore() {
         return game.getScore();
     }
 
+    /**
+     * Retrieves the current level number of the game.
+     *
+     * @return The level number of the game.
+     */
     public int getLvl() {
         return this.lvl;
-
     }
 
     /**
@@ -62,7 +80,8 @@ public class GameEngine implements Runnable {
      */
     @Override
     public void run() {
-        this.display = new Display(this.levelConstruct.getCharacters(), this.menuFactory, this.angelInputControl, this.devilInputControl);
+        this.display = new Display(this.levelConstruct.getCharacters(), this.menuFactory,
+        this.angelInputControl, this.devilInputControl);
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
                 this.levelConstruct.getEntities(), this.levelConstruct.getCharacters());
         running = true;
@@ -71,7 +90,7 @@ public class GameEngine implements Runnable {
 
         while (running) {
             currentTime = System.currentTimeMillis();
-            double lastTimeInSeconds = (currentTime - lastUpdate) / 1000d;
+            final double lastTimeInSeconds = (currentTime - lastUpdate) / 1000d;
             accumulator += lastTimeInSeconds;
             lastUpdate = currentTime;
 
@@ -88,7 +107,7 @@ public class GameEngine implements Runnable {
     }
 
     /**
-     * Renders the game state on the display.
+     * Calls the render of the display.
      */
     private void render() {
         display.render(game.getEntities(), this.game.getCharacters());
@@ -110,14 +129,19 @@ public class GameEngine implements Runnable {
     }
 
     /**
-     * Plays an audio clip based on the specified file name or path.
-     * 
-     * @param string the name or path of the audio file
+     * Plays an audio clip based on the specified for the event happening.
+     *
+     * @param string the name of the audio file.
      */
     public static void playSound(final String string) {
         (new SoundManager()).getClip(string).start();
     }
 
+    /**
+     * Retrieves the menu factory associated with the game engine.
+     *
+     * @return The menu factory.
+     */
     public MenuFactory getMenuFactory() {
         return menuFactory;
     }

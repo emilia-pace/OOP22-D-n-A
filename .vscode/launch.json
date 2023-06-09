@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launcher",
+            "request": "launch",
+            "mainClass": "it.unibo.dna.controller.core.Launcher",
+            "projectName": "OOP22-D-N-A"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

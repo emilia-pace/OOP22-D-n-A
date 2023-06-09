@@ -27,7 +27,7 @@ public class InputControlImpl implements InputControl {
      * {@inheritDoc}
      */
     @Override
-    public void addCommand(Command command) {
+    public void addCommand(final Command command) {
         this.commandQueue.add(command);
     }
 

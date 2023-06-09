@@ -51,11 +51,9 @@ public class Display extends JFrame {
      */
     public static final int TILE_SIZE = DIM / 100;
 
-    private Canvas canvas;
-    private transient ImageManager imgMgr;
-    private JPanel jpanel;
-    private JButton pauseButton;
-    private MenuFactory menuFactory;
+    private final Canvas canvas;
+    private transient final ImageManager imgMgr;
+    private final MenuFactory menuFactory;
     private transient BufferedImage backgroundImage;
 
     /**
@@ -63,6 +61,8 @@ public class Display extends JFrame {
      * 
      * @param playerList The list of players in the game.
      * @param menuFact
+     * @param angelInputControl
+     * @param devilInputControl
      */
     public Display(final List<Player> playerList, final MenuFactory menuFact, final InputControl angelInputControl,
             final InputControl devilInputControl) {
@@ -72,9 +72,11 @@ public class Display extends JFrame {
         setResizable(false);
         setUndecorated(true);
 
-        pauseButton = new JButton("\u23F8");
+        JButton pauseButton = new JButton("\u23F8");
 
-        ActionListener al = new ActionListener() {
+        final ActionListener al = new ActionListener() {
+            
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 menuFactory.pauseMenu().createMenuFrame();
             }
@@ -82,7 +84,7 @@ public class Display extends JFrame {
         };
         pauseButton.addActionListener(al);
 
-        jpanel = new JPanel(new BorderLayout());
+        JPanel jpanel = new JPanel(new BorderLayout());
         canvas = new Canvas();
         canvas.setSize(DIM, DIM);
         canvas.setFocusable(true);
@@ -133,8 +135,8 @@ public class Display extends JFrame {
      * @param players  The list of players to render.
      */
     public void render(final List<Entity> entities, final List<Player> players) {
-        BufferStrategy bufferStrategy = canvas.getBufferStrategy();
-        Graphics graphics = bufferStrategy.getDrawGraphics();
+        final BufferStrategy bufferStrategy = canvas.getBufferStrategy();
+        final Graphics graphics = bufferStrategy.getDrawGraphics();
 
         graphics.drawImage(backgroundImage, 0, 0, canvas.getWidth(), canvas.getHeight(), this);
 

@@ -44,7 +44,8 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The playerState field is intentionally to provide access to the current state of the player.")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The playerState field is intentionally"
+            + "to provide access to the current state of the player.")
     public State getState() {
         return this.playerState;
     }

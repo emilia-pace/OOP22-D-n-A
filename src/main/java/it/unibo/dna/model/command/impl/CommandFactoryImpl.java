@@ -20,7 +20,8 @@ public class CommandFactoryImpl implements CommandFactory {
      *
      * @param player the player
      */
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The player field is intentionally exposed to allow initialization with the current player.")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The player field is intentionally exposed to"
+            + "allow initialization with the current player.")
     public CommandFactoryImpl(final Player player) {
         this.player = player;
     }

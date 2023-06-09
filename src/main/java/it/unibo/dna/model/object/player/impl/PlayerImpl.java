@@ -1,5 +1,6 @@
 package it.unibo.dna.model.object.player.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.common.Vector2d;
 import it.unibo.dna.model.object.entity.api.Entity;
@@ -43,7 +44,8 @@ public class PlayerImpl extends AbstractMovableEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings(value = "MVEI")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The playerState field is intentionally"
+            + "to provide access to the current state of the player.")
     public State getState() {
         return this.playerState;
     }

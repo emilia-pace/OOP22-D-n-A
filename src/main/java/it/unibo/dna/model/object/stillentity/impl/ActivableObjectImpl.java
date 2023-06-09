@@ -18,7 +18,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements ActivableObj
 
     private boolean isActive; /*True when the platform is moving towards its final position*/
     private Optional<Player> player = Optional.empty(); /*The player that is touching the ActivableObject*/
-    private MovablePlatform movablePlatform;
+    private final MovablePlatform movablePlatform;
 
     /**
      * @param pos the position of the ActivableObject
@@ -27,7 +27,8 @@ public class ActivableObjectImpl extends  AbstractEntity implements ActivableObj
      * @param movablePlatform the {@link MovablePlatform} that the ActivableObject moves
      * @param type the type of the EntityType of the ActivableObject (it can be BUTTON or LEVER)
      */
-    @SuppressFBWarnings(value = "MVEI")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "cannot pass a copy of the MovablePlatform," 
+        + "it needs to be modified")
     public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, 
                                 final MovablePlatform movablePlatform, final EntityType type) {
        super(pos, height, width, type);
@@ -58,7 +59,8 @@ public class ActivableObjectImpl extends  AbstractEntity implements ActivableObj
     /** 
      * @return the {@link MovablePlatform} controlled by the ActivableObject
      */
-    @SuppressWarnings(value = "MVEI")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "cannot pass a copy of the MovablePlatform, "
+        + "it needs to be modified")
     public MovablePlatform getMovablePlatform() {
         return this.movablePlatform;
     }

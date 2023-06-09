@@ -1,5 +1,6 @@
 package it.unibo.dna.model.command.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.dna.controller.core.GameEngine;
 import it.unibo.dna.model.command.api.Command;
 import it.unibo.dna.model.command.api.CommandFactory;
@@ -19,7 +20,8 @@ public class CommandFactoryImpl implements CommandFactory {
      *
      * @param player the player
      */
-    @SuppressWarnings(value = "M V EI2")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The player field is intentionally exposed to"
+            + "allow initialization with the current player.")
     public CommandFactoryImpl(final Player player) {
         this.player = player;
     }

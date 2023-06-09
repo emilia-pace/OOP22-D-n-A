@@ -102,12 +102,12 @@ public class ImageManager {
      * of images.
      */
     private void loadImages() {
-        List<Image> doorImageList = new ArrayList<>();
-        List<Image> activableObjectImageList = new ArrayList<>();
-        List<Image> puddleImageList = new ArrayList<>();
-        List<Image> platformImageList = new ArrayList<>();
-        List<Image> movablePlatformImageList = new ArrayList<>();
-        List<Image> diamondImage = new ArrayList<>();
+        final List<Image> doorImageList = new ArrayList<>();
+        final List<Image> activableObjectImageList = new ArrayList<>();
+        final List<Image> puddleImageList = new ArrayList<>();
+        final List<Image> platformImageList = new ArrayList<>();
+        final List<Image> movablePlatformImageList = new ArrayList<>();
+        final List<Image> diamondImage = new ArrayList<>();
         try {
             doorImageList.add(this.resizeImage(ImageIO.read(ClassLoader.getSystemResource("porta_angelo.PNG")),
                     EntityFactory.DOOR_HEIGHT, EntityFactory.DOOR_WIDTH));
@@ -158,10 +158,10 @@ public class ImageManager {
      */
     public Image getActObjImage(final ActivableObjectImpl activableObject) {
         if (activableObject.getType().equals(Entity.EntityType.BUTTON)) {
-            return (activableObject.isActivated()) ? this.map.get(ActivableObjectImpl.class).get(1)
+            return activableObject.isActivated() ? this.map.get(ActivableObjectImpl.class).get(1)
                     : this.map.get(ActivableObjectImpl.class).get(0);
         }
-        return (activableObject.isActivated()) ? this.map.get(ActivableObjectImpl.class).get(3)
+        return activableObject.isActivated() ? this.map.get(ActivableObjectImpl.class).get(3)
                 : this.map.get(ActivableObjectImpl.class).get(2);
     }
 
@@ -189,9 +189,9 @@ public class ImageManager {
      * @return the Image of the door
      */
     public Image getDoorImage(final Door door) {
-        Entity.EntityType type = door.getType();
-        DoorState state = door.getDoorState();
-        List<Image> doorImages = this.map.get(Door.class);
+        final Entity.EntityType type = door.getType();
+        final DoorState state = door.getDoorState();
+        final List<Image> doorImages = this.map.get(Door.class);
         if (type.equals(Entity.EntityType.ANGEL_DOOR)) {
             return state.equals(Door.DoorState.CLOSED_DOOR) ? doorImages.get(0) : doorImages.get(1);
         }

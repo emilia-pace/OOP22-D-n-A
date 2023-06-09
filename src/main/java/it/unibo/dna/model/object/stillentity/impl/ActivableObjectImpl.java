@@ -27,7 +27,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements ActivableObj
      * @param movablePlatform the {@link MovablePlatform} that the ActivableObject moves
      * @param type the type of the EntityType of the ActivableObject (it can be BUTTON or LEVER)
      */
-    @SuppressFBWarnings(value = "MVEI2", justification = "cannot pass a copy of the MovablePlatform, it needs to be modified")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "cannot pass a copy of the MovablePlatform, it needs to be modified")
     public ActivableObjectImpl(final Position2d pos, final Double height, final Double width, 
                                 final MovablePlatform movablePlatform, final EntityType type) {
        super(pos, height, width, type);
@@ -58,7 +58,7 @@ public class ActivableObjectImpl extends  AbstractEntity implements ActivableObj
     /** 
      * @return the {@link MovablePlatform} controlled by the ActivableObject
      */
-    @SuppressFBWarnings(value = "MVEI", justification = "cannot pass a copy of the MovablePlatform, it needs to be modified")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "cannot pass a copy of the MovablePlatform, it needs to be modified")
     public MovablePlatform getMovablePlatform() {
         return this.movablePlatform;
     }

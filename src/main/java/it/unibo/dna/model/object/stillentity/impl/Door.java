@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.object.entity.api.Entity;
+import it.unibo.dna.model.object.entity.impl.AbstractEntity;
 import it.unibo.dna.model.object.player.api.Player;
 
 /**

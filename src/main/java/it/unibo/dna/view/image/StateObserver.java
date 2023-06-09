@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.player.impl;
+package it.unibo.dna.view.image;
 
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
@@ -12,6 +12,7 @@ import it.unibo.dna.model.common.Pair;
 import it.unibo.dna.model.object.entity.api.EntityFactory;
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.impl.State.StateEnum;
+import it.unibo.dna.model.object.player.impl.State;
 import it.unibo.dna.view.Display;
 
 import javax.imageio.ImageIO;

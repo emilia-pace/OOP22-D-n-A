@@ -1,4 +1,4 @@
-package it.unibo.dna.model.object.stillentity.impl;
+package it.unibo.dna.model.object.entity.impl;
 
 import it.unibo.dna.model.box.api.BoundingBox;
 import it.unibo.dna.model.box.impl.RectBoundingBox;

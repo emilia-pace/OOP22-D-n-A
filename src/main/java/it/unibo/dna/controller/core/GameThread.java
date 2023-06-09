@@ -82,6 +82,8 @@ public class GameThread extends Thread {
 
     public void interruptGame() {
         this.interrupt();
-        this.gameEngine.stop();
+        if (gameEngine.isRunning()) {
+            this.gameEngine.stop();
+        }
     }
 }

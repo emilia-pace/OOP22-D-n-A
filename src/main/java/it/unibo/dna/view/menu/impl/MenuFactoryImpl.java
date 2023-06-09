@@ -291,11 +291,10 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if(gameThread.isAlive()) {
-                    System.out.println("boh");
-                    gameThread.interrupt();
-                    gameEngine.stop();
+                if (!gameThread.isInterrupted()) {
+                    gameThread.interruptGame();
                 }
+
                 frame.dispose();
             }
 

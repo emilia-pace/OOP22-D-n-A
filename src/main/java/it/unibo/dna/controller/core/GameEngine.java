@@ -145,4 +145,9 @@ public class GameEngine implements Runnable {
     public MenuFactory getMenuFactory() {
         return menuFactory;
     }
+
+    public boolean isRunning() {
+        return running;
+
+    }
 }

@@ -47,6 +47,8 @@ public class GameEngineImpl implements Runnable, GameEngine {
      *
      * @param gameT The game thread.
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_STATIC_REP2",
+    justification =  "the game thread field is intentionally exposed because it shouldn't create new Gamethread")
     public static final void setGameThread(final GameThread gameT) {
         gameThread = gameT;
         menuFactory = new MenuFactoryImpl(gameThread);
@@ -87,8 +89,8 @@ public class GameEngineImpl implements Runnable, GameEngine {
      * Starts the game loop and keeps updating and rendering the game until stopped.
      */
     @Override
-    @SuppressFBWarnings(value = "FL_MATH_USING_FLOAT_PRECISION", 
-    justification =  "accumulator has to be a double because its compared to rate supdate")
+    @SuppressFBWarnings(value = "FL_FLOATS_AS_LOOP_COUNTERS", 
+    justification =  "accumulator has to be a double because its compared to the update rate")
     public void run() {
         this.display = new Display(this.levelConstruct.getCharacters(), menuFactory,
                 this.angelInputControl, this.devilInputControl);

@@ -70,7 +70,7 @@ public abstract class AbstractEntity implements Entity {
      * {@inheritDoc}
      */
     @Override
-    public Entity.EntityType getType() {
+    public final Entity.EntityType getType() {
         return this.type;
     }
 }

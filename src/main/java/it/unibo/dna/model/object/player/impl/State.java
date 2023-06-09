@@ -92,7 +92,7 @@ public class State {
      * @return a Pair of states
      */
     public Pair<StateEnum, StateEnum> getPairState() {
-        return new Pair<>(stateX, stateY);
+        return new Pair<>(this.stateX, this.stateY);
     }
 
     /**
@@ -101,7 +101,7 @@ public class State {
      * @param object   the observable object
      * @param property the name of the property
      * @param oldValue the old value
-     * @param newValue the new new value
+     * @param newValue the new value
      */
     private void notifyListeners(final Object object, final String property, final State oldValue,
             final State newValue) {

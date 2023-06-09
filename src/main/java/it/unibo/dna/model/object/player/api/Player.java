@@ -20,9 +20,9 @@ public interface Player extends MovableEntity {
     double STANDARDVELOCITY = 0.64;
 
     /**
-     * Returns the state of the player.
+     * Returns the current state of the player.
      *
-     * @return the state of the player
+     * @return the current state of the player
      */
     State getState();
 

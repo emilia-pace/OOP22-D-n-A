@@ -62,7 +62,6 @@ public class CommandFactoryImpl implements CommandFactory {
                 } else {
                     GameEngineImpl.playSound("Devil_audio");
                 }
-
             }
         };
     }

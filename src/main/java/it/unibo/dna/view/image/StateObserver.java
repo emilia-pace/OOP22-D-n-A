@@ -120,7 +120,7 @@ public class StateObserver implements PropertyChangeListener {
     }
 
     /**
-     * Returns the typer of the player.
+     * Returns the type of the player.
      * 
      * @return the type of the player
      */

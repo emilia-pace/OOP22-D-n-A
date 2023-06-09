@@ -18,6 +18,7 @@ public class Pair<X, Y> {
      * @param y the second element
      */
     public Pair(final X x, final Y y) {
+        super();
         this.x = x;
         this.y = y;
     }
@@ -71,7 +72,7 @@ public class Pair<X, Y> {
         if (x == null) {
             if (other.x != null) {
                 return false;
-        }
+            }
         } else if (!x.equals(other.x)) {
             return false;
         }

@@ -10,7 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Class that implements the {@link SoundFactory} interface.
+ * Manages audio clips and provides methods to retrieve them based on the
+ * specified file path.
  */
 public class SoundManager {
 

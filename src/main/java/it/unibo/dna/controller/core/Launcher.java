@@ -9,7 +9,7 @@ import it.unibo.dna.view.menu.api.MenuFactory;
  */
 public final class Launcher {
     private static GameThread gameThread;
-    private static GameEngine gameEngine;
+    private static GameEngineImpl gameEngine;
     private static MenuFactory menuFactory;
 
     private Launcher() {
@@ -22,9 +22,9 @@ public final class Launcher {
      * @throws IOException if an I/O error occurs while loading the game.
      */
     public static void main(final String[] args) throws IOException {
-        gameEngine = new GameEngine(1);
+        gameEngine = new GameEngineImpl(1);
         gameThread = new GameThread(gameEngine);
-        gameEngine.setGameThread(gameThread);
+        GameEngineImpl.setGameThread(gameThread);
         menuFactory = gameEngine.getMenuFactory();
         menuFactory.startMenu().createMenuFrame();
     }

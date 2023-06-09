@@ -56,7 +56,7 @@ public class Level {
     public final void entitiesList() throws IOException {
         BufferedReader b;
 
-        final Reader reader = new InputStreamReader(nameFile);
+        final Reader reader = new InputStreamReader(nameFile, "UTF-8");
         b = new BufferedReader(reader);
         String s = b.readLine();
 

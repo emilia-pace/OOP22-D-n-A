@@ -1,7 +1,7 @@
 package it.unibo.dna.model.command.impl;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.dna.controller.core.GameEngine;
+import it.unibo.dna.controller.core.GameEngineImpl;
 import it.unibo.dna.model.command.api.Command;
 import it.unibo.dna.model.command.api.CommandFactory;
 import it.unibo.dna.model.object.player.api.Player;
@@ -58,9 +58,9 @@ public class CommandFactoryImpl implements CommandFactory {
                 this.player.setVectorY(-Player.JUMPVELOCITY);
                 this.player.setStateX(StateEnum.STATE_JUMPING);
                 if (this.player.getPlayerType().equals(PlayerType.ANGEL)) {
-                    GameEngine.playSound("Angel_audio");
+                    GameEngineImpl.playSound("Angel_audio");
                 } else {
-                    GameEngine.playSound("Devil_audio");
+                    GameEngineImpl.playSound("Devil_audio");
                 }
 
             }

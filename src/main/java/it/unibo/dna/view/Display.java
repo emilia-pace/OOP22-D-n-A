@@ -97,7 +97,7 @@ public class Display extends JFrame {
         jpanel.add(pauseButton, BorderLayout.NORTH);
         jpanel.add(canvas, BorderLayout.CENTER);
         this.add(jpanel);
-        this.pack();
+        this.unifyPanels();
 
         canvas.createBufferStrategy(3);
 
@@ -164,5 +164,9 @@ public class Display extends JFrame {
      */
     public int getScreenDimension() {
         return DIM / TILE_SIZE;
+    }
+
+    private void unifyPanels() {
+        this.pack();
     }
 }

@@ -1,8 +1,5 @@
 package it.unibo.dna.model.game.level;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +11,6 @@ import java.util.Optional;
 
 import it.unibo.dna.model.object.player.api.Player;
 import it.unibo.dna.model.object.player.impl.PlayerImpl;
-import it.unibo.dna.view.image.ImageManager;
 import it.unibo.dna.model.common.Position2d;
 import it.unibo.dna.model.common.Vector2d;
 import it.unibo.dna.model.object.entity.api.Entity;
@@ -32,7 +28,6 @@ public class Level {
     private final List<Player> characters = new ArrayList<>();
     private InputStream nameFile;
     private final EntityFactoryImpl entityFactoryImpl = new EntityFactoryImpl();
-    private static final Logger LOGGER = LoggerFactory.getLogger(ImageManager.class);
 
     /**
      * Constructs the Level object with the specified level number.
@@ -41,11 +36,6 @@ public class Level {
      */
     public Level(final int lvl) {
         nameFile(lvl);
-        try {
-            this.entitiesList();
-        } catch (IOException e) {
-            LOGGER.error("IOEexception occurred", e);
-        }
     }
 
     /**

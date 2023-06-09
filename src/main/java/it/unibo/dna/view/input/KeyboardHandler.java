@@ -31,7 +31,8 @@ public class KeyboardHandler implements KeyListener {
      * @param character    the player linked to this keylistener
      * @param inputControl the input control instance
      */
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The inputControl field is intentionally exposed to allow initialization with the current inputControl.")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The inputControl field is intentionally"
+            + "exposed to allow initialization with the current inputControl.")
     public KeyboardHandler(final int commandRight, final int commandLeft, final int commandJump,
             final Player character, final InputControl inputControl) {
         this.commandRight = commandRight;

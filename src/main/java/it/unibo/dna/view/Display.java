@@ -3,6 +3,8 @@ package it.unibo.dna.view;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -64,11 +66,12 @@ public class Display extends JFrame {
     /**
      * Constructs a Display object with the specified player list.
      * 
-     * @param playerList The list of players in the game.
+     * @param playerList        The list of players in the game.
      * @param menuFact
      * @param angelInputControl
      * @param devilInputControl
      */
+    @SuppressFBWarnings(value = "MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR", justification = "The method pack should be called in the constructor")
     public Display(final List<Player> playerList, final MenuFactory menuFact, final InputControl angelInputControl,
             final InputControl devilInputControl) {
         this.menuFactory = menuFact;

@@ -150,7 +150,16 @@ public class Level {
      * @return The list of entities.
      */
     public List<Entity> getEntities() {
-        return this.entities;
+        return new ArrayList<>(entities);
+    }
+
+    /**
+     * Returns the list of characters in the level.
+     * 
+     * @return The list of characters.
+     */
+    public List<Player> getCharacters() {
+        return new ArrayList<>(characters);
     }
 
     private void nameFile(final int lvl) {
@@ -169,12 +178,4 @@ public class Level {
         }
     }
 
-    /**
-     * Returns the list of characters in the level.
-     * 
-     * @return The list of characters.
-     */
-    public List<Player> getCharacters() {
-        return this.characters;
-    }
 }

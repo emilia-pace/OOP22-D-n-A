@@ -28,7 +28,7 @@ public class GameEngine implements Runnable {
     private final int lvl;
 
     /**
-     * Constructs a GameEngine object and creates the Level object.
+     * Constructs a GameEngine object for the specified level.
      *
      * @param lvl The level number.
      * @throws IOException if an I/O error occurs while loading the level.
@@ -49,7 +49,7 @@ public class GameEngine implements Runnable {
     }
 
     /**
-     * Getter of the gameThread that runs the gameEngine.
+     * Retrieves the game thread associated with the game engine.
      *
      * @return The game thread.
      */
@@ -81,7 +81,7 @@ public class GameEngine implements Runnable {
     @Override
     public void run() {
         this.display = new Display(this.levelConstruct.getCharacters(), this.menuFactory,
-        this.angelInputControl, this.devilInputControl);
+                this.angelInputControl, this.devilInputControl);
         this.game = new GameStateImpl(display.getScreenDimension(), display.getScreenDimension(),
                 this.levelConstruct.getEntities(), this.levelConstruct.getCharacters());
         running = true;
@@ -107,7 +107,7 @@ public class GameEngine implements Runnable {
     }
 
     /**
-     * Calls the render of the display.
+     * Calls the render method of the display to update the game's visual representation.
      */
     private void render() {
         display.render(game.getEntities(), this.game.getCharacters());
@@ -129,12 +129,12 @@ public class GameEngine implements Runnable {
     }
 
     /**
-     * Plays an audio clip based on the specified for the event happening.
+     * Plays an audio clip based on the specified event.
      *
-     * @param string the name of the audio file.
+     * @param audioFileName The name of the audio file.
      */
-    public static void playSound(final String string) {
-        (new SoundManager()).getClip(string).start();
+    public static void playSound(final String audioFileName) {
+        (new SoundManager()).getClip(audioFileName).start();
     }
 
     /**
@@ -146,8 +146,12 @@ public class GameEngine implements Runnable {
         return menuFactory;
     }
 
+    /**
+     * Checks if the game engine is currently running.
+     *
+     * @return true if the game engine is running, false otherwise.
+     */
     public boolean isRunning() {
         return running;
-
     }
 }

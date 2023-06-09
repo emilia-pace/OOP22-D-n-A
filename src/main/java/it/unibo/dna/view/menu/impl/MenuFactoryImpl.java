@@ -283,6 +283,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     /**
      * Creates and returns the quit button for the menus.
      *
+     * @param frame the frame of the menu that has the button.
      * @return The JButton that closes the game.
      */
     public JButton getQuitButton(final JFrame frame) {
@@ -294,7 +295,6 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 if (!gameThread.isInterrupted()) {
                     gameThread.interruptGame();
                 }
-
                 frame.dispose();
             }
 

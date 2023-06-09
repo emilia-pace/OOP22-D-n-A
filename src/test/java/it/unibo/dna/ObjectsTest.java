@@ -28,7 +28,7 @@ class ObjectsTest {
     private static final Position2d POS3 = new Position2d(X + 15, Y + 15);
     private static final double HEIGHT = 4;
     private static final double WIDTH = 4;
-    private static final Player ANGEL = new PlayerImpl(POS, new Vector2d(0,0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
+    private static final Player ANGEL = new PlayerImpl(POS, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.ANGEL);
     private static final Player DEVIL = new PlayerImpl(POS2, new Vector2d(0, 0), HEIGHT, WIDTH, PlayerImpl.PlayerType.DEVIL);
     private static final MovablePlatform PLATFORM = new MovablePlatform(POS, new Vector2d(0, 0), HEIGHT, WIDTH, POS);
     private static final Entity BUTTON = ENTITYFACTORY.createEntity(Optional.of(PLATFORM), Entity.EntityType.BUTTON, POS);

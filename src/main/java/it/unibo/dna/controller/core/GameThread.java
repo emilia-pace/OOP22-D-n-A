@@ -41,7 +41,7 @@ public class GameThread extends Thread {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * Starts the game thread.
      * Creates a new thread and starts the execution of the game engine.
      */
@@ -80,9 +80,12 @@ public class GameThread extends Thread {
         this.gameEngine.stop();
     }
 
+    /**
+     * Interrupts the game thread and stops the associated game engine if it is running.
+     */
     public void interruptGame() {
         this.interrupt();
-        if (gameEngine.isRunning()) {
+        if (this.gameEngine.isRunning()) {
             this.gameEngine.stop();
         }
     }

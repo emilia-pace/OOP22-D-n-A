@@ -72,10 +72,10 @@ public class Display extends JFrame {
     public Display(final List<Player> playerList, final MenuFactory menuFact, final InputControl angelInputControl,
             final InputControl devilInputControl) {
         this.menuFactory = menuFact;
-        setTitle("D-n-A");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
-        setUndecorated(true);
+        this.setTitle("D-n-A");
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setUndecorated(true);
 
         final JButton pauseButton = new JButton("\u23F8");
 
@@ -96,13 +96,13 @@ public class Display extends JFrame {
 
         jpanel.add(pauseButton, BorderLayout.NORTH);
         jpanel.add(canvas, BorderLayout.CENTER);
-        add(jpanel);
-        pack();
+        this.add(jpanel);
+        this.pack();
 
         canvas.createBufferStrategy(3);
 
-        setLocationRelativeTo(null);
-        setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
 
         imgMgr = new ImageManager(playerList);
 
@@ -115,7 +115,7 @@ public class Display extends JFrame {
                         new KeyboardHandler(KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_W, p, devilInputControl));
             }
         });
-        loadBackgroundImage("background.jpg");
+        this.loadBackgroundImage("background.jpg");
         canvas.requestFocus();
 
     }

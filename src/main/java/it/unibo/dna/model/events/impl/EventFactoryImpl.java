@@ -1,6 +1,6 @@
 package it.unibo.dna.model.events.impl;
 
-import it.unibo.dna.controller.core.GameEngine;
+import it.unibo.dna.controller.core.GameEngineImpl;
 import it.unibo.dna.model.events.api.Event;
 import it.unibo.dna.model.events.api.EventFactory;
 import it.unibo.dna.model.object.entity.api.Entity;
@@ -112,7 +112,7 @@ public class EventFactoryImpl implements EventFactory {
     public Event hitDiamondEvent(final Diamond d) {
         return game -> {
             game.removeEntity(d);
-            GameEngine.playSound("Diamond_sound");
+            GameEngineImpl.playSound("Diamond_sound");
         };
     }
 
@@ -145,8 +145,8 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event victoryEvent() {
         return game -> {
-            GameEngine.playSound("Victory_sound");
-            GameEngine.getGameThread().victoryGame();
+            GameEngineImpl.playSound("Victory_sound");
+            GameEngineImpl.getGameThread().victoryGame();
         };
     }
 
@@ -156,8 +156,8 @@ public class EventFactoryImpl implements EventFactory {
     @Override
     public Event gameOverEvent() {
         return game -> {
-            GameEngine.playSound("GameOver_sound");
-            GameEngine.getGameThread().loosingGame();
+            GameEngineImpl.playSound("GameOver_sound");
+            GameEngineImpl.getGameThread().loosingGame();
         };
     }
 

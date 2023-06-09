@@ -9,7 +9,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * It interacts with the GameEngine to start, stop, and handle game events.
  */
 public class GameThread extends Thread {
-    private GameEngine gameEngine;
+    private GameEngineImpl gameEngine;
     private int lvl;
 
     /**
@@ -18,11 +18,11 @@ public class GameThread extends Thread {
      * @param gameEngine the GameEngine instance to associate with the thread
      * @throws IOException if an I/O error occurs.
      */
-    @SuppressFBWarnings(value = "EI_EXPOSE_BUF", 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", 
     justification =  "the gameEngine field is intentionally exposed to allow initialization with the current game engine")
-    public GameThread(final GameEngine gameEngine) throws IOException {
+    public GameThread(final GameEngineImpl gameEngine) throws IOException {
         this.gameEngine = gameEngine;
-        this.gameEngine.setGameThread(this);
+        GameEngineImpl.setGameThread(this);
     }
 
     /**
@@ -30,9 +30,9 @@ public class GameThread extends Thread {
      *
      * @param gameEngine the GameEngine instance to set.
      */
-    @SuppressFBWarnings(value = "EI_EXPOSE_BUF", 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", 
     justification =  "the gameEngine field is intentionally exposed to allow initialization with the current game engine")
-    public void setGameEngine(final GameEngine gameEngine) {
+    public void setGameEngine(final GameEngineImpl gameEngine) {
         this.gameEngine = gameEngine;
     }
 
@@ -41,8 +41,9 @@ public class GameThread extends Thread {
      *
      * @return the associated GameEngine instance.
      */
-    @SuppressWarnings(value = "M V EI2")
-    public GameEngine getGameEngine() {
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", 
+    justification =  "the gameEngine field is intentionally exposed to allow initialization with the current game engine")
+    public GameEngineImpl getGameEngine() {
         return this.gameEngine;
     }
 

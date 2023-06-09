@@ -3,12 +3,13 @@ package it.unibo.dna.view.menu.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import it.unibo.dna.controller.core.GameEngine;
+import it.unibo.dna.controller.core.GameEngineImpl;
 import it.unibo.dna.controller.core.GameThread;
 import it.unibo.dna.view.image.ImageManager;
 import it.unibo.dna.view.menu.api.GameMenu;
@@ -31,8 +32,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
     public static final long serialVersionUID = 4328743;
     private static final int MENUHEIGH = 600;
     private static final int MENUWIDTH = 800;
-    private final GameThread gameThread;
-    private GameEngine gameEngine;
+    private final transient GameThread gameThread;
+    private transient GameEngineImpl gameEngine;
     private static final Logger LOGGER = LoggerFactory.getLogger(ImageManager.class);
 
     /**
@@ -40,6 +41,8 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      *
      * @param gameThread the GameThread instance to associate with the factory.
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", 
+    justification =  "the gameThread field is intentionally exposed to allow initialization with the current gameThread")
     public MenuFactoryImpl(final GameThread gameThread) {
         this.gameThread = gameThread;
         this.gameEngine = this.gameThread.getGameEngine();
@@ -320,9 +323,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
                 gameThread.interruptGame();
                 menu.dispose();
                 try {
-                    gameEngine = new GameEngine(lvl);
+                    gameEngine = new GameEngineImpl(lvl);
                     gameThread.setGameEngine(gameEngine);
-                    gameEngine.setGameThread(gameThread);
+                    GameEngineImpl.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
                     LOGGER.error("IOEexception occurred", e1);
@@ -350,9 +353,9 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
             public void actionPerformed(final ActionEvent e) {
                 victoryFrame.dispose();
                 try {
-                    gameEngine = new GameEngine(lvl);
+                    gameEngine = new GameEngineImpl(lvl);
                     gameThread.setGameEngine(gameEngine);
-                    gameEngine.setGameThread(gameThread);
+                    GameEngineImpl.setGameThread(gameThread);
                     gameThread.start();
                 } catch (IOException e1) {
                     LOGGER.error("IOEexception occurred", e1);

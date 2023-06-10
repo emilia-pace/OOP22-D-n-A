@@ -1,31 +1,31 @@
-angel 5 100
-devil 17 100
-dAngel 85 5
-dDevil 100 5
-platform 0 95
-platform 25 95
-platform 50 95
-platform 40 75
-platform 60 75
-platform 80 75
-platform 0 55
-platform 0 20 
+angel 5 92
+devil 17 92
+dAngel 75 5
+dDevil 90 5
+platform 0 80
+platform 35 80
+platform 40 60
+platform 60 60
+platform 80 60
+platform 0 40
+platform 0 20
 platform 75 20
-bPuddle 80 75
-bPuddle 90 75
-bPuddle 28 55
-rPuddle 11 20
-rPuddle 21 20
-movablePlatform 90 95 120 95
-lever 50 110
-movablePlatform 0 75 20 75
-button 60 93
-button 105 73
-movablePlatform 75 55 30 20
-button 5 53
+bPuddle 70 60
+bPuddle 80 60
+bPuddle 10 40
+bPuddle 20 40
+rPuddle 10 20
+rPuddle 20 20
+movablePlatform 75 80 100 80
+lever 50 95
+movablePlatform 0 60 20 60
+button 60 78
+button 93 58
+movablePlatform 60 40 35 20
+button 5 38
 lever 5 15
-diamond 90 37
-diamond 18 12
-diamond 87 67
-diamond 15 48
+diamond 80 27
+diamond 17 13
+diamond 77 53
+diamond 17 33
 

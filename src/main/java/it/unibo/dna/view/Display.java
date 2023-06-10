@@ -56,6 +56,12 @@ public class Display extends JFrame {
      */
     public static final int TILE_SIZE = DIM / 100;
 
+    /**
+     * The size of each tile, calculated as the dimension divided by 100.
+     */
+
+    public static final int CANVAS_DIM = TILE_SIZE * 100;
+
     public static final long serialVersionUID = 4328743;
     private static final Logger LOGGER = LoggerFactory.getLogger(ImageManager.class);
     private final Canvas canvas;
@@ -94,7 +100,7 @@ public class Display extends JFrame {
 
         final JPanel jpanel = new JPanel(new BorderLayout());
         canvas = new Canvas();
-        canvas.setSize(DIM, DIM);
+        canvas.setSize(CANVAS_DIM, CANVAS_DIM);
         canvas.setFocusable(true);
 
         jpanel.add(pauseButton, BorderLayout.NORTH);
@@ -166,7 +172,7 @@ public class Display extends JFrame {
      * @return The screen dimension in tile size.
      */
     public int getScreenDimension() {
-        return DIM / TILE_SIZE;
+        return CANVAS_DIM / TILE_SIZE;
     }
 
     private void unifyPanels() {

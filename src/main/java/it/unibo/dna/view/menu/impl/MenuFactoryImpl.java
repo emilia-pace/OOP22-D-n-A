@@ -243,7 +243,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * @param startMenu The JFrame of the start menu.
      * @return The JButton that starts the first level.
      */
-    public JButton getStartButton(final JFrame startMenu) {
+    private JButton getStartButton(final JFrame startMenu) {
         final JButton startButton = new JButton("Start");
         final ActionListener al = new ActionListener() {
 
@@ -264,7 +264,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      *
      * @return The JButton that opens the messageDialog explaining how to play the game.
      */
-    public JButton getGuideButton() {
+    private JButton getGuideButton() {
         final JButton guideButton = new JButton("Guide", null);
         final ActionListener al = new ActionListener() {
 
@@ -288,7 +288,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * @param lvl The number of the current level.
      * @return The JButton that restarts the current level.
      */
-    public JButton getRestartButton(final JFrame menu, final int lvl) {
+    private JButton getRestartButton(final JFrame menu, final int lvl) {
         final JButton restartButton = new JButton("Restart");
         final ActionListener al = new ActionListener() {
 
@@ -319,7 +319,7 @@ public class MenuFactoryImpl extends JFrame implements MenuFactory {
      * @param lvl The number of the next level.
      * @return The JButton that starts the next level.
      */
-    public JButton getNextLevelButton(final JFrame victoryFrame, final int lvl) {
+    private JButton getNextLevelButton(final JFrame victoryFrame, final int lvl) {
         final JButton nextLevelButton = new JButton("Next");
         final ActionListener al = new ActionListener() {
 

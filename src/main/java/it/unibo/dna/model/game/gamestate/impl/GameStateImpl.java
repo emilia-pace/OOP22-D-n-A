@@ -132,7 +132,7 @@ public class GameStateImpl implements GameState {
     }
 
     /**
-     * Manages when a character leaves an {@link ActivableObjectImpl}.
+     * Manages when a character leaves an {@link ActivableObjectImpl} or a {@link Door}.
      * 
      * @param character the {@link Player} to check
      */
@@ -223,7 +223,7 @@ public class GameStateImpl implements GameState {
     /**
      * Checks the collision of a character with the vertical borders.
      * 
-     * @param pos    the x coordinate of the character's position
+     * @param pos the x coordinate of the character's position
      * @param lenght the lenght of the character
      * @return true if the character is colliding with a vertical border
      */
@@ -237,7 +237,7 @@ public class GameStateImpl implements GameState {
     /**
      * Checks the collision of a character with the horizontal borders.
      * 
-     * @param pos    the y coordinate of the character's position
+     * @param pos the y coordinate of the character's position
      * @param height the height of the character
      * @return true if the character is colliding with an horizontal border
      */
